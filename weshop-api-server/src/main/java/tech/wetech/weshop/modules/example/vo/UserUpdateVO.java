@@ -1,80 +1,40 @@
-package tech.wetech.weshop.modules.example.po;
+package tech.wetech.weshop.modules.example.vo;
 
-import tech.wetech.weshop.modules.example.vo.UserCreateVO;
-import tech.wetech.weshop.modules.example.vo.UserUpdateVO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Table(name = "sys_user")
-public class User {
-    /**
-     * 编号
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+/**
+ * @author cjbi
+ */
+@ApiModel("用户更新对象")
+public class UserUpdateVO {
+
+    @ApiModelProperty("编号")
+    @NotNull
     private Long id;
 
-    /**
-     * 组织机构编号
-     */
-    @Column(name = "organization_id")
+    @ApiModelProperty("组织机构编号")
     private Long organizationId;
 
-    /**
-     * 用户名
-     */
+    @ApiModelProperty("用户名")
     private String username;
 
-    /**
-     * 密码
-     */
+    @ApiModelProperty("密码")
     private String password;
 
-    /**
-     * 盐值
-     */
+    @ApiModelProperty("盐值")
     private String salt;
 
-    /**
-     * 角色列表
-     */
-    @Column(name = "role_ids")
+    @ApiModelProperty("角色列表")
     private String roleIds;
 
-    /**
-     * 组列表
-     */
-    @Column(name = "group_ids")
+    @ApiModelProperty("组列表")
     private String groupIds;
 
-    /**
-     * 是否锁定
-     */
+    @ApiModelProperty("是否锁定")
     private Boolean locked;
-
-    public User() {
-    }
-
-    public User(UserCreateVO userCreateVO) {
-        this.organizationId = userCreateVO.getOrganizationId();
-        this.username = userCreateVO.getUsername();
-        this.password = userCreateVO.getPassword();
-        this.salt = userCreateVO.getSalt();
-        this.roleIds = userCreateVO.getRoleIds();
-        this.groupIds = userCreateVO.getGroupIds();
-        this.locked = userCreateVO.getLocked();
-    }
-
-    public User(UserUpdateVO userUpdateVO) {
-        this.id = userUpdateVO.getId();
-        this.organizationId = userUpdateVO.getOrganizationId();
-        this.username = userUpdateVO.getUsername();
-        this.password = userUpdateVO.getPassword();
-        this.salt = userUpdateVO.getSalt();
-        this.roleIds = userUpdateVO.getRoleIds();
-        this.groupIds = userUpdateVO.getGroupIds();
-        this.locked = userUpdateVO.getLocked();
-    }
 
     /**
      * 获取编号
