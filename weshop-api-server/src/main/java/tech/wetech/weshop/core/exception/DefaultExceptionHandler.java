@@ -39,7 +39,6 @@ public class DefaultExceptionHandler {
      */
     @ResponseBody
     @ExceptionHandler({BizException.class})
-    @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
     public Result handleBizException(HttpServletRequest request, BizException e) {
         LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
         return Result.failure(e);
@@ -54,7 +53,6 @@ public class DefaultExceptionHandler {
      */
     @ResponseBody
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result handleNotValidException(HttpServletRequest request, Exception e) {
         LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
         if (e instanceof BindException) {

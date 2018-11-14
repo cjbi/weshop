@@ -89,7 +89,7 @@ export default {
   'app.register-result.back-home': 'Voltar ao Início',
   'app.register-result.view-mailbox': 'Visualizar a caixa de email',
   'app.home.introduce': 'introduzir',
-  'app.analysis.test': 'Gongzhuan No.{no} shop',
+  'app.analysis.test': 'Gongzhuan No.{no} app',
   'app.analysis.introduce': 'Introduzir',
   'app.analysis.total-sales': 'Vendas Totais',
   'app.analysis.day-sales': 'Vendas do Dia',

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tech.wetech.weshop.modules.app.mapper.RelatedGoodsMapper" >
+  <resultMap id="BaseResultMap" type="tech.wetech.weshop.modules.app.po.RelatedGoods" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="related_goods_id" property="relatedGoodsId" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

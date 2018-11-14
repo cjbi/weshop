@@ -122,7 +122,7 @@ export default {
   'app.register-result.back-home': 'Back to home',
   'app.register-result.view-mailbox': 'View mailbox',
   'app.home.introduce': 'introduce',
-  'app.analysis.test': 'Gongzhuan No.{no} shop',
+  'app.analysis.test': 'Gongzhuan No.{no} app',
   'app.analysis.introduce': 'Introduce',
   'app.analysis.total-sales': 'Total Sales',
   'app.analysis.day-sales': 'Day Sales',
