@@ -25,12 +25,12 @@ const plugins = [
       },
       ...(!process.env.TEST && os.platform() === 'darwin'
         ? {
-          dll: {
-            include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-            exclude: ['@babel/runtime'],
-          },
-          hardSource: true,
-        }
+            dll: {
+              include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+              exclude: ['@babel/runtime'],
+            },
+            hardSource: true,
+          }
         : {}),
     },
   ],
@@ -55,7 +55,7 @@ export default {
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
   },
-  history: 'hash',// 默认是 browser
+  history: 'hash', // 默认是 browser
   // 路由配置
   routes: pageRoutes,
   // Theme for antd
@@ -101,7 +101,7 @@ export default {
     },
   },
   manifest: {
-    basePath: '/',
+    basePath: '/weshop',
   },
 
   chainWebpack: webpackPlugin,
