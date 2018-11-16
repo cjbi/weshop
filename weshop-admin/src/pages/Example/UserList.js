@@ -266,8 +266,8 @@ class UpdateForm extends PureComponent {
 }
 
 /* eslint react/no-multi-comp:0 */
-@connect(({ rule, loading }) => ({
-  rule,
+@connect(({ users, loading }) => ({
+  users,
   loading: loading.models.rule,
 }))
 @Form.create()
@@ -345,7 +345,7 @@ class UserList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'rule/fetch',
+      type: 'users/fetch',
     });
   }
 
@@ -610,7 +610,7 @@ class UserList extends PureComponent {
 
   render() {
     const {
-      rule: { data },
+      users: { data },
       loading,
     } = this.props;
     const { selectedRows, modalVisible, updateModalVisible, stepFormValues } = this.state;

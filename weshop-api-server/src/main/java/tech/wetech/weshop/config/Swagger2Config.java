@@ -19,7 +19,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("tech.wetech.weshop.modules.example.api"))
+                .apis(RequestHandlerSelectors.basePackage("tech.wetech.weshop.web"))
                 .paths(PathSelectors.any())
                 .build();
     }

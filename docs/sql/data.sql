@@ -9390,7 +9390,7 @@ CREATE TABLE `weshop_user` (
   `mobile` varchar(20) NOT NULL,
   `register_ip` varchar(45) NOT NULL DEFAULT '',
   `avatar` varchar(255) NOT NULL DEFAULT '',
-  `weixin_openid` varchar(50) NOT NULL DEFAULT '',
+  `wechat_open_id` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`username`)
 ) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;

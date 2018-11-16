@@ -20,11 +20,11 @@
                         password="${spring.datasource.password}">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="tech.wetech.weshop.modules.app.po" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="tech.wetech.weshop.domain" targetProject="src/main/java"/>
 
-        <sqlMapGenerator targetPackage="tech.wetech.weshop.modules.app.mapper" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="tech.wetech.weshop.mapper" targetProject="src/main/java"/>
 
-        <javaClientGenerator targetPackage="tech.wetech.weshop.modules.app.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="tech.wetech.weshop.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
         <table schema="weshop" tableName="weshop_ad" domainObjectName="Ad">
