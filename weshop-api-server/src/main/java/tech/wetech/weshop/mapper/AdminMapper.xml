@@ -10,9 +10,9 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="password_salt" property="passwordSalt" jdbcType="VARCHAR" />
     <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
-    <result column="last_login_time" property="lastLoginTime" jdbcType="INTEGER" />
-    <result column="add_time" property="addTime" jdbcType="INTEGER" />
-    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="admin_role_id" property="adminRoleId" jdbcType="INTEGER" />
   </resultMap>

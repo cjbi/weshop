@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_user")
@@ -17,10 +18,10 @@ public class User {
     private Integer birthday;
 
     @Column(name = "register_time")
-    private Integer registerTime;
+    private Date registerTime;
 
     @Column(name = "last_login_time")
-    private Integer lastLoginTime;
+    private Date lastLoginTime;
 
     @Column(name = "last_login_ip")
     private String lastLoginIp;
@@ -113,28 +114,28 @@ public class User {
     /**
      * @return register_time
      */
-    public Integer getRegisterTime() {
+    public Date getRegisterTime() {
         return registerTime;
     }
 
     /**
      * @param registerTime
      */
-    public void setRegisterTime(Integer registerTime) {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
 
     /**
      * @return last_login_time
      */
-    public Integer getLastLoginTime() {
+    public Date getLastLoginTime() {
         return lastLoginTime;
     }
 
     /**
      * @param lastLoginTime
      */
-    public void setLastLoginTime(Integer lastLoginTime) {
+    public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
@@ -222,10 +223,16 @@ public class User {
         this.avatar = avatar;
     }
 
+    /**
+     * @return wechat_open_id
+     */
     public String getWechatOpenId() {
         return wechatOpenId;
     }
 
+    /**
+     * @param wechatOpenId
+     */
     public void setWechatOpenId(String wechatOpenId) {
         this.wechatOpenId = wechatOpenId;
     }

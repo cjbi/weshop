@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_order_express")
@@ -50,19 +51,19 @@ public class OrderExpress {
      * 最近一次向第三方查询物流信息时间
      */
     @Column(name = "request_time")
-    private Integer requestTime;
+    private Date requestTime;
 
     /**
      * 添加时间
      */
-    @Column(name = "add_time")
-    private Integer addTime;
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time")
-    private Integer updateTime;
+    private Date updateTime;
 
     /**
      * @return id
@@ -215,7 +216,7 @@ public class OrderExpress {
      *
      * @return request_time - 最近一次向第三方查询物流信息时间
      */
-    public Integer getRequestTime() {
+    public Date getRequestTime() {
         return requestTime;
     }
 
@@ -224,26 +225,26 @@ public class OrderExpress {
      *
      * @param requestTime 最近一次向第三方查询物流信息时间
      */
-    public void setRequestTime(Integer requestTime) {
+    public void setRequestTime(Date requestTime) {
         this.requestTime = requestTime;
     }
 
     /**
      * 获取添加时间
      *
-     * @return add_time - 添加时间
+     * @return create_time - 添加时间
      */
-    public Integer getAddTime() {
-        return addTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
      * 设置添加时间
      *
-     * @param addTime 添加时间
+     * @param createTime 添加时间
      */
-    public void setAddTime(Integer addTime) {
-        this.addTime = addTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     /**
@@ -251,7 +252,7 @@ public class OrderExpress {
      *
      * @return update_time - 更新时间
      */
-    public Integer getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
@@ -260,7 +261,7 @@ public class OrderExpress {
      *
      * @param updateTime 更新时间
      */
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 }

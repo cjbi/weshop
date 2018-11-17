@@ -9,7 +9,7 @@
     <result column="coupon_id" property="couponId" jdbcType="TINYINT" />
     <result column="coupon_number" property="couponNumber" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="used_time" property="usedTime" jdbcType="INTEGER" />
+    <result column="used_time" property="usedTime" jdbcType="TIMESTAMP" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
   </resultMap>
 </mapper>

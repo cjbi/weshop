@@ -27,9 +27,9 @@
     <result column="integral_money" property="integralMoney" jdbcType="DECIMAL" />
     <result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
     <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
-    <result column="add_time" property="addTime" jdbcType="INTEGER" />
-    <result column="confirm_time" property="confirmTime" jdbcType="INTEGER" />
-    <result column="pay_time" property="payTime" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
     <result column="freight_price" property="freightPrice" jdbcType="INTEGER" />
     <result column="coupon_id" property="couponId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />

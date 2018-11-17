@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_footprint")
@@ -14,8 +15,8 @@ public class Footprint {
     @Column(name = "goods_id")
     private Integer goodsId;
 
-    @Column(name = "add_time")
-    private Integer addTime;
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * @return id
@@ -60,16 +61,16 @@ public class Footprint {
     }
 
     /**
-     * @return add_time
+     * @return create_time
      */
-    public Integer getAddTime() {
-        return addTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * @param addTime
+     * @param createTime
      */
-    public void setAddTime(Integer addTime) {
-        this.addTime = addTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

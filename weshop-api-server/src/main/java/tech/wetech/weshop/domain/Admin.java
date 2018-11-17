@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_admin")
@@ -19,13 +20,13 @@ public class Admin {
     private String lastLoginIp;
 
     @Column(name = "last_login_time")
-    private Integer lastLoginTime;
+    private Date lastLoginTime;
 
-    @Column(name = "add_time")
-    private Integer addTime;
+    @Column(name = "create_time")
+    private Date createTime;
 
     @Column(name = "update_time")
-    private Integer updateTime;
+    private Date updateTime;
 
     private String avatar;
 
@@ -105,42 +106,42 @@ public class Admin {
     /**
      * @return last_login_time
      */
-    public Integer getLastLoginTime() {
+    public Date getLastLoginTime() {
         return lastLoginTime;
     }
 
     /**
      * @param lastLoginTime
      */
-    public void setLastLoginTime(Integer lastLoginTime) {
+    public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
     /**
-     * @return add_time
+     * @return create_time
      */
-    public Integer getAddTime() {
-        return addTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * @param addTime
+     * @param createTime
      */
-    public void setAddTime(Integer addTime) {
-        this.addTime = addTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     /**
      * @return update_time
      */
-    public Integer getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
     /**
      * @param updateTime
      */
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

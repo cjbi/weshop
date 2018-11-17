@@ -14,8 +14,8 @@
     <result column="traces" property="traces" jdbcType="VARCHAR" />
     <result column="is_finish" property="isFinish" jdbcType="BIT" />
     <result column="request_count" property="requestCount" jdbcType="INTEGER" />
-    <result column="request_time" property="requestTime" jdbcType="INTEGER" />
-    <result column="add_time" property="addTime" jdbcType="INTEGER" />
-    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+    <result column="request_time" property="requestTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
 </mapper>

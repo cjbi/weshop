@@ -10,14 +10,14 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="BIT" />
     <result column="birthday" property="birthday" jdbcType="INTEGER" />
-    <result column="register_time" property="registerTime" jdbcType="INTEGER" />
-    <result column="last_login_time" property="lastLoginTime" jdbcType="INTEGER" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
     <result column="user_level_id" property="userLevelId" jdbcType="TINYINT" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="register_ip" property="registerIp" jdbcType="VARCHAR" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
-    <result column="weixin_openid" property="weixinOpenid" jdbcType="VARCHAR" />
+    <result column="wechat_open_id" property="wechatOpenId" jdbcType="VARCHAR" />
   </resultMap>
 </mapper>

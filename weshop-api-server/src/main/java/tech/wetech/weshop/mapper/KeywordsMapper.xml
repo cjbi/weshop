@@ -5,8 +5,8 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="keyword" property="keyword" jdbcType="VARCHAR" />
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
     <result column="is_hot" property="isHot" jdbcType="BIT" />
     <result column="is_default" property="isDefault" jdbcType="BIT" />
     <result column="is_show" property="isShow" jdbcType="BIT" />

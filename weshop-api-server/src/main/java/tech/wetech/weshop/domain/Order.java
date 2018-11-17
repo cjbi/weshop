@@ -1,6 +1,7 @@
 package tech.wetech.weshop.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_order")
@@ -72,14 +73,14 @@ public class Order {
     @Column(name = "goods_price")
     private BigDecimal goodsPrice;
 
-    @Column(name = "add_time")
-    private Integer addTime;
+    @Column(name = "create_time")
+    private Date createTime;
 
     @Column(name = "confirm_time")
-    private Integer confirmTime;
+    private Date confirmTime;
 
     @Column(name = "pay_time")
-    private Integer payTime;
+    private Date payTime;
 
     /**
      * 配送费用
@@ -423,44 +424,44 @@ public class Order {
     }
 
     /**
-     * @return add_time
+     * @return create_time
      */
-    public Integer getAddTime() {
-        return addTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * @param addTime
+     * @param createTime
      */
-    public void setAddTime(Integer addTime) {
-        this.addTime = addTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     /**
      * @return confirm_time
      */
-    public Integer getConfirmTime() {
+    public Date getConfirmTime() {
         return confirmTime;
     }
 
     /**
      * @param confirmTime
      */
-    public void setConfirmTime(Integer confirmTime) {
+    public void setConfirmTime(Date confirmTime) {
         this.confirmTime = confirmTime;
     }
 
     /**
      * @return pay_time
      */
-    public Integer getPayTime() {
+    public Date getPayTime() {
         return payTime;
     }
 
     /**
      * @param payTime
      */
-    public void setPayTime(Integer payTime) {
+    public void setPayTime(Date payTime) {
         this.payTime = payTime;
     }
 

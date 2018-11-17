@@ -1,6 +1,7 @@
 package tech.wetech.weshop.domain;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_goods")
@@ -31,8 +32,8 @@ public class Goods {
     @Column(name = "is_on_sale")
     private Boolean isOnSale;
 
-    @Column(name = "add_time")
-    private Integer addTime;
+    @Column(name = "create_time")
+    private Date createTime;
 
     @Column(name = "sort_order")
     private Short sortOrder;
@@ -254,17 +255,17 @@ public class Goods {
     }
 
     /**
-     * @return add_time
+     * @return create_time
      */
-    public Integer getAddTime() {
-        return addTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * @param addTime
+     * @param createTime
      */
-    public void setAddTime(Integer addTime) {
-        this.addTime = addTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     /**

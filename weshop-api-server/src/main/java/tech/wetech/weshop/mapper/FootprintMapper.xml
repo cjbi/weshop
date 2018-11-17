@@ -8,6 +8,6 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="add_time" property="addTime" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
 </mapper>

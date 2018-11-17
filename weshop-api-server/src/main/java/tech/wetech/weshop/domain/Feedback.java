@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_feedback")
@@ -30,7 +31,7 @@ public class Feedback {
     private Boolean msgStatus;
 
     @Column(name = "msg_time")
-    private Integer msgTime;
+    private Date msgTime;
 
     @Column(name = "message_img")
     private String messageImg;
@@ -159,14 +160,14 @@ public class Feedback {
     /**
      * @return msg_time
      */
-    public Integer getMsgTime() {
+    public Date getMsgTime() {
         return msgTime;
     }
 
     /**
      * @param msgTime
      */
-    public void setMsgTime(Integer msgTime) {
+    public void setMsgTime(Date msgTime) {
         this.msgTime = msgTime;
     }
 

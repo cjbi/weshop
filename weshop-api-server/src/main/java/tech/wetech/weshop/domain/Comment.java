@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_comment")
@@ -19,8 +20,8 @@ public class Comment {
      */
     private String content;
 
-    @Column(name = "add_time")
-    private Long addTime;
+    @Column(name = "create_time")
+    private Date createTime;
 
     private Byte status;
 
@@ -91,17 +92,17 @@ public class Comment {
     }
 
     /**
-     * @return add_time
+     * @return create_time
      */
-    public Long getAddTime() {
-        return addTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * @param addTime
+     * @param createTime
      */
-    public void setAddTime(Long addTime) {
-        this.addTime = addTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     /**

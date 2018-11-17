@@ -9,7 +9,7 @@
     <result column="type_id" property="typeId" jdbcType="TINYINT" />
     <result column="value_id" property="valueId" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="add_time" property="addTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="new_content" property="newContent" jdbcType="VARCHAR" />

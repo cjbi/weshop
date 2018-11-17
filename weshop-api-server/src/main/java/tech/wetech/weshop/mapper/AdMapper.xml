@@ -11,7 +11,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="link" property="link" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="end_time" property="endTime" jdbcType="INTEGER" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="enabled" property="enabled" jdbcType="TINYINT" />
     <result column="image_url" property="imageUrl" jdbcType="LONGVARCHAR" />
   </resultMap>

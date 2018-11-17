@@ -5,11 +5,10 @@ import javax.persistence.*;
 @Table(name = "weshop_keywords")
 public class Keywords {
     @Id
-    private String keyword;
-
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private String keyword;
 
     @Column(name = "is_hot")
     private Boolean isHot;
@@ -32,20 +31,6 @@ public class Keywords {
     private Integer type;
 
     /**
-     * @return keyword
-     */
-    public String getKeyword() {
-        return keyword;
-    }
-
-    /**
-     * @param keyword
-     */
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
-    /**
      * @return id
      */
     public Integer getId() {
@@ -57,6 +42,20 @@ public class Keywords {
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * @return keyword
+     */
+    public String getKeyword() {
+        return keyword;
+    }
+
+    /**
+     * @param keyword
+     */
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     /**

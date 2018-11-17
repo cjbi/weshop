@@ -4,14 +4,12 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.domain.User;
-import tech.wetech.weshop.mapper.UserMapper;
 import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.service.UserService;
 import tk.mybatis.mapper.util.StringUtil;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,9 +35,6 @@ public class UserServiceImpl implements UserService {
         }
 
         List<User> list = userMapper.selectByExample(example);
-        if (list == null) {
-            return Collections.EMPTY_LIST;
-        }
         return list;
     }
 

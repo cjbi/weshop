@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_user_coupon")
@@ -18,7 +19,7 @@ public class UserCoupon {
     private Integer userId;
 
     @Column(name = "used_time")
-    private Integer usedTime;
+    private Date usedTime;
 
     @Column(name = "order_id")
     private Integer orderId;
@@ -82,14 +83,14 @@ public class UserCoupon {
     /**
      * @return used_time
      */
-    public Integer getUsedTime() {
+    public Date getUsedTime() {
         return usedTime;
     }
 
     /**
      * @param usedTime
      */
-    public void setUsedTime(Integer usedTime) {
+    public void setUsedTime(Date usedTime) {
         this.usedTime = usedTime;
     }
 

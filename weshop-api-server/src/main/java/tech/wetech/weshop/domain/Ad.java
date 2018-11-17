@@ -1,5 +1,6 @@
 package tech.wetech.weshop.domain;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "weshop_ad")
@@ -21,7 +22,7 @@ public class Ad {
     private String content;
 
     @Column(name = "end_time")
-    private Integer endTime;
+    private Date endTime;
 
     private Byte enabled;
 
@@ -115,14 +116,14 @@ public class Ad {
     /**
      * @return end_time
      */
-    public Integer getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
     /**
      * @param endTime
      */
-    public void setEndTime(Integer endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

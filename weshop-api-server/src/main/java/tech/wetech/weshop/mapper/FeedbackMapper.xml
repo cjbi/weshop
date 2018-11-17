@@ -13,7 +13,7 @@
     <result column="msg_title" property="msgTitle" jdbcType="VARCHAR" />
     <result column="msg_type" property="msgType" jdbcType="BIT" />
     <result column="msg_status" property="msgStatus" jdbcType="BIT" />
-    <result column="msg_time" property="msgTime" jdbcType="INTEGER" />
+    <result column="msg_time" property="msgTime" jdbcType="TIMESTAMP" />
     <result column="message_img" property="messageImg" jdbcType="VARCHAR" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="msg_area" property="msgArea" jdbcType="BIT" />

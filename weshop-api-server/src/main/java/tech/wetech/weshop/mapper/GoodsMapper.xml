@@ -14,7 +14,7 @@
     <result column="keywords" property="keywords" jdbcType="VARCHAR" />
     <result column="goods_brief" property="goodsBrief" jdbcType="VARCHAR" />
     <result column="is_on_sale" property="isOnSale" jdbcType="BIT" />
-    <result column="add_time" property="addTime" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="sort_order" property="sortOrder" jdbcType="SMALLINT" />
     <result column="is_delete" property="isDelete" jdbcType="BIT" />
     <result column="attribute_category" property="attributeCategory" jdbcType="INTEGER" />
