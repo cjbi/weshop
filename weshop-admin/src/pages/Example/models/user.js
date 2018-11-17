@@ -7,6 +7,7 @@ export default {
     data: {
       list: [],
       pagination: {},
+      extra: { gender: {}, userLevel: {} },
     },
   },
 
@@ -48,7 +49,7 @@ export default {
     save(state, action) {
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.data,
       };
     },
   },

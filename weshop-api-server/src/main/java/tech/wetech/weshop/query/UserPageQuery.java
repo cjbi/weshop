@@ -2,6 +2,7 @@ package tech.wetech.weshop.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import tech.wetech.weshop.enums.GenderEnum;
 
 /**
  * @author cjbi
@@ -10,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class UserPageQuery {
 
     @ApiModelProperty("页面大小")
-    private Integer pageSize = 10;
+    private Integer pageSize = 2;
 
     @ApiModelProperty("页码")
     private Integer pageNum = 1;
@@ -18,6 +19,8 @@ public class UserPageQuery {
     private String username;
 
     private String mobile;
+
+    private GenderEnum gender;
 
     public UserPageQuery() {
     }
@@ -57,5 +60,13 @@ public class UserPageQuery {
 
     public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public GenderEnum getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderEnum gender) {
+        this.gender = gender;
     }
 }

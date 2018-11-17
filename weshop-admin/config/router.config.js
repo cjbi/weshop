@@ -20,7 +20,7 @@ export default [
       { path: '/', redirect: '/dashboard/analysis' },
       {
         path: '/example',
-        name: '示例页面',
+        name: '用户管理',
         icon: 'user',
         routes: [
           {

@@ -14,7 +14,7 @@ export async function queryRule(params) {
 }
 
 export async function queryUser(params) {
-  return request(`/admin/user/list?${stringify(params)}`)
+  return request(`/weshop/admin/user/list?${stringify(params)}`);
 }
 
 export async function removeRule(params) {

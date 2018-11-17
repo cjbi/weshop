@@ -1,33 +1,36 @@
 package tech.wetech.weshop.vo;
 
-
 import tech.wetech.weshop.domain.User;
+import tech.wetech.weshop.enums.GenderEnum;
 
-/**
- * @author cjbi
- */
-public class UserVO {
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
-    private Integer id;
+public class CreateUserFormVO {
 
+    @NotNull
     private String username;
 
+    @NotNull
     private String password;
 
-    private Boolean gender;
+    @NotNull
+    private GenderEnum gender;
 
-    private Integer birthday;
+    private Date birthday;
 
-    private Integer registerTime;
+    private Date registerTime;
 
-    private Integer lastLoginTime;
+    private Date lastLoginTime;
 
     private String lastLoginIp;
+
 
     private Byte userLevelId;
 
     private String nickname;
 
+    @NotNull
     private String mobile;
 
     private String registerIp;
@@ -36,11 +39,10 @@ public class UserVO {
 
     private String wechatOpenId;
 
-    public UserVO() {
+    public CreateUserFormVO() {
     }
 
-    public UserVO(User user) {
-        this.id = user.getId();
+    public CreateUserFormVO(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.gender = user.getGender();
@@ -56,184 +58,98 @@ public class UserVO {
         this.wechatOpenId = user.getWechatOpenId();
     }
 
-    /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return username
-     */
     public String getUsername() {
         return username;
     }
 
-    /**
-     * @param username
-     */
     public void setUsername(String username) {
         this.username = username;
     }
 
-    /**
-     * @return password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * @param password
-     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @return gender
-     */
-    public Boolean getGender() {
+    public GenderEnum getGender() {
         return gender;
     }
 
-    /**
-     * @param gender
-     */
-    public void setGender(Boolean gender) {
+    public void setGender(GenderEnum gender) {
         this.gender = gender;
     }
 
-    /**
-     * @return birthday
-     */
-    public Integer getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    /**
-     * @param birthday
-     */
-    public void setBirthday(Integer birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
-    /**
-     * @return register_time
-     */
-    public Integer getRegisterTime() {
+    public Date getRegisterTime() {
         return registerTime;
     }
 
-    /**
-     * @param registerTime
-     */
-    public void setRegisterTime(Integer registerTime) {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
 
-    /**
-     * @return last_login_time
-     */
-    public Integer getLastLoginTime() {
+    public Date getLastLoginTime() {
         return lastLoginTime;
     }
 
-    /**
-     * @param lastLoginTime
-     */
-    public void setLastLoginTime(Integer lastLoginTime) {
+    public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
-    /**
-     * @return last_login_ip
-     */
     public String getLastLoginIp() {
         return lastLoginIp;
     }
 
-    /**
-     * @param lastLoginIp
-     */
     public void setLastLoginIp(String lastLoginIp) {
         this.lastLoginIp = lastLoginIp;
     }
 
-    /**
-     * @return user_level_id
-     */
     public Byte getUserLevelId() {
         return userLevelId;
     }
 
-    /**
-     * @param userLevelId
-     */
     public void setUserLevelId(Byte userLevelId) {
         this.userLevelId = userLevelId;
     }
 
-    /**
-     * @return nickname
-     */
     public String getNickname() {
         return nickname;
     }
 
-    /**
-     * @param nickname
-     */
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    /**
-     * @return mobile
-     */
     public String getMobile() {
         return mobile;
     }
 
-    /**
-     * @param mobile
-     */
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    /**
-     * @return register_ip
-     */
     public String getRegisterIp() {
         return registerIp;
     }
 
-    /**
-     * @param registerIp
-     */
     public void setRegisterIp(String registerIp) {
         this.registerIp = registerIp;
     }
 
-    /**
-     * @return avatar
-     */
     public String getAvatar() {
         return avatar;
     }
 
-    /**
-     * @param avatar
-     */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }

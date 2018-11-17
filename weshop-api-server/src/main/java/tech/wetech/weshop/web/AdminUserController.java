@@ -1,17 +1,26 @@
 package tech.wetech.weshop.web;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.core.utils.PageResult;
+import tech.wetech.weshop.core.utils.Reflections;
 import tech.wetech.weshop.core.utils.Result;
-import tech.wetech.weshop.domain.User;
+import tech.wetech.weshop.domain.UserLevel;
+import tech.wetech.weshop.enums.GenderEnum;
 import tech.wetech.weshop.query.UserPageQuery;
+import tech.wetech.weshop.service.UserLevelService;
 import tech.wetech.weshop.service.UserService;
+import tech.wetech.weshop.vo.CreateUserFormVO;
+import tech.wetech.weshop.vo.Pagination;
+import tech.wetech.weshop.vo.UserPageVO;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author cjbi
@@ -23,20 +32,33 @@ public class AdminUserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserLevelService userLevelService;
+
     @GetMapping("/list")
-    public PageResult<List<User>> findUserPage(UserPageQuery userPageQuery) {
-        List<User> users = userService.findUserPage(userPageQuery);
-        int total = userService.countUser(userPageQuery);
-        return PageResult.success(total, users);
+    public Result<UserPageVO> findUserPageInfo(UserPageQuery userPageQuery) {
+        PageInfo pageInfo = userService.findUserPageInfo(userPageQuery);
+        Pagination pagination = new Pagination(pageInfo);
+        UserPageVO userPageVO = new UserPageVO();
+        Map<String, Object> extra = new HashMap<>(16);
+
+        extra.put("userLevel", userLevelService.findAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)));
+        extra.put("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)));
+
+        userPageVO.setPagination(pagination);
+        userPageVO.setList(pageInfo.getList());
+        userPageVO.setExtra(extra);
+        return Result.success(userPageVO);
     }
 
     @PostMapping("/create")
-    public Result create() {
+    public Result createUser(CreateUserFormVO createUserFormVO) {
+        userService.createUser(createUserFormVO);
         return Result.success();
     }
 
     @PostMapping("/update")
-    public Result update() {
+    public Result updateUser() {
         return Result.success();
     }
 

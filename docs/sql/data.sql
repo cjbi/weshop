@@ -9369,10 +9369,10 @@ CREATE TABLE `weshop_user` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(60) NOT NULL DEFAULT '',
   `password` varchar(32) NOT NULL DEFAULT '',
-  `gender` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `birthday` int(11) unsigned NOT NULL DEFAULT '0',
-  `register_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_login_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `gender` tinyint(2) unsigned DEFAULT 0,
+  `birthday` date DEFAULT NULL,
+  `register_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login_ip` varchar(15) NOT NULL DEFAULT '',
   `user_level_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `nickname` varchar(60) NOT NULL,
@@ -9383,6 +9383,11 @@ CREATE TABLE `weshop_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+BEGIN
+INSERT INTO `weshop_user` VALUES (1, 'aaa', '2323', 2, '2018-11-23', '2018-11-17 11:54:56', '2018-11-17 11:54:56', '127.0.0.1', 1, '222', '18054071681', '127.0.0.1', '', 'dssdsdsd');
+INSERT INTO `weshop_user` VALUES (2, 'bbb', '22332', 1, '1936-07-17', '2018-11-17 16:02:05', '2018-11-17 16:02:05', '', 0, 'eee', '18054071681', '123232', '1212', '32323');
+COMMIT
 
 -- ----------------------------
 -- Table structure for weshop_user_coupon

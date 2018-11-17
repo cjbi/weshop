@@ -8,8 +8,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="gender" property="gender" jdbcType="BIT" />
-    <result column="birthday" property="birthday" jdbcType="INTEGER" />
+    <result column="gender" property="gender" jdbcType="TINYINT" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
