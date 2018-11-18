@@ -9,6 +9,7 @@ import tech.wetech.weshop.mapper.UserMapper;
 import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.service.UserService;
 import tech.wetech.weshop.vo.CreateUserFormVO;
+import tech.wetech.weshop.vo.UpdateUserFormVO;
 import tk.mybatis.mapper.util.StringUtil;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
@@ -32,8 +33,8 @@ public class UserServiceImpl implements UserService {
         if (StringUtil.isNotEmpty(userPageQuery.getMobile())) {
             criteria.andEqualTo(User::getMobile, userPageQuery.getMobile());
         }
-        if(userPageQuery.getGender() != null) {
-            criteria.andEqualTo(User::getGender,userPageQuery.getGender());
+        if (userPageQuery.getGender() != null) {
+            criteria.andEqualTo(User::getGender, userPageQuery.getGender());
         }
         return PageHelper.startPage(userPageQuery.getPageNum(), userPageQuery.getPageSize())
                 .doSelectPageInfo(() -> userMapper.selectByExample(example));
@@ -43,5 +44,11 @@ public class UserServiceImpl implements UserService {
     public void createUser(CreateUserFormVO createUserFormVO) {
         User user = new User(createUserFormVO);
         userMapper.insertSelective(user);
+    }
+
+    @Override
+    public void updateUser(UpdateUserFormVO updateUserFormVO) {
+        User user = new User(updateUserFormVO);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 }

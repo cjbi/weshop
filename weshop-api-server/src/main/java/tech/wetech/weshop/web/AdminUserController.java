@@ -2,10 +2,7 @@ package tech.wetech.weshop.web;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.core.utils.Result;
 import tech.wetech.weshop.domain.UserLevel;
 import tech.wetech.weshop.enums.GenderEnum;
@@ -14,6 +11,7 @@ import tech.wetech.weshop.service.UserLevelService;
 import tech.wetech.weshop.service.UserService;
 import tech.wetech.weshop.vo.CreateUserFormVO;
 import tech.wetech.weshop.vo.Pagination;
+import tech.wetech.weshop.vo.UpdateUserFormVO;
 import tech.wetech.weshop.vo.UserPageVO;
 
 import java.util.Arrays;
@@ -51,13 +49,14 @@ public class AdminUserController {
     }
 
     @PostMapping("/create")
-    public Result createUser(CreateUserFormVO createUserFormVO) {
+    public Result createUser(@RequestBody CreateUserFormVO createUserFormVO) {
         userService.createUser(createUserFormVO);
         return Result.success();
     }
 
     @PostMapping("/update")
-    public Result updateUser() {
+    public Result updateUser(UpdateUserFormVO updateUserFormVO) {
+        userService.updateUser(updateUserFormVO);
         return Result.success();
     }
 

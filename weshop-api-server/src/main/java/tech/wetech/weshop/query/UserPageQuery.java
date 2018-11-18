@@ -11,7 +11,7 @@ import tech.wetech.weshop.enums.GenderEnum;
 public class UserPageQuery {
 
     @ApiModelProperty("页面大小")
-    private Integer pageSize = 2;
+    private Integer pageSize = 10;
 
     @ApiModelProperty("页码")
     private Integer pageNum = 1;

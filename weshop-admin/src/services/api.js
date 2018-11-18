@@ -17,6 +17,20 @@ export async function queryUser(params) {
   return request(`/weshop/admin/user/list?${stringify(params)}`);
 }
 
+export async function createUser(params) {
+  return request('/weshop/admin/user/create', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+export async function updateUser(params) {
+  return request('/weshop/admin/user/update', {
+    method: 'POST',
+    body: params,
+  });
+}
+
 export async function removeRule(params) {
   return request('/api/rule', {
     method: 'POST',

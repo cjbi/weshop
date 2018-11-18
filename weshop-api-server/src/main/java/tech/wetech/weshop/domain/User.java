@@ -68,7 +68,6 @@ public class User {
 
     public User(UpdateUserFormVO user) {
         this.username = user.getUsername();
-        this.password = user.getPassword();
         this.gender = user.getGender();
         this.birthday = user.getBirthday();
         this.registerTime = user.getRegisterTime();

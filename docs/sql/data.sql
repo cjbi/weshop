@@ -9375,7 +9375,7 @@ CREATE TABLE `weshop_user` (
   `last_login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login_ip` varchar(15) NOT NULL DEFAULT '',
   `user_level_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `nickname` varchar(60) NOT NULL,
+  `nickname` varchar(60) NOT NULL DEFAULT '',
   `mobile` varchar(20) NOT NULL,
   `register_ip` varchar(45) NOT NULL DEFAULT '',
   `avatar` varchar(255) NOT NULL DEFAULT '',

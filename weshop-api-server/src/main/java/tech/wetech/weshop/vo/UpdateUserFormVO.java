@@ -3,16 +3,17 @@ package tech.wetech.weshop.vo;
 import tech.wetech.weshop.domain.User;
 import tech.wetech.weshop.enums.GenderEnum;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class UpdateUserFormVO {
 
     private Integer id;
 
+    @NotNull
     private String username;
 
-    private String password;
-
+    @NotNull
     private GenderEnum gender;
 
     private Date birthday;
@@ -27,6 +28,7 @@ public class UpdateUserFormVO {
 
     private String nickname;
 
+    @NotNull
     private String mobile;
 
     private String registerIp;
@@ -41,7 +43,6 @@ public class UpdateUserFormVO {
     public UpdateUserFormVO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
-        this.password = user.getPassword();
         this.gender = user.getGender();
         this.birthday = user.getBirthday();
         this.registerTime = user.getRegisterTime();
@@ -73,14 +74,6 @@ public class UpdateUserFormVO {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public GenderEnum getGender() {
