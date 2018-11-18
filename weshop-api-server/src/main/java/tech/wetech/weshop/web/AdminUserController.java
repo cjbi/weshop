@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.core.utils.Reflections;
 import tech.wetech.weshop.core.utils.Result;
 import tech.wetech.weshop.domain.UserLevel;
 import tech.wetech.weshop.enums.GenderEnum;
