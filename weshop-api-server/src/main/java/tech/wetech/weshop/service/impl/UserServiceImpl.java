@@ -10,7 +10,6 @@ import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.service.UserService;
 import tech.wetech.weshop.vo.CreateUserFormVO;
 import tech.wetech.weshop.vo.UpdateUserFormVO;
-import tk.mybatis.mapper.util.StringUtil;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 
@@ -27,10 +26,10 @@ public class UserServiceImpl implements UserService {
     public PageInfo<User> queryUserPageInfo(UserPageQuery userPageQuery) {
         Weekend<User> example = Weekend.of(User.class);
         WeekendCriteria<User, Object> criteria = example.weekendCriteria();
-        if (StringUtil.isNotEmpty(userPageQuery.getUsername())) {
+        if (userPageQuery.getUsername() != null) {
             criteria.andEqualTo(User::getUsername, userPageQuery.getUsername());
         }
-        if (StringUtil.isNotEmpty(userPageQuery.getMobile())) {
+        if (userPageQuery.getMobile() != null) {
             criteria.andEqualTo(User::getMobile, userPageQuery.getMobile());
         }
         if (userPageQuery.getGender() != null) {
