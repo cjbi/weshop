@@ -55,9 +55,16 @@ public class AdminUserController {
     }
 
     @PostMapping("/update")
-    public Result updateUser(UpdateUserFormVO updateUserFormVO) {
+    public Result updateUser(@RequestBody UpdateUserFormVO updateUserFormVO) {
         userService.updateUser(updateUserFormVO);
         return Result.success();
+    }
+
+
+    @PostMapping("/delete")
+    public Result deleteUser(@RequestBody Integer[] userIds) {
+        userService.deleteUser(userIds);
+        return Result.success(userIds);
     }
 
 }

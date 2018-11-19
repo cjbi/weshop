@@ -13,7 +13,7 @@ CREATE TABLE `weshop_ad` (
   `link` varchar(255) NOT NULL DEFAULT '',
   `image_url` text NOT NULL,
   `content` varchar(255) NOT NULL DEFAULT '',
-  `end_time` timestamp DEFAULT NULL,
+  `end_time` TIMESTAMP NULL DEFAULT NULL,
   `enabled` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `position_id` (`ad_position_id`),
@@ -85,7 +85,7 @@ CREATE TABLE `weshop_admin` (
   `password` varchar(255) NOT NULL DEFAULT '''''',
   `password_salt` varchar(255) NOT NULL DEFAULT '''''',
   `last_login_ip` varchar(60) NOT NULL DEFAULT '''''',
-  `last_login_time` timestamp DEFAULT NULL,
+  `last_login_time` TIMESTAMP NULL DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `avatar` varchar(255) NOT NULL DEFAULT '''''',
@@ -4817,8 +4817,8 @@ CREATE TABLE `weshop_order` (
   `order_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '订单总价',
   `goods_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '商品总价',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `confirm_time` TIMESTAMP DEFAULT NULL,
-  `pay_time` TIMESTAMP DEFAULT NULL,
+  `confirm_time` TIMESTAMP NULL DEFAULT NULL,
+  `pay_time` TIMESTAMP NULL DEFAULT NULL,
   `freight_price` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '配送费用',
   `coupon_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '使用的优惠券id',
   `parent_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -4846,7 +4846,7 @@ CREATE TABLE `weshop_order_express` (
   `traces` varchar(2000) NOT NULL DEFAULT '' COMMENT '物流跟踪信息',
   `is_finish` tinyint(1) NOT NULL DEFAULT '0',
   `request_count` int(11) DEFAULT '0' COMMENT '总查询次数',
-  `request_time` TIMESTAMP DEFAULT NULL COMMENT '最近一次向第三方查询物流信息时间',
+  `request_time` TIMESTAMP NULL DEFAULT NULL COMMENT '最近一次向第三方查询物流信息时间',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -9384,10 +9384,10 @@ CREATE TABLE `weshop_user` (
   UNIQUE KEY `user_name` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-BEGIN
+BEGIN;
 INSERT INTO `weshop_user` VALUES (1, 'aaa', '2323', 2, '2018-11-23', '2018-11-17 11:54:56', '2018-11-17 11:54:56', '127.0.0.1', 1, '222', '18054071681', '127.0.0.1', '', 'dssdsdsd');
-INSERT INTO `weshop_user` VALUES (2, 'bbb', '22332', 1, '1936-07-17', '2018-11-17 16:02:05', '2018-11-17 16:02:05', '', 0, 'eee', '18054071681', '123232', '1212', '32323');
-COMMIT
+INSERT INTO `weshop_user` VALUES (2, 'bbb', '22332', 1, '1936-07-17', '2018-11-17 16:02:05', '2018-11-17 16:02:05', '', 1, 'eee', '18054071681', '123232', '1212', '32323');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for weshop_user_coupon
@@ -9398,7 +9398,7 @@ CREATE TABLE `weshop_user_coupon` (
   `coupon_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `coupon_number` varchar(20) NOT NULL DEFAULT '',
   `user_id` int(11) unsigned NOT NULL DEFAULT '0',
-  `used_time` TIMESTAMP DEFAULT NULL,
+  `used_time` TIMESTAMP NULL DEFAULT NULL,
   `order_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)

@@ -67,6 +67,7 @@ public class User {
     }
 
     public User(UpdateUserFormVO user) {
+        this.id = user.getId();
         this.username = user.getUsername();
         this.gender = user.getGender();
         this.birthday = user.getBirthday();

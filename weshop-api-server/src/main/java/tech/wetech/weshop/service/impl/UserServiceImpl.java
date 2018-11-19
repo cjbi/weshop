@@ -51,4 +51,12 @@ public class UserServiceImpl implements UserService {
         User user = new User(updateUserFormVO);
         userMapper.updateByPrimaryKeySelective(user);
     }
+
+    @Override
+    public void deleteUser(Integer... userIds) {
+        for (Integer userId : userIds) {
+            userMapper.deleteByPrimaryKey(userId);
+        }
+    }
+
 }

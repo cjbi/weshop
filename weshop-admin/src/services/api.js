@@ -31,6 +31,13 @@ export async function updateUser(params) {
   });
 }
 
+export async function deleteUser(params) {
+  return request('/weshop/admin/user/delete', {
+    method: 'POST',
+    body: params,
+  });
+}
+
 export async function removeRule(params) {
   return request('/api/rule', {
     method: 'POST',

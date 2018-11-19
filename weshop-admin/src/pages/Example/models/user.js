@@ -1,4 +1,4 @@
-import { queryUser, removeRule, createUser, updateUser } from '@/services/api';
+import {queryUser, createUser, updateUser, deleteUser} from '@/services/api';
 
 export default {
   namespace: 'user1',
@@ -7,35 +7,31 @@ export default {
     data: {
       list: [],
       pagination: {},
-      extra: { gender: {}, userLevel: {} },
+      extra: {gender: {}, userLevel: {}},
     },
   },
 
   effects: {
-    *list({ payload }, { call, put }) {
+    * list({payload}, {call, put}) {
       const response = yield call(queryUser, payload);
       yield put({
         type: 'save',
         payload: response,
       });
     },
-    *create({ payload, callback }, { call, put }) {
+    * create({payload, callback}, {call}) {
       const response = yield call(createUser, payload);
+      if (callback) callback(response);
+    },
+    * delete({payload, callback}, {call}) {
+      const response = yield call(deleteUser, payload);
       // yield put({
       //   type: 'save',
       //   payload: response,
       // });
       if (callback) callback(response);
     },
-    *remove({ payload, callback }, { call, put }) {
-      const response = yield call(removeRule, payload);
-      // yield put({
-      //   type: 'save',
-      //   payload: response,
-      // });
-      if (callback) callback();
-    },
-    *update({ payload, callback }, { call, put }) {
+    * update({payload, callback}, {call, put}) {
       const response = yield call(updateUser, payload);
       // yield put({
       //   type: 'save',
