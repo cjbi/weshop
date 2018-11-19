@@ -11,7 +11,7 @@ import tech.wetech.weshop.enums.GenderEnum;
 public class UserPageQuery {
 
     @ApiModelProperty("页面大小")
-    private Integer pageSize = 2;
+    private Integer pageSize = 10;
 
     @ApiModelProperty("页码")
     private Integer pageNum = 1;
@@ -22,12 +22,22 @@ public class UserPageQuery {
 
     private GenderEnum gender;
 
+    private Byte userLevelId;
+
     public UserPageQuery() {
     }
 
     public UserPageQuery(Integer pageSize, Integer pageNum) {
         this.pageSize = pageSize;
         this.pageNum = pageNum;
+    }
+
+    public Byte getUserLevelId() {
+        return userLevelId;
+    }
+
+    public void setUserLevelId(Byte userLevelId) {
+        this.userLevelId = userLevelId;
     }
 
     public String getMobile() {

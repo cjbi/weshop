@@ -18,7 +18,7 @@ public interface UserService {
      * @param userPageParamVO
      * @return
      */
-    PageInfo<User> findUserPageInfo(UserPageQuery userPageParamVO);
+    PageInfo<User> queryUserPageInfo(UserPageQuery userPageParamVO);
 
     /**
      * 创建用户

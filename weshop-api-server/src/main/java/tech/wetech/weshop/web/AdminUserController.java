@@ -33,13 +33,13 @@ public class AdminUserController {
     private UserLevelService userLevelService;
 
     @GetMapping("/list")
-    public Result<UserPageVO> findUserPageInfo(UserPageQuery userPageQuery) {
-        PageInfo pageInfo = userService.findUserPageInfo(userPageQuery);
+    public Result<UserPageVO> queryUserPageInfo(UserPageQuery userPageQuery) {
+        PageInfo pageInfo = userService.queryUserPageInfo(userPageQuery);
         Pagination pagination = new Pagination(pageInfo);
         UserPageVO userPageVO = new UserPageVO();
         Map<String, Object> extra = new HashMap<>(16);
 
-        extra.put("userLevel", userLevelService.findAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)));
+        extra.put("userLevel", userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)));
         extra.put("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)));
 
         userPageVO.setPagination(pagination);

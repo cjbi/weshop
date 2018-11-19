@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public PageInfo<User> findUserPageInfo(UserPageQuery userPageQuery) {
+    public PageInfo<User> queryUserPageInfo(UserPageQuery userPageQuery) {
         Weekend<User> example = Weekend.of(User.class);
         WeekendCriteria<User, Object> criteria = example.weekendCriteria();
         if (StringUtil.isNotEmpty(userPageQuery.getUsername())) {
@@ -35,6 +35,9 @@ public class UserServiceImpl implements UserService {
         }
         if (userPageQuery.getGender() != null) {
             criteria.andEqualTo(User::getGender, userPageQuery.getGender());
+        }
+        if (userPageQuery.getUserLevelId() != null) {
+            criteria.andEqualTo(User::getUserLevelId, userPageQuery.getUserLevelId());
         }
         return PageHelper.startPage(userPageQuery.getPageNum(), userPageQuery.getPageSize())
                 .doSelectPageInfo(() -> userMapper.selectByExample(example));

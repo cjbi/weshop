@@ -1,5 +1,5 @@
-import React, {PureComponent, Fragment} from 'react';
-import {connect} from 'dva';
+import React, { PureComponent, Fragment } from 'react';
+import { connect } from 'dva';
 import moment from 'moment';
 import {
   Row,
@@ -24,10 +24,10 @@ import styles from './UserList.less';
 
 const FormItem = Form.Item;
 
-const {Option} = Select;
+const { Option } = Select;
 
 const CreateForm = Form.create()(props => {
-  const {modalVisible, form, handleCreateUser, handleModalVisible} = props;
+  const { modalVisible, form, handleCreateUser, handleModalVisible, gender, userLevel } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -43,44 +43,45 @@ const CreateForm = Form.create()(props => {
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="用户名">
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="用户名">
         {form.getFieldDecorator('username', {
-          rules: [{required: true, message: '请输入至少三个字符的用户名！', min: 3}],
-        })(<Input placeholder="请输入"/>)}
+          rules: [{ required: true, message: '请输入至少三个字符的用户名！', min: 3 }],
+        })(<Input placeholder="请输入" />)}
       </FormItem>
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="手机号">
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="手机号">
         {form.getFieldDecorator('mobile', {
-          rules: [{required: true, message: '不是有效的手机号！', len: 11}],
-        })(<Input placeholder="请输入"/>)}
+          rules: [{ required: true, message: '不是有效的手机号！', len: 11 }],
+        })(<Input placeholder="请输入" />)}
       </FormItem>
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="密码">
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="密码">
         {form.getFieldDecorator('password', {
-          rules: [{required: true, message: '密码不能低于六位数！', min: 6}],
-        })(<Input placeholder="请输入"/>)}
+          rules: [{ required: true, message: '密码不能低于六位数！', min: 6 }],
+        })(<Input placeholder="请输入" />)}
       </FormItem>
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="性别">
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="性别">
         {form.getFieldDecorator('gender', {
-          rules: [{required: true, message: '性别不能为空！'}],
+          rules: [{ required: true, message: '性别不能为空！' }],
         })(
-          <Select placeholder="请选择" style={{width: '100%'}}>
-            <Option value="UNKNOWN">未知</Option>
-            <Option value="MALE">男</Option>
-            <Option value="FEMALE">女</Option>
+          <Select placeholder="请选择" style={{ width: '100%' }}>
+            {Object.keys(gender).map(key => (
+              <Option key={key}>{gender[key]}</Option>
+            ))}
           </Select>
         )}
       </FormItem>
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="生日">
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="生日">
         {form.getFieldDecorator('birthday')(
-          <DatePicker style={{width: '100%'}} placeholder="请输入生日"/>
+          <DatePicker style={{ width: '100%' }} placeholder="请输入生日" />
         )}
       </FormItem>
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="用户等级">
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="用户等级">
         {form.getFieldDecorator('userLevelId', {
-          rules: [{required: true, message: '需要用户等级！'}],
+          rules: [{ required: true, message: '需要用户等级！' }],
         })(
-          <Select placeholder="请选择" style={{width: '100%'}}>
-            <Option value="1">普通用户</Option>
-            <Option value="2">vip</Option>
+          <Select placeholder="请选择" style={{ width: '100%' }}>
+            {Object.keys(userLevel).map(key => (
+              <Option key={key}>{userLevel[key]}</Option>
+            ))}
           </Select>
         )}
       </FormItem>
@@ -99,15 +100,15 @@ class UpdateForm extends PureComponent {
     };
 
     this.formLayout = {
-      labelCol: {span: 5},
-      wrapperCol: {span: 15},
+      labelCol: { span: 5 },
+      wrapperCol: { span: 15 },
     };
   }
 
   render() {
-    const {form, updateModalVisible, handleUpdate, handleUpdateModalVisible} = this.props;
-    const {formVals} = this.state;
-    const {labelCol, wrapperCol} = this.formLayout;
+    const { form, updateModalVisible, handleUpdate, handleUpdateModalVisible } = this.props;
+    const { formVals } = this.state;
+    const { labelCol, wrapperCol } = this.formLayout;
 
     const okHandle = () => {
       form.validateFields((err, fieldsValue) => {
@@ -131,38 +132,38 @@ class UpdateForm extends PureComponent {
         <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="用户名">
           {form.getFieldDecorator('username', {
             initialValue: formVals.username,
-            rules: [{required: true, message: '请输入至少三个字符的用户名！', min: 3}],
-          })(<Input placeholder="请输入"/>)}
+            rules: [{ required: true, message: '请输入至少三个字符的用户名！', min: 3 }],
+          })(<Input placeholder="请输入" />)}
         </FormItem>
         <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="手机号">
           {form.getFieldDecorator('mobile', {
             initialValue: formVals.mobile,
-            rules: [{required: true, message: '不是有效的手机号！', len: 11}],
-          })(<Input placeholder="请输入"/>)}
+            rules: [{ required: true, message: '不是有效的手机号！', len: 11 }],
+          })(<Input placeholder="请输入" />)}
         </FormItem>
         <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="性别">
           {form.getFieldDecorator('gender', {
             initialValue: formVals.gender,
-            rules: [{required: true, message: '性别不能为空！'}],
+            rules: [{ required: true, message: '性别不能为空！' }],
           })(
-            <Select placeholder="请选择" style={{width: '100%'}}>
+            <Select placeholder="请选择" style={{ width: '100%' }}>
               <Option value="UNKNOWN">未知</Option>
               <Option value="MALE">男</Option>
               <Option value="FEMALE">女</Option>
             </Select>
           )}
         </FormItem>
-        <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="生日">
+        <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="生日">
           {form.getFieldDecorator('birthday', {
             initialValue: moment(formVals.birthday),
-          })(<DatePicker style={{width: '100%'}} placeholder="请输入生日"/>)}
+          })(<DatePicker style={{ width: '100%' }} placeholder="请输入生日" />)}
         </FormItem>
-        <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="用户等级">
+        <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="用户等级">
           {form.getFieldDecorator('userLevelId', {
             initialValue: formVals.userLevelId,
-            rules: [{required: true, message: '需要用户等级！'}],
+            rules: [{ required: true, message: '需要用户等级！' }],
           })(
-            <Select placeholder="请选择" style={{width: '100%'}}>
+            <Select placeholder="请选择" style={{ width: '100%' }}>
               <Option value="1">普通用户</Option>
               <Option value="2">vip</Option>
             </Select>
@@ -174,7 +175,7 @@ class UpdateForm extends PureComponent {
 }
 
 /* eslint react/no-multi-comp:0 */
-@connect(({user1, loading}) => ({
+@connect(({ user1, loading }) => ({
   user1,
   extra: user1.data.extra,
   loading: loading.models.user1,
@@ -206,7 +207,7 @@ class UserList extends PureComponent {
         const {
           user1: {
             data: {
-              extra: {gender},
+              extra: { gender },
             },
           },
         } = this.props;
@@ -225,7 +226,7 @@ class UserList extends PureComponent {
         const {
           user1: {
             data: {
-              extra: {userLevel},
+              extra: { userLevel },
             },
           },
         } = this.props;
@@ -237,7 +238,7 @@ class UserList extends PureComponent {
       render: (text, record) => (
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>修改</a>
-          <Divider type="vertical"/>
+          <Divider type="vertical" />
           <a onClick={() => this.handleDeleteUser([record.id])}>删除</a>
         </Fragment>
       ),
@@ -245,15 +246,15 @@ class UserList extends PureComponent {
   ];
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'user1/list',
     });
   }
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {dispatch} = this.props;
-    const {formValues} = this.state;
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const params = {
       pageNum: pagination.current,
@@ -271,7 +272,7 @@ class UserList extends PureComponent {
   };
 
   handleFormReset = () => {
-    const {form, dispatch} = this.props;
+    const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
@@ -283,34 +284,10 @@ class UserList extends PureComponent {
   };
 
   toggleForm = () => {
-    const {expandForm} = this.state;
+    const { expandForm } = this.state;
     this.setState({
       expandForm: !expandForm,
     });
-  };
-
-  handleMenuClick = e => {
-    const {dispatch} = this.props;
-    const {selectedRows} = this.state;
-
-    if (!selectedRows) return;
-    switch (e.key) {
-      case 'delete':
-        dispatch({
-          type: 'rule/delete',
-          payload: {
-            key: selectedRows.map(row => row.key),
-          },
-          callback: () => {
-            this.setState({
-              selectedRows: [],
-            });
-          },
-        });
-        break;
-      default:
-        break;
-    }
   };
 
   handleSelectRows = rows => {
@@ -322,7 +299,7 @@ class UserList extends PureComponent {
   handleSearch = e => {
     e.preventDefault();
 
-    const {dispatch, form} = this.props;
+    const { dispatch, form } = this.props;
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -357,58 +334,61 @@ class UserList extends PureComponent {
   };
 
   handleCreateUser = fields => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'user1/create',
       payload: fields,
       callback: response => {
         message.success(response.msg);
         this.handleModalVisible();
-        dispatch({type: 'user1/list'});
+        dispatch({ type: 'user1/list' });
       },
     });
   };
 
   handleUpdate = fields => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'user1/update',
       payload: fields,
       callback: response => {
         message.success(response.msg);
         this.handleUpdateModalVisible();
-        dispatch({type: 'user1/list'});
+        dispatch({ type: 'user1/list' });
       },
     });
   };
 
   handleDeleteUser = params => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'user1/delete',
       payload: params,
       callback: response => {
         message.success(response.msg);
-        dispatch({type: 'user1/list'});
-      }
-    })
-  }
+        dispatch({ type: 'user1/list' });
+        this.setState({
+          selectedRows: [],
+        });
+      },
+    });
+  };
 
   renderSimpleForm() {
     const {
-      form: {getFieldDecorator},
+      form: { getFieldDecorator },
     } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="用户名">
-              {getFieldDecorator('username')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('username')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="手机号">
-              {getFieldDecorator('mobile')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('mobile')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -416,11 +396,11 @@ class UserList extends PureComponent {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
                 重置
               </Button>
-              <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-                展开 <Icon type="down"/>
+              <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+                展开 <Icon type="down" />
               </a>
             </span>
           </Col>
@@ -431,50 +411,61 @@ class UserList extends PureComponent {
 
   renderAdvancedForm() {
     const {
-      form: {getFieldDecorator},
-    } = this.props;
-    const {
+      form: { getFieldDecorator },
       user1: {
         data: {
-          extra: {gender},
+          extra: { gender, userLevel },
         },
       },
     } = this.props;
-    console.log("////////////////////");
-    console.log(gender);
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="用户名">
-              {getFieldDecorator('username')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('username')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="手机号">
-              {getFieldDecorator('mobile')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('mobile')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="性别">
               {getFieldDecorator('gender')(
-                <Select placeholder="请选择" style={{width: '100%'}}>
-                  {Object.keys(gender).map(key => <Option key={key}>{gender[key]}</Option>)}
+                <Select placeholder="请选择" style={{ width: '100%' }}>
+                  {Object.keys(gender).map(key => (
+                    <Option key={key}>{gender[key]}</Option>
+                  ))}
                 </Select>
               )}
             </FormItem>
           </Col>
         </Row>
-        <div style={{overflow: 'hidden'}}>
-          <div style={{float: 'right', marginBottom: 24}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="用户级别">
+              {getFieldDecorator('userLevelId')(
+                <Select placeholder="请选择" style={{ width: '100%' }}>
+                  {Object.keys(userLevel).map(key => (
+                    <Option key={key}>{userLevel[key]}</Option>
+                  ))}
+                </Select>
+              )}
+            </FormItem>
+          </Col>
+        </Row>
+        <div style={{ overflow: 'hidden' }}>
+          <div style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
               查询
             </Button>
-            <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+            <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
               重置
             </Button>
-            <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-              收起 <Icon type="up"/>
+            <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+              收起 <Icon type="up" />
             </a>
           </div>
         </div>
@@ -483,34 +474,37 @@ class UserList extends PureComponent {
   }
 
   renderForm() {
-    const {expandForm} = this.state;
+    const { expandForm } = this.state;
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
   render() {
     const {
-      user1: {data},
+      user1: { data },
       loading,
+      user1: {
+        data: {
+          extra: { gender, userLevel },
+        },
+      },
     } = this.props;
 
-    const {selectedRows, modalVisible, updateModalVisible, updateFormValues} = this.state;
-    const menu = (
-      <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
-        <Menu.Item key="delete">删除</Menu.Item>
-        <Menu.Item key="approval">批量审批</Menu.Item>
-      </Menu>
-    );
+    const { selectedRows, modalVisible, updateModalVisible, updateFormValues } = this.state;
 
     const parentMethods = {
       handleCreateUser: this.handleCreateUser,
       handleModalVisible: this.handleModalVisible,
+      gender: gender,
+      userLevel: userLevel,
     };
     const updateMethods = {
       handleUpdateModalVisible: this.handleUpdateModalVisible,
       handleUpdate: this.handleUpdate,
+      gender: gender,
+      userLevel: userLevel,
     };
     return (
-      <PageHeaderWrapper title="查询表格">
+      <PageHeaderWrapper title="用户管理">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
@@ -520,12 +514,9 @@ class UserList extends PureComponent {
               </Button>
               {selectedRows.length > 0 && (
                 <span>
-                  <Button>批量操作</Button>
-                  <Dropdown overlay={menu}>
-                    <Button>
-                      更多操作 <Icon type="down"/>
-                    </Button>
-                  </Dropdown>
+                  <Button onClick={() => this.handleDeleteUser(selectedRows.map(row => row.id))}>
+                    删除
+                  </Button>
                 </span>
               )}
             </div>
@@ -539,7 +530,7 @@ class UserList extends PureComponent {
             />
           </div>
         </Card>
-        <CreateForm {...parentMethods} modalVisible={modalVisible}/>
+        <CreateForm {...parentMethods} modalVisible={modalVisible} />
         {updateFormValues && Object.keys(updateFormValues).length ? (
           <UpdateForm
             {...updateMethods}

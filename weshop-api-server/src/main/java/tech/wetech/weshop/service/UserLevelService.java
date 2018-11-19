@@ -13,6 +13,6 @@ public interface UserLevelService {
      * 查询所有
      * @return
      */
-    List<UserLevel> findAll();
+    List<UserLevel> queryAll();
 
 }

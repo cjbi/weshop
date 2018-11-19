@@ -19,7 +19,7 @@ public class UserLevelServiceImpl implements UserLevelService {
 
 
     @Override
-    public List<UserLevel> findAll() {
+    public List<UserLevel> queryAll() {
         return userLevelMapper.selectAll();
     }
 }
