@@ -19,17 +19,18 @@ export default [
     routes: [
       { path: '/', redirect: '/dashboard/analysis' },
       {
-        path: '/example',
+        path: '/user-mgr',
         name: '用户管理',
         icon: 'user',
         routes: [
           {
-            path: '/example/user',
+            path: '/user-mgr/user',
             name: '用户列表',
-            component: './Example/UserList',
+            component: './User/UserList',
           },
         ],
       },
+      // ===========================================================
       // dashboard
       {
         path: '/dashboard',
