@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.core.utils.Result;
 import tech.wetech.weshop.query.SearchHistoryPageQuery;
 import tech.wetech.weshop.service.SearchHistoryService;
-import tech.wetech.weshop.vo.Pagination;
-import tech.wetech.weshop.vo.SearchHistoryPageVO;
+import tech.wetech.weshop.vo.PageInfoVO;
 
 /**
  * @author cjbi
@@ -22,13 +21,10 @@ public class AdminSearchHistoryController {
     private SearchHistoryService searchHistoryService;
 
     @GetMapping("/list")
-    public Result<SearchHistoryPageVO> querySearchHistoryPageInfo(SearchHistoryPageQuery searchHistoryPageQuery) {
+    public Result<PageInfoVO> querySearchHistoryPageInfo(SearchHistoryPageQuery searchHistoryPageQuery) {
         PageInfo pageInfo = searchHistoryService.querySearchHistoryPageInfo(searchHistoryPageQuery);
-        Pagination pagination = new Pagination(pageInfo);
-        SearchHistoryPageVO searchHistoryPageVO = new SearchHistoryPageVO();
-        searchHistoryPageVO.setList(pageInfo.getList());
-        searchHistoryPageVO.setPagination(pagination);
-        return Result.success(searchHistoryPageVO);
+        PageInfoVO pageInfoVO = new PageInfoVO(pageInfo);
+        return Result.success(pageInfoVO);
     }
 
 }

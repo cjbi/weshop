@@ -1,25 +1,20 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'dva';
-import {
-  Card,
-  Form,
-  Button, Row, Col, Input,
-} from 'antd';
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import { Card, Form, Button, Row, Col, Input } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './CollectList.less';
-import moment from "moment";
+import moment from 'moment';
 
 const FormItem = Form.Item;
 
-@connect(({collect, loading}) => ({
+@connect(({ collect, loading }) => ({
   collect,
-  loading: loading.models.collect
+  loading: loading.models.collect,
 }))
 @Form.create()
 class CollectList extends PureComponent {
-
   state = {
     selectedRows: [],
     formValues: {},
@@ -33,29 +28,29 @@ class CollectList extends PureComponent {
     },
     {
       title: '用户ID',
-      dataIndex: 'userId'
+      dataIndex: 'userId',
     },
     {
       title: '商品ID',
-      dataIndex: 'valueId'
+      dataIndex: 'valueId',
     },
     {
       title: '添加时间',
       dataIndex: 'createTime',
-      render: val => <span>{moment(val).format('YYYY-MM-DD')}</span>,
+      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
-  ]
+  ];
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'collect/list',
     });
   }
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {dispatch} = this.props;
-    const {formValues} = this.state;
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const params = {
       pageNum: pagination.current,
@@ -81,7 +76,7 @@ class CollectList extends PureComponent {
   handleSearch = e => {
     e.preventDefault();
 
-    const {dispatch, form} = this.props;
+    const { dispatch, form } = this.props;
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -98,7 +93,7 @@ class CollectList extends PureComponent {
   };
 
   handleFormReset = () => {
-    const {form, dispatch} = this.props;
+    const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
@@ -111,19 +106,19 @@ class CollectList extends PureComponent {
 
   renderForm() {
     const {
-      form: {getFieldDecorator},
+      form: { getFieldDecorator },
     } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="用户ID">
-              {getFieldDecorator('userId')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('userId')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="商品ID">
-              {getFieldDecorator('goodsId')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('goodsId')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -131,7 +126,7 @@ class CollectList extends PureComponent {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
                 重置
               </Button>
             </span>
@@ -139,16 +134,15 @@ class CollectList extends PureComponent {
         </Row>
       </Form>
     );
-  };
-
+  }
 
   render() {
     const {
-      collect: {data},
+      collect: { data },
       loading,
     } = this.props;
 
-    const {selectedRows} = this.state;
+    const { selectedRows } = this.state;
     return (
       <PageHeaderWrapper title="会员收藏">
         <Card bordered={false}>
@@ -166,7 +160,6 @@ class CollectList extends PureComponent {
         </Card>
       </PageHeaderWrapper>
     );
-
   }
 }
 

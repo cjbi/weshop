@@ -1,25 +1,20 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'dva';
-import {
-  Card,
-  Form,
-  Button, Row, Col, Input,
-} from 'antd';
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import { Card, Form, Button, Row, Col, Input } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './FeedbackList.less';
-import moment from "moment";
+import moment from 'moment';
 
 const FormItem = Form.Item;
 
-@connect(({feedback, loading}) => ({
+@connect(({ feedback, loading }) => ({
   feedback,
-  loading: loading.models.feedback
+  loading: loading.models.feedback,
 }))
 @Form.create()
 class FeedbackList extends PureComponent {
-
   state = {
     selectedRows: [],
     formValues: {},
@@ -33,41 +28,41 @@ class FeedbackList extends PureComponent {
     },
     {
       title: '用户名',
-      dataIndex: 'userName'
+      dataIndex: 'userName',
     },
     {
       title: '用户邮箱',
-      dataIndex: 'userEmail'
+      dataIndex: 'userEmail',
     },
     {
       title: '反馈标题',
-      dataIndex: 'msgTitle'
+      dataIndex: 'msgTitle',
     },
     {
       title: '反馈状态',
-      dataIndex: 'msgStatus'
+      dataIndex: 'msgStatus',
     },
     {
       title: '反馈内容',
-      dataIndex: 'msgContent'
+      dataIndex: 'msgContent',
     },
     {
       title: '反馈时间',
       dataIndex: 'msgTime',
-      render: val => <span>{moment(val).format('YYYY-MM-DD')}</span>,
+      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
-  ]
+  ];
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'feedback/list',
     });
   }
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {dispatch} = this.props;
-    const {formValues} = this.state;
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const params = {
       pageNum: pagination.current,
@@ -93,7 +88,7 @@ class FeedbackList extends PureComponent {
   handleSearch = e => {
     e.preventDefault();
 
-    const {dispatch, form} = this.props;
+    const { dispatch, form } = this.props;
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -110,7 +105,7 @@ class FeedbackList extends PureComponent {
   };
 
   handleFormReset = () => {
-    const {form, dispatch} = this.props;
+    const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
@@ -123,19 +118,19 @@ class FeedbackList extends PureComponent {
 
   renderForm() {
     const {
-      form: {getFieldDecorator},
+      form: { getFieldDecorator },
     } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="用户名">
-              {getFieldDecorator('userName')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('userName')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="反馈ID">
-              {getFieldDecorator('msgId')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('msgId')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -143,7 +138,7 @@ class FeedbackList extends PureComponent {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
                 重置
               </Button>
             </span>
@@ -151,16 +146,15 @@ class FeedbackList extends PureComponent {
         </Row>
       </Form>
     );
-  };
-
+  }
 
   render() {
     const {
-      feedback: {data},
+      feedback: { data },
       loading,
     } = this.props;
 
-    const {selectedRows} = this.state;
+    const { selectedRows } = this.state;
     return (
       <PageHeaderWrapper title="意见反馈">
         <Card bordered={false}>
@@ -178,7 +172,6 @@ class FeedbackList extends PureComponent {
         </Card>
       </PageHeaderWrapper>
     );
-
   }
 }
 

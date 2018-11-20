@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.core.utils.Result;
 import tech.wetech.weshop.query.FootprintPageQuery;
 import tech.wetech.weshop.service.FootprintService;
-import tech.wetech.weshop.vo.FootprintPageVO;
-import tech.wetech.weshop.vo.Pagination;
+import tech.wetech.weshop.vo.PageInfoVO;
 
 /**
  * @author cjbi
@@ -22,13 +21,10 @@ public class AdminFootprintController {
     private FootprintService footprintService;
 
     @GetMapping("/list")
-    public Result<FootprintPageVO> queryFootprintPageInfo(FootprintPageQuery footprintPageQuery) {
+    public Result<PageInfoVO> queryFootprintPageInfo(FootprintPageQuery footprintPageQuery) {
         PageInfo pageInfo = footprintService.queryFootprintPageInfo(footprintPageQuery);
-        Pagination pagination = new Pagination(pageInfo);
-        FootprintPageVO footprintPageVO = new FootprintPageVO();
-        footprintPageVO.setList(pageInfo.getList());
-        footprintPageVO.setPagination(pagination);
-        return Result.success(footprintPageVO);
+        PageInfoVO pageInfoVO = new PageInfoVO(pageInfo);
+        return Result.success(pageInfoVO);
     }
 
 }

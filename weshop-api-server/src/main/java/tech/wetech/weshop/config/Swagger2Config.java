@@ -26,8 +26,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring boot整合Vue示例工程")
-                .description("Spring boot整合Vue的示例工程，前端使用iView Admin")
+                .title("Weshop接口文档")
+                .description("WESHOP | 又一个小程序商城应用")
                 .termsOfServiceUrl("https://github.com/cjbi")
                 .version("1.0")
                 .build();

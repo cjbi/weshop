@@ -2,6 +2,7 @@ package tech.wetech.weshop.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import tech.wetech.weshop.core.utils.Constants;
 import tech.wetech.weshop.enums.GenderEnum;
 
 /**
@@ -11,10 +12,10 @@ import tech.wetech.weshop.enums.GenderEnum;
 public class UserPageQuery {
 
     @ApiModelProperty("页面大小")
-    private Integer pageSize = 10;
+    private Integer pageSize = Constants.DEFAULT_PAGE_SIZE;
 
     @ApiModelProperty("页码")
-    private Integer pageNum = 1;
+    private Integer pageNum = Constants.DEFAULT_PAGE_NUM;
 
     private String username;
 

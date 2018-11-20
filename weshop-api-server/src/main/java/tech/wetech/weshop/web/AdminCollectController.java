@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.core.utils.Result;
 import tech.wetech.weshop.query.CollectPageQuery;
 import tech.wetech.weshop.service.CollectService;
-import tech.wetech.weshop.vo.CollectPageVO;
-import tech.wetech.weshop.vo.Pagination;
+import tech.wetech.weshop.vo.PageInfoVO;
 
 /**
  * @author cjbi
@@ -22,13 +21,10 @@ public class AdminCollectController {
     private CollectService collectService;
 
     @GetMapping("/list")
-    public Result<CollectPageVO> queryCollectPageInfo(CollectPageQuery collectPageQuery) {
+    public Result<PageInfoVO> queryCollectPageInfo(CollectPageQuery collectPageQuery) {
         PageInfo pageInfo = collectService.queryCollectPageInfo(collectPageQuery);
-        Pagination pagination = new Pagination(pageInfo);
-        CollectPageVO collectPageVO = new CollectPageVO();
-        collectPageVO.setList(pageInfo.getList());
-        collectPageVO.setPagination(pagination);
-        return Result.success(collectPageVO);
+        PageInfoVO pageInfoVO = new PageInfoVO(pageInfo);
+        return Result.success(pageInfoVO);
     }
 
 }

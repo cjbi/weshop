@@ -1,7 +1,12 @@
 package tech.wetech.weshop.po;
 
+import tech.wetech.weshop.enums.CategoryLevelEnum;
+
 import javax.persistence.*;
 
+/**
+ * @author cjbi
+ */
 @Table(name = "weshop_category")
 public class Category {
     @Id
@@ -39,7 +44,7 @@ public class Category {
     @Column(name = "wap_banner_url")
     private String wapBannerUrl;
 
-    private String level;
+    private CategoryLevelEnum level;
 
     private Integer type;
 
@@ -217,14 +222,14 @@ public class Category {
     /**
      * @return level
      */
-    public String getLevel() {
+    public CategoryLevelEnum getLevel() {
         return level;
     }
 
     /**
      * @param level
      */
-    public void setLevel(String level) {
+    public void setLevel(CategoryLevelEnum level) {
         this.level = level;
     }
 

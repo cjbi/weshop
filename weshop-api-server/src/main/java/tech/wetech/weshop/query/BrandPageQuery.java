@@ -6,7 +6,7 @@ import tech.wetech.weshop.core.utils.Constants;
 /**
  * @author cjbi
  */
-public class FeedbackPageQuery {
+public class BrandPageQuery {
 
     @ApiModelProperty("页面大小")
     private Integer pageSize = Constants.DEFAULT_PAGE_SIZE;
@@ -14,9 +14,9 @@ public class FeedbackPageQuery {
     @ApiModelProperty("页码")
     private Integer pageNum = Constants.DEFAULT_PAGE_NUM;
 
-    private Integer userId;
+    private Integer id;
 
-    private Integer msgId;
+    private String name;
 
     public Integer getPageSize() {
         return pageSize;
@@ -34,19 +34,19 @@ public class FeedbackPageQuery {
         this.pageNum = pageNum;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getMsgId() {
-        return msgId;
+    public String getName() {
+        return name;
     }
 
-    public void setMsgId(Integer msgId) {
-        this.msgId = msgId;
+    public void setName(String name) {
+        this.name = name;
     }
 }

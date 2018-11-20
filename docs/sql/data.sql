@@ -9223,7 +9223,7 @@ DROP TABLE IF EXISTS `weshop_search_history`;
 CREATE TABLE `weshop_search_history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `keyword` char(50) NOT NULL,
-  `source` varchar(45) NOT NULL DEFAULT '' COMMENT '搜索来源，如PC、小程序、APP等',
+  `from` varchar(45) NOT NULL DEFAULT '' COMMENT '搜索来源，如PC、小程序、APP等',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '搜索时间',
   `user_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -9233,11 +9233,11 @@ CREATE TABLE `weshop_search_history` (
 -- Records of weshop_search_history
 -- ----------------------------
 BEGIN;
-INSERT INTO `weshop_search_history` VALUES (23, '母亲节', '', 1500564813, '1');
-INSERT INTO `weshop_search_history` VALUES (24, '日式', '', 1500564816, '1');
-INSERT INTO `weshop_search_history` VALUES (25, '日式', '', 1500564822, '1');
-INSERT INTO `weshop_search_history` VALUES (26, '清新', '', 1500564835, '1');
-INSERT INTO `weshop_search_history` VALUES (27, '日式', '', 1500638161, '1');
+INSERT INTO `weshop_search_history` VALUES (23, '母亲节', '', '2018-08-12 09:30:28', '1');
+INSERT INTO `weshop_search_history` VALUES (24, '日式', '', '2018-09-12 09:30:28', '1');
+INSERT INTO `weshop_search_history` VALUES (25, '日式', '', '2018-01-12 09:30:28', '1');
+INSERT INTO `weshop_search_history` VALUES (26, '清新', '', '2018-02-12 09:30:28', '1');
+INSERT INTO `weshop_search_history` VALUES (27, '日式', '', '2018-03-12 09:30:28', '1');
 COMMIT;
 
 -- ----------------------------
@@ -9447,5 +9447,24 @@ BEGIN;
 INSERT INTO `weshop_user_level` VALUES (1, '普通用户', '0');
 INSERT INTO `weshop_user_level` VALUES (2, 'vip', '10000');
 COMMIT;
+
+select * from weshop_category;
+
+DROP TABLE IF EXISTS `weshop_storage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weshop_storage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(63) NOT NULL COMMENT '文件的唯一索引',
+  `name` varchar(255) NOT NULL COMMENT '文件名',
+  `type` varchar(20) NOT NULL COMMENT '文件类型',
+  `size` bigint NOT NULL COMMENT '文件大小',
+  `url` varchar(255) DEFAULT NULL COMMENT '文件访问链接',
+	`source` varchar(10) NOT NULL DEFAULT '' COMMENT '文件来源',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_key` (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件存储表';
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,25 +1,20 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'dva';
-import {
-  Card,
-  Form,
-  Button, Row, Col, Input,
-} from 'antd';
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import { Card, Form, Button, Row, Col, Input } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './FootprintList.less';
-import moment from "moment";
+import moment from 'moment';
 
 const FormItem = Form.Item;
 
-@connect(({footprint, loading}) => ({
+@connect(({ footprint, loading }) => ({
   footprint,
-  loading: loading.models.footprint
+  loading: loading.models.footprint,
 }))
 @Form.create()
 class FootprintList extends PureComponent {
-
   state = {
     selectedRows: [],
     formValues: {},
@@ -33,29 +28,29 @@ class FootprintList extends PureComponent {
     },
     {
       title: '用户ID',
-      dataIndex: 'userId'
+      dataIndex: 'userId',
     },
     {
       title: '商品ID',
-      dataIndex: 'goodsId'
+      dataIndex: 'goodsId',
     },
     {
       title: '添加时间',
       dataIndex: 'createTime',
-      render: val => <span>{moment(val).format('YYYY-MM-DD')}</span>,
+      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
-  ]
+  ];
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'footprint/list',
     });
   }
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {dispatch} = this.props;
-    const {formValues} = this.state;
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const params = {
       pageNum: pagination.current,
@@ -81,7 +76,7 @@ class FootprintList extends PureComponent {
   handleSearch = e => {
     e.preventDefault();
 
-    const {dispatch, form} = this.props;
+    const { dispatch, form } = this.props;
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -98,7 +93,7 @@ class FootprintList extends PureComponent {
   };
 
   handleFormReset = () => {
-    const {form, dispatch} = this.props;
+    const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
@@ -111,19 +106,19 @@ class FootprintList extends PureComponent {
 
   renderForm() {
     const {
-      form: {getFieldDecorator},
+      form: { getFieldDecorator },
     } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="用户ID">
-              {getFieldDecorator('userId')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('userId')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="商品ID">
-              {getFieldDecorator('goodsId')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('goodsId')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -131,7 +126,7 @@ class FootprintList extends PureComponent {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
                 重置
               </Button>
             </span>
@@ -139,16 +134,15 @@ class FootprintList extends PureComponent {
         </Row>
       </Form>
     );
-  };
-
+  }
 
   render() {
     const {
-      footprint: {data},
+      footprint: { data },
       loading,
     } = this.props;
 
-    const {selectedRows} = this.state;
+    const { selectedRows } = this.state;
     return (
       <PageHeaderWrapper title="会员足迹">
         <Card bordered={false}>
@@ -166,7 +160,6 @@ class FootprintList extends PureComponent {
         </Card>
       </PageHeaderWrapper>
     );
-
   }
 }
 

@@ -6,23 +6,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.core.utils.Result;
-import tech.wetech.weshop.query.FeedbackPageQuery;
-import tech.wetech.weshop.service.FeedbackService;
+import tech.wetech.weshop.query.BrandPageQuery;
+import tech.wetech.weshop.service.BrandService;
 import tech.wetech.weshop.vo.PageInfoVO;
 
 /**
  * @author cjbi
  */
 @RestController
-@RequestMapping("/admin/feedback")
-public class AdminFeedbackController {
+@RequestMapping("/admin/brand")
+public class AdminBrandController {
 
     @Autowired
-    private FeedbackService feedbackService;
+    private BrandService brandService;
 
     @GetMapping("/list")
-    public Result<PageInfoVO> queryFeedbackPageInfo(FeedbackPageQuery feedbackPageQuery) {
-        PageInfo pageInfo = feedbackService.queryFeedbackPageInfo(feedbackPageQuery);
+    public Result<PageInfoVO> queryPageInfo(BrandPageQuery brandPageQuery) {
+        PageInfo pageInfo = brandService.queryBrandPageInfo(brandPageQuery);
         PageInfoVO pageInfoVO = new PageInfoVO(pageInfo);
         return Result.success(pageInfoVO);
     }
