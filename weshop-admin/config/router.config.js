@@ -30,8 +30,28 @@ export default [
           },
           {
             path: '/user-mgr/address',
-            name: '收获地址',
+            name: '收货地址',
             component: './User/AddressList',
+          },
+          {
+            path: '/user-mgr/collect',
+            name: '会员收藏',
+            component: './User/CollectList',
+          },
+          {
+            path: '/user-mgr/footprint',
+            name: '会员足迹',
+            component: './User/FootprintList',
+          },
+          {
+            path: '/user-mgr/search-history',
+            name: '搜索历史',
+            component: './User/SearchHistoryList',
+          },
+          {
+            path: '/user-mgr/feedback',
+            name: '意见反馈',
+            component: './User/FeedbackList',
           },
         ],
       },

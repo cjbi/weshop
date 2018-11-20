@@ -8,21 +8,17 @@ import {
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-import styles from './AddressList.less';
+import styles from './FeedbackList.less';
+import moment from "moment";
 
 const FormItem = Form.Item;
 
-const isDefaultMap = {
-  true: '是',
-  false: '否'
-};
-
-@connect(({address, loading}) => ({
-  address,
-  loading: loading.models.address
+@connect(({feedback, loading}) => ({
+  feedback,
+  loading: loading.models.feedback
 }))
 @Form.create()
-class AddressList extends PureComponent {
+class FeedbackList extends PureComponent {
 
   state = {
     selectedRows: [],
@@ -32,36 +28,40 @@ class AddressList extends PureComponent {
 
   columns = [
     {
-      title: '地址ID',
+      title: '反馈ID',
       dataIndex: 'id',
     },
     {
-      title: '用户ID',
-      dataIndex: 'userId'
+      title: '用户名',
+      dataIndex: 'userName'
     },
     {
-      title: '收货人名称',
-      dataIndex: 'name'
+      title: '用户邮箱',
+      dataIndex: 'userEmail'
     },
     {
-      title: '手机号码',
-      dataIndex: 'mobile'
-    }, {
-      title: '地址',
-      dataIndex: 'address'
-    }, {
-      title: '默认',
-      dataIndex: 'isDefault',
-      render: text => {
-        return isDefaultMap[text];
-      }
+      title: '反馈标题',
+      dataIndex: 'msgTitle'
+    },
+    {
+      title: '反馈状态',
+      dataIndex: 'msgStatus'
+    },
+    {
+      title: '反馈内容',
+      dataIndex: 'msgContent'
+    },
+    {
+      title: '反馈时间',
+      dataIndex: 'msgTime',
+      render: val => <span>{moment(val).format('YYYY-MM-DD')}</span>,
     },
   ]
 
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch({
-      type: 'address/list',
+      type: 'feedback/list',
     });
   }
 
@@ -79,7 +79,7 @@ class AddressList extends PureComponent {
     }
 
     dispatch({
-      type: 'address/list',
+      type: 'feedback/list',
       payload: params,
     });
   };
@@ -103,7 +103,7 @@ class AddressList extends PureComponent {
       });
 
       dispatch({
-        type: 'address/list',
+        type: 'feedback/list',
         payload: fieldsValue,
       });
     });
@@ -116,7 +116,7 @@ class AddressList extends PureComponent {
       formValues: {},
     });
     dispatch({
-      type: 'address/list',
+      type: 'feedback/list',
       payload: {},
     });
   };
@@ -129,13 +129,13 @@ class AddressList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="用户ID">
-              {getFieldDecorator('userId')(<Input placeholder="请输入"/>)}
+            <FormItem label="用户名">
+              {getFieldDecorator('userName')(<Input placeholder="请输入"/>)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="收货人名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入"/>)}
+            <FormItem label="反馈ID">
+              {getFieldDecorator('msgId')(<Input placeholder="请输入"/>)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -156,13 +156,13 @@ class AddressList extends PureComponent {
 
   render() {
     const {
-      address: {data},
+      feedback: {data},
       loading,
     } = this.props;
 
     const {selectedRows} = this.state;
     return (
-      <PageHeaderWrapper title="收获地址">
+      <PageHeaderWrapper title="意见反馈">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
@@ -182,4 +182,4 @@ class AddressList extends PureComponent {
   }
 }
 
-export default AddressList;
+export default FeedbackList;

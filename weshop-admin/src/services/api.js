@@ -17,6 +17,22 @@ export async function queryAddress(params) {
   return request(`/weshop/admin/address/list?${stringify(params)}`);
 }
 
+export async function queryCollect(params) {
+  return request(`/weshop/admin/collect/list?${stringify(params)}`);
+}
+
+export async function queryFootprint(params) {
+  return request(`/weshop/admin/footprint/list?${stringify(params)}`);
+}
+
+export async function querySearchHistory(params) {
+  return request(`/weshop/admin/search-history/list?${stringify(params)}`);
+}
+
+export async function queryFeedback(params) {
+  return request(`/weshop/admin/feedback/list?${stringify(params)}`);
+}
+
 export async function queryUser(params) {
   return request(`/weshop/admin/user/list?${stringify(params)}`);
 }

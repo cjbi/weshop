@@ -8,21 +8,17 @@ import {
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-import styles from './AddressList.less';
+import styles from './SearchHistoryList.less';
+import moment from "moment";
 
 const FormItem = Form.Item;
 
-const isDefaultMap = {
-  true: '是',
-  false: '否'
-};
-
-@connect(({address, loading}) => ({
-  address,
-  loading: loading.models.address
+@connect(({searchHistory, loading}) => ({
+  searchHistory,
+  loading: loading.models.searchHistory
 }))
 @Form.create()
-class AddressList extends PureComponent {
+class SearchHistoryList extends PureComponent {
 
   state = {
     selectedRows: [],
@@ -32,7 +28,7 @@ class AddressList extends PureComponent {
 
   columns = [
     {
-      title: '地址ID',
+      title: '搜索ID',
       dataIndex: 'id',
     },
     {
@@ -40,28 +36,20 @@ class AddressList extends PureComponent {
       dataIndex: 'userId'
     },
     {
-      title: '收货人名称',
-      dataIndex: 'name'
+      title: '关键字',
+      dataIndex: 'keyword'
     },
     {
-      title: '手机号码',
-      dataIndex: 'mobile'
-    }, {
-      title: '地址',
-      dataIndex: 'address'
-    }, {
-      title: '默认',
-      dataIndex: 'isDefault',
-      render: text => {
-        return isDefaultMap[text];
-      }
+      title: '添加时间',
+      dataIndex: 'createTime',
+      render: val => <span>{moment(val).format('YYYY-MM-DD')}</span>,
     },
   ]
 
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch({
-      type: 'address/list',
+      type: 'searchHistory/list',
     });
   }
 
@@ -79,7 +67,7 @@ class AddressList extends PureComponent {
     }
 
     dispatch({
-      type: 'address/list',
+      type: 'searchHistory/list',
       payload: params,
     });
   };
@@ -103,7 +91,7 @@ class AddressList extends PureComponent {
       });
 
       dispatch({
-        type: 'address/list',
+        type: 'searchHistory/list',
         payload: fieldsValue,
       });
     });
@@ -116,7 +104,7 @@ class AddressList extends PureComponent {
       formValues: {},
     });
     dispatch({
-      type: 'address/list',
+      type: 'searchHistory/list',
       payload: {},
     });
   };
@@ -134,8 +122,8 @@ class AddressList extends PureComponent {
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="收货人名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入"/>)}
+            <FormItem label="关键字">
+              {getFieldDecorator('keyword')(<Input placeholder="请输入"/>)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -156,13 +144,13 @@ class AddressList extends PureComponent {
 
   render() {
     const {
-      address: {data},
+      searchHistory: {data},
       loading,
     } = this.props;
 
     const {selectedRows} = this.state;
     return (
-      <PageHeaderWrapper title="收获地址">
+      <PageHeaderWrapper title="会员收藏">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
@@ -182,4 +170,4 @@ class AddressList extends PureComponent {
   }
 }
 
-export default AddressList;
+export default SearchHistoryList;
