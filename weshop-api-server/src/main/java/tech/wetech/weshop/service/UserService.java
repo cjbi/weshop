@@ -1,8 +1,7 @@
 package tech.wetech.weshop.service;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.domain.User;
+import tech.wetech.weshop.po.User;
 import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.vo.CreateUserFormVO;
 import tech.wetech.weshop.vo.UpdateUserFormVO;

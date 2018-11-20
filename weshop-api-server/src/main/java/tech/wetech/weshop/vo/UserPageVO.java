@@ -1,6 +1,6 @@
 package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.domain.User;
+import tech.wetech.weshop.po.User;
 
 import java.util.List;
 import java.util.Map;

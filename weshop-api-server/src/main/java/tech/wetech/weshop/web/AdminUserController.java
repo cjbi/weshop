@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.core.utils.Result;
-import tech.wetech.weshop.domain.UserLevel;
+import tech.wetech.weshop.po.UserLevel;
 import tech.wetech.weshop.enums.GenderEnum;
 import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.service.UserLevelService;

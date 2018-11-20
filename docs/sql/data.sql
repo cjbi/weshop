@@ -9223,8 +9223,8 @@ DROP TABLE IF EXISTS `weshop_search_history`;
 CREATE TABLE `weshop_search_history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `keyword` char(50) NOT NULL,
-  `from` varchar(45) NOT NULL DEFAULT '' COMMENT '搜索来源，如PC、小程序、APP等',
-  `add_time` int(11) NOT NULL DEFAULT '0' COMMENT '搜索时间',
+  `source` varchar(45) NOT NULL DEFAULT '' COMMENT '搜索来源，如PC、小程序、APP等',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '搜索时间',
   `user_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

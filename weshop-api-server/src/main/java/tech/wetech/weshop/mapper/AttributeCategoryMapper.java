@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
 import tech.wetech.weshop.core.utils.MyMapper;
-import tech.wetech.weshop.domain.AttributeCategory;
+import tech.wetech.weshop.po.AttributeCategory;
 
 public interface AttributeCategoryMapper extends MyMapper<AttributeCategory> {
 }

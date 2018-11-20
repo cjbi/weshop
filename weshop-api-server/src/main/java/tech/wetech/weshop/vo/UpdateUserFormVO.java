@@ -1,6 +1,6 @@
 package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.domain.User;
+import tech.wetech.weshop.po.User;
 import tech.wetech.weshop.enums.GenderEnum;
 
 import javax.validation.constraints.NotNull;

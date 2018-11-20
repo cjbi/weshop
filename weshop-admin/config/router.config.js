@@ -28,6 +28,11 @@ export default [
             name: '用户列表',
             component: './User/UserList',
           },
+          {
+            path: '/user-mgr/address',
+            name: '收获地址',
+            component: './User/AddressList',
+          },
         ],
       },
       // ===========================================================

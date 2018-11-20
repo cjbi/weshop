@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.domain.UserLevel;
+import tech.wetech.weshop.po.UserLevel;
 
 import java.util.List;
 

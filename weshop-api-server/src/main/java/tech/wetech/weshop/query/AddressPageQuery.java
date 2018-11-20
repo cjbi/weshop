@@ -15,7 +15,7 @@ public class AddressPageQuery {
 
     private Integer userId;
 
-    private Integer name;
+    private String name;
 
     private String mobile;
 
@@ -43,11 +43,11 @@ public class AddressPageQuery {
         this.userId = userId;
     }
 
-    public Integer getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Integer name) {
+    public void setName(String name) {
         this.name = name;
     }
 

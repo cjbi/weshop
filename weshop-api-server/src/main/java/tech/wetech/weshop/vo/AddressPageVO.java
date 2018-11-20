@@ -1,6 +1,6 @@
 package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.domain.Address;
+import tech.wetech.weshop.po.Address;
 
 import java.util.List;
 import java.util.Map;
