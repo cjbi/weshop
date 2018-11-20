@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.Footprint;
+import tech.wetech.weshop.po.FootprintPO;
 import tech.wetech.weshop.query.FootprintPageQuery;
 
 /**
@@ -14,7 +14,7 @@ public interface FootprintService {
      * @param footprintPageQuery
      * @return
      */
-    PageInfo<Footprint> queryFootprintPageInfo(FootprintPageQuery footprintPageQuery);
+    PageInfo<FootprintPO> queryFootprintPageInfo(FootprintPageQuery footprintPageQuery);
 
 
 }

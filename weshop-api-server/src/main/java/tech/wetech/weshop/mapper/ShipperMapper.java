@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
-import tech.wetech.weshop.core.utils.MyMapper;
-import tech.wetech.weshop.po.Shipper;
+import tech.wetech.weshop.utils.MyMapper;
+import tech.wetech.weshop.po.ShipperPO;
 
-public interface ShipperMapper extends MyMapper<Shipper> {
+public interface ShipperMapper extends MyMapper<ShipperPO> {
 }

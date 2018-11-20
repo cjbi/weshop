@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
-import tech.wetech.weshop.core.utils.MyMapper;
-import tech.wetech.weshop.po.Cart;
+import tech.wetech.weshop.utils.MyMapper;
+import tech.wetech.weshop.po.CartPO;
 
-public interface CartMapper extends MyMapper<Cart> {
+public interface CartMapper extends MyMapper<CartPO> {
 }

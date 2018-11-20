@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.SearchHistory;
+import tech.wetech.weshop.po.SearchHistoryPO;
 import tech.wetech.weshop.query.SearchHistoryPageQuery;
 
 /**
@@ -14,6 +14,6 @@ public interface SearchHistoryService {
      * @param searchHistoryPageQuery
      * @return
      */
-    PageInfo<SearchHistory> querySearchHistoryPageInfo(SearchHistoryPageQuery searchHistoryPageQuery);
+    PageInfo<SearchHistoryPO> querySearchHistoryPageInfo(SearchHistoryPageQuery searchHistoryPageQuery);
 
 }

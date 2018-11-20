@@ -2,7 +2,7 @@ package tech.wetech.weshop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.po.UserLevel;
+import tech.wetech.weshop.po.UserLevelPO;
 import tech.wetech.weshop.mapper.UserLevelMapper;
 import tech.wetech.weshop.service.UserLevelService;
 
@@ -19,7 +19,7 @@ public class UserLevelServiceImpl implements UserLevelService {
 
 
     @Override
-    public List<UserLevel> queryAll() {
+    public List<UserLevelPO> queryAll() {
         return userLevelMapper.selectAll();
     }
 }

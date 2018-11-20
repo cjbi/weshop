@@ -116,6 +116,12 @@
             <artifactId>qiniu-java-sdk</artifactId>
             <version>[7.2.0, 7.2.99]</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>

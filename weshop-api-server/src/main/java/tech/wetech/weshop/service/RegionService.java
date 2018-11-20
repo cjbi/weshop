@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.Region;
+import tech.wetech.weshop.po.RegionPO;
 import tech.wetech.weshop.query.RegionPageQuery;
 
 /**
@@ -14,13 +14,13 @@ public interface RegionService {
      * @param regionId
      * @return
      */
-    Region queryRegionById(Integer regionId);
+    RegionPO queryRegionById(Integer regionId);
 
     /**
      * 分页查询区域
      * @param regionPageQuery
      * @return
      */
-    PageInfo<Region> queryRegionPageInfo(RegionPageQuery regionPageQuery);
+    PageInfo<RegionPO> queryRegionPageInfo(RegionPageQuery regionPageQuery);
 
 }

@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
-import tech.wetech.weshop.core.utils.MyMapper;
-import tech.wetech.weshop.po.Ad;
+import tech.wetech.weshop.utils.MyMapper;
+import tech.wetech.weshop.po.AdPO;
 
-public interface AdMapper extends MyMapper<Ad> {
+public interface AdMapper extends MyMapper<AdPO> {
 }

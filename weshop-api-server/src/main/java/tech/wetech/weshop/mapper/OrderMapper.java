@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
-import tech.wetech.weshop.core.utils.MyMapper;
-import tech.wetech.weshop.po.Order;
+import tech.wetech.weshop.utils.MyMapper;
+import tech.wetech.weshop.po.OrderPO;
 
-public interface OrderMapper extends MyMapper<Order> {
+public interface OrderMapper extends MyMapper<OrderPO> {
 }

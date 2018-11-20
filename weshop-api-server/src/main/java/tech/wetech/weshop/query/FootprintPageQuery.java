@@ -1,7 +1,7 @@
 package tech.wetech.weshop.query;
 
 import io.swagger.annotations.ApiModelProperty;
-import tech.wetech.weshop.core.utils.Constants;
+import tech.wetech.weshop.utils.Constants;
 
 /**
  * @author cjbi

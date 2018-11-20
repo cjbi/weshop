@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.Category;
+import tech.wetech.weshop.po.CategoryPO;
 import tech.wetech.weshop.query.CategoryPageQuery;
 
 /**
@@ -14,6 +14,6 @@ public interface CategoryService {
      * @param categoryPageQuery
      * @return
      */
-    PageInfo<Category> queryCategoryPageInfo(CategoryPageQuery categoryPageQuery);
+    PageInfo<CategoryPO> queryCategoryPageInfo(CategoryPageQuery categoryPageQuery);
 
 }

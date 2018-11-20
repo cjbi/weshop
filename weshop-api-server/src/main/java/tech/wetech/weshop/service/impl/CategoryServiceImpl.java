@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.mapper.CategoryMapper;
-import tech.wetech.weshop.po.Category;
+import tech.wetech.weshop.po.CategoryPO;
 import tech.wetech.weshop.query.CategoryPageQuery;
 import tech.wetech.weshop.service.CategoryService;
 import tk.mybatis.mapper.weekend.Weekend;
@@ -21,14 +21,14 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    public PageInfo<Category> queryCategoryPageInfo(CategoryPageQuery categoryPageQuery) {
-        Weekend<Category> example = Weekend.of(Category.class);
-        WeekendCriteria<Category, Object> criteria = example.weekendCriteria();
+    public PageInfo<CategoryPO> queryCategoryPageInfo(CategoryPageQuery categoryPageQuery) {
+        Weekend<CategoryPO> example = Weekend.of(CategoryPO.class);
+        WeekendCriteria<CategoryPO, Object> criteria = example.weekendCriteria();
         if(categoryPageQuery.getId() != null) {
-            criteria.andEqualTo(Category::getId,categoryPageQuery.getId());
+            criteria.andEqualTo(CategoryPO::getId,categoryPageQuery.getId());
         }
         if(categoryPageQuery.getName() != null) {
-            criteria.andEqualTo(Category::getName,categoryPageQuery.getName());
+            criteria.andEqualTo(CategoryPO::getName,categoryPageQuery.getName());
         }
         return PageHelper.startPage(categoryPageQuery.getPageNum(), categoryPageQuery.getPageSize())
                 .doSelectPageInfo(() -> categoryMapper.selectByExample(example));

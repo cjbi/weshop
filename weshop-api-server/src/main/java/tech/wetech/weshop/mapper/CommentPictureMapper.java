@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
-import tech.wetech.weshop.core.utils.MyMapper;
-import tech.wetech.weshop.po.CommentPicture;
+import tech.wetech.weshop.utils.MyMapper;
+import tech.wetech.weshop.po.CommentPicturePO;
 
-public interface CommentPictureMapper extends MyMapper<CommentPicture> {
+public interface CommentPictureMapper extends MyMapper<CommentPicturePO> {
 }

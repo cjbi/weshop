@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 /**
  * 服务器本地对象存储服务
  */
-public class LocalStorage implements IStorage {
+public class LocalStorage implements Storage {
 
     private String storagePath;
     private String address;

@@ -1,11 +1,10 @@
 package tech.wetech.weshop.storage;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import tech.wetech.weshop.core.utils.CharUtil;
+import tech.wetech.weshop.utils.CharUtil;
 import tech.wetech.weshop.mapper.StorageMapper;
-import tech.wetech.weshop.po.Storage;
+import tech.wetech.weshop.po.StoragePO;
 
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -18,7 +17,7 @@ public class StorageService {
 
     private String active;
 
-    private IStorage storage;
+    private Storage storage;
 
     @Autowired
     private StorageMapper storageMapper;
@@ -31,11 +30,11 @@ public class StorageService {
         this.active = active;
     }
 
-    public IStorage getStorage() {
+    public Storage getStorage() {
         return storage;
     }
 
-    public void setStorage(IStorage storage) {
+    public void setStorage(Storage storage) {
         this.storage = storage;
     }
 
@@ -53,15 +52,15 @@ public class StorageService {
 
         String url = generateUrl(key);
 
-        Storage storage = new Storage();
-        storage.setKey(key);
-        storage.setName(fileName);
-        storage.setType(contentType);
-        storage.setSize(contentLength);
-        storage.setUrl(url);
-        storage.setSource("");
+        StoragePO storagePO = new StoragePO();
+        storagePO.setKey(key);
+        storagePO.setName(fileName);
+        storagePO.setType(contentType);
+        storagePO.setSize(contentLength);
+        storagePO.setUrl(url);
+        storagePO.setSource("");
 
-        storageMapper.insertSelective(storage);
+        storageMapper.insertSelective(storagePO);
 
         return url;
     }
@@ -71,14 +70,14 @@ public class StorageService {
         String suffix = originalFilename.substring(index);
 
         String key = null;
-        Storage storage = null;
+        StoragePO storagePO = null;
 
         do {
             key = CharUtil.getRandomString(20) + suffix;
             String finalKey = key;
-            storage = storageMapper.selectOne(new Storage(){{setKey(finalKey);}});
+            storagePO = storageMapper.selectOne(new StoragePO(){{setKey(finalKey);}});
         }
-        while (storage != null);
+        while (storagePO != null);
 
         return key;
     }

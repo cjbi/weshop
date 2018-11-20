@@ -2,7 +2,7 @@ package tech.wetech.weshop.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import tech.wetech.weshop.core.utils.Constants;
+import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.enums.GenderEnum;
 
 /**

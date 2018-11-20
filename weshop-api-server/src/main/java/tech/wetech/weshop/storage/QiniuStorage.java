@@ -15,7 +15,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-public class QiniuStorage implements IStorage {
+public class QiniuStorage implements Storage {
 
     private String endpoint;
     private String accessKey;
