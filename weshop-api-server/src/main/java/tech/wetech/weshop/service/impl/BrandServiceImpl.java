@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.mapper.BrandMapper;
-import tech.wetech.weshop.po.BrandPO;
+import tech.wetech.weshop.po.Brand;
 import tech.wetech.weshop.query.BrandPageQuery;
 import tech.wetech.weshop.service.BrandService;
 import tk.mybatis.mapper.weekend.Weekend;
@@ -22,14 +22,14 @@ public class BrandServiceImpl implements BrandService {
 
 
     @Override
-    public PageInfo<BrandPO> queryBrandPageInfo(BrandPageQuery brandPageQuery) {
-        Weekend<BrandPO> example = Weekend.of(BrandPO.class);
-        WeekendCriteria<BrandPO, Object> criteria = example.weekendCriteria();
+    public PageInfo<Brand> queryBrandPageInfo(BrandPageQuery brandPageQuery) {
+        Weekend<Brand> example = Weekend.of(Brand.class);
+        WeekendCriteria<Brand, Object> criteria = example.weekendCriteria();
         if(brandPageQuery.getId() != null) {
-            criteria.andEqualTo(BrandPO::getId,brandPageQuery.getId());
+            criteria.andEqualTo(Brand::getId,brandPageQuery.getId());
         }
         if(brandPageQuery.getName() != null) {
-            criteria.andEqualTo(BrandPO::getName,brandPageQuery.getName());
+            criteria.andEqualTo(Brand::getName,brandPageQuery.getName());
         }
         return PageHelper.startPage(brandPageQuery.getPageNum(), brandPageQuery.getPageSize())
                 .doSelectPageInfo(() -> brandMapper.selectByExample(example));

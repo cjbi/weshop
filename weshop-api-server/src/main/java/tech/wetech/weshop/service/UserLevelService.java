@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.po.UserLevelPO;
+import tech.wetech.weshop.po.UserLevel;
 
 import java.util.List;
 
@@ -13,6 +13,6 @@ public interface UserLevelService {
      * 查询所有
      * @return
      */
-    List<UserLevelPO> queryAll();
+    List<UserLevel> queryAll();
 
 }

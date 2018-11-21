@@ -148,7 +148,7 @@
                     <dependency>
                         <groupId>tk.mybatis</groupId>
                         <artifactId>mapper-generator</artifactId>
-                        <version>1.0.0</version>
+                            <version>1.0.0</version>
                     </dependency>
                 </dependencies>
             </plugin>

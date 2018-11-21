@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.po.UserPO;
+import tech.wetech.weshop.po.User;
 import tech.wetech.weshop.mapper.UserMapper;
 import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.service.UserService;
@@ -23,20 +23,20 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public PageInfo<UserPO> queryUserPageInfo(UserPageQuery userPageQuery) {
-        Weekend<UserPO> example = Weekend.of(UserPO.class);
-        WeekendCriteria<UserPO, Object> criteria = example.weekendCriteria();
+    public PageInfo<User> queryUserPageInfo(UserPageQuery userPageQuery) {
+        Weekend<User> example = Weekend.of(User.class);
+        WeekendCriteria<User, Object> criteria = example.weekendCriteria();
         if (userPageQuery.getUsername() != null) {
-            criteria.andEqualTo(UserPO::getUsername, userPageQuery.getUsername());
+            criteria.andEqualTo(User::getUsername, userPageQuery.getUsername());
         }
         if (userPageQuery.getMobile() != null) {
-            criteria.andEqualTo(UserPO::getMobile, userPageQuery.getMobile());
+            criteria.andEqualTo(User::getMobile, userPageQuery.getMobile());
         }
         if (userPageQuery.getGender() != null) {
-            criteria.andEqualTo(UserPO::getGender, userPageQuery.getGender());
+            criteria.andEqualTo(User::getGender, userPageQuery.getGender());
         }
         if (userPageQuery.getUserLevelId() != null) {
-            criteria.andEqualTo(UserPO::getUserLevelId, userPageQuery.getUserLevelId());
+            criteria.andEqualTo(User::getUserLevelId, userPageQuery.getUserLevelId());
         }
         return PageHelper.startPage(userPageQuery.getPageNum(), userPageQuery.getPageSize())
                 .doSelectPageInfo(() -> userMapper.selectByExample(example));
@@ -44,14 +44,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(CreateUserFormVO createUserFormVO) {
-        UserPO userPO = new UserPO(createUserFormVO);
-        userMapper.insertSelective(userPO);
+        User user = new User(createUserFormVO);
+        userMapper.insertSelective(user);
     }
 
     @Override
     public void updateUser(UpdateUserFormVO updateUserFormVO) {
-        UserPO userPO = new UserPO(updateUserFormVO);
-        userMapper.updateByPrimaryKeySelective(userPO);
+        User user = new User(updateUserFormVO);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 
     @Override

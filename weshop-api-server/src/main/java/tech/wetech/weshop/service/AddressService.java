@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.AddressPO;
+import tech.wetech.weshop.po.Address;
 import tech.wetech.weshop.query.AddressPageQuery;
 
 /**
@@ -15,5 +15,5 @@ public interface AddressService {
      * @param addressPageQuery
      * @return
      */
-    PageInfo<AddressPO> queryAddressPageInfo(AddressPageQuery addressPageQuery);
+    PageInfo<Address> queryAddressPageInfo(AddressPageQuery addressPageQuery);
 }

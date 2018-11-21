@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.BrandPO;
+import tech.wetech.weshop.po.Brand;
 import tech.wetech.weshop.query.BrandPageQuery;
 
 /**
@@ -14,6 +14,6 @@ public interface BrandService {
      * @param brandPageQuery
      * @return
      */
-    PageInfo<BrandPO> queryBrandPageInfo(BrandPageQuery brandPageQuery);
+    PageInfo<Brand> queryBrandPageInfo(BrandPageQuery brandPageQuery);
 
 }

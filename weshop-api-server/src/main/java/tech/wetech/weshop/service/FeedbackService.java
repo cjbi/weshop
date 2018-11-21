@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.FeedbackPO;
+import tech.wetech.weshop.po.Feedback;
 import tech.wetech.weshop.query.FeedbackPageQuery;
 
 /**
@@ -10,6 +10,6 @@ import tech.wetech.weshop.query.FeedbackPageQuery;
 public interface FeedbackService {
 
 
-    PageInfo<FeedbackPO> queryFeedbackPageInfo(FeedbackPageQuery feedbackPageQuery);
+    PageInfo<Feedback> queryFeedbackPageInfo(FeedbackPageQuery feedbackPageQuery);
 
 }

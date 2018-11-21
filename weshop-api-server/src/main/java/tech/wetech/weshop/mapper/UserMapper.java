@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
 import tech.wetech.weshop.utils.MyMapper;
-import tech.wetech.weshop.po.UserPO;
+import tech.wetech.weshop.po.User;
 
-public interface UserMapper extends MyMapper<UserPO> {
+public interface UserMapper extends MyMapper<User> {
 }

@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.UserPO;
+import tech.wetech.weshop.po.User;
 import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.vo.CreateUserFormVO;
 import tech.wetech.weshop.vo.UpdateUserFormVO;
@@ -17,7 +17,7 @@ public interface UserService {
      * @param userPageParamVO
      * @return
      */
-    PageInfo<UserPO> queryUserPageInfo(UserPageQuery userPageParamVO);
+    PageInfo<User> queryUserPageInfo(UserPageQuery userPageParamVO);
 
     /**
      * 创建用户

@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
 import tech.wetech.weshop.utils.MyMapper;
-import tech.wetech.weshop.po.FootprintPO;
+import tech.wetech.weshop.po.Footprint;
 
-public interface FootprintMapper extends MyMapper<FootprintPO> {
+public interface FootprintMapper extends MyMapper<Footprint> {
 }

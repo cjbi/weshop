@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.po.UserLevelPO;
+import tech.wetech.weshop.po.UserLevel;
 import tech.wetech.weshop.enums.GenderEnum;
 import tech.wetech.weshop.query.UserPageQuery;
 import tech.wetech.weshop.service.UserLevelService;
@@ -31,7 +31,7 @@ public class AdminUserController {
     public Result<PageInfoVO> queryUserPageInfo(UserPageQuery userPageQuery) {
         PageInfo pageInfo = userService.queryUserPageInfo(userPageQuery);
         PageInfoVO pageInfoVO = new PageInfoVO.Builder(pageInfo)
-                .addExtra("userLevel",userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevelPO::getId, UserLevelPO::getName)))
+                .addExtra("userLevel",userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)))
                 .addExtra("gender",Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)))
                 .build();
         return Result.success(pageInfoVO);

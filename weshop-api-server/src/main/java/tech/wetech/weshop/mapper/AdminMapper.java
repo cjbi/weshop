@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
 import tech.wetech.weshop.utils.MyMapper;
-import tech.wetech.weshop.po.AdminPO;
+import tech.wetech.weshop.po.Admin;
 
-public interface AdminMapper extends MyMapper<AdminPO> {
+public interface AdminMapper extends MyMapper<Admin> {
 }

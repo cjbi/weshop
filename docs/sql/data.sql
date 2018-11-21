@@ -9460,7 +9460,6 @@ CREATE TABLE `weshop_storage` (
   `type` varchar(20) NOT NULL COMMENT '文件类型',
   `size` bigint NOT NULL COMMENT '文件大小',
   `url` varchar(255) DEFAULT NULL COMMENT '文件访问链接',
-	`source` varchar(10) NOT NULL DEFAULT '' COMMENT '文件来源',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),

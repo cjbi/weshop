@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import tech.wetech.weshop.utils.CharUtil;
 import tech.wetech.weshop.mapper.StorageMapper;
-import tech.wetech.weshop.po.StoragePO;
+import tech.wetech.weshop.po.Storage;
 
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -17,7 +17,7 @@ public class StorageService {
 
     private String active;
 
-    private Storage storage;
+    private tech.wetech.weshop.storage.Storage storage;
 
     @Autowired
     private StorageMapper storageMapper;
@@ -30,11 +30,11 @@ public class StorageService {
         this.active = active;
     }
 
-    public Storage getStorage() {
+    public tech.wetech.weshop.storage.Storage getStorage() {
         return storage;
     }
 
-    public void setStorage(Storage storage) {
+    public void setStorage(tech.wetech.weshop.storage.Storage storage) {
         this.storage = storage;
     }
 
@@ -48,19 +48,18 @@ public class StorageService {
      */
     public String store(InputStream inputStream, long contentLength, String contentType, String fileName) {
         String key = generateKey(fileName);
-        storage.store(inputStream, contentLength, contentType, key);
+        this.storage.store(inputStream, contentLength, contentType, key);
 
         String url = generateUrl(key);
 
-        StoragePO storagePO = new StoragePO();
-        storagePO.setKey(key);
-        storagePO.setName(fileName);
-        storagePO.setType(contentType);
-        storagePO.setSize(contentLength);
-        storagePO.setUrl(url);
-        storagePO.setSource("");
+        Storage storage = new Storage();
+        storage.setKey(key);
+        storage.setName(fileName);
+        storage.setType(contentType);
+        storage.setSize(contentLength);
+        storage.setUrl(url);
 
-        storageMapper.insertSelective(storagePO);
+        storageMapper.insertSelective(storage);
 
         return url;
     }
@@ -70,14 +69,14 @@ public class StorageService {
         String suffix = originalFilename.substring(index);
 
         String key = null;
-        StoragePO storagePO = null;
+        Storage storage = null;
 
         do {
             key = CharUtil.getRandomString(20) + suffix;
             String finalKey = key;
-            storagePO = storageMapper.selectOne(new StoragePO(){{setKey(finalKey);}});
+            storage = storageMapper.selectOne(new Storage(){{setKey(finalKey);}});
         }
-        while (storagePO != null);
+        while (storage != null);
 
         return key;
     }

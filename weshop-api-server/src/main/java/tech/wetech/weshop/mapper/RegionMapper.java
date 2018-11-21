@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
 import tech.wetech.weshop.utils.MyMapper;
-import tech.wetech.weshop.po.RegionPO;
+import tech.wetech.weshop.po.Region;
 
-public interface RegionMapper extends MyMapper<RegionPO> {
+public interface RegionMapper extends MyMapper<Region> {
 }

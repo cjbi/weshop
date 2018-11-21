@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.po.AddressPO;
+import tech.wetech.weshop.po.Address;
 import tech.wetech.weshop.mapper.AddressMapper;
 import tech.wetech.weshop.query.AddressPageQuery;
 import tech.wetech.weshop.service.AddressService;
@@ -21,17 +21,17 @@ public class AddressServiceImpl implements AddressService {
     private AddressMapper addressMapper;
 
     @Override
-    public PageInfo<AddressPO> queryAddressPageInfo(AddressPageQuery addressPageQuery) {
-        Weekend<AddressPO> example = Weekend.of(AddressPO.class);
-        WeekendCriteria<AddressPO, Object> criteria = example.weekendCriteria();
+    public PageInfo<Address> queryAddressPageInfo(AddressPageQuery addressPageQuery) {
+        Weekend<Address> example = Weekend.of(Address.class);
+        WeekendCriteria<Address, Object> criteria = example.weekendCriteria();
         if (addressPageQuery.getUserId() != null) {
-            criteria.andEqualTo(AddressPO::getUserId, addressPageQuery.getUserId());
+            criteria.andEqualTo(Address::getUserId, addressPageQuery.getUserId());
         }
         if (addressPageQuery.getName() != null) {
-            criteria.andEqualTo(AddressPO::getName, addressPageQuery.getName());
+            criteria.andEqualTo(Address::getName, addressPageQuery.getName());
         }
         if (addressPageQuery.getMobile() != null) {
-            criteria.andEqualTo(AddressPO::getMobile, addressPageQuery.getMobile());
+            criteria.andEqualTo(Address::getMobile, addressPageQuery.getMobile());
         }
         return PageHelper.startPage(addressPageQuery.getPageNum(), addressPageQuery.getPageSize())
                 .doSelectPageInfo(() -> addressMapper.selectByExample(example));

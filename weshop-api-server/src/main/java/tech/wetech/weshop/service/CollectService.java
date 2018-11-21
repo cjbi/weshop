@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import tech.wetech.weshop.po.CollectPO;
+import tech.wetech.weshop.po.Collect;
 import tech.wetech.weshop.query.CollectPageQuery;
 
 /**
@@ -14,6 +14,6 @@ public interface CollectService {
      * @param collectPageQuery
      * @return
      */
-    PageInfo<CollectPO> queryCollectPageInfo(CollectPageQuery collectPageQuery);
+    PageInfo<Collect> queryCollectPageInfo(CollectPageQuery collectPageQuery);
 
 }

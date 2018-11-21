@@ -1,6 +1,6 @@
 package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.po.UserPO;
+import tech.wetech.weshop.po.User;
 import tech.wetech.weshop.enums.GenderEnum;
 
 import javax.validation.constraints.NotNull;
@@ -42,20 +42,20 @@ public class CreateUserFormVO {
     public CreateUserFormVO() {
     }
 
-    public CreateUserFormVO(UserPO userPO) {
-        this.username = userPO.getUsername();
-        this.password = userPO.getPassword();
-        this.gender = userPO.getGender();
-        this.birthday = userPO.getBirthday();
-        this.registerTime = userPO.getRegisterTime();
-        this.lastLoginTime = userPO.getLastLoginTime();
-        this.lastLoginIp = userPO.getLastLoginIp();
-        this.userLevelId = userPO.getUserLevelId();
-        this.nickname = userPO.getNickname();
-        this.mobile = userPO.getMobile();
-        this.registerIp = userPO.getRegisterIp();
-        this.avatar = userPO.getAvatar();
-        this.wechatOpenId = userPO.getWechatOpenId();
+    public CreateUserFormVO(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.gender = user.getGender();
+        this.birthday = user.getBirthday();
+        this.registerTime = user.getRegisterTime();
+        this.lastLoginTime = user.getLastLoginTime();
+        this.lastLoginIp = user.getLastLoginIp();
+        this.userLevelId = user.getUserLevelId();
+        this.nickname = user.getNickname();
+        this.mobile = user.getMobile();
+        this.registerIp = user.getRegisterIp();
+        this.avatar = user.getAvatar();
+        this.wechatOpenId = user.getWechatOpenId();
     }
 
     public String getUsername() {
