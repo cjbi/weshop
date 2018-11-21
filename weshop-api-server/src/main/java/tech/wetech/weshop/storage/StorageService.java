@@ -22,6 +22,10 @@ public class StorageService {
     @Autowired
     private StorageMapper storageMapper;
 
+    public Storage queryByKey(String key) {
+       return storageMapper.selectOne(new Storage(){{setKey(key);}});
+    }
+
     public String getActive() {
         return active;
     }
