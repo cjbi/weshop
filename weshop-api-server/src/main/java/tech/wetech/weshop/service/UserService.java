@@ -31,6 +31,6 @@ public interface UserService {
      */
     void updateUser(UpdateUserFormVO updateUserFormVO);
 
-    void deleteUser(Integer... userId);
+    void deleteUser(Integer userId);
 
 }

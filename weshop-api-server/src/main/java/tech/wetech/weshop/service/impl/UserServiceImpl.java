@@ -55,10 +55,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Integer... userIds) {
-        for (Integer userId : userIds) {
-            userMapper.deleteByPrimaryKey(userId);
-        }
+    public void deleteUser(Integer userId) {
+        userMapper.deleteByPrimaryKey(userId);
     }
 
 }

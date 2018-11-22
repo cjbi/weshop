@@ -31,8 +31,8 @@ public class AdminUserController {
     public Result<PageInfoVO> queryUserPageInfo(UserPageQuery userPageQuery) {
         PageInfo pageInfo = userService.queryUserPageInfo(userPageQuery);
         PageInfoVO pageInfoVO = new PageInfoVO.Builder(pageInfo)
-                .addExtra("userLevel",userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)))
-                .addExtra("gender",Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)))
+                .addExtra("userLevel", userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)))
+                .addExtra("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)))
                 .build();
         return Result.success(pageInfoVO);
     }
@@ -52,7 +52,7 @@ public class AdminUserController {
 
     @PostMapping("/delete")
     public Result deleteUser(@RequestBody Integer[] userIds) {
-        userService.deleteUser(userIds);
+        Arrays.stream(userIds).forEach(userId -> userService.deleteUser(userId));
         return Result.success(userIds);
     }
 

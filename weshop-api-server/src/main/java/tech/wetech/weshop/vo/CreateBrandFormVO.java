@@ -1,94 +1,33 @@
-package tech.wetech.weshop.po;
-
-import tech.wetech.weshop.vo.CreateBrandFormVO;
-import tech.wetech.weshop.vo.UpdateBrandFormVO;
+package tech.wetech.weshop.vo;
 
 import java.math.BigDecimal;
-import javax.persistence.*;
 
-@Table(name = "weshop_brand")
-public class Brand {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+/**
+ * @author cjbi
+ */
+public class CreateBrandFormVO {
 
     private String name;
 
-    @Column(name = "list_pic_url")
     private String listPicUrl;
 
-    @Column(name = "simple_desc")
     private String simpleDesc;
 
-    @Column(name = "pic_url")
     private String picUrl;
 
-    @Column(name = "sort_order")
     private Byte sortOrder;
 
-    @Column(name = "is_show")
     private Boolean isShow;
 
-    @Column(name = "floor_price")
     private BigDecimal floorPrice;
 
-    @Column(name = "app_list_pic_url")
     private String appListPicUrl;
 
-    @Column(name = "is_new")
     private Boolean isNew;
 
-    @Column(name = "new_pic_url")
     private String newPicUrl;
 
-    @Column(name = "new_sort_order")
     private Byte newSortOrder;
-
-    public Brand() {
-    }
-
-    public Brand(CreateBrandFormVO createBrandFormVO) {
-        this.name = createBrandFormVO.getName();
-        this.listPicUrl = createBrandFormVO.getListPicUrl();
-        this.simpleDesc = createBrandFormVO.getSimpleDesc();
-        this.picUrl = createBrandFormVO.getPicUrl();
-        this.sortOrder = createBrandFormVO.getSortOrder();
-        this.isShow = createBrandFormVO.getIsShow();
-        this.floorPrice = createBrandFormVO.getFloorPrice();
-        this.appListPicUrl = createBrandFormVO.getAppListPicUrl();
-        this.isNew = createBrandFormVO.getIsNew();
-        this.newPicUrl = createBrandFormVO.getNewPicUrl();
-        this.newSortOrder = createBrandFormVO.getNewSortOrder();
-    }
-
-    public Brand(UpdateBrandFormVO updateBrandFormVO) {
-        this.id = updateBrandFormVO.getId();
-        this.name = updateBrandFormVO.getName();
-        this.listPicUrl = updateBrandFormVO.getListPicUrl();
-        this.simpleDesc = updateBrandFormVO.getSimpleDesc();
-        this.picUrl = updateBrandFormVO.getPicUrl();
-        this.sortOrder = updateBrandFormVO.getSortOrder();
-        this.isShow = updateBrandFormVO.getIsShow();
-        this.floorPrice = updateBrandFormVO.getFloorPrice();
-        this.appListPicUrl = updateBrandFormVO.getAppListPicUrl();
-        this.isNew = updateBrandFormVO.getIsNew();
-        this.newPicUrl = updateBrandFormVO.getNewPicUrl();
-        this.newSortOrder = updateBrandFormVO.getNewSortOrder();
-    }
-
-    /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * @return name
@@ -243,4 +182,5 @@ public class Brand {
     public void setNewSortOrder(Byte newSortOrder) {
         this.newSortOrder = newSortOrder;
     }
+
 }
