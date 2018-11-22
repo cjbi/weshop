@@ -9,9 +9,9 @@ import java.util.Map;
 /**
  * @author cjbi
  */
-public class PageInfoVO {
+public class PageInfoVO<T> {
 
-    private List<?> list;
+    private List<T> list;
 
     private Pagination pagination;
 
@@ -56,7 +56,7 @@ public class PageInfoVO {
         return list;
     }
 
-    public void setList(List<?> list) {
+    public void setList(List<T> list) {
         this.list = list;
     }
 

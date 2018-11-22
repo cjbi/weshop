@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class DefaultExceptionHandler {
 
-    public static Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
 
     @ResponseBody
     @ExceptionHandler({Throwable.class})

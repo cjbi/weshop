@@ -16,4 +16,5 @@ public interface CategoryService {
      */
     PageInfo<Category> queryCategoryPageInfo(CategoryPageQuery categoryPageQuery);
 
+
 }
