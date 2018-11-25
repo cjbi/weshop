@@ -1,6 +1,7 @@
 package tech.wetech.weshop.query;
 
 import io.swagger.annotations.ApiModelProperty;
+import tech.wetech.weshop.enums.CategoryLevelEnum;
 import tech.wetech.weshop.utils.Constants;
 
 /**
@@ -17,6 +18,8 @@ public class CategoryPageQuery {
     private Integer id;
 
     private String name;
+
+    private CategoryLevelEnum categoryLevel;
 
     public Integer getPageSize() {
         return pageSize;
@@ -48,5 +51,13 @@ public class CategoryPageQuery {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public CategoryLevelEnum getCategoryLevel() {
+        return categoryLevel;
+    }
+
+    public void setCategoryLevel(CategoryLevelEnum categoryLevel) {
+        this.categoryLevel = categoryLevel;
     }
 }

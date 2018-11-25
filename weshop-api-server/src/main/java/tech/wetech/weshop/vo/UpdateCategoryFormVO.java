@@ -7,6 +7,8 @@ import tech.wetech.weshop.enums.CategoryLevelEnum;
  */
 public class UpdateCategoryFormVO {
 
+    private Integer id;
+
     private String name;
 
     private String keywords;
@@ -34,6 +36,14 @@ public class UpdateCategoryFormVO {
     private Integer type;
 
     private String frontName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     /**
      * @return name

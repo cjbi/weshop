@@ -1,6 +1,8 @@
 package tech.wetech.weshop.po;
 
 import tech.wetech.weshop.enums.CategoryLevelEnum;
+import tech.wetech.weshop.vo.CreateCategoryFormVO;
+import tech.wetech.weshop.vo.UpdateCategoryFormVO;
 
 import javax.persistence.*;
 
@@ -50,6 +52,44 @@ public class Category {
 
     @Column(name = "front_name")
     private String frontName;
+
+    public Category() {
+    }
+
+    public Category(CreateCategoryFormVO updateCategoryFormVO) {
+        this.name = updateCategoryFormVO.getName();
+        this.keywords = updateCategoryFormVO.getKeywords();
+        this.frontDesc = updateCategoryFormVO.getFrontDesc();
+        this.parentId = updateCategoryFormVO.getParentId();
+        this.sortOrder = updateCategoryFormVO.getSortOrder();
+        this.showIndex = updateCategoryFormVO.getShowIndex();
+        this.isShow = updateCategoryFormVO.getIsShow();
+        this.bannerUrl = updateCategoryFormVO.getBannerUrl();
+        this.iconUrl = updateCategoryFormVO.getIconUrl();
+        this.imgUrl = updateCategoryFormVO.getImgUrl();
+        this.wapBannerUrl = updateCategoryFormVO.getWapBannerUrl();
+        this.level = updateCategoryFormVO.getLevel();
+        this.type = updateCategoryFormVO.getType();
+        this.frontName = updateCategoryFormVO.getFrontName();
+    }
+
+    public Category(UpdateCategoryFormVO updateCategoryFormVO) {
+        this.id = updateCategoryFormVO.getId();
+        this.name = updateCategoryFormVO.getName();
+        this.keywords = updateCategoryFormVO.getKeywords();
+        this.frontDesc = updateCategoryFormVO.getFrontDesc();
+        this.parentId = updateCategoryFormVO.getParentId();
+        this.sortOrder = updateCategoryFormVO.getSortOrder();
+        this.showIndex = updateCategoryFormVO.getShowIndex();
+        this.isShow = updateCategoryFormVO.getIsShow();
+        this.bannerUrl = updateCategoryFormVO.getBannerUrl();
+        this.iconUrl = updateCategoryFormVO.getIconUrl();
+        this.imgUrl = updateCategoryFormVO.getImgUrl();
+        this.wapBannerUrl = updateCategoryFormVO.getWapBannerUrl();
+        this.level = updateCategoryFormVO.getLevel();
+        this.type = updateCategoryFormVO.getType();
+        this.frontName = updateCategoryFormVO.getFrontName();
+    }
 
     /**
      * @return id
