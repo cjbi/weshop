@@ -1,8 +1,12 @@
 package tech.wetech.weshop.po;
 
+import tech.wetech.weshop.enums.OrderStatusEnum;
+import tech.wetech.weshop.enums.PayStatusEnum;
+import tk.mybatis.mapper.annotation.ColumnType;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "weshop_order")
 public class Order {
@@ -17,13 +21,15 @@ public class Order {
     private Integer userId;
 
     @Column(name = "order_status")
-    private Boolean orderStatus;
+    @ColumnType
+    private OrderStatusEnum orderStatus;
 
     @Column(name = "shipping_status")
-    private Boolean shippingStatus;
+    private Short shippingStatus;
 
     @Column(name = "pay_status")
-    private Boolean payStatus;
+    @ColumnType
+    private PayStatusEnum payStatus;
 
     private String consignee;
 
@@ -148,42 +154,42 @@ public class Order {
     /**
      * @return order_status
      */
-    public Boolean getOrderStatus() {
+    public OrderStatusEnum getOrderStatus() {
         return orderStatus;
     }
 
     /**
      * @param orderStatus
      */
-    public void setOrderStatus(Boolean orderStatus) {
+    public void setOrderStatus(OrderStatusEnum orderStatus) {
         this.orderStatus = orderStatus;
     }
 
     /**
      * @return shipping_status
      */
-    public Boolean getShippingStatus() {
+    public Short getShippingStatus() {
         return shippingStatus;
     }
 
     /**
      * @param shippingStatus
      */
-    public void setShippingStatus(Boolean shippingStatus) {
+    public void setShippingStatus(Short shippingStatus) {
         this.shippingStatus = shippingStatus;
     }
 
     /**
      * @return pay_status
      */
-    public Boolean getPayStatus() {
+    public PayStatusEnum getPayStatus() {
         return payStatus;
     }
 
     /**
      * @param payStatus
      */
-    public void setPayStatus(Boolean payStatus) {
+    public void setPayStatus(PayStatusEnum payStatus) {
         this.payStatus = payStatus;
     }
 

@@ -27,7 +27,7 @@
         <javaClientGenerator targetPackage="tech.wetech.weshop.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="weshop_storage" domainObjectName="St orage">
+        <table tableName="weshop_order" domainObjectName="Order">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 

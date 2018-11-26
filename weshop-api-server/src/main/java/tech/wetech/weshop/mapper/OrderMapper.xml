@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="tech.wetech.weshop.mapper.OrderMapper" >
-  <resultMap id="BaseResultMap" type="tech.wetech.weshop.po.Order" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.wetech.weshop.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="tech.wetech.weshop.po.Order">
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="order_status" property="orderStatus" jdbcType="BIT" />
-    <result column="shipping_status" property="shippingStatus" jdbcType="BIT" />
-    <result column="pay_status" property="payStatus" jdbcType="BIT" />
-    <result column="consignee" property="consignee" jdbcType="VARCHAR" />
-    <result column="country" property="country" jdbcType="SMALLINT" />
-    <result column="province" property="province" jdbcType="SMALLINT" />
-    <result column="city" property="city" jdbcType="SMALLINT" />
-    <result column="district" property="district" jdbcType="SMALLINT" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="postscript" property="postscript" jdbcType="VARCHAR" />
-    <result column="shipping_fee" property="shippingFee" jdbcType="DECIMAL" />
-    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
-    <result column="pay_id" property="payId" jdbcType="TINYINT" />
-    <result column="actual_price" property="actualPrice" jdbcType="DECIMAL" />
-    <result column="integral" property="integral" jdbcType="INTEGER" />
-    <result column="integral_money" property="integralMoney" jdbcType="DECIMAL" />
-    <result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
-    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
-    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
-    <result column="freight_price" property="freightPrice" jdbcType="INTEGER" />
-    <result column="coupon_id" property="couponId" jdbcType="INTEGER" />
-    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
-    <result column="coupon_price" property="couponPrice" jdbcType="DECIMAL" />
-    <result column="callback_status" property="callbackStatus" jdbcType="CHAR" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_status" jdbcType="SMALLINT" property="orderStatus" />
+    <result column="shipping_status" jdbcType="SMALLINT" property="shippingStatus" />
+    <result column="pay_status" jdbcType="SMALLINT" property="payStatus" />
+    <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+    <result column="country" jdbcType="SMALLINT" property="country" />
+    <result column="province" jdbcType="SMALLINT" property="province" />
+    <result column="city" jdbcType="SMALLINT" property="city" />
+    <result column="district" jdbcType="SMALLINT" property="district" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="postscript" jdbcType="VARCHAR" property="postscript" />
+    <result column="shipping_fee" jdbcType="DECIMAL" property="shippingFee" />
+    <result column="pay_name" jdbcType="VARCHAR" property="payName" />
+    <result column="pay_id" jdbcType="TINYINT" property="payId" />
+    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="integral_money" jdbcType="DECIMAL" property="integralMoney" />
+    <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="freight_price" jdbcType="INTEGER" property="freightPrice" />
+    <result column="coupon_id" jdbcType="INTEGER" property="couponId" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="coupon_price" jdbcType="DECIMAL" property="couponPrice" />
+    <result column="callback_status" jdbcType="CHAR" property="callbackStatus" />
   </resultMap>
 </mapper>
