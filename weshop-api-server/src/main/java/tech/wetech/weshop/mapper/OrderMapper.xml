@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSN" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="order_status" jdbcType="SMALLINT" property="orderStatus" />
     <result column="shipping_status" jdbcType="SMALLINT" property="shippingStatus" />

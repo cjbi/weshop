@@ -10,6 +10,7 @@ import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.query.OrderPageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.vo.OrderVO;
 import tech.wetech.weshop.vo.PageInfoVO;
 
 import java.util.Arrays;
@@ -35,6 +36,9 @@ public class AdminOrderController {
         return Result.success(pageInfoVO);
     }
 
-
+    @GetMapping
+    public OrderVO queryOrderDetail() {
+        return new OrderVO();
+    }
 
 }

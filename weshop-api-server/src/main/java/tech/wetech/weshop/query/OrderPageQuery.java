@@ -1,6 +1,8 @@
 package tech.wetech.weshop.query;
 
 import io.swagger.annotations.ApiModelProperty;
+import tech.wetech.weshop.enums.OrderStatusEnum;
+import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.utils.Constants;
 
 /**
@@ -14,9 +16,13 @@ public class OrderPageQuery {
     @ApiModelProperty("页码")
     private Integer pageNum = Constants.DEFAULT_PAGE_NUM;
 
-    private Integer id;
+    private Integer userId;
 
-    private String name;
+    private String orderSN;
+
+    private OrderStatusEnum orderStatus;
+
+    private PayStatusEnum payStatus;
 
     public Integer getPageSize() {
         return pageSize;
@@ -34,19 +40,35 @@ public class OrderPageQuery {
         this.pageNum = pageNum;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getOrderSN() {
+        return orderSN;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrderSN(String orderSN) {
+        this.orderSN = orderSN;
+    }
+
+    public OrderStatusEnum getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatusEnum orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public PayStatusEnum getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(PayStatusEnum payStatus) {
+        this.payStatus = payStatus;
     }
 }

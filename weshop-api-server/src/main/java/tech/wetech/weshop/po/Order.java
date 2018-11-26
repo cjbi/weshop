@@ -15,7 +15,7 @@ public class Order {
     private Integer id;
 
     @Column(name = "order_sn")
-    private String orderSn;
+    private String orderSN;
 
     @Column(name = "user_id")
     private Integer userId;
@@ -126,15 +126,15 @@ public class Order {
     /**
      * @return order_sn
      */
-    public String getOrderSn() {
-        return orderSn;
+    public String getOrderSN() {
+        return orderSN;
     }
 
     /**
-     * @param orderSn
+     * @param orderSN
      */
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
+    public void setOrderSN(String orderSN) {
+        this.orderSN = orderSN;
     }
 
     /**
