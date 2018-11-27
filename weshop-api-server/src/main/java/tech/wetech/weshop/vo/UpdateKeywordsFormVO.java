@@ -1,61 +1,28 @@
-package tech.wetech.weshop.po;
+package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.vo.CreateKeywordsFormVO;
-import tech.wetech.weshop.vo.UpdateKeywordsFormVO;
+/**
+ * @author cjbi
+ */
+public class UpdateKeywordsFormVO {
 
-import javax.persistence.*;
-
-@Table(name = "weshop_keywords")
-public class Keywords {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String keyword;
 
-    @Column(name = "is_hot")
     private Boolean isHot;
 
-    @Column(name = "is_default")
     private Boolean isDefault;
 
-    @Column(name = "is_show")
     private Boolean isShow;
 
-    @Column(name = "sort_order")
     private Integer sortOrder;
 
     /**
      * 关键词的跳转链接
      */
-    @Column(name = "`scheme _url`")
     private String schemeUrl;
 
     private Integer type;
-
-    public Keywords() {
-    }
-
-    public Keywords(CreateKeywordsFormVO createKeywordsFormVO) {
-        this.keyword = createKeywordsFormVO.getKeyword();
-        this.isHot = createKeywordsFormVO.getIsHot();
-        this.isDefault = createKeywordsFormVO.getIsDefault();
-        this.isShow = createKeywordsFormVO.getIsShow();
-        this.sortOrder = createKeywordsFormVO.getSortOrder();
-        this.schemeUrl = createKeywordsFormVO.getSchemeUrl();
-        this.type = createKeywordsFormVO.getType();
-    }
-
-    public Keywords(UpdateKeywordsFormVO updateKeywordsFormVO) {
-        this.id = updateKeywordsFormVO.getId();
-        this.keyword = updateKeywordsFormVO.getKeyword();
-        this.isHot = updateKeywordsFormVO.getIsHot();
-        this.isDefault = updateKeywordsFormVO.getIsDefault();
-        this.isShow = updateKeywordsFormVO.getIsShow();
-        this.sortOrder = updateKeywordsFormVO.getSortOrder();
-        this.schemeUrl = updateKeywordsFormVO.getSchemeUrl();
-        this.type = updateKeywordsFormVO.getType();
-    }
 
     /**
      * @return id

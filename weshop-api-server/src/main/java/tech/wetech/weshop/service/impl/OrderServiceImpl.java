@@ -8,10 +8,15 @@ import tech.wetech.weshop.mapper.OrderExpressMapper;
 import tech.wetech.weshop.mapper.OrderGoodsMapper;
 import tech.wetech.weshop.mapper.OrderMapper;
 import tech.wetech.weshop.po.Order;
+import tech.wetech.weshop.po.OrderExpress;
+import tech.wetech.weshop.po.OrderGoods;
 import tech.wetech.weshop.query.OrderPageQuery;
 import tech.wetech.weshop.service.OrderService;
+import tech.wetech.weshop.vo.OrderVO;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
+
+import java.util.List;
 
 /**
  * @author cjbi
@@ -48,6 +53,21 @@ public class OrderServiceImpl implements OrderService {
 
         return PageHelper.startPage(orderPageQuery.getPageNum(), orderPageQuery.getPageSize())
                 .doSelectPageInfo(() -> orderMapper.selectByExample(example));
+    }
+
+    @Override
+    public OrderVO queryOrderDetail(Integer orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+
+        List<OrderGoods> orderGoodsList = orderGoodsMapper.select(new OrderGoods() {{
+            setOrderId(orderId);
+        }});
+
+        OrderExpress orderExpress = orderExpressMapper.selectOne(new OrderExpress() {{
+            setOrderId(orderId);
+        }});
+
+        return new OrderVO(order, orderGoodsList, orderExpress);
     }
 
 

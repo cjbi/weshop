@@ -1,38 +1,17 @@
-package tech.wetech.weshop.po;
+package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.vo.CreateGoodsIssueFormVO;
-import tech.wetech.weshop.vo.UpdateGoodsIssueFormVO;
+/**
+ * @author cjbi
+ */
+public class UpdateGoodsIssueFormVO {
 
-import javax.persistence.*;
-
-@Table(name = "weshop_goods_issue")
-public class GoodsIssue {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String question;
 
     private String answer;
 
-    @Column(name = "goods_id")
     private String goodsId;
-
-    public GoodsIssue() {
-    }
-
-    public GoodsIssue(UpdateGoodsIssueFormVO updateGoodsIssueFormVO) {
-        this.id = updateGoodsIssueFormVO.getId();
-        this.question = updateGoodsIssueFormVO.getQuestion();
-        this.answer = updateGoodsIssueFormVO.getAnswer();
-        this.goodsId = updateGoodsIssueFormVO.getGoodsId();
-    }
-
-    public GoodsIssue(CreateGoodsIssueFormVO createGoodsIssueFormVO) {
-        this.question = createGoodsIssueFormVO.getQuestion();
-        this.answer = createGoodsIssueFormVO.getAnswer();
-        this.goodsId = createGoodsIssueFormVO.getGoodsId();
-    }
 
     /**
      * @return id

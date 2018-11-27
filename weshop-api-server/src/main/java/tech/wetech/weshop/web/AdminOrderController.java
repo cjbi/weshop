@@ -3,6 +3,7 @@ package tech.wetech.weshop.web;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.enums.OrderStatusEnum;
@@ -36,9 +37,9 @@ public class AdminOrderController {
         return Result.success(pageInfoVO);
     }
 
-    @GetMapping
-    public OrderVO queryOrderDetail() {
-        return new OrderVO();
+    @GetMapping("/{orderId}")
+    public Result<OrderVO> queryOrderDetail(@PathVariable("orderId") Integer orderId) {
+        return Result.success(orderService.queryOrderDetail(orderId));
     }
 
 }
