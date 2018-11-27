@@ -1556,6 +1556,7 @@ this.tinycolor = tinycolor;
 @heading-color-dark     : fade(#fff, 100%);
 @text-color-dark        : fade(#fff, 85%);
 @text-color-secondary-dark: fade(#fff, 65%);
+@font-variant-base      : tabular-nums;
 @font-size-base         : 14px;
 @font-size-lg           : @font-size-base + 2px;
 @font-size-sm           : 12px;
@@ -1819,6 +1820,7 @@ this.tinycolor = tinycolor;
 
 // Modal
 // --
+@modal-header-bg: @component-background;
 @modal-mask-bg: rgba(0, 0, 0, 0.65);
 
 // Progress
@@ -1832,7 +1834,7 @@ this.tinycolor = tinycolor;
 @menu-inline-toplevel-item-height: 40px;
 @menu-item-height: 40px;
 @menu-collapsed-width: 80px;
-@menu-bg: @component-background;
+@menu-bg: transparent;
 @menu-item-color: @text-color;
 @menu-highlight-color: @primary-color;
 @menu-item-active-bg: @item-active-bg;
@@ -2039,21 +2041,6 @@ this.tinycolor = tinycolor;
 @list-item-meta-margin-bottom:               @padding-md;
 @list-item-meta-avatar-margin-right:         @padding-md;
 @list-item-meta-title-margin-bottom:         @padding-sm;
-
-// Menu
-@menu-dark-item-selected-bg: @menu-dark-item-active-bg;
-
-// Tabs
-@tab-bar-margin: @tabs-bar-margin;
-@tab-horizontal-margin: @tabs-horizontal-margin;
-@tab-vertical-margin: @tabs-vertical-margin;
-@tab-horizontal-padding: @tabs-horizontal-padding;
-@tab-vertical-padding: @tabs-vertical-padding;
-@tab-scrolling-size: @tabs-scrolling-size;
-@tab-highlight-color: @tabs-highlight-color;
-@tab-hover-color: @tabs-hover-color;
-@tab-active-color: @tabs-active-color;
-@tabs-ink-bar-bg-color: @tabs-ink-bar-color;
 
 .listContent .extra {
   color: rgba(0, 0, 0, 0.45);
@@ -2891,7 +2878,7 @@ mark {
   color: #fff;
   background-color: @primary-color;
   border-color: @primary-color;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
 .ant-btn-primary > a:only-child {
   color: currentColor;
@@ -3769,6 +3756,7 @@ mark {
   border: 1px solid #d9d9d9;
   border-radius: 2px;
   background-color: #fff;
+  border-collapse: separate;
 }
 .ant-checkbox-inner:after {
   border: 2px solid #fff;
@@ -4022,7 +4010,7 @@ mark {
   color: #fff;
   background-color: @primary-color;
   border-color: @primary-color;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
   border-radius: 4px;
 }
 .ant-calendar .ant-calendar-ok-btn:not([disabled]):active {
@@ -5289,7 +5277,7 @@ form .ant-upload {
 .ant-menu {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   color: rgba(0, 0, 0, 0.65);
-  background: #fff;
+  background: transparent;
 }
 .ant-menu-item-group-title {
   color: rgba(0, 0, 0, 0.45);
@@ -5362,7 +5350,7 @@ form .ant-upload {
   border-radius: 4px;
 }
 .ant-menu-submenu > .ant-menu {
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 4px;
 }
 .ant-menu-submenu-vertical > .ant-menu-submenu-title .ant-menu-submenu-arrow:before,
@@ -6558,10 +6546,10 @@ form .ant-upload {
 .ant-table-tbody > tr > td {
   border-bottom: 1px solid #e8e8e8;
 }
-.ant-table-thead > tr.ant-table-row-hover > td,
-.ant-table-tbody > tr.ant-table-row-hover > td,
-.ant-table-thead > tr:hover > td,
-.ant-table-tbody > tr:hover > td {
+.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td,
+.ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td,
+.ant-table-thead > tr:hover:not(.ant-table-expanded-row) > td,
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
   background: color(~`colorPalette("@{primary-color}", 1)`);
 }
 .ant-table-thead > tr:hover {
@@ -6826,6 +6814,7 @@ tr.ant-table-expanded-row:hover {
   border-right: 1px solid #e8e8e8;
 }
 .ant-table-small.ant-table-bordered .ant-table-fixed-right {
+  border-left: 1px solid #e8e8e8;
   border-right: 1px solid #e8e8e8;
 }
 .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
@@ -7335,6 +7324,7 @@ li.ant-time-picker-panel-select-option-disabled:hover {
   border: 1px solid #d9d9d9;
   border-radius: 2px;
   background-color: #fff;
+  border-collapse: separate;
 }
 .ant-select-tree-checkbox-inner:after {
   border: 2px solid #fff;
@@ -7481,6 +7471,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
   border: 1px solid #d9d9d9;
   border-radius: 2px;
   background-color: #fff;
+  border-collapse: separate;
 }
 .ant-tree-checkbox-inner:after {
   border: 2px solid #fff;

@@ -67,7 +67,7 @@ export default {
     '@antv/data-set': 'DataSet',
   },
   proxy: {
-    '/weshop/admin': {
+    '/admin/': {
       target: 'http://localhost:8080',
       changeOrigin: true,
       pathRewrite: { '^/server': '' },
@@ -101,7 +101,7 @@ export default {
     },
   },
   manifest: {
-    basePath: '/weshop/',
+    basePath: '/',
   },
 
   chainWebpack: webpackPlugin,

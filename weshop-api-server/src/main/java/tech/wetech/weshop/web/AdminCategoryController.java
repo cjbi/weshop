@@ -48,6 +48,7 @@ public class AdminCategoryController {
         return Result.success();
     }
 
+    @PostMapping("/delete")
     public Result deleteCategory(@Valid @RequestBody Integer[] categoryIds) {
         Arrays.stream(categoryIds).forEach(id->categoryService.deleteCategory(id));
         return Result.success();

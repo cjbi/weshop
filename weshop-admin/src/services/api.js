@@ -1,4 +1,4 @@
-import {stringify} from 'qs';
+import { stringify } from 'qs';
 import request from '@/utils/request';
 
 export async function queryProjectNotice() {
@@ -14,45 +14,45 @@ export async function queryRule(params) {
 }
 
 export async function queryAddress(params) {
-  return request(`/weshop/admin/address/list?${stringify(params)}`);
+  return request(`/admin/address/list?${stringify(params)}`);
 }
 
 export async function queryCollect(params) {
-  return request(`/weshop/admin/collect/list?${stringify(params)}`);
+  return request(`/admin/collect/list?${stringify(params)}`);
 }
 
 export async function queryFootprint(params) {
-  return request(`/weshop/admin/footprint/list?${stringify(params)}`);
+  return request(`/admin/footprint/list?${stringify(params)}`);
 }
 
 export async function querySearchHistory(params) {
-  return request(`/weshop/admin/search-history/list?${stringify(params)}`);
+  return request(`/admin/search-history/list?${stringify(params)}`);
 }
 
 export async function queryFeedback(params) {
-  return request(`/weshop/admin/feedback/list?${stringify(params)}`);
+  return request(`/admin/feedback/list?${stringify(params)}`);
 }
 
 export async function queryUser(params) {
-  return request(`/weshop/admin/user/list?${stringify(params)}`);
+  return request(`/admin/user/list?${stringify(params)}`);
 }
 
 export async function createUser(params) {
-  return request('/weshop/admin/user/create', {
+  return request('/admin/user/create', {
     method: 'POST',
     body: params,
   });
 }
 
 export async function updateUser(params) {
-  return request('/weshop/admin/user/update', {
+  return request('/admin/user/update', {
     method: 'POST',
     body: params,
   });
 }
 
 export async function deleteUser(params) {
-  return request('/weshop/admin/user/delete', {
+  return request('/admin/user/delete', {
     method: 'POST',
     body: params,
   });
@@ -116,7 +116,7 @@ export async function queryFakeList(params) {
 }
 
 export async function removeFakeList(params) {
-  const {count = 5, ...restParams} = params;
+  const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
     body: {
@@ -127,7 +127,7 @@ export async function removeFakeList(params) {
 }
 
 export async function addFakeList(params) {
-  const {count = 5, ...restParams} = params;
+  const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
     body: {
@@ -138,7 +138,7 @@ export async function addFakeList(params) {
 }
 
 export async function updateFakeList(params) {
-  const {count = 5, ...restParams} = params;
+  const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
     body: {
