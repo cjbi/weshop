@@ -44,6 +44,7 @@ public class AdminKeywordsController {
         return Result.success();
     }
 
+    @PostMapping("/delete")
     public Result deleteKeywords(Integer[] keywordIds) {
         Arrays.stream(keywordIds).forEach(keywordId -> keywordsService.deleteKeyword(keywordId));
         return Result.success();
