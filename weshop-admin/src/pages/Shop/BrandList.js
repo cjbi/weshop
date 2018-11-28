@@ -27,27 +27,26 @@ class BrandList extends PureComponent {
 
   columns = [
     {
-      title: '区域ID',
+      title: '品牌商ID',
       dataIndex: 'id',
     },
     {
-      title: '区域父ID',
-      dataIndex: 'parentId'
-    },
-    {
-      title: '区域名称',
+      title: '品牌商名称',
       dataIndex: 'name'
     }, {
-      title: '区域类型',
-      dataIndex: 'type',
-      render: text => {
-        const {
-          brand: {
-            extra: {brandType}
-          }
-        } = this.props;
-        return brandType[text];
-      }
+      title: '品牌商图片',
+      dataIndex: 'picUrl',
+      render: (text) => (
+        <a href={text} target="_blank">
+          <img src={text} width={65}/>
+        </a>
+      )
+    }, {
+      title: '介绍',
+      dataIndex: 'simpleDesc'
+    }, {
+      title: '底价',
+      dataIndex: 'floorPrice'
     },
   ]
 
@@ -122,12 +121,12 @@ class BrandList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="区域ID">
+            <FormItem label="品牌商ID">
               {getFieldDecorator('id')(<Input placeholder="请输入"/>)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="区域名称">
+            <FormItem label="品牌商名称">
               {getFieldDecorator('name')(<Input placeholder="请输入"/>)}
             </FormItem>
           </Col>

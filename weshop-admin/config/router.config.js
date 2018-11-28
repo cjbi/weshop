@@ -66,6 +66,11 @@ export default [
             name: '行政区域',
             component: './Shop/RegionList',
           },
+          {
+            path: '/shop/brand',
+            name: '品牌制造商',
+            component: './Shop/BrandList',
+          },
         ],
       },
       // ===========================================================
