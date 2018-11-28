@@ -65,3 +65,4 @@ functions/mock
 screenshot
 .firebase
 /weshop-api-server/target/
+/weshop-frontend-app/target/
