@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tech.wetech.weshop.po.Region;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.enums.RegionTypeEnum;
 import tech.wetech.weshop.query.RegionPageQuery;
@@ -26,9 +27,9 @@ public class AdminRegionController {
 
     @GetMapping("/list")
     public Result<PageInfoVO> queryRegionPageInfo(RegionPageQuery regionPageQuery) {
-        PageInfo pageInfo = regionService.queryRegionPageInfo(regionPageQuery);
-        PageInfoVO pageInfoVO = new PageInfoVO.Builder(pageInfo)
-                .addExtra("regionType", Arrays.stream(RegionTypeEnum.values()).collect(Collectors.toMap(e->e,RegionTypeEnum::getName)))
+        PageInfo<Region> regionPageInfo = regionService.queryRegionPageInfo(regionPageQuery);
+        PageInfoVO pageInfoVO = new PageInfoVO.Builder(regionPageInfo)
+                .addExtra("regionType", Arrays.stream(RegionTypeEnum.values()).collect(Collectors.toMap(e -> e, RegionTypeEnum::getName)))
                 .build();
         return Result.success(pageInfoVO);
     }

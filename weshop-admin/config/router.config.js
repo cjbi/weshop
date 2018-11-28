@@ -55,6 +55,19 @@ export default [
           },
         ],
       },
+      // shop
+      {
+        path: '/shop',
+        name: '商城管理',
+        icon: 'shop',
+        routes: [
+          {
+            path: '/shop/region',
+            name: '行政区域',
+            component: './Shop/RegionList',
+          },
+        ],
+      },
       // ===========================================================
       // dashboard
       {

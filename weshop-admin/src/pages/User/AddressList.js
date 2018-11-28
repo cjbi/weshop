@@ -156,7 +156,7 @@ class AddressList extends PureComponent {
 
   render() {
     const {
-      address: {data},
+      address,
       loading,
     } = this.props;
 
@@ -169,7 +169,7 @@ class AddressList extends PureComponent {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={data}
+              data={address}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}

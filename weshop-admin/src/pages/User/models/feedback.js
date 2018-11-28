@@ -3,10 +3,8 @@ import {queryFeedback} from '@/services/api';
 export default {
   namespace: 'feedback',
   state: {
-    data: {
-      list: [],
-      pagination: {}
-    },
+    list: [],
+    pagination: {}
   },
 
   effects: {
@@ -23,7 +21,7 @@ export default {
     queryList(state, action) {
       return {
         ...state,
-        data: action.payload.data,
+        ...action.payload.data,
       };
     },
   },

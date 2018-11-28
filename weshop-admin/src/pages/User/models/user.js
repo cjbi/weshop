@@ -4,11 +4,9 @@ export default {
   namespace: 'user1',
 
   state: {
-    data: {
-      list: [],
-      pagination: {},
-      extra: { gender: {}, userLevel: {} },
-    },
+    list: [],
+    pagination: {},
+    extra: { gender: {}, userLevel: {} },
   },
 
   effects: {
@@ -45,7 +43,7 @@ export default {
     save(state, action) {
       return {
         ...state,
-        data: action.payload.data,
+        ...action.payload.data,
       };
     },
   },

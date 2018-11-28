@@ -1,15 +1,17 @@
-import {querySearchHistory} from '@/services/api';
+import {queryRegion} from "../../../services/api";
 
 export default {
-  namespace: 'searchHistory',
+  namespace: 'region',
+
   state: {
     list: [],
-    pagination: {}
+    pagination: {},
+    extra: {regionType: {}},
   },
 
   effects: {
     * list({payload}, {call, put}) {
-      const response = yield call(querySearchHistory, payload);
+      const response = yield call(queryRegion, payload);
       yield put({
         type: 'queryList',
         payload: response,
@@ -25,4 +27,5 @@ export default {
       };
     },
   },
+
 };

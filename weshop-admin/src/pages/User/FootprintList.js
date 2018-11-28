@@ -138,7 +138,7 @@ class FootprintList extends PureComponent {
 
   render() {
     const {
-      footprint: { data },
+      footprint,
       loading,
     } = this.props;
 
@@ -151,7 +151,7 @@ class FootprintList extends PureComponent {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={data}
+              data={footprint}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}

@@ -25,7 +25,7 @@ const FormItem = Form.Item;
 const {Option} = Select;
 
 const CreateForm = Form.create()(props => {
-  const {modalVisible, form, handleCreateUser, handleModalVisible, gender, userLevel} = props;
+  const {loading, modalVisible, form, handleCreateUser, handleModalVisible, gender, userLevel} = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -34,12 +34,12 @@ const CreateForm = Form.create()(props => {
     });
   };
   return (
-    <Modal
-      destroyOnClose
-      title="新建用户"
-      visible={modalVisible}
-      onOk={okHandle}
-      onCancel={() => handleModalVisible()}
+    <Modal confirmLoading={loading}
+           destroyOnClose
+           title="新建用户"
+           visible={modalVisible}
+           onOk={okHandle}
+           onCancel={() => handleModalVisible()}
     >
       <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="用户名">
         {form.getFieldDecorator('username', {
@@ -104,7 +104,7 @@ class UpdateForm extends PureComponent {
   }
 
   render() {
-    const {form, updateModalVisible, handleUpdate, handleUpdateModalVisible, gender, userLevel} = this.props;
+    const {loading, form, updateModalVisible, handleUpdate, handleUpdateModalVisible, gender, userLevel} = this.props;
     const {formVals} = this.state;
     const {labelCol, wrapperCol} = this.formLayout;
 
@@ -120,12 +120,12 @@ class UpdateForm extends PureComponent {
     };
 
     return (
-      <Modal
-        destroyOnClose
-        title="修改用户"
-        visible={updateModalVisible}
-        onOk={okHandle}
-        onCancel={() => handleUpdateModalVisible()}
+      <Modal confirmLoading={loading}
+             destroyOnClose
+             title="修改用户"
+             visible={updateModalVisible}
+             onOk={okHandle}
+             onCancel={() => handleUpdateModalVisible()}
       >
         <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="用户名">
           {form.getFieldDecorator('username', {
@@ -176,7 +176,7 @@ class UpdateForm extends PureComponent {
 /* eslint react/no-multi-comp:0 */
 @connect(({user1, loading}) => ({
   user1,
-  extra: user1.data.extra,
+  extra: user1.extra,
   loading: loading.models.user1,
 }))
 @Form.create()
@@ -205,9 +205,7 @@ class UserList extends PureComponent {
       render: (text, record) => {
         const {
           user1: {
-            data: {
-              extra: {gender},
-            },
+            extra: {gender},
           },
         } = this.props;
         return gender[text];
@@ -224,9 +222,7 @@ class UserList extends PureComponent {
       render: (text, record) => {
         const {
           user1: {
-            data: {
-              extra: {userLevel},
-            },
+            extra: {userLevel},
           },
         } = this.props;
         return userLevel[text];
@@ -407,9 +403,7 @@ class UserList extends PureComponent {
     const {
       form: {getFieldDecorator},
       user1: {
-        data: {
-          extra: {gender, userLevel},
-        },
+        extra: {gender, userLevel},
       },
     } = this.props;
     return (
@@ -474,24 +468,24 @@ class UserList extends PureComponent {
 
   render() {
     const {
-      user1: {data},
       loading,
       user1: {
-        data: {
-          extra: {gender, userLevel},
-        },
+        extra: {gender, userLevel},
       },
+      user1
     } = this.props;
 
     const {selectedRows, modalVisible, updateModalVisible, updateFormValues} = this.state;
 
     const parentMethods = {
+      loading,
       handleCreateUser: this.handleCreateUser,
       handleModalVisible: this.handleModalVisible,
       gender: gender,
       userLevel: userLevel,
     };
     const updateMethods = {
+      loading,
       handleUpdateModalVisible: this.handleUpdateModalVisible,
       handleUpdate: this.handleUpdate,
       gender: gender,
@@ -517,7 +511,7 @@ class UserList extends PureComponent {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={data}
+              data={user1}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}

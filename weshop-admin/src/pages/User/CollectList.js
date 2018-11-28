@@ -138,7 +138,7 @@ class CollectList extends PureComponent {
 
   render() {
     const {
-      collect: { data },
+      collect,
       loading,
     } = this.props;
 
@@ -151,7 +151,7 @@ class CollectList extends PureComponent {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={data}
+              data={collect}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}

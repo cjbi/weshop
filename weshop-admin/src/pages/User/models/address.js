@@ -3,14 +3,12 @@ import {queryAddress} from '@/services/api';
 export default {
   namespace: 'address',
   state: {
-    data: {
-      list: [],
-      pagination: {}
-    },
+    list: [],
+    pagination: {}
   },
 
   effects: {
-    *list({payload}, {call, put}) {
+    * list({payload}, {call, put}) {
       const response = yield call(queryAddress, payload);
       yield put({
         type: 'queryList',
@@ -23,7 +21,7 @@ export default {
     queryList(state, action) {
       return {
         ...state,
-        data: action.payload.data,
+        ...action.payload.data,
       };
     },
   },
