@@ -18,7 +18,6 @@ class FeedbackList extends PureComponent {
   state = {
     selectedRows: [],
     formValues: {},
-    updateFormValues: {},
   };
 
   columns = [

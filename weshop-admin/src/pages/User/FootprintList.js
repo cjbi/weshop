@@ -18,7 +18,6 @@ class FootprintList extends PureComponent {
   state = {
     selectedRows: [],
     formValues: {},
-    updateFormValues: {},
   };
 
   columns = [

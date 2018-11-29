@@ -3,7 +3,7 @@ import {connect} from 'dva';
 import {
   Card,
   Form,
-  Button, Row, Col, Input,
+  Button, Row, Col, Input, Modal, message, Upload, Icon,
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -18,8 +18,10 @@ const FormItem = Form.Item;
 }))
 @Form.create()
 class BrandList extends PureComponent {
-
   state = {
+    modalVisible: false,
+    updateModalVisible: false,
+    expandForm: false,
     selectedRows: [],
     formValues: {},
     updateFormValues: {},
@@ -145,6 +147,40 @@ class BrandList extends PureComponent {
     );
   };
 
+  handleModalVisible = flag => {
+    this.setState({
+      modalVisible: !!flag,
+    });
+  };
+
+  handleDeleteBrand = params => {
+    const {dispatch} = this.props;
+    dispatch({
+      type: 'brand/delete',
+      payload: params,
+      callback: response => {
+        message.success(response.msg);
+        dispatch({type: 'brand/list'});
+        this.setState({
+          selectedRows: [],
+        });
+      },
+    });
+  };
+
+  handleCreateBrand = params => {
+    const {dispatch} = this.props;
+    dispatch({
+      type: 'brand/create',
+      payload: params,
+      callback: response => {
+        message.success(response.msg);
+        this.handleModalVisible();
+        dispatch({type: 'brand/list'});
+      },
+    });
+  }
+
 
   render() {
     const {
@@ -152,12 +188,29 @@ class BrandList extends PureComponent {
       loading,
     } = this.props;
 
-    const {selectedRows} = this.state;
+    const {selectedRows, modalVisible, updateModalVisible, updateFormValues} = this.state;
+    const parentMethods = {
+      loading,
+      handleCreateBrand: this.handleCreateBrand,
+      handleModalVisible: this.handleModalVisible,
+    };
     return (
       <PageHeaderWrapper title="行政区域">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
+            <div className={styles.tableListOperator}>
+              <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>
+                新建
+              </Button>
+              {selectedRows.length > 0 && (
+                <span>
+                  <Button onClick={() => this.handleDeleteBrand(selectedRows.map(row => row.id))}>
+                    删除
+                  </Button>
+                </span>
+              )}
+            </div>
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
@@ -167,11 +220,117 @@ class BrandList extends PureComponent {
               onChange={this.handleStandardTableChange}
             />
           </div>
+          <CreateForm {...parentMethods} modalVisible={modalVisible}/>
         </Card>
       </PageHeaderWrapper>
     );
 
   }
 }
+
+const CreateForm = Form.create()(props => {
+  const {loading, modalVisible, form, handleCreateBrand, handleModalVisible} = props;
+
+  const okHandle = () => {
+
+  };
+  const uploadButton = (
+    <div>
+      <Icon type={loading ? 'loading' : 'plus'}/>
+      <div className="ant-upload-text">上传</div>
+    </div>
+  );
+  const imageUrl = null;
+  return (
+    <Modal
+      confirmLoading={loading}
+      destroyOnClose
+      title="新建品牌商"
+      visible={modalVisible}
+      onOk={okHandle}
+      onCancel={() => handleModalVisible()}
+    >
+      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="品牌商名称">
+        {form.getFieldDecorator('name', {
+          rules: [{required: true, message: '请输入至少三个字符的用户名！', min: 3}],
+        })(<Input placeholder="请输入品牌商名称"/>)}
+      </FormItem>
+      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="介绍">
+        {form.getFieldDecorator('simpleDesc')(<Input placeholder="请输入介绍"/>)}
+      </FormItem>
+      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="品牌商图片">
+        <Upload
+          name="picUrl"
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+        >
+          {imageUrl ? <img src={imageUrl} alt="avatar"/> : uploadButton}
+        </Upload>
+      </FormItem>
+    </Modal>)
+});
+
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+  const isJPG = file.type === 'image/jpeg';
+  if (!isJPG) {
+    message.error('You can only upload JPG file!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error('Image must smaller than 2MB!');
+  }
+  return isJPG && isLt2M;
+}
+
+class AvatarUploader extends React.Component {
+  state = {
+    loading: false,
+  };
+
+  handleChange = (info) => {
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, imageUrl => this.setState({
+        imageUrl,
+        loading: false,
+      }));
+    }
+  }
+
+  render() {
+    const uploadButton = (
+      <div>
+        <Icon type={this.state.loading ? 'loading' : 'plus'} />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+    const imageUrl = this.state.imageUrl;
+    return (
+      <Upload
+        name="avatar"
+        listType="picture-card"
+        className="avatar-uploader"
+        showUploadList={false}
+        action="//jsonplaceholder.typicode.com/posts/"
+        beforeUpload={beforeUpload}
+        onChange={this.handleChange}
+      >
+        {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+      </Upload>
+    );
+  }
+}
+
 
 export default BrandList;

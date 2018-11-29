@@ -27,7 +27,6 @@ class AddressList extends PureComponent {
   state = {
     selectedRows: [],
     formValues: {},
-    updateFormValues: {},
   };
 
   columns = [

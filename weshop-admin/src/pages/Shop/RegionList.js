@@ -22,7 +22,6 @@ class RegionList extends PureComponent {
   state = {
     selectedRows: [],
     formValues: {},
-    updateFormValues: {},
   };
 
   columns = [
