@@ -71,6 +71,11 @@ export default [
             name: '品牌制造商',
             component: './Shop/BrandList',
           },
+          {
+            path: '/shop/category',
+            name: '商品类目',
+            component: './Shop/CategoryList',
+          },
         ],
       },
       // ===========================================================

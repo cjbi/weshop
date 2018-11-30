@@ -2,7 +2,6 @@ package tech.wetech.weshop.po;
 
 import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
-import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -21,14 +20,12 @@ public class Order {
     private Integer userId;
 
     @Column(name = "order_status")
-    @ColumnType
     private OrderStatusEnum orderStatus;
 
     @Column(name = "shipping_status")
     private Short shippingStatus;
 
     @Column(name = "pay_status")
-    @ColumnType
     private PayStatusEnum payStatus;
 
     private String consignee;

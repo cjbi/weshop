@@ -18,7 +18,7 @@ public class User {
 
     private String password;
 
-    @ColumnType
+    @Column(name = "gender")
     private GenderEnum gender;
 
     private Date birthday;

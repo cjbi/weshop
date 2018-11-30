@@ -46,6 +46,7 @@ public class Category {
     @Column(name = "wap_banner_url")
     private String wapBannerUrl;
 
+    @Column(name = "level")
     private CategoryLevelEnum level;
 
     private Integer type;

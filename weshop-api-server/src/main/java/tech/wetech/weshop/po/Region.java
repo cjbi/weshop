@@ -1,7 +1,6 @@
 package tech.wetech.weshop.po;
 
 import tech.wetech.weshop.enums.RegionTypeEnum;
-import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.*;
 
@@ -16,7 +15,7 @@ public class Region {
 
     private String name;
 
-    @ColumnType
+    @Column(name = "type")
     private RegionTypeEnum type;
 
     @Column(name = "agency_id")
