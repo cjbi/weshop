@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.utils.ResultCodeEnum;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 
 import javax.servlet.http.HttpServletRequest;
 

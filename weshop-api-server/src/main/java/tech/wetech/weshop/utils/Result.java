@@ -3,6 +3,7 @@ package tech.wetech.weshop.utils;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 
 import java.io.Serializable;

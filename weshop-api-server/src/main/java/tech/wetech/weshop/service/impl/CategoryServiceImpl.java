@@ -29,11 +29,14 @@ public class CategoryServiceImpl implements CategoryService {
     public PageInfo<Category> queryCategoryPageInfo(CategoryPageQuery categoryPageQuery) {
         Weekend<Category> example = Weekend.of(Category.class);
         WeekendCriteria<Category, Object> criteria = example.weekendCriteria();
-        if(categoryPageQuery.getId() != null) {
-            criteria.andEqualTo(Category::getId,categoryPageQuery.getId());
+        if (categoryPageQuery.getId() != null) {
+            criteria.andEqualTo(Category::getId, categoryPageQuery.getId());
         }
-        if(categoryPageQuery.getName() != null) {
-            criteria.andEqualTo(Category::getName,categoryPageQuery.getName());
+        if (categoryPageQuery.getName() != null) {
+            criteria.andEqualTo(Category::getName, categoryPageQuery.getName());
+        }
+        if (categoryPageQuery.getCategoryLevel() != null) {
+            criteria.andEqualTo(Category::getLevel, categoryPageQuery.getCategoryLevel());
         }
         return PageHelper.startPage(categoryPageQuery.getPageNum(), categoryPageQuery.getPageSize())
                 .doSelectPageInfo(() -> categoryMapper.selectByExample(example));
@@ -43,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> queryCategoryByLevel(CategoryLevelEnum categoryLevel) {
         Weekend<Category> example = Weekend.of(Category.class);
         WeekendCriteria<Category, Object> criteria = example.weekendCriteria();
-        criteria.andEqualTo(Category::getLevel,categoryLevel.name());
+        criteria.andEqualTo(Category::getLevel, categoryLevel.name());
         return categoryMapper.selectByExample(example);
     }
 

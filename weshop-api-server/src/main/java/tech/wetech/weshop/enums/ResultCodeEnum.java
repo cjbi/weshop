@@ -1,4 +1,4 @@
-package tech.wetech.weshop.utils;
+package tech.wetech.weshop.enums;
 
 /**
  * @author cjbi
