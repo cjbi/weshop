@@ -1,10 +1,6 @@
-import React, {PureComponent} from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import {connect} from 'dva';
-import {
-  Card,
-  Form,
-  Button, Row, Col, Input, Modal, message, Upload, Icon,
-} from 'antd';
+import {Button, Card, Col, Divider, Form, Icon, Input, message, Modal, Row, Upload,} from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
@@ -49,6 +45,15 @@ class BrandList extends PureComponent {
     }, {
       title: '底价',
       dataIndex: 'floorPrice'
+    }, {
+      title: '操作',
+      render: (text, record) => (
+        <Fragment>
+          <a onClick={() => this.handleUpdateModalVisible(true, record)}>修改</a>
+          <Divider type="vertical"/>
+          <a onClick={() => this.handleDeleteBrand([record.id])}>删除</a>
+        </Fragment>
+      ),
     },
   ]
 
@@ -153,6 +158,13 @@ class BrandList extends PureComponent {
     });
   };
 
+  handleUpdateModalVisible = (flag, record) => {
+    this.setState({
+      updateModalVisible: !!flag,
+      updateFormValues: record || {},
+    });
+  };
+
   handleDeleteBrand = params => {
     const {dispatch} = this.props;
     dispatch({
@@ -164,6 +176,19 @@ class BrandList extends PureComponent {
         this.setState({
           selectedRows: [],
         });
+      },
+    });
+  };
+
+  handleUpdateBrand = fields => {
+    const {dispatch} = this.props;
+    dispatch({
+      type: 'brand/update',
+      payload: fields,
+      callback: response => {
+        message.success(response.msg);
+        this.handleUpdateModalVisible();
+        dispatch({type: 'brand/list'});
       },
     });
   };
@@ -194,6 +219,11 @@ class BrandList extends PureComponent {
       handleCreateBrand: this.handleCreateBrand,
       handleModalVisible: this.handleModalVisible,
     };
+    const updateMethods = {
+      loading,
+      handleUpdateModalVisible: this.handleUpdateModalVisible,
+      handleUpdateBrand: this.handleUpdateBrand,
+    };
     return (
       <PageHeaderWrapper title="行政区域">
         <Card bordered={false}>
@@ -220,11 +250,86 @@ class BrandList extends PureComponent {
               onChange={this.handleStandardTableChange}
             />
           </div>
-          <CreateForm {...parentMethods} modalVisible={modalVisible}/>
         </Card>
+        <CreateForm {...parentMethods} modalVisible={modalVisible}/>
+        {updateFormValues && Object.keys(updateFormValues).length ? (
+          <UpdateForm
+            {...updateMethods}
+            updateModalVisible={updateModalVisible}
+            values={updateFormValues}
+          />
+        ) : null}
       </PageHeaderWrapper>
     );
 
+  }
+}
+
+@Form.create()
+class UpdateForm extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formVals: {
+        ...props.values,
+      }
+    };
+
+    this.formLayout = {
+      labelCol: {span: 5},
+      wrapperCol: {span: 15},
+    };
+  }
+
+  render() {
+    const {loading, form, updateModalVisible, handleUpdateBrand, handleUpdateModalVisible} = this.props;
+    const {formVals} = this.state;
+    const {labelCol, wrapperCol} = this.formLayout;
+    const okHandle = () => {
+      form.validateFields((err, fieldsValue) => {
+        if (err) return;
+        const params = {
+          ...formVals,
+          ...fieldsValue,
+        };
+        handleUpdateBrand(params);
+      });
+    };
+    const extractPicUrl = (res) => {
+      form.setFieldsValue({picUrl: res.data});
+    };
+    return (<Modal
+      confirmLoading={loading}
+      destroyOnClose
+      title="修改品牌商"
+      visible={updateModalVisible}
+      onOk={okHandle}
+      onCancel={() => handleUpdateModalVisible()}
+    >
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商名称">
+        {form.getFieldDecorator('name', {
+          initialValue: formVals.name,
+          rules: [{required: true, message: '请输入至少三个字符的用户名！', min: 3}],
+        })(<Input placeholder="请输入品牌商名称"/>)}
+      </FormItem>
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="介绍">
+        {form.getFieldDecorator('simpleDesc', {
+          initialValue: formVals.simpleDesc,
+        })(<Input placeholder="请输入介绍"/>)}
+      </FormItem>
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商图片">
+        {form.getFieldDecorator('picUrl', {
+          initialValue: formVals.picUrl,
+          rules: [{required: true, message: '品牌商图片是必填的'}]
+        })(<Input type="hidden"/>)}
+        <Uploader accept="image/*" imageUrl={formVals.picUrl} loading={loading} callback={extractPicUrl}/>
+      </FormItem>
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="底价">
+        {form.getFieldDecorator('floorPrice', {
+          initialValue: formVals.floorPrice,
+        })(<Input type="number" min={0} placeholder="请输入底价"/>)}
+      </FormItem>
+    </Modal>)
   }
 }
 
@@ -232,15 +337,21 @@ const CreateForm = Form.create()(props => {
   const {loading, modalVisible, form, handleCreateBrand, handleModalVisible} = props;
 
   const okHandle = () => {
-
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+      form.resetFields();
+      handleCreateBrand(fieldsValue);
+    });
   };
-  const uploadButton = (
-    <div>
-      <Icon type={loading ? 'loading' : 'plus'}/>
-      <div className="ant-upload-text">上传</div>
-    </div>
-  );
-  const imageUrl = null;
+
+  const extractPicUrl = (res) => {
+    form.setFieldsValue({picUrl: res.data});
+  };
+
+  const {labelCol, wrapperCol} = {
+    labelCol: {span: 5},
+    wrapperCol: {span: 15},
+  };
   return (
     <Modal
       confirmLoading={loading}
@@ -250,34 +361,34 @@ const CreateForm = Form.create()(props => {
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="品牌商名称">
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商名称">
         {form.getFieldDecorator('name', {
           rules: [{required: true, message: '请输入至少三个字符的用户名！', min: 3}],
         })(<Input placeholder="请输入品牌商名称"/>)}
       </FormItem>
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="介绍">
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="介绍">
         {form.getFieldDecorator('simpleDesc')(<Input placeholder="请输入介绍"/>)}
       </FormItem>
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="品牌商图片">
-        <Upload
-          name="picUrl"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-        >
-          {imageUrl ? <img src={imageUrl} alt="avatar"/> : uploadButton}
-        </Upload>
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商图片">
+        {form.getFieldDecorator('picUrl', {rules: [{required: true, message: '品牌商图片是必填的'}]})(<Input type="hidden"/>)}
+        <Uploader accept="image/*" loading={loading} callback={extractPicUrl}/>
+      </FormItem>
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="底价">
+        {form.getFieldDecorator('floorPrice')(<Input type="number" min={0} placeholder="请输入底价"/>)}
       </FormItem>
     </Modal>)
 });
 
-function getBase64(img, callback) {
+// 自定义上传组件Uploder
+const action = "//localhost:8080/storage/upload";
+
+const getBase64 = (img, callback) => {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 }
 
-function beforeUpload(file) {
+const beforeUpload = (file) => {
   const isJPG = file.type === 'image/jpeg';
   if (!isJPG) {
     message.error('You can only upload JPG file!');
@@ -289,14 +400,21 @@ function beforeUpload(file) {
   return isJPG && isLt2M;
 }
 
-class AvatarUploader extends React.Component {
-  state = {
-    loading: false,
-  };
+class Uploader extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageUrl: props.imageUrl,
+      loading: props.loading,
+    }
+  }
 
   handleChange = (info) => {
+
+    const {callback} = this.props;
+
     if (info.file.status === 'uploading') {
-      this.setState({ loading: true });
+      this.setState({loading: true});
       return;
     }
     if (info.file.status === 'done') {
@@ -305,32 +423,34 @@ class AvatarUploader extends React.Component {
         imageUrl,
         loading: false,
       }));
+      callback(info.file.response);
     }
   }
 
   render() {
     const uploadButton = (
       <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'} />
-        <div className="ant-upload-text">Upload</div>
+        <Icon type={this.state.loading ? 'loading' : 'plus'}/>
+        <div className="ant-upload-text">上传图片</div>
       </div>
     );
+
     const imageUrl = this.state.imageUrl;
     return (
       <Upload
-        name="avatar"
+        {...this.props}
+        name="file"
         listType="picture-card"
         className="avatar-uploader"
         showUploadList={false}
-        action="//jsonplaceholder.typicode.com/posts/"
+        action={action}
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
       >
-        {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+        {imageUrl ? <img src={imageUrl} style={{width: '150px'}} alt="avatar"/> : uploadButton}
       </Upload>
     );
   }
 }
-
 
 export default BrandList;

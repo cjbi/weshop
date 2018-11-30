@@ -151,12 +151,12 @@ class UpdateForm extends PureComponent {
             </Select>
           )}
         </FormItem>
-        <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="生日">
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="生日">
           {form.getFieldDecorator('birthday', {
             initialValue: moment(formVals.birthday),
           })(<DatePicker style={{width: '100%'}} placeholder="请输入生日"/>)}
         </FormItem>
-        <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="用户等级">
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="用户等级">
           {form.getFieldDecorator('userLevelId', {
             initialValue: formVals.userLevelId + "",
             rules: [{required: true, message: '需要用户等级！'}],
