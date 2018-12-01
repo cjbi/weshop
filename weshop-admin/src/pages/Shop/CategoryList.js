@@ -1,6 +1,19 @@
-import React, {Fragment, PureComponent} from 'react';
-import {connect} from 'dva';
-import {Button, Card, Col, Divider, Form, Icon, Input, message, Modal, Row, Upload,} from 'antd';
+import React, { Fragment, PureComponent } from 'react';
+import { connect } from 'dva';
+import {
+  Button,
+  Card,
+  Col,
+  Divider,
+  Form,
+  Icon,
+  Input,
+  message,
+  Modal,
+  Row,
+  Upload,
+  Select,
+} from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
@@ -8,9 +21,9 @@ import styles from './CategoryList.less';
 
 const FormItem = Form.Item;
 
-@connect(({category, loading}) => ({
+@connect(({ category, loading }) => ({
   category,
-  loading: loading.models.category
+  loading: loading.models.category,
 }))
 @Form.create()
 class CategoryList extends PureComponent {
@@ -30,57 +43,72 @@ class CategoryList extends PureComponent {
     },
     {
       title: '类目名称',
-      dataIndex: 'name'
-    }, {
+      dataIndex: 'name',
+    },
+    {
       title: '类目图标',
       dataIndex: 'iconUrl',
-      render: (text) => (
+      render: text => (
         <a href={text} target="_blank">
-          <img src={text} width={65}/>
+          <img src={text} width={65} />
         </a>
-      )
-    },{
+      ),
+    },
+    {
       title: '类目图片',
       dataIndex: 'imgUrl',
-      render: (text) => (
+      render: text => (
         <a href={text} target="_blank">
-          <img src={text} width={65}/>
+          <img src={text} width={65} />
         </a>
-      )
-    }, {
+      ),
+    },
+    {
       title: '关键词',
-      dataIndex: 'keywords'
-    }, {
+      dataIndex: 'keywords',
+    },
+    {
       title: '简介',
-      dataIndex: 'frontDesc'
-    },{
+      dataIndex: 'frontDesc',
+    },
+    {
       title: '类别',
-      dataIndex: 'level'
-    },{
+      dataIndex: 'level',
+      render: text => {
+        const {
+          category: {
+            extra: { categoryLevel },
+          },
+        } = this.props;
+        return categoryLevel[text];
+      },
+    },
+    {
       title: '父类目ID',
-      dataIndex: 'parentId'
-    }, {
+      dataIndex: 'parentId',
+    },
+    {
       title: '操作',
       render: (text, record) => (
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>修改</a>
-          <Divider type="vertical"/>
+          <Divider type="vertical" />
           <a onClick={() => this.handleDeleteCategory([record.id])}>删除</a>
         </Fragment>
       ),
     },
-  ]
+  ];
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'category/list',
     });
   }
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {dispatch} = this.props;
-    const {formValues} = this.state;
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const params = {
       pageNum: pagination.current,
@@ -106,7 +134,7 @@ class CategoryList extends PureComponent {
   handleSearch = e => {
     e.preventDefault();
 
-    const {dispatch, form} = this.props;
+    const { dispatch, form } = this.props;
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -123,7 +151,7 @@ class CategoryList extends PureComponent {
   };
 
   handleFormReset = () => {
-    const {form, dispatch} = this.props;
+    const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
@@ -136,19 +164,19 @@ class CategoryList extends PureComponent {
 
   renderForm() {
     const {
-      form: {getFieldDecorator},
+      form: { getFieldDecorator },
     } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="类目ID">
-              {getFieldDecorator('id')(<Input placeholder="请输入类目ID"/>)}
+              {getFieldDecorator('id')(<Input placeholder="请输入类目ID" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="类目名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入类目名称"/>)}
+              {getFieldDecorator('name')(<Input placeholder="请输入类目名称" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -156,7 +184,7 @@ class CategoryList extends PureComponent {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
                 重置
               </Button>
             </span>
@@ -164,7 +192,7 @@ class CategoryList extends PureComponent {
         </Row>
       </Form>
     );
-  };
+  }
 
   handleModalVisible = flag => {
     this.setState({
@@ -180,13 +208,13 @@ class CategoryList extends PureComponent {
   };
 
   handleDeleteCategory = params => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'category/delete',
       payload: params,
       callback: response => {
         message.success(response.msg);
-        dispatch({type: 'category/list'});
+        dispatch({ type: 'category/list' });
         this.setState({
           selectedRows: [],
         });
@@ -195,51 +223,56 @@ class CategoryList extends PureComponent {
   };
 
   handleUpdateCategory = fields => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'category/update',
       payload: fields,
       callback: response => {
         message.success(response.msg);
         this.handleUpdateModalVisible();
-        dispatch({type: 'category/list'});
+        dispatch({ type: 'category/list' });
       },
     });
   };
 
   handleCreateCategory = params => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'category/create',
       payload: params,
       callback: response => {
         message.success(response.msg);
         this.handleModalVisible();
-        dispatch({type: 'category/list'});
+        dispatch({ type: 'category/list' });
       },
     });
-  }
-
+  };
 
   render() {
     const {
       category,
       loading,
+      category: {
+        extra: { categoryLevel, l1 },
+      },
     } = this.props;
-
-    const {selectedRows, modalVisible, updateModalVisible, updateFormValues} = this.state;
+    const { selectedRows, modalVisible, updateModalVisible, updateFormValues } = this.state;
     const parentMethods = {
       loading,
       handleCreateCategory: this.handleCreateCategory,
       handleModalVisible: this.handleModalVisible,
+      categoryLevel: categoryLevel,
+      l1: l1,
     };
     const updateMethods = {
       loading,
       handleUpdateModalVisible: this.handleUpdateModalVisible,
       handleUpdateCategory: this.handleUpdateCategory,
+      categoryLevel: categoryLevel,
+      l1: l1,
     };
     return (
-      <PageHeaderWrapper title="行政区域">
+      <PageHeaderWrapper title="商品类目">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
@@ -249,7 +282,9 @@ class CategoryList extends PureComponent {
               </Button>
               {selectedRows.length > 0 && (
                 <span>
-                  <Button onClick={() => this.handleDeleteCategory(selectedRows.map(row => row.id))}>
+                  <Button
+                    onClick={() => this.handleDeleteCategory(selectedRows.map(row => row.id))}
+                  >
                     删除
                   </Button>
                 </span>
@@ -265,7 +300,7 @@ class CategoryList extends PureComponent {
             />
           </div>
         </Card>
-        <CreateForm {...parentMethods} modalVisible={modalVisible}/>
+        <CreateForm {...parentMethods} modalVisible={modalVisible} />
         {updateFormValues && Object.keys(updateFormValues).length ? (
           <UpdateForm
             {...updateMethods}
@@ -275,7 +310,6 @@ class CategoryList extends PureComponent {
         ) : null}
       </PageHeaderWrapper>
     );
-
   }
 }
 
@@ -286,19 +320,27 @@ class UpdateForm extends PureComponent {
     this.state = {
       formVals: {
         ...props.values,
-      }
+      },
     };
 
     this.formLayout = {
-      labelCol: {span: 5},
-      wrapperCol: {span: 15},
+      labelCol: { span: 5 },
+      wrapperCol: { span: 15 },
     };
   }
 
   render() {
-    const {loading, form, updateModalVisible, handleUpdateCategory, handleUpdateModalVisible} = this.props;
-    const {formVals} = this.state;
-    const {labelCol, wrapperCol} = this.formLayout;
+    const {
+      loading,
+      form,
+      updateModalVisible,
+      handleUpdateCategory,
+      handleUpdateModalVisible,
+      categoryLevel,
+      l1,
+    } = this.props;
+    const { formVals } = this.state;
+    const { labelCol, wrapperCol } = this.formLayout;
     const okHandle = () => {
       form.validateFields((err, fieldsValue) => {
         if (err) return;
@@ -309,47 +351,94 @@ class UpdateForm extends PureComponent {
         handleUpdateCategory(params);
       });
     };
-    const extractPicUrl = (res) => {
-      form.setFieldsValue({picUrl: res.data});
-    };
-    return (<Modal
-      confirmLoading={loading}
-      destroyOnClose
-      title="修改品牌商"
-      visible={updateModalVisible}
-      onOk={okHandle}
-      onCancel={() => handleUpdateModalVisible()}
-    >
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商名称">
-        {form.getFieldDecorator('name', {
-          initialValue: formVals.name,
-          rules: [{required: true, message: '请输入至少三个字符的用户名！', min: 3}],
-        })(<Input placeholder="请输入品牌商名称"/>)}
-      </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="介绍">
-        {form.getFieldDecorator('simpleDesc', {
-          initialValue: formVals.simpleDesc,
-        })(<Input placeholder="请输入介绍"/>)}
-      </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商图片">
-        {form.getFieldDecorator('picUrl', {
-          initialValue: formVals.picUrl,
-          rules: [{required: true, message: '品牌商图片是必填的'}]
-        })(<Input type="hidden"/>)}
-        <Uploader accept="image/*" imageUrl={formVals.picUrl} loading={loading} callback={extractPicUrl}/>
-      </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="底价">
-        {form.getFieldDecorator('floorPrice', {
-          initialValue: formVals.floorPrice,
-        })(<Input type="number" min={0} placeholder="请输入底价"/>)}
-      </FormItem>
-    </Modal>)
+    return (
+      <Modal
+        confirmLoading={loading}
+        destroyOnClose
+        title="修改类目"
+        visible={updateModalVisible}
+        onOk={okHandle}
+        onCancel={() => handleUpdateModalVisible()}
+      >
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目名称">
+          {form.getFieldDecorator('name', {
+            rules: [{ required: true, message: '请输入至少三个字符的用户名！', min: 3 }],
+            initialValue: formVals.name,
+          })(<Input placeholder="请输入类目名称" />)}
+        </FormItem>
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="关键字">
+          {form.getFieldDecorator('keywords', { initialValue: formVals.keywords })(
+            <Input placeholder="请输入关键字" />
+          )}
+        </FormItem>
+        <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="级别">
+          {form.getFieldDecorator('level', {
+            rules: [{ required: true, message: '级别不能为空！' }],
+            initialValue: formVals.level,
+          })(
+            <Select placeholder="请选择" style={{ width: '100%' }}>
+              {Object.keys(categoryLevel).map(key => (
+                <Option key={key}>{categoryLevel[key]}</Option>
+              ))}
+            </Select>
+          )}
+        </FormItem>
+        {form.getFieldValue('level') === 'L2' ? (
+          <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="父类目">
+            {form.getFieldDecorator('parentId', {
+              rules: [{ required: true, message: '父类目不能为空！' }],
+              initialValue: formVals.parentId + '',
+            })(
+              <Select placeholder="请选择" style={{ width: '100%' }}>
+                {l1.map(item => (
+                  <Option key={item.id}>{item.name}</Option>
+                ))}
+              </Select>
+            )}
+          </FormItem>
+        ) : null}
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目图标">
+          {form.getFieldDecorator('iconUrl', { initialValue: formVals.iconUrl })(
+            <Input type="hidden" />
+          )}
+          <Uploader
+            accept="image/*"
+            loading={loading}
+            imageUrl={formVals.iconUrl}
+            callback={res => form.setFieldsValue({ iconUrl: res.data })}
+          />
+        </FormItem>
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目图图片">
+          {form.getFieldDecorator('imgUrl', { initialValue: formVals.imgUrl })(
+            <Input type="hidden" />
+          )}
+          <Uploader
+            accept="image/*"
+            loading={loading}
+            imageUrl={formVals.imgUrl}
+            callback={res => form.setFieldsValue({ imgUrl: res.data })}
+          />
+        </FormItem>
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目简介">
+          {form.getFieldDecorator('frontDesc', { initialValue: formVals.frontDesc })(
+            <Input placeholder="请输入类目简介" />
+          )}
+        </FormItem>
+      </Modal>
+    );
   }
 }
 
 const CreateForm = Form.create()(props => {
-  const {loading, modalVisible, form, handleCreateCategory, handleModalVisible} = props;
-
+  const {
+    loading,
+    modalVisible,
+    form,
+    handleCreateCategory,
+    handleModalVisible,
+    categoryLevel,
+    l1,
+  } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -358,51 +447,85 @@ const CreateForm = Form.create()(props => {
     });
   };
 
-  const extractPicUrl = (res) => {
-    form.setFieldsValue({picUrl: res.data});
-  };
-
-  const {labelCol, wrapperCol} = {
-    labelCol: {span: 5},
-    wrapperCol: {span: 15},
+  const { labelCol, wrapperCol } = {
+    labelCol: { span: 5 },
+    wrapperCol: { span: 15 },
   };
   return (
     <Modal
       confirmLoading={loading}
       destroyOnClose
-      title="新建品牌商"
+      title="新建类目"
       visible={modalVisible}
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商名称">
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目名称">
         {form.getFieldDecorator('name', {
-          rules: [{required: true, message: '请输入至少三个字符的用户名！', min: 3}],
-        })(<Input placeholder="请输入品牌商名称"/>)}
+          rules: [{ required: true, message: '请输入至少三个字符的用户名！', min: 3 }],
+        })(<Input placeholder="请输入类目名称" />)}
       </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="介绍">
-        {form.getFieldDecorator('simpleDesc')(<Input placeholder="请输入介绍"/>)}
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="关键字">
+        {form.getFieldDecorator('keywords')(<Input placeholder="请输入关键字" />)}
       </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商图片">
-        {form.getFieldDecorator('picUrl', {rules: [{required: true, message: '品牌商图片是必填的'}]})(<Input type="hidden"/>)}
-        <Uploader accept="image/*" loading={loading} callback={extractPicUrl}/>
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="级别">
+        {form.getFieldDecorator('level', {
+          rules: [{ required: true, message: '级别不能为空！' }],
+          initialValue: 'L2',
+        })(
+          <Select placeholder="请选择" style={{ width: '100%' }}>
+            {Object.keys(categoryLevel).map(key => (
+              <Option key={key}>{categoryLevel[key]}</Option>
+            ))}
+          </Select>
+        )}
       </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="底价">
-        {form.getFieldDecorator('floorPrice')(<Input type="number" min={0} placeholder="请输入底价"/>)}
+      {form.getFieldValue('level') === 'L2' ? (
+        <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="父类目">
+          {form.getFieldDecorator('parentId', {
+            rules: [{ required: true, message: '父类目不能为空！' }],
+          })(
+            <Select placeholder="请选择" style={{ width: '100%' }}>
+              {l1.map(item => (
+                <Option key={item.id}>{item.name}</Option>
+              ))}
+            </Select>
+          )}
+        </FormItem>
+      ) : null}
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目图标">
+        {form.getFieldDecorator('iconUrl')(<Input type="hidden" />)}
+        <Uploader
+          accept="image/*"
+          loading={loading}
+          callback={res => form.setFieldsValue({ iconUrl: res.data })}
+        />
       </FormItem>
-    </Modal>)
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目图图片">
+        {form.getFieldDecorator('imgUrl')(<Input type="hidden" />)}
+        <Uploader
+          accept="image/*"
+          loading={loading}
+          callback={res => form.setFieldsValue({ imgUrl: res.data })}
+        />
+      </FormItem>
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="类目简介">
+        {form.getFieldDecorator('frontDesc')(<Input placeholder="请输入类目简介" />)}
+      </FormItem>
+    </Modal>
+  );
 });
 
 // 自定义上传组件Uploder
-const action = "//localhost:8080/storage/upload";
+const action = '//localhost:8080/storage/upload';
 
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
-}
+};
 
-const beforeUpload = (file) => {
+const beforeUpload = file => {
   const isJPG = file.type === 'image/jpeg';
   if (!isJPG) {
     message.error('You can only upload JPG file!');
@@ -412,7 +535,7 @@ const beforeUpload = (file) => {
     message.error('Image must smaller than 2MB!');
   }
   return isJPG && isLt2M;
-}
+};
 
 class Uploader extends React.Component {
   constructor(props) {
@@ -420,31 +543,32 @@ class Uploader extends React.Component {
     this.state = {
       imageUrl: props.imageUrl,
       loading: props.loading,
-    }
+    };
   }
 
-  handleChange = (info) => {
-
-    const {callback} = this.props;
+  handleChange = info => {
+    const { callback } = this.props;
 
     if (info.file.status === 'uploading') {
-      this.setState({loading: true});
+      this.setState({ loading: true });
       return;
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl => this.setState({
-        imageUrl,
-        loading: false,
-      }));
+      getBase64(info.file.originFileObj, imageUrl =>
+        this.setState({
+          imageUrl,
+          loading: false,
+        })
+      );
       callback(info.file.response);
     }
-  }
+  };
 
   render() {
     const uploadButton = (
       <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'}/>
+        <Icon type={this.state.loading ? 'loading' : 'plus'} />
         <div className="ant-upload-text">上传图片</div>
       </div>
     );
@@ -461,7 +585,7 @@ class Uploader extends React.Component {
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
       >
-        {imageUrl ? <img src={imageUrl} style={{width: '150px'}} alt="avatar"/> : uploadButton}
+        {imageUrl ? <img src={imageUrl} style={{ width: '150px' }} alt="avatar" /> : uploadButton}
       </Upload>
     );
   }

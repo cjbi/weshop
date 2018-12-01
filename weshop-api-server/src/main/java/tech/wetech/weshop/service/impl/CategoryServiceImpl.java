@@ -53,12 +53,30 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void createCategory(CreateCategoryFormVO createCategoryFormVO) {
         Category category = new Category(createCategoryFormVO);
+        if (category.getLevel() == CategoryLevelEnum.L1) {
+            category.setParentId(0);
+        }
+        if (category.getWapBannerUrl() == null) {
+            category.setWapBannerUrl(category.getImgUrl());
+        }
+        if (category.getFrontName() == null) {
+            category.setFrontName(category.getFrontDesc());
+        }
         categoryMapper.insertSelective(category);
     }
 
     @Override
     public void updateCategory(UpdateCategoryFormVO updateCategoryFormVO) {
         Category category = new Category(updateCategoryFormVO);
+        if (category.getLevel() == CategoryLevelEnum.L1) {
+            category.setParentId(0);
+        }
+        if (category.getWapBannerUrl() == null) {
+            category.setWapBannerUrl(category.getImgUrl());
+        }
+        if (category.getFrontName() == null) {
+            category.setFrontName(category.getFrontDesc());
+        }
         categoryMapper.updateByPrimaryKeySelective(category);
     }
 

@@ -1,4 +1,9 @@
-import {queryCategory, createCategory, updateCategory, deleteCategory} from "../../../services/api";
+import {
+  queryCategory,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from '../../../services/api';
 
 export default {
   namespace: 'category',
@@ -6,26 +11,26 @@ export default {
   state: {
     list: [],
     pagination: {},
-    extra: {gender: {}, userLevel: {}},
+    extra: { categoryLevel: {}, l1: [] },
   },
 
   effects: {
-    * list({payload}, {call, put}) {
+    *list({ payload }, { call, put }) {
       const response = yield call(queryCategory, payload);
       yield put({
         type: 'save',
         payload: response,
       });
     },
-    * create({payload, callback}, {call}) {
+    *create({ payload, callback }, { call }) {
       const response = yield call(createCategory, payload);
       if (callback) callback(response);
     },
-    * update({payload, callback}, {call, put}) {
+    *update({ payload, callback }, { call, put }) {
       const response = yield call(updateCategory, payload);
       if (callback) callback(response);
     },
-    * delete({payload, callback}, {call}) {
+    *delete({ payload, callback }, { call }) {
       const response = yield call(deleteCategory, payload);
       if (callback) callback(response);
     },
