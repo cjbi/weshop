@@ -1,5 +1,9 @@
 package tech.wetech.weshop.enums;
 
+/**
+ * @author cjbi
+ */
+
 public enum PayStatusEnum {
 
     CASH_ON_DELIVERY("到付"),

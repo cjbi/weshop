@@ -1,7 +1,7 @@
-import { queryBrand, createBrand, updateBrand, deleteBrand } from '@/services/api';
+import { queryKeywords, createKeywords, updateKeywords, deleteKeywords } from '@/services/api';
 
 export default {
-  namespace: 'brand',
+  namespace: 'keywords',
 
   state: {
     list: [],
@@ -11,22 +11,22 @@ export default {
 
   effects: {
     *list({ payload }, { call, put }) {
-      const response = yield call(queryBrand, payload);
+      const response = yield call(queryKeywords, payload);
       yield put({
         type: 'save',
         payload: response,
       });
     },
     *create({ payload, callback }, { call }) {
-      const response = yield call(createBrand, payload);
+      const response = yield call(createKeywords, payload);
       if (callback) callback(response);
     },
     *update({ payload, callback }, { call, put }) {
-      const response = yield call(updateBrand, payload);
+      const response = yield call(updateKeywords, payload);
       if (callback) callback(response);
     },
     *delete({ payload, callback }, { call }) {
-      const response = yield call(deleteBrand, payload);
+      const response = yield call(deleteKeywords, payload);
       if (callback) callback(response);
     },
   },

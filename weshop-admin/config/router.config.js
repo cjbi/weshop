@@ -76,6 +76,21 @@ export default [
             name: '商品类目',
             component: './Shop/CategoryList',
           },
+          {
+            path: '/shop/order',
+            name: '订单管理',
+            component: './Shop/OrderList',
+          },
+          {
+            path: '/shop/goods-issue',
+            name: '商品问题',
+            component: './Shop/GoodsIssueList',
+          },
+          {
+            path: '/shop/keywords',
+            name: '关键词',
+            component: './Shop/KeywordsList',
+          },
         ],
       },
       // ===========================================================

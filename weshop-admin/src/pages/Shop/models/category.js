@@ -1,9 +1,4 @@
-import {
-  queryCategory,
-  createCategory,
-  updateCategory,
-  deleteCategory,
-} from '../../../services/api';
+import { createCategory, deleteCategory, queryCategory, updateCategory } from '@/services/api';
 
 export default {
   namespace: 'category',

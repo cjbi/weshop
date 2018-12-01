@@ -1,19 +1,24 @@
 import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'dva';
-import { Button, Card, Col, Divider, Form, Icon, Input, message, Modal, Row, Upload } from 'antd';
+import { Button, Card, Col, Divider, Form, Input, message, Modal, Row, Select } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-import styles from './BrandList.less';
+import styles from './KeywordsList.less';
 
 const FormItem = Form.Item;
 
-@connect(({ brand, loading }) => ({
-  brand,
-  loading: loading.models.brand,
+const isMap = {
+  true: '是',
+  false: '否',
+};
+
+@connect(({ keywords, loading }) => ({
+  keywords,
+  loading: loading.models.keywords,
 }))
 @Form.create()
-class BrandList extends PureComponent {
+class KeywordsList extends PureComponent {
   state = {
     modalVisible: false,
     updateModalVisible: false,
@@ -25,29 +30,37 @@ class BrandList extends PureComponent {
 
   columns = [
     {
-      title: '品牌商ID',
+      title: '关键词ID',
       dataIndex: 'id',
     },
     {
-      title: '品牌商名称',
-      dataIndex: 'name',
+      title: '关键词',
+      dataIndex: 'keyword',
     },
     {
-      title: '品牌商图片',
-      dataIndex: 'picUrl',
-      render: text => (
-        <a href={text} target="_blank">
-          <img src={text} width={65} />
-        </a>
-      ),
+      title: '跳转链接',
+      dataIndex: 'schemeUrl',
     },
     {
-      title: '介绍',
-      dataIndex: 'simpleDesc',
+      title: '是否热词',
+      dataIndex: 'isHot',
+      render: (text, record) => {
+        return isMap[text];
+      },
     },
     {
-      title: '底价',
-      dataIndex: 'floorPrice',
+      title: '是否显示',
+      dataIndex: 'isShow',
+      render: (text, record) => {
+        return isMap[text];
+      },
+    },
+    {
+      title: '是否默认',
+      dataIndex: 'isDefault',
+      render: (text, record) => {
+        return isMap[text];
+      },
     },
     {
       title: '操作',
@@ -55,7 +68,7 @@ class BrandList extends PureComponent {
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>修改</a>
           <Divider type="vertical" />
-          <a onClick={() => this.handleDeleteBrand([record.id])}>删除</a>
+          <a onClick={() => this.handleDeleteKeywords([record.id])}>删除</a>
         </Fragment>
       ),
     },
@@ -64,7 +77,7 @@ class BrandList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'brand/list',
+      type: 'keywords/list',
     });
   }
 
@@ -82,7 +95,7 @@ class BrandList extends PureComponent {
     }
 
     dispatch({
-      type: 'brand/list',
+      type: 'keywords/list',
       payload: params,
     });
   };
@@ -106,7 +119,7 @@ class BrandList extends PureComponent {
       });
 
       dispatch({
-        type: 'brand/list',
+        type: 'keywords/list',
         payload: fieldsValue,
       });
     });
@@ -119,7 +132,7 @@ class BrandList extends PureComponent {
       formValues: {},
     });
     dispatch({
-      type: 'brand/list',
+      type: 'keywords/list',
       payload: {},
     });
   };
@@ -132,13 +145,8 @@ class BrandList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="品牌商ID">
-              {getFieldDecorator('id')(<Input placeholder="请输入" />)}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="品牌商名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            <FormItem label="关键词">
+              {getFieldDecorator('keyword')(<Input placeholder="请输入关键词" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -169,14 +177,14 @@ class BrandList extends PureComponent {
     });
   };
 
-  handleDeleteBrand = params => {
+  handleDeleteKeywords = params => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'brand/delete',
+      type: 'keywords/delete',
       payload: params,
       callback: response => {
         message.success(response.msg);
-        dispatch({ type: 'brand/list' });
+        dispatch({ type: 'keywords/list' });
         this.setState({
           selectedRows: [],
         });
@@ -184,48 +192,48 @@ class BrandList extends PureComponent {
     });
   };
 
-  handleUpdateBrand = fields => {
+  handleUpdateKeywords = fields => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'brand/update',
+      type: 'keywords/update',
       payload: fields,
       callback: response => {
         message.success(response.msg);
         this.handleUpdateModalVisible();
-        dispatch({ type: 'brand/list' });
+        dispatch({ type: 'keywords/list' });
       },
     });
   };
 
-  handleCreateBrand = params => {
+  handleCreateKeywords = params => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'brand/create',
+      type: 'keywords/create',
       payload: params,
       callback: response => {
         message.success(response.msg);
         this.handleModalVisible();
-        dispatch({ type: 'brand/list' });
+        dispatch({ type: 'keywords/list' });
       },
     });
   };
 
   render() {
-    const { brand, loading } = this.props;
+    const { keywords, loading } = this.props;
 
     const { selectedRows, modalVisible, updateModalVisible, updateFormValues } = this.state;
     const parentMethods = {
       loading,
-      handleCreateBrand: this.handleCreateBrand,
+      handleCreateKeywords: this.handleCreateKeywords,
       handleModalVisible: this.handleModalVisible,
     };
     const updateMethods = {
       loading,
       handleUpdateModalVisible: this.handleUpdateModalVisible,
-      handleUpdateBrand: this.handleUpdateBrand,
+      handleUpdateKeywords: this.handleUpdateKeywords,
     };
     return (
-      <PageHeaderWrapper title="行政区域">
+      <PageHeaderWrapper title="关键词">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
@@ -235,7 +243,9 @@ class BrandList extends PureComponent {
               </Button>
               {selectedRows.length > 0 && (
                 <span>
-                  <Button onClick={() => this.handleDeleteBrand(selectedRows.map(row => row.id))}>
+                  <Button
+                    onClick={() => this.handleDeleteKeywords(selectedRows.map(row => row.id))}
+                  >
                     删除
                   </Button>
                 </span>
@@ -244,7 +254,7 @@ class BrandList extends PureComponent {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={brand}
+              data={keywords}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
@@ -285,7 +295,7 @@ class UpdateForm extends PureComponent {
       loading,
       form,
       updateModalVisible,
-      handleUpdateBrand,
+      handleUpdateKeywords,
       handleUpdateModalVisible,
     } = this.props;
     const { formVals } = this.state;
@@ -297,47 +307,65 @@ class UpdateForm extends PureComponent {
           ...formVals,
           ...fieldsValue,
         };
-        handleUpdateBrand(params);
+        handleUpdateKeywords(params);
       });
     };
     return (
       <Modal
         confirmLoading={loading}
         destroyOnClose
-        title="修改品牌商"
+        title="修改商品问题"
         visible={updateModalVisible}
         onOk={okHandle}
         onCancel={() => handleUpdateModalVisible()}
       >
-        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商名称">
-          {form.getFieldDecorator('name', {
-            initialValue: formVals.name,
-            rules: [{ required: true, message: '请输入至少三个字符的用户名！', min: 3 }],
-          })(<Input placeholder="请输入品牌商名称" />)}
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="关键词">
+          {form.getFieldDecorator('keyword', {
+            rules: [{ required: true, message: '不能为空！' }],
+            initialValue: formVals.keyword,
+          })(<Input placeholder="请输入关键词" />)}
         </FormItem>
-        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="介绍">
-          {form.getFieldDecorator('simpleDesc', {
-            initialValue: formVals.simpleDesc,
-          })(<Input placeholder="请输入介绍" />)}
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="跳转链接">
+          {form.getFieldDecorator('schemeUrl', {
+            rules: [{ required: true, message: '请输入跳转链接！' }],
+            initialValue: formVals.schemeUrl,
+          })(<Input placeholder="请输入跳转链接" />)}
         </FormItem>
-        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商图片">
-          {form.getFieldDecorator('picUrl', {
-            initialValue: formVals.picUrl,
-            rules: [{ required: true, message: '品牌商图片是必填的' }],
-          })(<Input type="hidden" />)}
-          <Uploader
-            accept="image/*"
-            imageUrl={formVals.picUrl}
-            loading={loading}
-            callback={res => {
-              form.setFieldsValue({ picUrl: res.data });
-            }}
-          />
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="是否热词">
+          {form.getFieldDecorator('isHot', {
+            initialValue: formVals.isHot + '',
+            rules: [{ required: true, message: '不能为空！' }],
+          })(
+            <Select placeholder="请选择" style={{ width: '100%' }}>
+              {Object.keys(isMap).map(key => (
+                <Option key={key}>{isMap[key]}</Option>
+              ))}
+            </Select>
+          )}
         </FormItem>
-        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="底价">
-          {form.getFieldDecorator('floorPrice', {
-            initialValue: formVals.floorPrice,
-          })(<Input type="number" min={0} placeholder="请输入底价" />)}
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="是否显示">
+          {form.getFieldDecorator('isShow', {
+            initialValue: formVals.isShow + '',
+            rules: [{ required: true, message: '不能为空！' }],
+          })(
+            <Select placeholder="请选择" style={{ width: '100%' }}>
+              {Object.keys(isMap).map(key => (
+                <Option key={key}>{isMap[key]}</Option>
+              ))}
+            </Select>
+          )}
+        </FormItem>
+        <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="是否默认">
+          {form.getFieldDecorator('isDefault', {
+            initialValue: formVals.isDefault + '',
+            rules: [{ required: true, message: '不能为空！' }],
+          })(
+            <Select placeholder="请选择" style={{ width: '100%' }}>
+              {Object.keys(isMap).map(key => (
+                <Option key={key}>{isMap[key]}</Option>
+              ))}
+            </Select>
+          )}
         </FormItem>
       </Modal>
     );
@@ -345,18 +373,14 @@ class UpdateForm extends PureComponent {
 }
 
 const CreateForm = Form.create()(props => {
-  const { loading, modalVisible, form, handleCreateBrand, handleModalVisible } = props;
+  const { loading, modalVisible, form, handleCreateKeywords, handleModalVisible } = props;
 
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       form.resetFields();
-      handleCreateBrand(fieldsValue);
+      handleCreateKeywords(fieldsValue);
     });
-  };
-
-  const extractPicUrl = res => {
-    form.setFieldsValue({ picUrl: res.data });
   };
 
   const { labelCol, wrapperCol } = {
@@ -367,107 +391,56 @@ const CreateForm = Form.create()(props => {
     <Modal
       confirmLoading={loading}
       destroyOnClose
-      title="新建品牌商"
+      title="新建商品问题"
       visible={modalVisible}
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商名称">
-        {form.getFieldDecorator('name', {
-          rules: [{ required: true, message: '请输入至少三个字符的用户名！', min: 3 }],
-        })(<Input placeholder="请输入品牌商名称" />)}
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="关键词">
+        {form.getFieldDecorator('keyword', {
+          rules: [{ required: true, message: '不能为空！' }],
+        })(<Input placeholder="请输入关键词" />)}
       </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="介绍">
-        {form.getFieldDecorator('simpleDesc')(<Input placeholder="请输入介绍" />)}
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="跳转链接">
+        {form.getFieldDecorator('schemeUrl', {
+          rules: [{ required: true, message: '请输入跳转链接！' }],
+        })(<Input placeholder="请输入跳转链接" />)}
       </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="品牌商图片">
-        {form.getFieldDecorator('picUrl', {
-          rules: [{ required: true, message: '品牌商图片是必填的' }],
-        })(<Input type="hidden" />)}
-        <Uploader accept="image/*" loading={loading} callback={extractPicUrl} />
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="是否热词">
+        {form.getFieldDecorator('isHot', {
+          rules: [{ required: true, message: '不能为空！' }],
+        })(
+          <Select placeholder="请选择" style={{ width: '100%' }}>
+            {Object.keys(isMap).map(key => (
+              <Option key={key}>{isMap[key]}</Option>
+            ))}
+          </Select>
+        )}
       </FormItem>
-      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="底价">
-        {form.getFieldDecorator('floorPrice')(
-          <Input type="number" min={0} placeholder="请输入底价" />
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="是否显示">
+        {form.getFieldDecorator('isSHow', {
+          rules: [{ required: true, message: '不能为空！' }],
+        })(
+          <Select placeholder="请选择" style={{ width: '100%' }}>
+            {Object.keys(isMap).map(key => (
+              <Option key={key}>{isMap[key]}</Option>
+            ))}
+          </Select>
+        )}
+      </FormItem>
+      <FormItem labelCol={labelCol} wrapperCol={wrapperCol} label="是否默认">
+        {form.getFieldDecorator('isDefault', {
+          rules: [{ required: true, message: '不能为空！' }],
+        })(
+          <Select placeholder="请选择" style={{ width: '100%' }}>
+            {Object.keys(isMap).map(key => (
+              <Option key={key}>{isMap[key]}</Option>
+            ))}
+          </Select>
         )}
       </FormItem>
     </Modal>
   );
 });
 
-// 自定义上传组件Uploder
-const action = '//localhost:8080/storage/upload';
-
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
-
-const beforeUpload = file => {
-  const isJPG = file.type === 'image/jpeg';
-  if (!isJPG) {
-    message.error('You can only upload JPG file!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJPG && isLt2M;
-};
-
-class Uploader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageUrl: props.imageUrl,
-      loading: props.loading,
-    };
-  }
-
-  handleChange = info => {
-    const { callback } = this.props;
-
-    if (info.file.status === 'uploading') {
-      this.setState({ loading: true });
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl =>
-        this.setState({
-          imageUrl,
-          loading: false,
-        })
-      );
-      callback(info.file.response);
-    }
-  };
-
-  render() {
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'} />
-        <div className="ant-upload-text">上传图片</div>
-      </div>
-    );
-
-    const imageUrl = this.state.imageUrl;
-    return (
-      <Upload
-        {...this.props}
-        name="file"
-        listType="picture-card"
-        className="avatar-uploader"
-        showUploadList={false}
-        action={action}
-        beforeUpload={beforeUpload}
-        onChange={this.handleChange}
-      >
-        {imageUrl ? <img src={imageUrl} style={{ width: '150px' }} alt="avatar" /> : uploadButton}
-      </Upload>
-    );
-  }
-}
-
-export default BrandList;
+export default KeywordsList;

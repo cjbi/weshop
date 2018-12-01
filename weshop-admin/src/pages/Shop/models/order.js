@@ -1,7 +1,7 @@
-import { queryRegion } from '@/services/api';
+import { queryOrder, queryOrderDetail } from '@/services/api';
 
 export default {
-  namespace: 'region',
+  namespace: 'order',
 
   state: {
     list: [],
@@ -11,7 +11,7 @@ export default {
 
   effects: {
     *list({ payload }, { call, put }) {
-      const response = yield call(queryRegion, payload);
+      const response = yield call(queryOrder, payload);
       yield put({
         type: 'queryList',
         payload: response,

@@ -3,10 +3,7 @@ package tech.wetech.weshop.web;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.po.GoodsIssue;
 import tech.wetech.weshop.query.GoodsIssuePageQuery;
 import tech.wetech.weshop.service.GoodsIssueService;
@@ -34,19 +31,19 @@ public class AdminGoodsIssueController {
     }
 
     @PostMapping("/create")
-    public Result createGoodsIssue(CreateGoodsIssueFormVO createGoodsIssueFormVO) {
+    public Result createGoodsIssue(@RequestBody CreateGoodsIssueFormVO createGoodsIssueFormVO) {
         goodsIssueService.createGoodsIssue(createGoodsIssueFormVO);
         return Result.success();
     }
 
     @PostMapping("/update")
-    public Result updateGoodsIssue(UpdateGoodsIssueFormVO updateGoodsIssueFormVO) {
+    public Result updateGoodsIssue(@RequestBody UpdateGoodsIssueFormVO updateGoodsIssueFormVO) {
         goodsIssueService.updateGoodsIssue(updateGoodsIssueFormVO);
         return Result.success();
     }
 
     @PostMapping("/delete")
-    public Result deleteGoodsIssue(Integer[] goodsIssueIds) {
+    public Result deleteGoodsIssue(@RequestBody Integer[] goodsIssueIds) {
         Arrays.stream(goodsIssueIds).forEach(goodsIssueId -> goodsIssueService.deleteGoodsIssue(goodsIssueId));
         return Result.success();
     }

@@ -2,10 +2,7 @@ package tech.wetech.weshop.web;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.po.Keywords;
 import tech.wetech.weshop.query.KeywordsPageQuery;
 import tech.wetech.weshop.service.KeywordsService;
@@ -33,19 +30,19 @@ public class AdminKeywordsController {
     }
 
     @PostMapping("/create")
-    public Result createKeywords(CreateKeywordsFormVO createKeywordsFormVO) {
+    public Result createKeywords(@RequestBody CreateKeywordsFormVO createKeywordsFormVO) {
         keywordsService.createKeywords(createKeywordsFormVO);
         return Result.success();
     }
 
     @PostMapping("/update")
-    public Result updateKeywords(UpdateKeywordsFormVO updateKeywordsFormVO) {
+    public Result updateKeywords(@RequestBody UpdateKeywordsFormVO updateKeywordsFormVO) {
         keywordsService.updateKeywords(updateKeywordsFormVO);
         return Result.success();
     }
 
     @PostMapping("/delete")
-    public Result deleteKeywords(Integer[] keywordIds) {
+    public Result deleteKeywords(@RequestBody Integer[] keywordIds) {
         Arrays.stream(keywordIds).forEach(keywordId -> keywordsService.deleteKeyword(keywordId));
         return Result.success();
     }

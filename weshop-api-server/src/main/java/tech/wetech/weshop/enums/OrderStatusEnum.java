@@ -1,5 +1,9 @@
 package tech.wetech.weshop.enums;
 
+/**
+ * @author cjbi
+ */
+
 public enum  OrderStatusEnum {
 
     SUBMIT_ORDER("提交订单"),
