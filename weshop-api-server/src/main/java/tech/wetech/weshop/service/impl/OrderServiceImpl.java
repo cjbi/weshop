@@ -38,6 +38,9 @@ public class OrderServiceImpl implements OrderService {
 
         Weekend<Order> example = Weekend.of(Order.class);
         WeekendCriteria<Order, Object> criteria = example.weekendCriteria();
+        if (orderPageQuery.getId() != null) {
+            criteria.andEqualTo(Order::getId, orderPageQuery.getId());
+        }
         if (orderPageQuery.getUserId() != null) {
             criteria.andEqualTo(Order::getUserId, orderPageQuery.getUserId());
         }

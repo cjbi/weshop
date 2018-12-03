@@ -4,7 +4,7 @@ package tech.wetech.weshop.enums;
  * @author cjbi
  */
 
-public enum  OrderStatusEnum {
+public enum OrderStatusEnum {
 
     SUBMIT_ORDER("提交订单"),
     WAREHOUSE_DISTRIBUTION("仓库配货"),

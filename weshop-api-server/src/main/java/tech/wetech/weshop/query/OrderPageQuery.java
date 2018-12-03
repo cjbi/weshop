@@ -18,6 +18,8 @@ public class OrderPageQuery {
 
     private Integer userId;
 
+    private Integer id;
+
     private String orderSN;
 
     private OrderStatusEnum orderStatus;
@@ -38,6 +40,14 @@ public class OrderPageQuery {
 
     public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getUserId() {

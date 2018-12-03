@@ -52,7 +52,7 @@ public class StorageController {
 
     @GetMapping("/download/{key:.+}")
     public ResponseEntity<Resource> download(@PathVariable String key) {
-        Storage litemallStorage = storageService.queryByKey(key);
+        Storage storage = storageService.queryByKey(key);
         if (key == null) {
             return ResponseEntity.notFound().build();
         }
@@ -60,7 +60,7 @@ public class StorageController {
             return ResponseEntity.badRequest().build();
         }
 
-        String type = litemallStorage.getType();
+        String type = storage.getType();
         MediaType mediaType = MediaType.parseMediaType(type);
 
         Resource file = storageService.loadAsResource(key);
