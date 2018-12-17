@@ -2,9 +2,11 @@ package tech.wetech.weshop.storage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import tech.wetech.weshop.service.IService;
+import tech.wetech.weshop.service.impl.BaseService;
 import tech.wetech.weshop.utils.CharUtil;
 import tech.wetech.weshop.mapper.StorageMapper;
-import tech.wetech.weshop.po.Storage;
+import tech.wetech.weshop.domain.Storage;
 
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -13,7 +15,7 @@ import java.util.stream.Stream;
 /**
  * 提供存储服务类，所有存储服务均由该类对外提供
  */
-public class StorageService {
+public class StorageService extends BaseService<Storage> implements IService<Storage> {
 
     private String active;
 

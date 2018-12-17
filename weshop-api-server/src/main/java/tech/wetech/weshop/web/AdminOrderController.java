@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tech.wetech.weshop.domain.Order;
 import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.query.OrderPageQuery;
@@ -15,6 +16,8 @@ import tech.wetech.weshop.vo.OrderVO;
 import tech.wetech.weshop.vo.PageInfoVO;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,19 +25,20 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/admin/order")
-public class AdminOrderController {
+public class AdminOrderController extends BaseController<Order> {
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/list")
-    public Result<PageInfoVO> queryOrderPageInfo(OrderPageQuery orderPageQuery) {
-        PageInfo pageInfo = orderService.queryOrderPageInfo(orderPageQuery);
-        PageInfoVO pageInfoVO = new PageInfoVO.Builder(pageInfo)
-                .addExtra("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)))
-                .addExtra("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)))
-                .build();
-        return Result.success(pageInfoVO);
+    @Override
+    public Result<PageInfoVO<Order>> queryPageInfo(Order entity, Integer pageNum, Integer pageSize) {
+        Map<String, Object> extra = new HashMap(16) {{
+            put("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)));
+            put("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
+        }};
+        Result<PageInfoVO<Order>> result = super.queryPageInfo(entity, pageNum, pageSize);
+        result.getData().setExtra(extra);
+        return result;
     }
 
     @GetMapping("/{orderId}")

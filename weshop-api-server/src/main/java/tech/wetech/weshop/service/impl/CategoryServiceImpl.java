@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.enums.CategoryLevelEnum;
 import tech.wetech.weshop.mapper.CategoryMapper;
-import tech.wetech.weshop.po.Category;
+import tech.wetech.weshop.domain.Category;
 import tech.wetech.weshop.query.CategoryPageQuery;
 import tech.wetech.weshop.service.CategoryService;
 import tech.wetech.weshop.vo.CreateCategoryFormVO;
@@ -20,27 +20,10 @@ import java.util.List;
  * @author cjbi
  */
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl extends BaseService<Category> implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
-
-    @Override
-    public PageInfo<Category> queryCategoryPageInfo(CategoryPageQuery categoryPageQuery) {
-        Weekend<Category> example = Weekend.of(Category.class);
-        WeekendCriteria<Category, Object> criteria = example.weekendCriteria();
-        if (categoryPageQuery.getId() != null) {
-            criteria.andEqualTo(Category::getId, categoryPageQuery.getId());
-        }
-        if (categoryPageQuery.getName() != null) {
-            criteria.andEqualTo(Category::getName, categoryPageQuery.getName());
-        }
-        if (categoryPageQuery.getCategoryLevel() != null) {
-            criteria.andEqualTo(Category::getLevel, categoryPageQuery.getCategoryLevel());
-        }
-        return PageHelper.startPage(categoryPageQuery.getPageNum(), categoryPageQuery.getPageSize())
-                .doSelectPageInfo(() -> categoryMapper.selectByExample(example));
-    }
 
     @Override
     public List<Category> queryCategoryByLevel(CategoryLevelEnum categoryLevel) {
@@ -48,40 +31,5 @@ public class CategoryServiceImpl implements CategoryService {
         WeekendCriteria<Category, Object> criteria = example.weekendCriteria();
         criteria.andEqualTo(Category::getLevel, categoryLevel.name());
         return categoryMapper.selectByExample(example);
-    }
-
-    @Override
-    public void createCategory(CreateCategoryFormVO createCategoryFormVO) {
-        Category category = new Category(createCategoryFormVO);
-        if (category.getLevel() == CategoryLevelEnum.L1) {
-            category.setParentId(0);
-        }
-        if (category.getWapBannerUrl() == null) {
-            category.setWapBannerUrl(category.getImgUrl());
-        }
-        if (category.getFrontName() == null) {
-            category.setFrontName(category.getFrontDesc());
-        }
-        categoryMapper.insertSelective(category);
-    }
-
-    @Override
-    public void updateCategory(UpdateCategoryFormVO updateCategoryFormVO) {
-        Category category = new Category(updateCategoryFormVO);
-        if (category.getLevel() == CategoryLevelEnum.L1) {
-            category.setParentId(0);
-        }
-        if (category.getWapBannerUrl() == null) {
-            category.setWapBannerUrl(category.getImgUrl());
-        }
-        if (category.getFrontName() == null) {
-            category.setFrontName(category.getFrontDesc());
-        }
-        categoryMapper.updateByPrimaryKeySelective(category);
-    }
-
-    @Override
-    public void deleteCategory(Integer id) {
-        categoryMapper.deleteByPrimaryKey(id);
     }
 }

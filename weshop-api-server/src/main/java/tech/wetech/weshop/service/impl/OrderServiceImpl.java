@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import tech.wetech.weshop.mapper.OrderExpressMapper;
 import tech.wetech.weshop.mapper.OrderGoodsMapper;
 import tech.wetech.weshop.mapper.OrderMapper;
-import tech.wetech.weshop.po.Order;
-import tech.wetech.weshop.po.OrderExpress;
-import tech.wetech.weshop.po.OrderGoods;
+import tech.wetech.weshop.domain.Order;
+import tech.wetech.weshop.domain.OrderExpress;
+import tech.wetech.weshop.domain.OrderGoods;
 import tech.wetech.weshop.query.OrderPageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.vo.OrderVO;
@@ -22,7 +22,7 @@ import java.util.List;
  * @author cjbi
  */
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl extends BaseService<Order> implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
@@ -32,31 +32,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderExpressMapper orderExpressMapper;
-
-    @Override
-    public PageInfo<Order> queryOrderPageInfo(OrderPageQuery orderPageQuery) {
-
-        Weekend<Order> example = Weekend.of(Order.class);
-        WeekendCriteria<Order, Object> criteria = example.weekendCriteria();
-        if (orderPageQuery.getId() != null) {
-            criteria.andEqualTo(Order::getId, orderPageQuery.getId());
-        }
-        if (orderPageQuery.getUserId() != null) {
-            criteria.andEqualTo(Order::getUserId, orderPageQuery.getUserId());
-        }
-        if (orderPageQuery.getOrderSN() != null) {
-            criteria.andEqualTo(Order::getOrderSN, orderPageQuery.getOrderSN());
-        }
-        if (orderPageQuery.getOrderStatus() != null) {
-            criteria.andEqualTo(Order::getOrderStatus, orderPageQuery.getOrderStatus());
-        }
-        if (orderPageQuery.getPayStatus() != null) {
-            criteria.andEqualTo(Order::getPayStatus, orderPageQuery.getPayStatus());
-        }
-
-        return PageHelper.startPage(orderPageQuery.getPageNum(), orderPageQuery.getPageSize())
-                .doSelectPageInfo(() -> orderMapper.selectByExample(example));
-    }
 
     @Override
     public OrderVO queryOrderDetail(Integer orderId) {

@@ -2,6 +2,7 @@ package tech.wetech.weshop.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import tech.wetech.weshop.domain.User;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.enums.GenderEnum;
 
@@ -25,12 +26,9 @@ public class UserPageQuery {
 
     private Byte userLevelId;
 
-    public UserPageQuery() {
-    }
-
-    public UserPageQuery(Integer pageSize, Integer pageNum) {
-        this.pageSize = pageSize;
-        this.pageNum = pageNum;
+    public User toPO() {
+        User user = new User();
+        return user;
     }
 
     public Byte getUserLevelId() {

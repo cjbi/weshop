@@ -1,6 +1,6 @@
 package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.po.*;
+import tech.wetech.weshop.domain.*;
 
 import java.util.List;
 

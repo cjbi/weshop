@@ -1,7 +1,7 @@
 package tech.wetech.weshop.mapper;
 
 import tech.wetech.weshop.utils.MyMapper;
-import tech.wetech.weshop.po.Brand;
+import tech.wetech.weshop.domain.Brand;
 
 public interface BrandMapper extends MyMapper<Brand> {
 }

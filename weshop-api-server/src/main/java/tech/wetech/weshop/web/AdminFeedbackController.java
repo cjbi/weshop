@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tech.wetech.weshop.domain.Feedback;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.query.FeedbackPageQuery;
 import tech.wetech.weshop.service.FeedbackService;
@@ -15,16 +16,6 @@ import tech.wetech.weshop.vo.PageInfoVO;
  */
 @RestController
 @RequestMapping("/admin/feedback")
-public class AdminFeedbackController {
-
-    @Autowired
-    private FeedbackService feedbackService;
-
-    @GetMapping("/list")
-    public Result<PageInfoVO> queryFeedbackPageInfo(FeedbackPageQuery feedbackPageQuery) {
-        PageInfo pageInfo = feedbackService.queryFeedbackPageInfo(feedbackPageQuery);
-        PageInfoVO pageInfoVO = new PageInfoVO(pageInfo);
-        return Result.success(pageInfoVO);
-    }
+public class AdminFeedbackController extends BaseController<Feedback> {
 
 }

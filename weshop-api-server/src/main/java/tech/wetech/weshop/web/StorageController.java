@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import tech.wetech.weshop.po.Storage;
+import tech.wetech.weshop.domain.Storage;
 import tech.wetech.weshop.storage.StorageService;
 import tech.wetech.weshop.utils.Result;
 
@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/storage")
-public class StorageController {
+public class StorageController extends BaseController<Storage> {
 
     @Autowired
     private StorageService storageService;

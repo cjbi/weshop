@@ -20,7 +20,7 @@
                         password="${spring.datasource.password}">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="tech.wetech.weshop.po" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="tech.wetech.weshop.domain" targetProject="src/main/java"/>
 
         <sqlMapGenerator targetPackage="tech.wetech.weshop.mapper" targetProject="src/main/java"/>
 

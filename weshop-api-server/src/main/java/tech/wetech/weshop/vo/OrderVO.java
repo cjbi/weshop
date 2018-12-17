@@ -1,8 +1,8 @@
 package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.po.Order;
-import tech.wetech.weshop.po.OrderExpress;
-import tech.wetech.weshop.po.OrderGoods;
+import tech.wetech.weshop.domain.Order;
+import tech.wetech.weshop.domain.OrderExpress;
+import tech.wetech.weshop.domain.OrderGoods;
 
 import java.util.List;
 
