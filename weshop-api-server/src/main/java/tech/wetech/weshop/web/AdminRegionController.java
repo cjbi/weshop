@@ -21,7 +21,7 @@ public class AdminRegionController extends BaseController<Region> {
 
     @Override
     public Result<PageInfoVO<Region>> queryPageInfo(Region entity, Integer pageNum, Integer pageSize) {
-        Map<String, Object> extra = new HashMap(16) {{
+        Map<String, Object> extra = new HashMap<String, Object>(16) {{
             put("regionType", Arrays.stream(RegionTypeEnum.values()).collect(Collectors.toMap(e -> e, RegionTypeEnum::getName)));
         }};
         Result<PageInfoVO<Region>> result = super.queryPageInfo(entity, pageNum, pageSize);

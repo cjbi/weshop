@@ -1,6 +1,7 @@
 package tech.wetech.weshop.web;
 
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public abstract class BaseController<T> {
     }
 
     @GetMapping("/list")
+    @ApiOperation("分页查询数据")
     public Result<PageInfoVO<T>> queryPageInfo(T entity, Integer pageNum, Integer pageSize) {
         if (pageNum == null) {
             pageNum = Constants.DEFAULT_PAGE_NUM;
@@ -40,29 +42,34 @@ public abstract class BaseController<T> {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("查询单条数据")
     public Result<T> query(@PathVariable Object id) {
         return Result.success(service.queryById(id));
     }
 
     @PostMapping
+    @ApiOperation("新增数据")
     public Result create(@RequestBody @Valid T entity) {
         service.create(entity);
         return Result.success();
     }
 
     @PutMapping
+    @ApiOperation("更新数据")
     public Result update(@RequestBody @Valid T entity) {
         service.updateNotNull(entity);
         return Result.success();
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation("删除数据")
     public Result delete(@PathVariable Object id) {
         service.deleteById(id);
         return Result.success();
     }
 
     @DeleteMapping
+    @ApiOperation("删除多条数据")
     public Result deleteBatchIds(@RequestBody Object[] ids) {
         if (ids != null && ids.length > 0) {
             Arrays.stream(ids).forEach(id -> service.deleteById(id));

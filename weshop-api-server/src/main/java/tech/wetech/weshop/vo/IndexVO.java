@@ -15,7 +15,7 @@ public class IndexVO {
 
     private List<Category> categoryList;
 
-    private List<Channel> ChannelList;
+    private List<Channel> channelList;
 
     private List<Goods> hotGoodsList;
 
@@ -48,11 +48,11 @@ public class IndexVO {
     }
 
     public List<Channel> getChannelList() {
-        return ChannelList;
+        return channelList;
     }
 
     public void setChannelList(List<Channel> channelList) {
-        ChannelList = channelList;
+        this.channelList = channelList;
     }
 
     public List<Goods> getHotGoodsList() {
