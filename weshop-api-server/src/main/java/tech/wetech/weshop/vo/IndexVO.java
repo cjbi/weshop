@@ -13,7 +13,7 @@ public class IndexVO {
 
     private List<Brand> brandList;
 
-    private List<Category> categoryList;
+    private List<CategoryVO> categoryList;
 
     private List<Channel> channelList;
 
@@ -39,11 +39,11 @@ public class IndexVO {
         this.brandList = brandList;
     }
 
-    public List<Category> getCategoryList() {
+    public List<CategoryVO> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<Category> categoryList) {
+    public void setCategoryList(List<CategoryVO> categoryList) {
         this.categoryList = categoryList;
     }
 
