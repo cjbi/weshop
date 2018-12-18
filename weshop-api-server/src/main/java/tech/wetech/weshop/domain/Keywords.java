@@ -1,8 +1,5 @@
 package tech.wetech.weshop.domain;
 
-import tech.wetech.weshop.vo.CreateKeywordsFormVO;
-import tech.wetech.weshop.vo.UpdateKeywordsFormVO;
-
 import javax.persistence.*;
 
 @Table(name = "weshop_keywords")
@@ -34,27 +31,6 @@ public class Keywords {
     private Integer type;
 
     public Keywords() {
-    }
-
-    public Keywords(CreateKeywordsFormVO createKeywordsFormVO) {
-        this.keyword = createKeywordsFormVO.getKeyword();
-        this.isHot = createKeywordsFormVO.getIsHot();
-        this.isDefault = createKeywordsFormVO.getIsDefault();
-        this.isShow = createKeywordsFormVO.getIsShow();
-        this.sortOrder = createKeywordsFormVO.getSortOrder();
-        this.schemeUrl = createKeywordsFormVO.getSchemeUrl();
-        this.type = createKeywordsFormVO.getType();
-    }
-
-    public Keywords(UpdateKeywordsFormVO updateKeywordsFormVO) {
-        this.id = updateKeywordsFormVO.getId();
-        this.keyword = updateKeywordsFormVO.getKeyword();
-        this.isHot = updateKeywordsFormVO.getIsHot();
-        this.isDefault = updateKeywordsFormVO.getIsDefault();
-        this.isShow = updateKeywordsFormVO.getIsShow();
-        this.sortOrder = updateKeywordsFormVO.getSortOrder();
-        this.schemeUrl = updateKeywordsFormVO.getSchemeUrl();
-        this.type = updateKeywordsFormVO.getType();
     }
 
     /**

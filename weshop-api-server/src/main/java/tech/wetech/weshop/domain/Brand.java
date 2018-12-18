@@ -1,10 +1,7 @@
 package tech.wetech.weshop.domain;
 
-import tech.wetech.weshop.vo.CreateBrandFormVO;
-import tech.wetech.weshop.vo.UpdateBrandFormVO;
-
-import java.math.BigDecimal;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "weshop_brand")
 public class Brand {
@@ -43,38 +40,6 @@ public class Brand {
 
     @Column(name = "new_sort_order")
     private Byte newSortOrder;
-
-    public Brand() {
-    }
-
-    public Brand(CreateBrandFormVO createBrandFormVO) {
-        this.name = createBrandFormVO.getName();
-        this.listPicUrl = createBrandFormVO.getListPicUrl();
-        this.simpleDesc = createBrandFormVO.getSimpleDesc();
-        this.picUrl = createBrandFormVO.getPicUrl();
-        this.sortOrder = createBrandFormVO.getSortOrder();
-        this.isShow = createBrandFormVO.getIsShow();
-        this.floorPrice = createBrandFormVO.getFloorPrice();
-        this.appListPicUrl = createBrandFormVO.getAppListPicUrl();
-        this.isNew = createBrandFormVO.getIsNew();
-        this.newPicUrl = createBrandFormVO.getNewPicUrl();
-        this.newSortOrder = createBrandFormVO.getNewSortOrder();
-    }
-
-    public Brand(UpdateBrandFormVO updateBrandFormVO) {
-        this.id = updateBrandFormVO.getId();
-        this.name = updateBrandFormVO.getName();
-        this.listPicUrl = updateBrandFormVO.getListPicUrl();
-        this.simpleDesc = updateBrandFormVO.getSimpleDesc();
-        this.picUrl = updateBrandFormVO.getPicUrl();
-        this.sortOrder = updateBrandFormVO.getSortOrder();
-        this.isShow = updateBrandFormVO.getIsShow();
-        this.floorPrice = updateBrandFormVO.getFloorPrice();
-        this.appListPicUrl = updateBrandFormVO.getAppListPicUrl();
-        this.isNew = updateBrandFormVO.getIsNew();
-        this.newPicUrl = updateBrandFormVO.getNewPicUrl();
-        this.newSortOrder = updateBrandFormVO.getNewSortOrder();
-    }
 
     /**
      * @return id

@@ -1,15 +1,13 @@
 package tech.wetech.weshop.web;
 
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.domain.Goods;
-import tech.wetech.weshop.query.GoodsPageQuery;
 import tech.wetech.weshop.service.GoodsService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.CreateGoodsFormVO;
-import tech.wetech.weshop.vo.PageInfoVO;
-import tech.wetech.weshop.vo.UpdateGoodsFormVO;
 
 /**
  * @author cjbi

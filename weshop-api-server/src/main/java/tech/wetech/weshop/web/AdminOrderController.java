@@ -1,6 +1,5 @@
 package tech.wetech.weshop.web;
 
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.domain.Order;
 import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
-import tech.wetech.weshop.query.OrderPageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderVO;
@@ -41,7 +39,7 @@ public class AdminOrderController extends BaseController<Order> {
         return result;
     }
 
-    @GetMapping("/{orderId}")
+    @GetMapping("/detail/{orderId}")
     public Result<OrderVO> queryOrderDetail(@PathVariable("orderId") Integer orderId) {
         return Result.success(orderService.queryOrderDetail(orderId));
     }

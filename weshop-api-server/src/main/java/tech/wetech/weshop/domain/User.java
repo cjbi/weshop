@@ -1,11 +1,9 @@
 package tech.wetech.weshop.domain;
 
 import tech.wetech.weshop.enums.GenderEnum;
-import tech.wetech.weshop.vo.CreateUserFormVO;
-import tech.wetech.weshop.vo.UpdateUserFormVO;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_user")
 public class User {
@@ -45,41 +43,6 @@ public class User {
 
     @Column(name = "wechat_open_id")
     private String wechatOpenId;
-
-    public User() {
-    }
-
-    public User(CreateUserFormVO user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.gender = user.getGender();
-        this.birthday = user.getBirthday();
-        this.registerTime = user.getRegisterTime();
-        this.lastLoginTime = user.getLastLoginTime();
-        this.lastLoginIp = user.getLastLoginIp();
-        this.userLevelId = user.getUserLevelId();
-        this.nickname = user.getNickname();
-        this.mobile = user.getMobile();
-        this.registerIp = user.getRegisterIp();
-        this.avatar = user.getAvatar();
-        this.wechatOpenId = user.getWechatOpenId();
-    }
-
-    public User(UpdateUserFormVO user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.gender = user.getGender();
-        this.birthday = user.getBirthday();
-        this.registerTime = user.getRegisterTime();
-        this.lastLoginTime = user.getLastLoginTime();
-        this.lastLoginIp = user.getLastLoginIp();
-        this.userLevelId = user.getUserLevelId();
-        this.nickname = user.getNickname();
-        this.mobile = user.getMobile();
-        this.registerIp = user.getRegisterIp();
-        this.avatar = user.getAvatar();
-        this.wechatOpenId = user.getWechatOpenId();
-    }
 
     /**
      * @return id

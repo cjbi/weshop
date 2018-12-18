@@ -1,11 +1,7 @@
 package tech.wetech.weshop.service;
 
-import com.github.pagehelper.PageInfo;
 import tech.wetech.weshop.enums.CategoryLevelEnum;
 import tech.wetech.weshop.domain.Category;
-import tech.wetech.weshop.query.CategoryPageQuery;
-import tech.wetech.weshop.vo.CreateCategoryFormVO;
-import tech.wetech.weshop.vo.UpdateCategoryFormVO;
 
 import java.util.List;
 

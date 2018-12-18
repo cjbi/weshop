@@ -1,8 +1,6 @@
 package tech.wetech.weshop.service;
 
-import com.github.pagehelper.PageInfo;
 import tech.wetech.weshop.domain.Order;
-import tech.wetech.weshop.query.OrderPageQuery;
 import tech.wetech.weshop.vo.OrderVO;
 
 /**
