@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.domain.Goods;
+import tech.wetech.weshop.po.Goods;
 
 import java.util.List;
 

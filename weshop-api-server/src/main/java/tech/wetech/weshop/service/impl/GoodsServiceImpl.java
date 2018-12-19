@@ -2,7 +2,7 @@ package tech.wetech.weshop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.domain.Goods;
+import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.mapper.GoodsMapper;
 import tech.wetech.weshop.service.GoodsService;
 import tk.mybatis.mapper.weekend.Weekend;

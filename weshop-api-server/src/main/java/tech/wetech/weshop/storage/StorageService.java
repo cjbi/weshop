@@ -6,7 +6,7 @@ import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.service.impl.BaseService;
 import tech.wetech.weshop.utils.CharUtil;
 import tech.wetech.weshop.mapper.StorageMapper;
-import tech.wetech.weshop.domain.Storage;
+import tech.wetech.weshop.po.Storage;
 
 import java.io.InputStream;
 import java.nio.file.Path;

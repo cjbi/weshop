@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service;
 
 import tech.wetech.weshop.enums.CategoryLevelEnum;
-import tech.wetech.weshop.domain.Category;
+import tech.wetech.weshop.po.Category;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.domain.Region;
+import tech.wetech.weshop.po.Region;
 
 /**
  * @author cjbi

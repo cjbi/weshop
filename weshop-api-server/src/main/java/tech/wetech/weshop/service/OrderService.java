@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.domain.Order;
+import tech.wetech.weshop.po.Order;
 import tech.wetech.weshop.vo.OrderVO;
 
 /**

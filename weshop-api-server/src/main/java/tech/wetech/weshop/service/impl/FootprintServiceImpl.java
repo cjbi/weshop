@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service.impl;
 
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.domain.Footprint;
+import tech.wetech.weshop.po.Footprint;
 import tech.wetech.weshop.service.FootprintService;
 
 /**

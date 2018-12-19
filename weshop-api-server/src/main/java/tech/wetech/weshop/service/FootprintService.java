@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.domain.Footprint;
+import tech.wetech.weshop.po.Footprint;
 
 /**
  * @author cjbi

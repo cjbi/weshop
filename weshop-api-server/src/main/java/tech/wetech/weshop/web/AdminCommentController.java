@@ -1,7 +1,7 @@
 package tech.wetech.weshop.web;
 
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.domain.Comment;
+import tech.wetech.weshop.po.Comment;
 
 /**
  * @author cjbi

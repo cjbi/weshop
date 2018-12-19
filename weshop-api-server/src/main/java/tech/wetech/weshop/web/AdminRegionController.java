@@ -2,7 +2,7 @@ package tech.wetech.weshop.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.domain.Region;
+import tech.wetech.weshop.po.Region;
 import tech.wetech.weshop.enums.RegionTypeEnum;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.PageInfoVO;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tech.wetech.weshop.mapper.CategoryMapper" >
+  <resultMap id="BaseResultMap" type="tech.wetech.weshop.po.Category" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="front_desc" property="frontDesc" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="sort_order" property="sortOrder" jdbcType="BIT" />
+    <result column="show_index" property="showIndex" jdbcType="BIT" />
+    <result column="is_show" property="isShow" jdbcType="BIT" />
+    <result column="banner_url" property="bannerUrl" jdbcType="VARCHAR" />
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="wap_banner_url" property="wapBannerUrl" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="front_name" property="frontName" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

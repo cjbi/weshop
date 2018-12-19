@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service.impl;
 
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.domain.Feedback;
+import tech.wetech.weshop.po.Feedback;
 import tech.wetech.weshop.service.FeedbackService;
 
 /**

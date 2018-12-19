@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.enums.CategoryLevelEnum;
 import tech.wetech.weshop.mapper.CategoryMapper;
-import tech.wetech.weshop.domain.Category;
+import tech.wetech.weshop.po.Category;
 import tech.wetech.weshop.service.CategoryService;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;

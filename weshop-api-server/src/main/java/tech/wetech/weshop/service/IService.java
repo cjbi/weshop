@@ -1,8 +1,6 @@
 package tech.wetech.weshop.service;
 
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -33,6 +31,6 @@ public interface IService<T> {
 
     int deleteById(Object id);
 
-    //TODO 其他...
+    int count(T entity);
 
 }

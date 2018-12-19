@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.domain.Comment;
+import tech.wetech.weshop.po.Comment;
 
 /**
  * @author cjbi

@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.domain.*;
+import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.service.*;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.CategoryVO;
+import tech.wetech.weshop.vo.HomeCategoryVO;
 import tech.wetech.weshop.vo.IndexVO;
 
 import java.util.LinkedList;
@@ -70,7 +70,8 @@ public class WechatHomeController {
         PageHelper.startPage(1, 3);
         List<Topic> topicList = topicService.queryAll();
 
-        List<CategoryVO> categoryList = new LinkedList<>();
+        List<HomeCategoryVO> categoryList = new LinkedList<>();
+
         categoryService.queryList(new Category() {{
             setParentId(0);
         }}).forEach(c -> {
@@ -83,10 +84,8 @@ public class WechatHomeController {
 
             PageHelper.startPage(1, 7);
             List<Goods> goodsList = goodsService.queryGoodsByCategoryIdIn(categoryIdList);
-            categoryList.add(new CategoryVO(c.getId(), c.getName(), goodsList));
+            categoryList.add(new HomeCategoryVO(c.getId(), c.getName(), goodsList));
         });
-
-
         indexVO.setBannerList(bannerList);
         indexVO.setChannelList(channelList);
         indexVO.setNewGoodsList(newGoodsList);

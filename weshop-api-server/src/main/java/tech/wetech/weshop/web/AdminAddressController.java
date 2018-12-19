@@ -2,7 +2,7 @@ package tech.wetech.weshop.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.domain.Address;
+import tech.wetech.weshop.po.Address;
 
 /**
  * @author cjbi

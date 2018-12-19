@@ -1,6 +1,6 @@
 package tech.wetech.weshop.service;
 
-import tech.wetech.weshop.domain.SearchHistory;
+import tech.wetech.weshop.po.SearchHistory;
 
 /**
  * @author cjbi

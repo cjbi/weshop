@@ -71,4 +71,9 @@ public abstract class BaseService<T> implements IService<T> {
     public int deleteById(Object id) {
         return mapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int count(T entity) {
+        return mapper.selectCount(entity);
+    }
 }

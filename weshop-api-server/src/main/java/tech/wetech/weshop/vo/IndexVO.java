@@ -1,6 +1,6 @@
 package tech.wetech.weshop.vo;
 
-import tech.wetech.weshop.domain.*;
+import tech.wetech.weshop.po.*;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class IndexVO {
 
     private List<Brand> brandList;
 
-    private List<CategoryVO> categoryList;
+    private List<HomeCategoryVO> categoryList;
 
     private List<Channel> channelList;
 
@@ -39,11 +39,11 @@ public class IndexVO {
         this.brandList = brandList;
     }
 
-    public List<CategoryVO> getCategoryList() {
+    public List<HomeCategoryVO> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<CategoryVO> categoryList) {
+    public void setCategoryList(List<HomeCategoryVO> categoryList) {
         this.categoryList = categoryList;
     }
 
