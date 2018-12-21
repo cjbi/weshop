@@ -17,4 +17,5 @@ public interface CategoryService extends IService<Category> {
      */
     List<Category> queryCategoryByLevel(CategoryLevelEnum categoryLevel);
 
+    List<Category> queryCategoryByIdIn(List<Integer> Ids);
 }

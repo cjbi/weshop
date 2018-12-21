@@ -1,18 +1,21 @@
 package tech.wetech.weshop.web;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.po.*;
+import tech.wetech.weshop.query.GoodsSearchQuery;
 import tech.wetech.weshop.service.*;
 import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.vo.CategoryFilterVO;
 import tech.wetech.weshop.vo.GoodsDetailVO;
+import tech.wetech.weshop.vo.GoodsSearchVO;
+import tech.wetech.weshop.vo.PageInfoVO;
 
-import java.util.Base64;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +27,9 @@ public class WechatGoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private GoodsGalleryService goodsGalleryService;
@@ -61,6 +67,38 @@ public class WechatGoodsController {
     }
 
 
+    @GetMapping("/list")
+    public Result<PageInfoVO<Goods>> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
+        PageInfo<Goods> goodsPageInfo = goodsService.queryGoodsSearchPageInfo(goodsSearchQuery);
+
+        List<Integer> categoryIds = goodsPageInfo.getList()
+                .stream()
+                .map(Goods::getCategoryId)
+                .collect(Collectors.toList());
+
+        //查询二级分类的parentIds
+        List<Integer> parentIds = categoryService.queryCategoryByIdIn(categoryIds).stream()
+                .map(Category::getParentId).collect(Collectors.toList());
+
+        //一级分类
+        List<CategoryFilterVO> categoryFilter = categoryService.queryCategoryByIdIn(parentIds).stream()
+                .map(CategoryFilterVO::new)
+                .collect(Collectors.toList());
+
+        categoryFilter.forEach(categoryFilterVO -> categoryFilterVO.setChecked(categoryFilterVO.getId().equals(goodsSearchQuery.getCategoryId())));
+
+        PageInfoVO pageInfoVO = new PageInfoVO.Builder(
+                goodsPageInfo.getList().stream()
+                        .map(GoodsSearchVO::new)
+                        .collect(Collectors.toList())
+        )
+                .addExtra("categoryFilter", categoryFilter)
+                .pagination(new PageInfoVO.Pagination(goodsPageInfo))
+                .build();
+
+        return Result.success(pageInfoVO);
+    }
+
     @GetMapping("/detail/{goodsId}")
     public Result<GoodsDetailVO> queryGoodsDetail(@PathVariable Integer goodsId) {
         GoodsDetailVO goodsDetailVO = new GoodsDetailVO();
@@ -72,9 +110,6 @@ public class WechatGoodsController {
         List<GoodsDetailVO.GoodsAttributeVO> goodsAttributeVOList = goodsAttributeService.queryGoodsDetailAttributeByGoodsId(goodsId);
         List<GoodsIssue> goodsIssueList = goodsIssueService.queryAll();
         Brand brand = brandService.queryById(goods.getBrandId());
-        int count = commentService.count(new Comment() {{
-            setValueId(goodsId);
-        }});
 
         //商品评价
         int commentCount = commentService.count(new Comment() {{

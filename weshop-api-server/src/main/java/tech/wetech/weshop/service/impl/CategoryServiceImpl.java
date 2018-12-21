@@ -27,4 +27,12 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         criteria.andEqualTo(Category::getLevel, categoryLevel.name());
         return categoryMapper.selectByExample(example);
     }
+
+    @Override
+    public List<Category> queryCategoryByIdIn(List<Integer> ids) {
+        Weekend<Category> example = Weekend.of(Category.class);
+        WeekendCriteria<Category, Object> criteria = example.weekendCriteria();
+        criteria.andIn(Category::getId, ids);
+        return categoryMapper.selectByExample(example);
+    }
 }
