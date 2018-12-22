@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.mapper.CategoryMapper;
+import tech.wetech.weshop.po.Category;
 import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.mapper.GoodsMapper;
 import tech.wetech.weshop.query.GoodsSearchQuery;
@@ -16,12 +18,16 @@ import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     @Override
     public List<Goods> queryGoodsByCategoryIdIn(List<Integer> categoryIds) {
@@ -42,7 +48,10 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
             goodsSearchQuery.setPageSize(Constants.DEFAULT_PAGE_SIZE);
         }
         if (goodsSearchQuery.getCategoryId() != null) {
-            criteria.andEqualTo(Goods::getCategoryId, goodsSearchQuery.getCategoryId());
+            List<Integer> childCategoryIdList = categoryMapper.select(new Category() {{
+                setParentId(goodsSearchQuery.getCategoryId());
+            }}).stream().map(Category::getId).collect(Collectors.toList());
+            criteria.andIn(Goods::getCategoryId, childCategoryIdList);
         }
         if (goodsSearchQuery.getBrandId() != null) {
             criteria.andEqualTo(Goods::getBrandId, goodsSearchQuery.getBrandId());
