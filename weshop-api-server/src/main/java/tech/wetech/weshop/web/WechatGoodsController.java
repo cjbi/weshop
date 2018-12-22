@@ -12,10 +12,11 @@ import tech.wetech.weshop.service.*;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.CategoryFilterVO;
 import tech.wetech.weshop.vo.GoodsDetailVO;
-import tech.wetech.weshop.vo.GoodsSearchVO;
 import tech.wetech.weshop.vo.PageInfoVO;
 
-import java.util.*;
+import java.util.Base64;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -71,14 +72,10 @@ public class WechatGoodsController {
     public Result<PageInfoVO<Goods>> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
         PageInfo<Goods> goodsPageInfo = goodsService.queryGoodsSearchPageInfo(goodsSearchQuery);
 
-        List<Integer> categoryIds = goodsPageInfo.getList()
-                .stream()
-                .map(Goods::getCategoryId)
-                .collect(Collectors.toList());
+        List<Integer> categoryIds = goodsService.queryGoodsSearchCategoryIds(goodsSearchQuery);
 
         //查询二级分类的parentIds
-        List<Integer> parentIds = categoryService.queryCategoryByIdIn(categoryIds).stream()
-                .map(Category::getParentId).collect(Collectors.toList());
+        List<Integer> parentIds = categoryService.queryParentIdsByIdIn(categoryIds);
 
         //一级分类
         List<CategoryFilterVO> categoryFilter = categoryService.queryCategoryByIdIn(parentIds).stream()
@@ -87,13 +84,8 @@ public class WechatGoodsController {
 
         categoryFilter.forEach(categoryFilterVO -> categoryFilterVO.setChecked(categoryFilterVO.getId().equals(goodsSearchQuery.getCategoryId())));
 
-        PageInfoVO pageInfoVO = new PageInfoVO.Builder(
-                goodsPageInfo.getList().stream()
-                        .map(GoodsSearchVO::new)
-                        .collect(Collectors.toList())
-        )
+        PageInfoVO pageInfoVO = new PageInfoVO.Builder(goodsPageInfo)
                 .addExtra("categoryFilter", categoryFilter)
-                .pagination(new PageInfoVO.Pagination(goodsPageInfo))
                 .build();
 
         return Result.success(pageInfoVO);

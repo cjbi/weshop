@@ -47,8 +47,20 @@ public class Reflections {
         return map;
     }
 
+    public static <A, B> String[] fnToFieldName(Fn<A, B>... fns) {
+        try {
+            String[] arr = new String[fns.length];
+            for (int i = 0; i < fns.length; i++) {
+                arr[i] = fnToFieldName(fns[i]);
+            }
+            return arr;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-    public static String fnToFieldName(Fn fn) {
+    public static <A, B> String fnToFieldName(Fn<A, B> fn) {
         try {
             SerializedLambda serializedLambda = getSerializedLambda(fn);
             String getter = serializedLambda.getImplMethodName();

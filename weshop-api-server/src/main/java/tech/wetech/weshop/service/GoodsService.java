@@ -15,4 +15,6 @@ public interface GoodsService extends IService<Goods> {
 
     PageInfo<Goods> queryGoodsSearchPageInfo(GoodsSearchQuery goodsSearchQuery);
 
+    List<Integer> queryGoodsSearchCategoryIds(GoodsSearchQuery goodsSearchQuery);
+
 }

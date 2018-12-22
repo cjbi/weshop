@@ -29,6 +29,11 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
     }
 
     @Override
+    public List<Integer> queryParentIdsByIdIn(List<Integer> ids) {
+        return categoryMapper.selectParentIdsByIn(ids);
+    }
+
+    @Override
     public List<Category> queryCategoryByIdIn(List<Integer> ids) {
         Weekend<Category> example = Weekend.of(Category.class);
         WeekendCriteria<Category, Object> criteria = example.weekendCriteria();
