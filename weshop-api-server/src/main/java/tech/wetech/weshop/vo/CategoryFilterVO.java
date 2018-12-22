@@ -10,6 +10,12 @@ public class CategoryFilterVO {
 
     private Boolean checked;
 
+    public CategoryFilterVO(Integer id, String name, Boolean checked) {
+        this.id = id;
+        this.name = name;
+        this.checked = checked;
+    }
+
     public CategoryFilterVO(Category category) {
         this.id = category.getId();
         this.name = category.getName();

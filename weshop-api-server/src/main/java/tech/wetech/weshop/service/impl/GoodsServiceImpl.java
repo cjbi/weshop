@@ -16,6 +16,7 @@ import tk.mybatis.mapper.mapperhelper.EntityHelper;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,9 +50,12 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         if (goodsSearchQuery.getPageSize() == null) {
             goodsSearchQuery.setPageSize(Constants.DEFAULT_PAGE_SIZE);
         }
-        if (goodsSearchQuery.getCategoryId() != null) {
+        if (goodsSearchQuery.getCategoryId() != null && goodsSearchQuery.getCategoryId() > 0) {
             //根据一级分类ID查询二级分类ID
             List<Integer> idList = categoryMapper.selectIdsByParentId(goodsSearchQuery.getCategoryId());
+            if (idList.isEmpty()) {
+                return new PageInfo<>(Collections.emptyList());
+            }
             criteria.andIn(Goods::getCategoryId, idList);
         }
         if (goodsSearchQuery.getBrandId() != null) {

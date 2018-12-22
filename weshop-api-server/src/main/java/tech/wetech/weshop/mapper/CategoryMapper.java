@@ -10,6 +10,6 @@ public interface CategoryMapper extends MyMapper<Category> {
 
     List<Integer> selectIdsByParentId(Integer parentId);
 
-    List<Integer> selectParentIdsByIn(@Param("ids") List<Integer> ids);
+    List<Integer> selectParentIdsByIdIn( List<Integer> ids);
 
 }

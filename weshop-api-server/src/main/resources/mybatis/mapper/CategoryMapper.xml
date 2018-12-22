@@ -24,7 +24,10 @@
     <select id="selectIdsByParentId" resultType="java.lang.Integer">
       select id from weshop_category where parent_id=#{parentId}
     </select>
-    <select id="selectParentIdsByIn" resultType="java.lang.Integer">
-        select distinct parent_id from weshop_category where id in #{ids}
+    <select id="selectParentIdsByIdIn" resultType="java.lang.Integer">
+        select distinct parent_id from weshop_category where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

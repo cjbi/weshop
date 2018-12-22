@@ -30,7 +30,7 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
 
     @Override
     public List<Integer> queryParentIdsByIdIn(List<Integer> ids) {
-        return categoryMapper.selectParentIdsByIn(ids);
+        return categoryMapper.selectParentIdsByIdIn(ids);
     }
 
     @Override

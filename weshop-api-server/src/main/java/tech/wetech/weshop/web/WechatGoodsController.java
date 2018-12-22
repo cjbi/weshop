@@ -70,17 +70,25 @@ public class WechatGoodsController {
 
     @GetMapping("/list")
     public Result<PageInfoVO<Goods>> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
+
+        //没传分类id就查全部
+        if (goodsSearchQuery.getCategoryId() == null) {
+            goodsSearchQuery.setCategoryId(0);
+        }
         PageInfo<Goods> goodsPageInfo = goodsService.queryGoodsSearchPageInfo(goodsSearchQuery);
-
+        if (goodsPageInfo.getList().isEmpty()) {
+            return Result.success();
+        }
         List<Integer> categoryIds = goodsService.queryGoodsSearchCategoryIds(goodsSearchQuery);
-
         //查询二级分类的parentIds
         List<Integer> parentIds = categoryService.queryParentIdsByIdIn(categoryIds);
-
         //一级分类
-        List<CategoryFilterVO> categoryFilter = categoryService.queryCategoryByIdIn(parentIds).stream()
-                .map(CategoryFilterVO::new)
-                .collect(Collectors.toList());
+        List<CategoryFilterVO> categoryFilter = new LinkedList<CategoryFilterVO>() {{
+            add(new CategoryFilterVO(0, "全部", false));
+            addAll(categoryService.queryCategoryByIdIn(parentIds).stream()
+                    .map(CategoryFilterVO::new)
+                    .collect(Collectors.toList()));
+        }};
 
         categoryFilter.forEach(categoryFilterVO -> categoryFilterVO.setChecked(categoryFilterVO.getId().equals(goodsSearchQuery.getCategoryId())));
 
