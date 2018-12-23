@@ -1,5 +1,7 @@
 package tech.wetech.weshop.web;
 
-public class WechatBrandController {
+import tech.wetech.weshop.po.Brand;
+
+public class WechatBrandController extends BaseController<Brand> {
 
 }
