@@ -6,7 +6,7 @@ public class GoodsSearchQuery {
 
     private Integer brandId;
 
-    private Integer keyword;
+    private String keyword;
 
     private Boolean isNew;
 
@@ -36,11 +36,11 @@ public class GoodsSearchQuery {
         this.brandId = brandId;
     }
 
-    public Integer getKeyword() {
+    public String getKeyword() {
         return keyword;
     }
 
-    public void setKeyword(Integer keyword) {
+    public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
 

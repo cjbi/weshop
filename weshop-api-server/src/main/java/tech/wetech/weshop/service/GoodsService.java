@@ -11,10 +11,14 @@ import java.util.List;
  */
 public interface GoodsService extends IService<Goods> {
 
+    List<Goods> queryGoodsByIdIn(List<Integer> ids);
+
     List<Goods> queryGoodsByCategoryIdIn(List<Integer> categoryIds);
 
-    PageInfo<Goods> queryGoodsSearchPageInfo(GoodsSearchQuery goodsSearchQuery);
+    List<Goods> queryGoodsByCategoryId(Integer categoryId);
 
-    List<Integer> queryGoodsSearchCategoryIds(GoodsSearchQuery goodsSearchQuery);
+    PageInfo<Goods> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery);
+
+    List<Integer> queryGoodsCategoryIds(GoodsSearchQuery goodsSearchQuery);
 
 }

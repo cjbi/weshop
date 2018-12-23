@@ -2,18 +2,15 @@ package tech.wetech.weshop.web;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.query.GoodsSearchQuery;
 import tech.wetech.weshop.service.*;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.CategoryFilterVO;
-import tech.wetech.weshop.vo.GoodsDetailVO;
-import tech.wetech.weshop.vo.PageInfoVO;
+import tech.wetech.weshop.vo.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,10 +21,14 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/wechat/goods")
+@Validated
 public class WechatGoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private RelatedGoodsService relatedGoodsService;
 
     @Autowired
     private CategoryService categoryService;
@@ -67,6 +68,68 @@ public class WechatGoodsController {
         }}));
     }
 
+    @GetMapping("/related")
+    public Result<List<GoodsListVO>> queryRelatedGoods(@NotNull Integer goodsId) {
+        List<RelatedGoods> relatedGoodsList = relatedGoodsService.queryList(new RelatedGoods() {{
+            setGoodsId(goodsId);
+        }});
+        List<GoodsListVO> goodsList = null;
+        if (relatedGoodsList.isEmpty()) {
+            //查找同分类下的商品
+            Goods goods = goodsService.queryById(goodsId);
+            goodsList = goodsService.queryGoodsByCategoryId(goods.getCategoryId()).stream()
+                    .map(GoodsListVO::new)
+                    .collect(Collectors.toList());
+        } else {
+            List<Integer> goodsIdList = relatedGoodsList.stream()
+                    .map(RelatedGoods::getGoodsId)
+                    .collect(Collectors.toList());
+            goodsList = goodsService.queryGoodsByIdIn(goodsIdList).stream()
+                    .map(GoodsListVO::new)
+                    .collect(Collectors.toList());
+        }
+        return Result.success(goodsList);
+    }
+
+    /**
+     * 新品首发
+     *
+     * @return
+     */
+    @GetMapping("/new")
+    public Result<BannerInfoVO> newGoods() {
+        BannerInfoVO bannerInfo = new BannerInfoVO();
+        bannerInfo.setName("坚持初心，为你寻觅世间好物");
+        bannerInfo.setImgUrl("http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png");
+        return Result.success(bannerInfo);
+    }
+
+    /**
+     * 人气推荐
+     *
+     * @return
+     */
+    @GetMapping("/hot")
+    public Result<BannerInfoVO> hotGoods() {
+        BannerInfoVO bannerInfo = new BannerInfoVO();
+        bannerInfo.setName("大家都在买的严选好物");
+        bannerInfo.setImgUrl("http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png");
+        return Result.success(bannerInfo);
+    }
+
+    @GetMapping("/category")
+    public Result<GoodsCategoryVO> queryGoodsCategory(@RequestParam("categoryId") @NotNull Integer categoryId) {
+        Category currentCategory = categoryService.queryById(categoryId);
+        if (currentCategory == null) {
+            return Result.success();
+        }
+        Category parentCategory = categoryService.queryById(currentCategory.getParentId());
+        List<Category> brotherCategory = categoryService.queryList(new Category() {{
+            setParentId(currentCategory.getParentId());
+        }});
+        return Result.success(new GoodsCategoryVO(currentCategory, parentCategory, brotherCategory));
+    }
+
 
     @GetMapping("/list")
     public Result<PageInfoVO<Goods>> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
@@ -75,11 +138,11 @@ public class WechatGoodsController {
         if (goodsSearchQuery.getCategoryId() == null) {
             goodsSearchQuery.setCategoryId(0);
         }
-        PageInfo<Goods> goodsPageInfo = goodsService.queryGoodsSearchPageInfo(goodsSearchQuery);
+        PageInfo<Goods> goodsPageInfo = goodsService.queryGoodsPageInfo(goodsSearchQuery);
         if (goodsPageInfo.getList().isEmpty()) {
             return Result.success();
         }
-        List<Integer> categoryIds = goodsService.queryGoodsSearchCategoryIds(goodsSearchQuery);
+        List<Integer> categoryIds = goodsService.queryGoodsCategoryIds(goodsSearchQuery);
         //查询二级分类的parentIds
         List<Integer> parentIds = categoryService.queryParentIdsByIdIn(categoryIds);
         //一级分类

@@ -4,7 +4,7 @@ import tech.wetech.weshop.po.Goods;
 
 import java.math.BigDecimal;
 
-public class GoodsSearchVO {
+public class GoodsListVO {
 
     private Integer id;
 
@@ -14,7 +14,7 @@ public class GoodsSearchVO {
 
     private BigDecimal retailPrice;
 
-    public GoodsSearchVO(Goods goods) {
+    public GoodsListVO(Goods goods) {
         this.id = goods.getId();
         this.name = goods.getName();
         this.listPicUrl = goods.getListPicUrl();
@@ -33,7 +33,7 @@ public class GoodsSearchVO {
         return name;
     }
 
-    public GoodsSearchVO setName(String name) {
+    public GoodsListVO setName(String name) {
         this.name = name;
         return this;
     }

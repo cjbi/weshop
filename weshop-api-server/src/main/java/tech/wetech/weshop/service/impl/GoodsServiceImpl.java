@@ -30,19 +30,52 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
     private CategoryMapper categoryMapper;
 
     @Override
+    public List<Goods> queryGoodsByIdIn(List<Integer> ids) {
+        Weekend<Goods> example = Weekend.of(Goods.class);
+        example.selectProperties(Reflections.fnToFieldName(
+                Goods::getId,
+                Goods::getName,
+                Goods::getListPicUrl,
+                Goods::getRetailPrice));
+        WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
+        criteria.andIn(Goods::getCategoryId, ids);
+        return goodsMapper.selectByExample(example);
+    }
+
+    @Override
     public List<Goods> queryGoodsByCategoryIdIn(List<Integer> categoryIds) {
         Weekend<Goods> example = Weekend.of(Goods.class);
+        example.selectProperties(Reflections.fnToFieldName(
+                Goods::getId,
+                Goods::getName,
+                Goods::getListPicUrl,
+                Goods::getRetailPrice));
         WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
         criteria.andIn(Goods::getCategoryId, categoryIds);
         return goodsMapper.selectByExample(example);
     }
 
     @Override
-    public PageInfo<Goods> queryGoodsSearchPageInfo(GoodsSearchQuery goodsSearchQuery) {
+    public List<Goods> queryGoodsByCategoryId(Integer categoryId) {
         Weekend<Goods> example = Weekend.of(Goods.class);
-        example.selectProperties(
-                Reflections.fnToFieldName(Goods::getId, Goods::getName, Goods::getListPicUrl, Goods::getRetailPrice)
-        );
+        example.selectProperties(Reflections.fnToFieldName(
+                Goods::getId,
+                Goods::getName,
+                Goods::getListPicUrl,
+                Goods::getRetailPrice));
+        WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
+        criteria.andEqualTo(Goods::getCategoryId, categoryId);
+        return goodsMapper.selectByExample(example);
+    }
+
+    @Override
+    public PageInfo<Goods> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
+        Weekend<Goods> example = Weekend.of(Goods.class);
+        example.selectProperties(Reflections.fnToFieldName(
+                Goods::getId,
+                Goods::getName,
+                Goods::getListPicUrl,
+                Goods::getRetailPrice));
         WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
         if (goodsSearchQuery.getPageNum() == null) {
             goodsSearchQuery.setPageNum(Constants.DEFAULT_PAGE_NUM);
@@ -91,7 +124,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
     }
 
     @Override
-    public List<Integer> queryGoodsSearchCategoryIds(GoodsSearchQuery goodsSearchQuery) {
+    public List<Integer> queryGoodsCategoryIds(GoodsSearchQuery goodsSearchQuery) {
         Weekend<Goods> example = Weekend.of(Goods.class);
         WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
         example.selectProperties(Reflections.fnToFieldName(Goods::getCategoryId));
