@@ -1,13 +1,15 @@
 package tech.wetech.weshop.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.po.Cart;
 import tech.wetech.weshop.service.CartService;
+import tech.wetech.weshop.service.GoodsService;
+import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.vo.AddToCartVO;
 import tech.wetech.weshop.vo.CartListVO;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Stream;
@@ -19,8 +21,11 @@ public class WechatCartController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private GoodsService goodsService;
+
     @GetMapping("/list")
-    public CartListVO queryList() {
+    public Result<CartListVO> queryList() {
         Integer loginUserId = 1;
         String sessionId = "1";
         List<Cart> cartList = cartService.queryList(new Cart() {{
@@ -42,7 +47,14 @@ public class WechatCartController {
         cartTotalVO.setCheckedGoodsAmount(
                 stream.filter(Cart::getChecked).map(Cart::getRetailPrice).reduce(BigDecimal.ZERO, BigDecimal::add)
         );
-        return new CartListVO(cartList, cartTotalVO);
+        return Result.success(new CartListVO(cartList, cartTotalVO));
+    }
+
+    @PostMapping
+    public Result<CartListVO> addToCart(@RequestBody @Valid AddToCartVO addToCartVO) {
+
+
+        return null;
     }
 
 }
