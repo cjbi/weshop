@@ -1,9 +1,14 @@
 package tech.wetech.weshop.service;
 
 import tech.wetech.weshop.po.Cart;
-import tech.wetech.weshop.vo.AddToCartVO;
+import tech.wetech.weshop.vo.CartVO;
+import tech.wetech.weshop.vo.CartListVO;
 
 public interface CartService extends IService<Cart> {
 
-    void addToCart(AddToCartVO addToCartVO);
+    CartListVO queryCartList();
+
+    void addToCart(CartVO cartVO);
+
+    void updateCart(CartVO cartVO);
 }

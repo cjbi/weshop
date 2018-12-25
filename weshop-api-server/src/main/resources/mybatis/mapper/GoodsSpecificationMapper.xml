@@ -21,4 +21,16 @@ FROM
 WHERE
     gs.goods_id = #{goodsId};
   </select>
+    <select id="selectValueByGoodsIdAndIdIn" resultType="java.lang.String">
+        select
+          `value`
+        from
+          weshop_goods_specification
+        where
+          goods_id=${goodsId}
+        and specification_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>
