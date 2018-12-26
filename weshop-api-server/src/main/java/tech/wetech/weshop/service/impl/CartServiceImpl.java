@@ -15,6 +15,8 @@ import tech.wetech.weshop.po.Product;
 import tech.wetech.weshop.service.CartService;
 import tech.wetech.weshop.vo.CartVO;
 import tech.wetech.weshop.vo.CartListVO;
+import tk.mybatis.mapper.weekend.Weekend;
+import tk.mybatis.mapper.weekend.WeekendCriteria;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -178,9 +180,30 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                 //库存不足
                 throw new BizException(ResultCodeEnum.UNDER_STOCK);
             }
-// TODO           cartMapper.deleteByPrimaryKey()
+            cartMapper.deleteByPrimaryKey(newCartInfo.getId());
+            Cart cartData = new Cart();
+            cartData.setId(cartVO.getId());
+            cartData.setNumber(newNumber.shortValue());
+            cartData.setGoodsSpecifitionNameValue(newCartInfo.getGoodsSpecifitionNameValue());
+            cartData.setGoodsSpecifitionIds(newCartInfo.getGoodsSpecifitionIds());
+            cartData.setRetailPrice(product.getRetailPrice());
+            cartData.setMarketPrice(product.getRetailPrice());
+            cartData.setProductId(cartVO.getProductId());
+            cartData.setGoodsSn(product.getGoodsSn());
+            cartMapper.updateByPrimaryKeySelective(cartData);
         }
 
 
+    }
+
+    @Override
+    @Transactional
+    public void deleteCart(List<Integer> productIds) {
+        Weekend<Cart> example = Weekend.of(Cart.class);
+        WeekendCriteria<Cart, Object> criteria = example.weekendCriteria();
+        criteria.andEqualTo(Cart::getUserId, 1);
+        criteria.andEqualTo(Cart::getSessionId,"1");
+        criteria.andIn(Cart::getProductId,productIds);
+        cartMapper.deleteByExample(example);
     }
 }

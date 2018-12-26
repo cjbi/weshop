@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.utils.Constants;
@@ -12,11 +13,14 @@ import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.PageInfoVO;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 
 /**
  * @author cjbi
  */
+@Validated
 public abstract class BaseController<T> {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -49,14 +53,14 @@ public abstract class BaseController<T> {
 
     @PostMapping
     @ApiOperation("新增数据")
-    public Result create(@RequestBody @Valid T entity) {
+    public Result create(@RequestBody @Validated T entity) {
         service.create(entity);
         return Result.success();
     }
 
     @PutMapping
     @ApiOperation("更新数据")
-    public Result update(@RequestBody @Valid T entity) {
+    public Result update(@RequestBody @Validated T entity) {
         service.updateNotNull(entity);
         return Result.success();
     }
@@ -70,10 +74,8 @@ public abstract class BaseController<T> {
 
     @DeleteMapping
     @ApiOperation("删除多条数据")
-    public Result deleteBatchIds(@RequestBody Object[] ids) {
-        if (ids != null && ids.length > 0) {
-            Arrays.stream(ids).forEach(id -> service.deleteById(id));
-        }
+    public Result deleteBatchIds(@RequestBody @NotNull @Min(1) Object[] ids) {
+        Arrays.stream(ids).forEach(id -> service.deleteById(id));
         return Result.success();
     }
 

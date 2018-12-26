@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 
 public class CartVO {
 
+    @NotNull(groups = CartUpdateChecks.class)
     private Integer id;
 
     @NotNull
@@ -16,6 +17,10 @@ public class CartVO {
     @NotNull
     @Min(1)
     private Integer number;
+
+    public interface CartUpdateChecks {
+        //更新购物车的分组
+    }
 
     public Integer getId() {
         return id;

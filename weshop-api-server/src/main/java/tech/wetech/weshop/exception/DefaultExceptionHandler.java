@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 
@@ -47,9 +44,10 @@ public class DefaultExceptionHandler {
 
     /**
      * 参数校验异常
-     * 方法上加`@RequstBody`注解修饰的方法未校验通过会抛MethodArgumentNotValidException，否则抛BindException。
-     * 类上加`@Validated`这个注解未校验通过会抛ConstraintViolationException
-     *
+     * <p>使用 @Valid 注解，方法上加@RequestBody注解修饰的方法未校验通过会抛MethodArgumentNotValidException，否则抛BindException。
+     * <p>使用 @Validated 注解，未校验通过会抛ConstraintViolationException
+     * <p>关于 @Valid和@Validated注解的区别:
+     * <p> 这两个注解都是实现JSR-303规范，不同的是@Validated是spring的注解支持groups以及可以用在spring mvc处理器的方法级别入参验证 ，@Valid是Javax提供的注解，可以支持多个bean嵌套验证。
      * @param request
      * @param e
      * @return

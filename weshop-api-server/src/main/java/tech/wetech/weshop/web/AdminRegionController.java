@@ -25,6 +25,7 @@ public class AdminRegionController extends BaseController<Region> {
             put("regionType", Arrays.stream(RegionTypeEnum.values()).collect(Collectors.toMap(e -> e, RegionTypeEnum::getName)));
         }};
         Result<PageInfoVO<Region>> result = super.queryPageInfo(entity, pageNum, pageSize);
+        result.getData().setExtra(extra);
         return result;
     }
 }
