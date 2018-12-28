@@ -8,11 +8,13 @@ import tech.wetech.weshop.mapper.*;
 import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Constants;
+import tech.wetech.weshop.utils.IdGenerator;
 import tech.wetech.weshop.vo.OrderSubmitVO;
 import tech.wetech.weshop.vo.OrderVO;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -92,10 +94,57 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
         Date currentTime = new Date();
 
         Order orderInfo = new Order();
-        //TODO
-        DateTime.now();
-        orderInfo.setOrderSN(null);
-        return null;
+        orderInfo.setOrderSN(IdGenerator.INSTANCE.nextId());
+        orderInfo.setUserId(Constants.CURRENT_USER_ID);
+
+        //收货地址和运费
+        orderInfo.setConsignee(checkedAddress.getName());
+        orderInfo.setMobile(checkedAddress.getMobile());
+        orderInfo.setProvince(checkedAddress.getProvinceId());
+        orderInfo.setCity(checkedAddress.getCityId());
+        orderInfo.setDistrict(checkedAddress.getDistrictId());
+        orderInfo.setAddress(checkedAddress.getAddress());
+        orderInfo.setFreightPrice(new BigDecimal(0.00));
+
+        //留言
+        orderInfo.setPostscript(orderSubmitVO.getPostscript());
+
+        //使用优惠券
+        orderInfo.setCouponId(0);
+        orderInfo.setCouponPrice(couponPrice);
+        orderInfo.setCreateTime(currentTime);
+        orderInfo.setGoodsPrice(goodsTotalPrice);
+        orderInfo.setOrderPrice(orderTotalPrice);
+        orderInfo.setActualPrice(actualPrice);
+
+        orderMapper.insertSelective(orderInfo);
+
+        //统计商品总价
+        List<OrderGoods> orderGoodsList = new LinkedList<>();
+        for (Cart goodsItem : checkedGoodsList) {
+            OrderGoods orderGoods = new OrderGoods();
+            orderGoods.setOrderId(orderInfo.getId());
+            orderGoods.setGoodsId(goodsItem.getGoodsId());
+            orderGoods.setGoodsSn(goodsItem.getGoodsSn());
+            orderGoods.setProductId(goodsItem.getProductId());
+            orderGoods.setGoodsName(goodsItem.getGoodsName());
+            orderGoods.setListPicUrl(goodsItem.getListPicUrl());
+            orderGoods.setMarketPrice(goodsItem.getMarketPrice());
+            orderGoods.setRetailPrice(goodsItem.getRetailPrice());
+            orderGoods.setNumber(goodsItem.getNumber());
+            orderGoods.setGoodsSpecifitionNameValue(goodsItem.getGoodsSpecifitionNameValue());
+            orderGoods.setGoodsSpecifitionIds(goodsItem.getGoodsSpecifitionIds());
+
+            orderGoodsList.add(orderGoods);
+        }
+        orderGoodsMapper.insertList(orderGoodsList);
+
+        cartMapper.delete(new Cart() {{
+            setUserId(Constants.CURRENT_USER_ID);
+            setSessionId(Constants.SESSION_ID);
+            setChecked(true);
+        }});
+        return orderInfo;
     }
 
 

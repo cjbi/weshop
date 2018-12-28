@@ -89,7 +89,7 @@ public class Order {
      * 配送费用
      */
     @Column(name = "freight_price")
-    private Integer freightPrice;
+    private BigDecimal freightPrice;
 
     /**
      * 使用的优惠券id
@@ -473,7 +473,7 @@ public class Order {
      *
      * @return freight_price - 配送费用
      */
-    public Integer getFreightPrice() {
+    public BigDecimal getFreightPrice() {
         return freightPrice;
     }
 
@@ -482,7 +482,7 @@ public class Order {
      *
      * @param freightPrice 配送费用
      */
-    public void setFreightPrice(Integer freightPrice) {
+    public void setFreightPrice(BigDecimal freightPrice) {
         this.freightPrice = freightPrice;
     }
 
