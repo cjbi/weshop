@@ -5,18 +5,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
-import tech.wetech.weshop.mapper.CartMapper;
-import tech.wetech.weshop.mapper.GoodsMapper;
-import tech.wetech.weshop.mapper.GoodsSpecificationMapper;
-import tech.wetech.weshop.mapper.ProductMapper;
+import tech.wetech.weshop.mapper.*;
+import tech.wetech.weshop.po.Address;
 import tech.wetech.weshop.po.Cart;
 import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.po.Product;
 import tech.wetech.weshop.service.CartService;
+import tech.wetech.weshop.vo.CartCheckoutVO;
+import tech.wetech.weshop.vo.CartGoodsListVO;
 import tech.wetech.weshop.vo.CartVO;
-import tech.wetech.weshop.vo.CartListVO;
-import tk.mybatis.mapper.weekend.Weekend;
-import tk.mybatis.mapper.weekend.WeekendCriteria;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -34,20 +31,27 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     @Autowired
     private GoodsMapper goodsMapper;
 
+    @Autowired
     private GoodsSpecificationMapper goodsSpecificationMapper;
 
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private AddressMapper addressMapper;
+
+    @Autowired
+    private RegionMapper regionMapper;
+
     @Override
-    public CartListVO queryCartList() {
+    public CartGoodsListVO queryList() {
         Integer loginUserId = 1;
         String sessionId = "1";
         List<Cart> cartList = cartMapper.select(new Cart() {{
             setUserId(loginUserId);
             setSessionId(sessionId);
         }});
-        CartListVO.CartTotalVO cartTotalVO = new CartListVO.CartTotalVO();
+        CartGoodsListVO.CartTotalVO cartTotalVO = new CartGoodsListVO.CartTotalVO();
         Stream<Cart> stream = cartList.stream();
         cartTotalVO.setGoodsCount(
                 cartList.size()
@@ -62,7 +66,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
         cartTotalVO.setCheckedGoodsAmount(
                 stream.filter(Cart::getChecked).map(Cart::getRetailPrice).reduce(BigDecimal.ZERO, BigDecimal::add)
         );
-        return new CartListVO(cartList, cartTotalVO);
+        return new CartGoodsListVO(cartList, cartTotalVO);
     }
 
     @Override
@@ -197,13 +201,31 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     }
 
     @Override
-    @Transactional
-    public void deleteCart(List<Integer> productIds) {
-        Weekend<Cart> example = Weekend.of(Cart.class);
-        WeekendCriteria<Cart, Object> criteria = example.weekendCriteria();
-        criteria.andEqualTo(Cart::getUserId, 1);
-        criteria.andEqualTo(Cart::getSessionId,"1");
-        criteria.andIn(Cart::getProductId,productIds);
-        cartMapper.deleteByExample(example);
+    public CartCheckoutVO checkoutCart(Integer addressId, Integer couponId) {
+        CartCheckoutVO cartCheckoutVO = new CartCheckoutVO();
+        //选择收货地址
+
+        Address checkedAddress = null;
+        if (addressId != null) {
+            checkedAddress = addressMapper.selectOne(new Address() {{
+                setId(addressId);
+                setUserId(1);
+            }});
+        } else {
+            checkedAddress = addressMapper.selectOne(new Address() {{
+                setUserId(1);
+                setIsDefault(true);
+            }});
+        }
+
+        CartCheckoutVO.CheckedAddressVO checkedAddressVO = null;
+        if (checkedAddress != null) {
+            checkedAddressVO = new CartCheckoutVO.CheckedAddressVO(checkedAddress);
+            checkedAddressVO.setProvinceName(
+                    regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
+            );
+        }
+        return null;
     }
+
 }
