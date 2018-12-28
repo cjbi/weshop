@@ -1,8 +1,8 @@
 package tech.wetech.weshop.vo;
 
 import tech.wetech.weshop.po.Address;
-import tech.wetech.weshop.po.Coupon;
-import tech.wetech.weshop.po.Goods;
+import tech.wetech.weshop.po.Cart;
+import tech.wetech.weshop.po.UserCoupon;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,11 +13,11 @@ public class CartCheckoutVO {
 
     private CheckedAddressVO checkedAddress;
 
-    private Coupon checkedCoupon;
+    private UserCoupon checkedCoupon;
 
-    private List<Coupon> couponList;
+    private List<UserCoupon> couponList;
 
-    private List<Goods> checkedGoodsList;
+    private List<Cart> checkedGoodsList;
 
     private BigDecimal couponPrice;
 
@@ -203,28 +203,31 @@ public class CartCheckoutVO {
         this.checkedAddress = checkedAddress;
     }
 
-    public Coupon getCheckedCoupon() {
+    public UserCoupon getCheckedCoupon() {
         return checkedCoupon;
     }
 
-    public void setCheckedCoupon(Coupon checkedCoupon) {
+    public CartCheckoutVO setCheckedCoupon(UserCoupon checkedCoupon) {
         this.checkedCoupon = checkedCoupon;
+        return this;
     }
 
-    public List<Coupon> getCouponList() {
+    public List<UserCoupon> getCouponList() {
         return couponList;
     }
 
-    public void setCouponList(List<Coupon> couponList) {
+    public CartCheckoutVO setCouponList(List<UserCoupon> couponList) {
         this.couponList = couponList;
+        return this;
     }
 
-    public List<Goods> getCheckedGoodsList() {
+    public List<Cart> getCheckedGoodsList() {
         return checkedGoodsList;
     }
 
-    public void setCheckedGoodsList(List<Goods> checkedGoodsList) {
+    public CartCheckoutVO setCheckedGoodsList(List<Cart> checkedGoodsList) {
         this.checkedGoodsList = checkedGoodsList;
+        return this;
     }
 
     public BigDecimal getCouponPrice() {

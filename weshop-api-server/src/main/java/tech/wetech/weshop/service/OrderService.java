@@ -1,6 +1,7 @@
 package tech.wetech.weshop.service;
 
 import tech.wetech.weshop.po.Order;
+import tech.wetech.weshop.vo.OrderSubmitVO;
 import tech.wetech.weshop.vo.OrderVO;
 
 /**
@@ -15,5 +16,12 @@ public interface OrderService extends IService<Order> {
      * @return
      */
     OrderVO queryOrderDetail(Integer orderId);
+
+    /**
+     * 提交订单
+     * @param orderSubmitVO
+     * @return
+     */
+    Order submitOrder(OrderSubmitVO orderSubmitVO);
 
 }

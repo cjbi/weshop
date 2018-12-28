@@ -2,16 +2,16 @@ package tech.wetech.weshop.service;
 
 import tech.wetech.weshop.po.Cart;
 import tech.wetech.weshop.vo.CartCheckoutVO;
-import tech.wetech.weshop.vo.CartGoodsListVO;
-import tech.wetech.weshop.vo.CartVO;
+import tech.wetech.weshop.vo.CartResultVO;
+import tech.wetech.weshop.vo.CartParamVO;
 
 public interface CartService extends IService<Cart> {
 
-    CartGoodsListVO queryList();
+    CartResultVO getCart();
 
-    void addToCart(CartVO cartVO);
+    void addGoodsToCart(CartParamVO cartParamVO);
 
-    void updateCart(CartVO cartVO);
+    void updateGoods(CartParamVO cartParamVO);
 
     CartCheckoutVO checkoutCart(Integer addressId, Integer couponId);
 

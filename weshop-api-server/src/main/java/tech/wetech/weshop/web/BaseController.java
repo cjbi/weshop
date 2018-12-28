@@ -21,6 +21,7 @@ import java.util.Arrays;
  * @author cjbi
  */
 @Validated
+@RestController
 public abstract class BaseController<T> {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());

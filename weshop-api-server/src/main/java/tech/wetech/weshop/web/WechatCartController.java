@@ -5,13 +5,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.po.Cart;
 import tech.wetech.weshop.service.CartService;
+import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.CartCheckedVO;
 import tech.wetech.weshop.vo.CartCheckoutVO;
-import tech.wetech.weshop.vo.CartGoodsListVO;
-import tech.wetech.weshop.vo.CartVO;
-
-import javax.validation.constraints.NotNull;
+import tech.wetech.weshop.vo.CartParamVO;
+import tech.wetech.weshop.vo.CartResultVO;
 
 @RestController
 @RequestMapping("/wechat/cart")
@@ -21,42 +20,50 @@ public class WechatCartController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping("/list")
-    public Result<CartGoodsListVO> queryList() {
-        return Result.success(cartService.queryList());
+    @GetMapping("/index")
+    public Result<CartResultVO> getCart() {
+        return Result.success(cartService.getCart());
     }
 
     @PostMapping
-    public Result<CartGoodsListVO> addGoodsToCart(@RequestBody @Validated CartVO cartVO) {
-        cartService.addToCart(cartVO);
-        return Result.success(cartService.queryList());
+    public Result<CartResultVO> addGoodsToCart(@RequestBody @Validated CartParamVO cartParamVO) {
+        cartService.addGoodsToCart(cartParamVO);
+        return Result.success(cartService.getCart());
     }
 
     @PutMapping
-    public Result<CartGoodsListVO> updateCartGoods(@RequestBody @Validated(CartVO.CartUpdateChecks.class) CartVO cartVO) {
-        cartService.updateCart(cartVO);
-        return Result.success(cartService.queryList());
+    public Result<CartResultVO> updateCartGoods(@RequestBody @Validated(CartParamVO.CartUpdateChecks.class) CartParamVO cartParamVO) {
+        cartService.updateGoods(cartParamVO);
+        return Result.success(cartService.getCart());
     }
 
     @DeleteMapping("/{cartId}")
-    public Result<CartGoodsListVO> deleteCartGoods(@PathVariable Integer cartId) {
+    public Result<CartResultVO> deleteCartGoods(@PathVariable Integer cartId) {
         cartService.deleteById(cartId);
-        return Result.success(cartService.queryList());
+        return Result.success(cartService.getCart());
     }
 
     @PostMapping("/checked")
-    public Result<CartGoodsListVO> checkedCartGoods(@RequestBody @Validated CartCheckedVO cartCheckedVO) {
+    public Result<CartResultVO> checkedCartGoods(@RequestBody @Validated CartCheckedVO cartCheckedVO) {
         cartService.updateNotNull(new Cart() {{
             setId(cartCheckedVO.getCartId());
             setChecked(cartCheckedVO.getChecked());
         }});
-        return Result.success(cartService.queryList());
+        return Result.success(cartService.getCart());
+    }
+
+    @GetMapping("/goods-count")
+    public Result<Integer> goodsCount() {
+        int count = cartService.count(new Cart() {{
+            setUserId(Constants.CURRENT_USER_ID);
+            setSessionId(Constants.SESSION_ID);
+        }});
+        return Result.success(count);
     }
 
     @GetMapping("/checkout")
-    public Result<CartCheckoutVO> checkoutCartGood(@NotNull Integer addressId, Integer couponId) {
-
-        return Result.success();
+    public Result<CartCheckoutVO> checkoutCartGoods(Integer addressId, Integer couponId) {
+        return Result.success(cartService.checkoutCart(addressId, couponId));
     }
 
 

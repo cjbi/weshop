@@ -5,13 +5,13 @@ import tech.wetech.weshop.po.Cart;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class CartGoodsListVO {
+public class CartResultVO {
 
     private List<Cart> cartList;
 
     private CartTotalVO cartTotal;
 
-    public CartGoodsListVO(List<Cart> cartList, CartTotalVO cartTotal) {
+    public CartResultVO(List<Cart> cartList, CartTotalVO cartTotal) {
         this.cartList = cartList;
         this.cartTotal = cartTotal;
     }

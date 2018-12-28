@@ -6,21 +6,18 @@ import org.springframework.transaction.annotation.Transactional;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.mapper.*;
-import tech.wetech.weshop.po.Address;
-import tech.wetech.weshop.po.Cart;
-import tech.wetech.weshop.po.Goods;
-import tech.wetech.weshop.po.Product;
+import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.service.CartService;
+import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.vo.CartCheckoutVO;
-import tech.wetech.weshop.vo.CartGoodsListVO;
-import tech.wetech.weshop.vo.CartVO;
+import tech.wetech.weshop.vo.CartResultVO;
+import tech.wetech.weshop.vo.CartParamVO;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class CartServiceImpl extends BaseService<Cart> implements CartService {
@@ -30,6 +27,9 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private UserCouponMapper userCouponMapper;
 
     @Autowired
     private GoodsSpecificationMapper goodsSpecificationMapper;
@@ -44,67 +44,78 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     private RegionMapper regionMapper;
 
     @Override
-    public CartGoodsListVO queryList() {
-        Integer loginUserId = 1;
-        String sessionId = "1";
+    public CartResultVO getCart() {
         List<Cart> cartList = cartMapper.select(new Cart() {{
-            setUserId(loginUserId);
-            setSessionId(sessionId);
+            setUserId(Constants.CURRENT_USER_ID);
+            setSessionId(Constants.SESSION_ID);
         }});
-        CartGoodsListVO.CartTotalVO cartTotalVO = new CartGoodsListVO.CartTotalVO();
-        Stream<Cart> stream = cartList.stream();
-        cartTotalVO.setGoodsCount(
-                cartList.size()
-        );
-        // 使用reduce聚合函数,实现累加器
-        cartTotalVO.setGoodsAmount(
-                stream.map(Cart::getRetailPrice).reduce(BigDecimal.ZERO, BigDecimal::add)
-        );
-        cartTotalVO.setCheckedGoodsCount(
-                stream.filter(Cart::getChecked).mapToInt(c -> 1).sum()
-        );
-        cartTotalVO.setCheckedGoodsAmount(
-                stream.filter(Cart::getChecked).map(Cart::getRetailPrice).reduce(BigDecimal.ZERO, BigDecimal::add)
-        );
-        return new CartGoodsListVO(cartList, cartTotalVO);
+        CartResultVO.CartTotalVO cartTotalVO = new CartResultVO.CartTotalVO();
+
+        Integer goodsCount = 0;
+        BigDecimal goodsAmount = BigDecimal.ZERO;
+        Integer checkedGoodsCount = 0;
+        BigDecimal checkedGoodsAmount = BigDecimal.ZERO;
+        for (Cart cart : cartList) {
+            goodsCount += cart.getNumber();
+            //goodsAmount = goodsAmount + retailPrice * number
+            goodsAmount = goodsAmount.add(
+                    cart.getRetailPrice().multiply(new BigDecimal(cart.getNumber()))
+            );
+            if (cart.getChecked()) {
+                checkedGoodsCount += cart.getNumber();
+                //checkedGoodsAmount = checkedGoodsAmount + retailPrice * number
+                checkedGoodsAmount = checkedGoodsAmount.add(
+                        cart.getRetailPrice().multiply(new BigDecimal(cart.getNumber())))
+                ;
+            }
+        }
+
+        cartTotalVO.setGoodsCount(goodsCount);
+        cartTotalVO.setGoodsAmount(goodsAmount);
+        cartTotalVO.setCheckedGoodsCount(checkedGoodsCount);
+        cartTotalVO.setCheckedGoodsAmount(checkedGoodsAmount);
+        return new CartResultVO(cartList, cartTotalVO);
     }
 
     @Override
     @Transactional
-    public void addToCart(CartVO cartVO) {
-        Goods goods = goodsMapper.selectByPrimaryKey(cartVO.getGoodsId());
+    public void addGoodsToCart(CartParamVO cartParamVO) {
+        Goods goods = goodsMapper.selectByPrimaryKey(cartParamVO.getGoodsId());
         if (goods == null || goods.getIsDelete()) {
             //商品已下架
             throw new BizException(ResultCodeEnum.GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES);
         }
         Product product = productMapper.selectOne(new Product() {{
-            setGoodsId(cartVO.getGoodsId());
-            setId(cartVO.getProductId());
+            setGoodsId(cartParamVO.getGoodsId());
+            setId(cartParamVO.getProductId());
         }});
-        if (product == null || product.getGoodsNumber() < cartVO.getNumber()) {
+        if (product == null || product.getGoodsNumber() < cartParamVO.getNumber()) {
             //库存不足
             throw new BizException(ResultCodeEnum.UNDER_STOCK);
         }
         Cart cart = cartMapper.selectOne(new Cart() {{
-            setGoodsId(cartVO.getGoodsId());
-            setProductId(cartVO.getProductId());
+            setGoodsId(cartParamVO.getGoodsId());
+            setProductId(cartParamVO.getProductId());
         }});
         if (cart == null) {
             // 判断购物车中是否存在此规格商品
             List<String> goodsSpecificationValueList = new LinkedList<>();
             if (product.getGoodsSpecificationIds() != null) {
                 List<Integer> specificationIdList = Arrays.stream(product.getGoodsSpecificationIds().split("_"))
+                        .filter(id -> id.length() > 0)
                         .map(Integer::valueOf)
                         .collect(Collectors.toList());
-                goodsSpecificationValueList = goodsSpecificationMapper.selectValueByGoodsIdAndIdIn(cartVO.getGoodsId(), specificationIdList);
+                if (!specificationIdList.isEmpty()) {
+                    goodsSpecificationValueList = goodsSpecificationMapper.selectValueByGoodsIdAndIdIn(cartParamVO.getGoodsId(), specificationIdList);
+                }
             }
             Cart cartData = new Cart();
-            cartData.setGoodsId(cartVO.getGoodsId());
-            cartData.setProductId(cartVO.getProductId());
+            cartData.setGoodsId(cartParamVO.getGoodsId());
+            cartData.setProductId(cartParamVO.getProductId());
             cartData.setGoodsSn(product.getGoodsSn());
             cartData.setGoodsName(goods.getName());
             cartData.setListPicUrl(goods.getListPicUrl());
-            cartData.setNumber(cartVO.getNumber().shortValue());
+            cartData.setNumber(cartParamVO.getNumber().shortValue());
             cartData.setSessionId("1");
             cartData.setUserId(1);
             cartData.setRetailPrice(product.getRetailPrice());
@@ -115,10 +126,10 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
             );
             cartData.setGoodsSpecifitionIds(product.getGoodsSpecificationIds());
             cartData.setChecked(true);
-            cartMapper.insertSelective(cart);
+            cartMapper.insertSelective(cartData);
         } else {
             // 如果已经存在购物车中，则数量增加
-            if (product.getGoodsNumber() < (cartVO.getNumber() + cart.getNumber())) {
+            if (product.getGoodsNumber() < (cartParamVO.getNumber() + cart.getNumber())) {
                 throw new BizException(ResultCodeEnum.UNDER_STOCK);
             }
             cartMapper.incrementNumberById(cart.getId());
@@ -128,45 +139,49 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
 
     @Override
     @Transactional
-    public void updateCart(CartVO cartVO) {
+    public void updateGoods(CartParamVO cartParamVO) {
         // 取得规格的信息,判断规格库存
         Product product = productMapper.selectOne(new Product() {{
-            setGoodsId(cartVO.getGoodsId());
-            setId(cartVO.getProductId());
+            setGoodsId(cartParamVO.getGoodsId());
+            setId(cartParamVO.getProductId());
         }});
-        if (product == null || product.getGoodsNumber() < cartVO.getNumber()) {
+        if (product == null || product.getGoodsNumber() < cartParamVO.getNumber()) {
             //库存不足
             throw new BizException(ResultCodeEnum.UNDER_STOCK);
         }
         // 判断是否已经存在product_id购物车商品
-        Cart cart = cartMapper.selectByPrimaryKey(cartVO.getId());
-        if (cart.getProductId().equals(cartVO.getProductId())) {
+        Cart cart = cartMapper.selectByPrimaryKey(cartParamVO.getId());
+        if (cart.getProductId().equals(cartParamVO.getProductId())) {
             // 只是更新number
             cartMapper.updateByPrimaryKeySelective(new Cart() {{
-                setNumber(cartVO.getNumber().shortValue());
-                setId(cartVO.getId());
+                setNumber(cartParamVO.getNumber().shortValue());
+                setId(cartParamVO.getId());
             }});
             return;
         }
         Cart newCartInfo = cartMapper.selectOne(new Cart() {{
-            setUserId(1);
-            setSessionId("1");
-            setGoodsId(cartVO.getGoodsId());
-            setProductId(cartVO.getProductId());
+            setUserId(Constants.CURRENT_USER_ID);
+            setSessionId(Constants.SESSION_ID);
+            setGoodsId(cartParamVO.getGoodsId());
+            setProductId(cartParamVO.getProductId());
         }});
         if (newCartInfo == null) {
             //直接更新原来的cartInfo
             // 判断购物车中是否存在此规格商品
             List<String> goodsSpecificationValueList = new LinkedList<>();
             if (product.getGoodsSpecificationIds() != null) {
-                List<Integer> specificationIdList = Arrays.stream(product.getGoodsSpecificationIds().split("_"))
+                List<Integer> specificationIdList = Arrays.stream(product.getGoodsSpecificationIds()
+                        .split("_"))
+                        .filter(id -> id.length() > 0)
                         .map(Integer::valueOf)
                         .collect(Collectors.toList());
-                goodsSpecificationValueList = goodsSpecificationMapper.selectValueByGoodsIdAndIdIn(cartVO.getGoodsId(), specificationIdList);
+                if (!specificationIdList.isEmpty()) {
+                    goodsSpecificationValueList = goodsSpecificationMapper.selectValueByGoodsIdAndIdIn(cartParamVO.getGoodsId(), specificationIdList);
+                }
             }
             Cart cartData = new Cart();
             cartData.setId(cartData.getId());
-            cartData.setNumber(cartVO.getNumber().shortValue());
+            cartData.setNumber(cartParamVO.getNumber().shortValue());
             cartData.setGoodsSpecifitionNameValue(
                     goodsSpecificationValueList.stream()
                             .collect(Collectors.joining(";"))
@@ -174,25 +189,25 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
             cartData.setGoodsSpecifitionIds(product.getGoodsSpecificationIds());
             cartData.setRetailPrice(product.getRetailPrice());
             cartData.setMarketPrice(product.getRetailPrice());
-            cartData.setProductId(cartVO.getProductId());
+            cartData.setProductId(cartParamVO.getProductId());
             cartData.setGoodsSn(product.getGoodsSn());
             cartMapper.updateByPrimaryKeySelective(cartData);
         } else {
             // 合并购物车已有的product信息，删除已有的数据
-            Integer newNumber = cartVO.getNumber() + newCartInfo.getNumber();
+            Integer newNumber = cartParamVO.getNumber() + newCartInfo.getNumber();
             if (product == null || product.getGoodsNumber() < newNumber) {
                 //库存不足
                 throw new BizException(ResultCodeEnum.UNDER_STOCK);
             }
             cartMapper.deleteByPrimaryKey(newCartInfo.getId());
             Cart cartData = new Cart();
-            cartData.setId(cartVO.getId());
+            cartData.setId(cartParamVO.getId());
             cartData.setNumber(newNumber.shortValue());
             cartData.setGoodsSpecifitionNameValue(newCartInfo.getGoodsSpecifitionNameValue());
             cartData.setGoodsSpecifitionIds(newCartInfo.getGoodsSpecifitionIds());
             cartData.setRetailPrice(product.getRetailPrice());
             cartData.setMarketPrice(product.getRetailPrice());
-            cartData.setProductId(cartVO.getProductId());
+            cartData.setProductId(cartParamVO.getProductId());
             cartData.setGoodsSn(product.getGoodsSn());
             cartMapper.updateByPrimaryKeySelective(cartData);
         }
@@ -204,7 +219,6 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     public CartCheckoutVO checkoutCart(Integer addressId, Integer couponId) {
         CartCheckoutVO cartCheckoutVO = new CartCheckoutVO();
         //选择收货地址
-
         Address checkedAddress = null;
         if (addressId != null) {
             checkedAddress = addressMapper.selectOne(new Address() {{
@@ -224,8 +238,52 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
             checkedAddressVO.setProvinceName(
                     regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
             );
+            checkedAddressVO.setCityName(
+                    regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
+            );
+            checkedAddressVO.setDistrictName(
+                    regionMapper.selectNameById(checkedAddress.getDistrictId().intValue())
+            );
+            checkedAddressVO.setFullRegion(
+                    checkedAddressVO.getProvinceName() + checkedAddressVO.getCityName() + checkedAddressVO.getDistrictName()
+            );
         }
-        return null;
+        // 根据收货地址计算运费，未实现
+        BigDecimal freightPrice = BigDecimal.ZERO;
+
+        CartResultVO cartData = this.getCart();
+        List<Cart> checkedGoodsList = cartData.getCartList().stream()
+                .filter(Cart::getChecked)
+                .collect(Collectors.toList());
+
+        // 获取可用的优惠券信息
+        List<UserCoupon> userCouponList = userCouponMapper.select(new UserCoupon() {{
+            setUserId(Constants.CURRENT_USER_ID);
+        }});
+        BigDecimal couponPrice = BigDecimal.ZERO;
+
+        //计算订单的费用
+
+        //商品总价
+        BigDecimal goodsTotalPrice = cartData.getCartTotal().getCheckedGoodsAmount();
+        BigDecimal orderTotalPrice = cartData.getCartTotal().getCheckedGoodsAmount()
+                .add(freightPrice)
+                .subtract(couponPrice);
+
+        //减去其它支付的金额后，要实际支付的金额
+        BigDecimal actualPrice = orderTotalPrice
+                .subtract(new BigDecimal(0.00));
+
+        cartCheckoutVO.setCheckedAddress(checkedAddressVO);
+        cartCheckoutVO.setFreightPrice(freightPrice);
+        cartCheckoutVO.setCheckedCoupon(null);
+        cartCheckoutVO.setCouponList(userCouponList);
+        cartCheckoutVO.setCouponPrice(couponPrice);
+        cartCheckoutVO.setCheckedGoodsList(checkedGoodsList);
+        cartCheckoutVO.setGoodsTotalPrice(goodsTotalPrice);
+        cartCheckoutVO.setOrderTotalPrice(orderTotalPrice);
+        cartCheckoutVO.setActualPrice(actualPrice);
+        return cartCheckoutVO;
     }
 
 }

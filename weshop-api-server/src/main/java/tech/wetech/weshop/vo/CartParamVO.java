@@ -3,7 +3,7 @@ package tech.wetech.weshop.vo;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class CartVO {
+public class CartParamVO {
 
     @NotNull(groups = CartUpdateChecks.class)
     private Integer id;
@@ -26,7 +26,7 @@ public class CartVO {
         return id;
     }
 
-    public CartVO setId(Integer id) {
+    public CartParamVO setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -35,7 +35,7 @@ public class CartVO {
         return goodsId;
     }
 
-    public CartVO setGoodsId(Integer goodsId) {
+    public CartParamVO setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
         return this;
     }
@@ -44,7 +44,7 @@ public class CartVO {
         return productId;
     }
 
-    public CartVO setProductId(Integer productId) {
+    public CartParamVO setProductId(Integer productId) {
         this.productId = productId;
         return this;
     }
@@ -53,7 +53,7 @@ public class CartVO {
         return number;
     }
 
-    public CartVO setNumber(Integer number) {
+    public CartParamVO setNumber(Integer number) {
         this.number = number;
         return this;
     }
