@@ -1,13 +1,23 @@
 package tech.wetech.weshop.service;
 
 import tech.wetech.weshop.po.Order;
-import tech.wetech.weshop.vo.OrderSubmitVO;
+import tech.wetech.weshop.query.OrderQuery;
+import tech.wetech.weshop.vo.OrderListVO;
+import tech.wetech.weshop.vo.OrderSubmitParamVO;
 import tech.wetech.weshop.vo.OrderVO;
+import tech.wetech.weshop.vo.PageInfoVO;
 
 /**
  * @author cjbi
  */
 public interface OrderService extends IService<Order> {
+
+    /**
+     * 分页查询订单数据
+     * @param orderQuery
+     * @return
+     */
+    PageInfoVO<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery);
 
     /**
      * 查询订单详情
@@ -19,9 +29,9 @@ public interface OrderService extends IService<Order> {
 
     /**
      * 提交订单
-     * @param orderSubmitVO
+     * @param orderSubmitParamVO
      * @return
      */
-    Order submitOrder(OrderSubmitVO orderSubmitVO);
+    Order submitOrder(OrderSubmitParamVO orderSubmitParamVO);
 
 }

@@ -2,7 +2,7 @@ package tech.wetech.weshop.vo;
 
 import javax.validation.constraints.NotNull;
 
-public class OrderSubmitVO {
+public class OrderSubmitParamVO {
 
     @NotNull
     private Integer addressId;
@@ -15,7 +15,7 @@ public class OrderSubmitVO {
         return addressId;
     }
 
-    public OrderSubmitVO setAddressId(Integer addressId) {
+    public OrderSubmitParamVO setAddressId(Integer addressId) {
         this.addressId = addressId;
         return this;
     }
@@ -24,7 +24,7 @@ public class OrderSubmitVO {
         return couponId;
     }
 
-    public OrderSubmitVO setCouponId(Integer couponId) {
+    public OrderSubmitParamVO setCouponId(Integer couponId) {
         this.couponId = couponId;
         return this;
     }
@@ -33,7 +33,7 @@ public class OrderSubmitVO {
         return postscript;
     }
 
-    public OrderSubmitVO setPostscript(String postscript) {
+    public OrderSubmitParamVO setPostscript(String postscript) {
         this.postscript = postscript;
         return this;
     }

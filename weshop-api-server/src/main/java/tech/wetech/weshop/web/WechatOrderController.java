@@ -3,10 +3,15 @@ package tech.wetech.weshop.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import tech.wetech.weshop.po.Order;
 import tech.wetech.weshop.po.OrderExpress;
+import tech.wetech.weshop.query.OrderQuery;
+import tech.wetech.weshop.service.OrderExpressService;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.OrderSubmitVO;
+import tech.wetech.weshop.vo.OrderListVO;
+import tech.wetech.weshop.vo.OrderSubmitParamVO;
+import tech.wetech.weshop.vo.PageInfoVO;
 
 @RestController
 @RequestMapping("/wechat/order")
@@ -16,12 +21,21 @@ public class WechatOrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderExpressService orderExpressService;
+
+    @GetMapping("/list")
+    public Result<PageInfoVO<OrderListVO>> queryOrderPageInfo(OrderQuery orderQuery) {
+
+        return null;
+    }
+
     /**
      * @return
      */
     @PostMapping("/submit")
-    public Result submitOrder(@Validated @RequestBody OrderSubmitVO orderSubmitVO) {
-        return Result.success(orderService.submitOrder(orderSubmitVO));
+    public Result<Order> submitOrder(@Validated @RequestBody OrderSubmitParamVO orderSubmitParamVO) {
+        return Result.success(orderService.submitOrder(orderSubmitParamVO));
     }
 
     /**
@@ -32,7 +46,9 @@ public class WechatOrderController {
      */
     @GetMapping("/express/{orderId}")
     public Result<OrderExpress> queryLatestExpressInfo(@PathVariable Integer orderId) {
-        return Result.success();
+        return Result.success(orderExpressService.queryOne(new OrderExpress() {{
+            setOrderId(orderId);
+        }}));
     }
 
 }

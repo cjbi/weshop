@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.service.IService;
+import tech.wetech.weshop.utils.Constants;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -42,7 +43,13 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public PageInfo<T> queryPageInfo(T entity, int pageNum, int pageSize) {
+    public PageInfo<T> queryPageInfo(T entity, Integer pageNum, Integer pageSize) {
+        if (pageNum == null) {
+            pageNum = Constants.DEFAULT_PAGE_NUM;
+        }
+        if (pageSize == null) {
+            pageSize = Constants.DEFAULT_PAGE_SIZE;
+        }
         return PageHelper.startPage(pageNum, pageSize)
                 .doSelectPageInfo(() -> mapper.select(entity));
     }

@@ -1,5 +1,6 @@
 package tech.wetech.weshop.vo;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 import java.util.HashMap;
@@ -17,9 +18,17 @@ public class PageInfoVO<T> {
 
     private Map<String, Object> extra;
 
+    public PageInfoVO() {
+    }
+
     public PageInfoVO(PageInfo pageInfo) {
         this.list = pageInfo.getList();
         this.pagination = new Pagination(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal());
+    }
+
+    public PageInfoVO(Page page) {
+        this.list = page;
+        this.pagination = new Pagination(page.getPageNum(), page.getPageSize(), page.getTotal());
     }
 
     public PageInfoVO(Builder builder) {
@@ -110,6 +119,12 @@ public class PageInfoVO<T> {
             this.current = current;
             this.pageSize = pageSize;
             this.total = total;
+        }
+
+        public Pagination(Page page) {
+            this.current = page.getPageNum();
+            this.pageSize = page.getPageSize();
+            this.total = page.getPageNum();
         }
 
         public Pagination(PageInfo pageInfo) {

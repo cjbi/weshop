@@ -19,7 +19,7 @@ public interface IService<T> {
 
     T queryById(Object id);
 
-    PageInfo<T> queryPageInfo(T entity, int pageNum, int pageSize);
+    PageInfo<T> queryPageInfo(T entity, Integer pageNum, Integer pageSize);
 
     int create(T entity);
 

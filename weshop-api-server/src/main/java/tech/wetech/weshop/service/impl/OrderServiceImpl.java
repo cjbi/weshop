@@ -1,21 +1,26 @@
 package tech.wetech.weshop.service.impl;
 
-import org.joda.time.DateTime;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.mapper.*;
 import tech.wetech.weshop.po.*;
+import tech.wetech.weshop.query.OrderQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.IdGenerator;
-import tech.wetech.weshop.vo.OrderSubmitVO;
+import tech.wetech.weshop.vo.OrderListVO;
+import tech.wetech.weshop.vo.OrderSubmitParamVO;
 import tech.wetech.weshop.vo.OrderVO;
+import tech.wetech.weshop.vo.PageInfoVO;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author cjbi
@@ -39,6 +44,17 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     private CartMapper cartMapper;
 
     @Override
+    public PageInfoVO<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery) {
+        PageHelper.startPage(orderQuery.getPageNum(), orderQuery.getPageSize());
+        List<Order> orderList = orderMapper.selectAll();
+        List<OrderListVO> orderVOList = orderList.stream()
+                .map(OrderListVO::new)
+                .collect(Collectors.toList());
+//        PageInfoVO pageInfoVO = new PageInfoVO(orderList);
+        return null;
+    }
+
+    @Override
     public OrderVO queryOrderDetail(Integer orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
@@ -54,8 +70,8 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     }
 
     @Override
-    public Order submitOrder(OrderSubmitVO orderSubmitVO) {
-        Address checkedAddress = addressMapper.selectByPrimaryKey(orderSubmitVO.getAddressId());
+    public Order submitOrder(OrderSubmitParamVO orderSubmitParamVO) {
+        Address checkedAddress = addressMapper.selectByPrimaryKey(orderSubmitParamVO.getAddressId());
         if (checkedAddress == null) {
             throw new BizException("请选择收货地址");
         }
@@ -83,7 +99,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 
         //获取订单使用的优惠券
         BigDecimal couponPrice = BigDecimal.ZERO;
-        if (orderSubmitVO.getCouponId() != null) {
+        if (orderSubmitParamVO.getCouponId() != null) {
             //计算优惠券的价格 未实现
         }
 
@@ -107,7 +123,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
         orderInfo.setFreightPrice(new BigDecimal(0.00));
 
         //留言
-        orderInfo.setPostscript(orderSubmitVO.getPostscript());
+        orderInfo.setPostscript(orderSubmitParamVO.getPostscript());
 
         //使用优惠券
         orderInfo.setCouponId(0);
