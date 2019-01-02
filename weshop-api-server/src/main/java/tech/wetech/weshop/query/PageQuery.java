@@ -28,7 +28,7 @@ public class PageQuery implements Serializable {
     @ApiModelProperty("包含count查询")
     private Boolean countSql = true;
     /**
-     * 分页合理化
+     * 分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询。
      */
     @ApiModelProperty("分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询。")
     private Boolean reasonable;
@@ -42,10 +42,6 @@ public class PageQuery implements Serializable {
      */
     @ApiModelProperty("排序")
     private String orderBy;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public Integer getPageNum() {
         return pageNum;
