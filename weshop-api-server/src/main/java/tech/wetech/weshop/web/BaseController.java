@@ -1,5 +1,6 @@
 package tech.wetech.weshop.web;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
@@ -21,7 +23,6 @@ import java.util.Arrays;
  * @author cjbi
  */
 @Validated
-@RestController
 public abstract class BaseController<T> {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -34,16 +35,14 @@ public abstract class BaseController<T> {
 
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
-    public Result<PageInfoVO<T>> queryPageInfo(T entity, Integer pageNum, Integer pageSize) {
-        if (pageNum == null) {
-            pageNum = Constants.DEFAULT_PAGE_NUM;
-        }
-        if (pageSize == null) {
-            pageSize = Constants.DEFAULT_PAGE_SIZE;
-        }
-        PageInfo<T> pageInfo = service.queryPageInfo(entity, pageNum, pageSize);
-        PageInfoVO<T> pageInfoVO = new PageInfoVO(pageInfo);
-        return Result.success(pageInfoVO);
+    public Result<PageInfoVO<T>> queryPageInfo(T entity, PageQuery pageQuery) {
+//        if (pageNum == null) {
+//            pageNum = Constants.DEFAULT_PAGE_NUM;
+//        }
+//        if (pageSize == null) {
+//            pageSize = Constants.DEFAULT_PAGE_SIZE;
+//        }
+        return Result.success(new PageInfoVO<>(service.queryPageInfo(entity, pageQuery)));
     }
 
     @GetMapping("/{id}")

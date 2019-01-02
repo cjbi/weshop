@@ -1,6 +1,5 @@
 package tech.wetech.weshop.web;
 
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -138,7 +137,7 @@ public class WechatGoodsController {
         if (goodsSearchQuery.getCategoryId() == null) {
             goodsSearchQuery.setCategoryId(0);
         }
-        PageInfo<Goods> goodsPageInfo = goodsService.queryGoodsPageInfo(goodsSearchQuery);
+        PageInfoVO<Goods> goodsPageInfo = (PageInfoVO<Goods>) goodsService.queryGoodsPageInfo(goodsSearchQuery);
         if (goodsPageInfo.getList().isEmpty()) {
             return Result.success();
         }
@@ -154,12 +153,10 @@ public class WechatGoodsController {
         }};
 
         categoryFilter.forEach(categoryFilterVO -> categoryFilterVO.setChecked(categoryFilterVO.getId().equals(goodsSearchQuery.getCategoryId())));
+                goodsPageInfo
+                .addExtra("categoryFilter", categoryFilter);
 
-        PageInfoVO pageInfoVO = new PageInfoVO.Builder(goodsPageInfo)
-                .addExtra("categoryFilter", categoryFilter)
-                .build();
-
-        return Result.success(pageInfoVO);
+        return Result.success(goodsPageInfo);
     }
 
     @GetMapping("/detail/{goodsId}")

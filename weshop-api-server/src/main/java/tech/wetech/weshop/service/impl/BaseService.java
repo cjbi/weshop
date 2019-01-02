@@ -1,10 +1,13 @@
 package tech.wetech.weshop.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.utils.Constants;
 import tk.mybatis.mapper.common.Mapper;
@@ -47,8 +50,10 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public PageInfo<T> queryPageInfo(T entity, Integer pageNum, Integer pageSize) {
-        return PageHelper.startPage(pageNum, pageSize)
+    public PageInfo<T> queryPageInfo(T entity, PageQuery pageQuery) {
+        Page page = new Page();
+        BeanUtils.copyProperties(pageQuery, page);
+        return PageHelper.startPage(page)
                 .doSelectPageInfo(() -> mapper.select(entity));
     }
 

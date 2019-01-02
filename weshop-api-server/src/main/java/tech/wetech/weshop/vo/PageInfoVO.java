@@ -1,101 +1,38 @@
 package tech.wetech.weshop.vo;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author cjbi
  */
-public class PageInfoVO<T> {
-
-    private List<T> list;
-
-    private Pagination pagination;
+public class PageInfoVO<T> extends PageInfo {
 
     private Map<String, Object> extra;
 
-    public PageInfoVO() {
-    }
-
     public PageInfoVO(PageInfo pageInfo) {
-        this.list = pageInfo.getList();
-        this.pagination = new Pagination(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal());
-    }
-
-    public PageInfoVO(Page page) {
-        this.list = page;
-        this.pagination = new Pagination(page.getPageNum(), page.getPageSize(), page.getTotal());
-    }
-
-    public PageInfoVO(Builder builder) {
-        if (builder.list != null) {
-            this.list = builder.list;
-        } else {
-            this.list = builder.pageInfo.getList();
-        }
-        if (builder.pagination != null) {
-            this.pagination = builder.pagination;
-        } else {
-            this.pagination = new Pagination(builder.pageInfo.getPageNum(), builder.pageInfo.getPageSize(), builder.pageInfo.getTotal());
-        }
-        this.extra = builder.extra;
-    }
-
-    public static class Builder<T> {
-
-        private PageInfo pageInfo;
-
-        private List<T> list;
-
-        private Map<String, Object> extra;
-
-        private Pagination pagination;
-
-        public Builder(List<T> list) {
-            this.list = list;
-        }
-
-        public Builder(PageInfo pageInfo) {
-            this.pageInfo = pageInfo;
-        }
-
-        public Builder addExtra(String key, Object value) {
-            if (extra == null) {
-                extra = new HashMap<>(16);
-            }
-            extra.put(key, value);
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public PageInfoVO build() {
-            return new PageInfoVO(this);
-        }
-
-    }
-
-    public List<?> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
-
-    public Pagination getPagination() {
-        return pagination;
-    }
-
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
+        this.setPageNum(pageInfo.getPageNum());
+        this.setPageSize(pageInfo.getPageSize());
+        this.setSize(pageInfo.getPageSize());
+        this.setStartRow(pageInfo.getPageSize());
+        this.setEndRow(pageInfo.getEndRow());
+        this.setTotal(pageInfo.getTotal());
+        this.setPages(pageInfo.getPages());
+        this.setList(pageInfo.getList());
+        this.setFirstPage(pageInfo.getFirstPage());
+        this.setPrePage(pageInfo.getPrePage());
+        this.setNextPage(pageInfo.getNextPage());
+        this.setLastPage(pageInfo.getLastPage());
+        this.setIsFirstPage(pageInfo.isIsFirstPage());
+        this.setIsLastPage(pageInfo.isIsLastPage());
+        this.setHasPreviousPage(pageInfo.isHasPreviousPage());
+        this.setHasNextPage(pageInfo.isHasNextPage());
+        this.setNavigatePages(pageInfo.getNavigatePages());
+        this.setNavigatepageNums(pageInfo.getNavigatepageNums());
+        this.setNavigateFirstPage(pageInfo.getNavigateFirstPage());
+        this.setNavigateLastPage(pageInfo.getNavigateLastPage());
     }
 
     public Map<String, Object> getExtra() {
@@ -106,56 +43,12 @@ public class PageInfoVO<T> {
         this.extra = extra;
     }
 
-
-    public static class Pagination {
-
-        private int current;
-
-        private int pageSize;
-
-        private long total;
-
-        public Pagination(int current, int pageSize, long total) {
-            this.current = current;
-            this.pageSize = pageSize;
-            this.total = total;
+    public PageInfoVO<T> addExtra(String key, Object value) {
+        if (extra == null) {
+            extra = new HashMap<>(16);
         }
-
-        public Pagination(Page page) {
-            this.current = page.getPageNum();
-            this.pageSize = page.getPageSize();
-            this.total = page.getPageNum();
-        }
-
-        public Pagination(PageInfo pageInfo) {
-            this.current = pageInfo.getPageNum();
-            this.pageSize = pageInfo.getPageSize();
-            this.total = pageInfo.getTotal();
-        }
-
-        public int getCurrent() {
-            return current;
-        }
-
-        public void setCurrent(int current) {
-            this.current = current;
-        }
-
-        public int getPageSize() {
-            return pageSize;
-        }
-
-        public void setPageSize(int pageSize) {
-            this.pageSize = pageSize;
-        }
-
-        public long getTotal() {
-            return total;
-        }
-
-        public void setTotal(long total) {
-            this.total = total;
-        }
+        extra.put(key, value);
+        return this;
     }
 
 }

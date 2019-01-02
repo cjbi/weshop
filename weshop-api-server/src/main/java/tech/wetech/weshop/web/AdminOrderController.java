@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.po.Order;
+import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderVO;
@@ -29,12 +30,12 @@ public class AdminOrderController extends BaseController<Order> {
     private OrderService orderService;
 
     @Override
-    public Result<PageInfoVO<Order>> queryPageInfo(Order entity, Integer pageNum, Integer pageSize) {
+    public Result<PageInfoVO<Order>> queryPageInfo(Order entity, PageQuery pageQuery) {
         Map<String, Object> extra = new HashMap(16) {{
             put("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)));
             put("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
         }};
-        Result<PageInfoVO<Order>> result = super.queryPageInfo(entity, pageNum, pageSize);
+        Result<PageInfoVO<Order>> result = super.queryPageInfo(entity, pageQuery);
         result.getData().setExtra(extra);
         return result;
     }

@@ -3,9 +3,10 @@ package tech.wetech.weshop.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tech.wetech.weshop.enums.GenderEnum;
 import tech.wetech.weshop.po.User;
 import tech.wetech.weshop.po.UserLevel;
-import tech.wetech.weshop.enums.GenderEnum;
+import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.UserLevelService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.PageInfoVO;
@@ -26,8 +27,8 @@ public class AdminUserController extends BaseController<User> {
     private UserLevelService userLevelService;
 
     @Override
-    public Result<PageInfoVO<User>> queryPageInfo(User entity, Integer pageNum, Integer pageSize) {
-        Result<PageInfoVO<User>> result = super.queryPageInfo(entity, pageNum, pageSize);
+    public Result<PageInfoVO<User>> queryPageInfo(User entity, PageQuery pageQuery) {
+        Result<PageInfoVO<User>> result = super.queryPageInfo(entity, pageQuery);
         Map<String, Object> extra = new HashMap(16) {{
             put("userLevel", userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)));
             put("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)));
