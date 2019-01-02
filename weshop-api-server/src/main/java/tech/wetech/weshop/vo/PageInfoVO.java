@@ -21,10 +21,10 @@ public class PageInfoVO<T> extends PageInfo {
         this.setTotal(pageInfo.getTotal());
         this.setPages(pageInfo.getPages());
         this.setList(pageInfo.getList());
-        this.setFirstPage(pageInfo.getFirstPage());
+//        this.setFirstPage(pageInfo.getFirstPage());
         this.setPrePage(pageInfo.getPrePage());
         this.setNextPage(pageInfo.getNextPage());
-        this.setLastPage(pageInfo.getLastPage());
+//        this.setLastPage(pageInfo.getLastPage());
         this.setIsFirstPage(pageInfo.isIsFirstPage());
         this.setIsLastPage(pageInfo.isIsLastPage());
         this.setHasPreviousPage(pageInfo.isHasPreviousPage());
@@ -39,8 +39,9 @@ public class PageInfoVO<T> extends PageInfo {
         return extra;
     }
 
-    public void setExtra(Map<String, Object> extra) {
+    public PageInfoVO<T> setExtra(Map<String, Object> extra) {
         this.extra = extra;
+        return this;
     }
 
     public PageInfoVO<T> addExtra(String key, Object value) {
