@@ -27,7 +27,7 @@ public abstract class BaseController<T> {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private IService<T> service;
+    protected IService<T> service;
 
     public BaseController() {
     }
@@ -35,6 +35,12 @@ public abstract class BaseController<T> {
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
     public Result<PageInfoVO<T>> queryPageInfo(T entity, Integer pageNum, Integer pageSize) {
+        if (pageNum == null) {
+            pageNum = Constants.DEFAULT_PAGE_NUM;
+        }
+        if (pageSize == null) {
+            pageSize = Constants.DEFAULT_PAGE_SIZE;
+        }
         PageInfo<T> pageInfo = service.queryPageInfo(entity, pageNum, pageSize);
         PageInfoVO<T> pageInfoVO = new PageInfoVO(pageInfo);
         return Result.success(pageInfoVO);

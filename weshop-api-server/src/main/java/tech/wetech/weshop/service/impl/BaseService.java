@@ -2,6 +2,8 @@ package tech.wetech.weshop.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.utils.Constants;
@@ -15,8 +17,10 @@ import java.util.List;
  */
 public abstract class BaseService<T> implements IService<T> {
 
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
-    private Mapper<T> mapper;
+    protected Mapper<T> mapper;
 
     public Mapper<T> getMapper() {
         return mapper;
@@ -44,12 +48,6 @@ public abstract class BaseService<T> implements IService<T> {
 
     @Override
     public PageInfo<T> queryPageInfo(T entity, Integer pageNum, Integer pageSize) {
-        if (pageNum == null) {
-            pageNum = Constants.DEFAULT_PAGE_NUM;
-        }
-        if (pageSize == null) {
-            pageSize = Constants.DEFAULT_PAGE_SIZE;
-        }
         return PageHelper.startPage(pageNum, pageSize)
                 .doSelectPageInfo(() -> mapper.select(entity));
     }
