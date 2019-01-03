@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_search_history")
 public class SearchHistory {
@@ -24,7 +24,7 @@ public class SearchHistory {
     private Date createTime;
 
     @Column(name = "user_id")
-    private String userId;
+    private Integer userId;
 
     /**
      * @return id
@@ -93,14 +93,14 @@ public class SearchHistory {
     /**
      * @return user_id
      */
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
     /**
      * @param userId
      */
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 }

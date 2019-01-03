@@ -47,6 +47,11 @@ public class PageQuery implements Serializable {
         return serialVersionUID;
     }
 
+    public PageQuery limit(int limit, int offset) {
+
+        return this;
+    }
+
     public int getPageNum() {
         return pageNum;
     }

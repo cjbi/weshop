@@ -9226,7 +9226,7 @@ CREATE TABLE `weshop_search_history` (
   `keyword` char(50) NOT NULL,
   `from` varchar(45) NOT NULL DEFAULT '' COMMENT '搜索来源，如PC、小程序、APP等',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '搜索时间',
-  `user_id` varchar(45) DEFAULT NULL,
+  `user_id` int(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
