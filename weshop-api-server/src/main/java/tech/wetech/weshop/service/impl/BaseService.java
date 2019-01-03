@@ -47,9 +47,9 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public PageInfo<T> queryPageInfo(T entity, PageQuery pageQuery) {
+    public List<T> queryList(T entity, PageQuery pageQuery) {
         return PageHelper.startPage(pageQuery)
-                .doSelectPageInfo(() -> mapper.select(entity));
+                .doSelectPage(() -> mapper.select(entity));
     }
 
     @Override

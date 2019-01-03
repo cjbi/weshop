@@ -1,6 +1,5 @@
 package tech.wetech.weshop.service;
 
-import com.github.pagehelper.PageInfo;
 import tech.wetech.weshop.query.PageQuery;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public interface IService<T> {
 
     T queryById(Object id);
 
-    PageInfo<T> queryPageInfo(T entity, PageQuery pageQuery);
+    List<T> queryList(T entity, PageQuery pageQuery);
 
     int create(T entity);
 

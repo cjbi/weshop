@@ -1,5 +1,6 @@
 package tech.wetech.weshop.web;
 
+import com.github.pagehelper.Page;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,12 +11,12 @@ import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.PageInfoVO;
 import tk.mybatis.mapper.code.Style;
 import tk.mybatis.mapper.util.StringUtil;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author cjbi
@@ -33,7 +34,7 @@ public abstract class BaseController<T> {
 
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
-    public Result queryPageInfo(T entity, PageQuery pageQuery) {
+    public Result<List<T>> queryList(T entity, PageQuery pageQuery) {
         if (pageQuery.getPageNum() == null) {
             pageQuery.setPageNum(Constants.DEFAULT_PAGE_NUM);
         }
@@ -43,7 +44,9 @@ public abstract class BaseController<T> {
         if (pageQuery.getOrderBy() != null) {
             pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
         }
-        return Result.success(new PageInfoVO<>(service.queryPageInfo(entity, pageQuery)));
+        List<T> list = service.queryList(entity, pageQuery);
+        return Result.success(service.queryList(entity, pageQuery))
+                .addExtra("total", ((Page) list).getTotal());
     }
 
     @GetMapping("/{id}")

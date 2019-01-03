@@ -34,6 +34,23 @@ public class Result<T> implements Serializable {
     @ApiModelProperty("数据")
     private T data;
 
+    private Map<String, Object> extra;
+
+    public Result<T> addExtra(String key, Object value) {
+        extra = extra == null ? new HashMap<>() : extra;
+        extra.put(key, value);
+        return this;
+    }
+
+    public Map<String, Object> getExtra() {
+        return extra;
+    }
+
+    public Result<T> setExtra(Map<String, Object> extra) {
+        this.extra = extra;
+        return this;
+    }
+
     public boolean isSuccess() {
         return success;
     }

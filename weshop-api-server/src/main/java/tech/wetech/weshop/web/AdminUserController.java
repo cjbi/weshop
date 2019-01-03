@@ -9,11 +9,9 @@ import tech.wetech.weshop.po.UserLevel;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.UserLevelService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.PageInfoVO;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -27,14 +25,10 @@ public class AdminUserController extends BaseController<User> {
     private UserLevelService userLevelService;
 
     @Override
-    public Result<PageInfoVO<User>> queryPageInfo(User entity, PageQuery pageQuery) {
-        Result<PageInfoVO<User>> result = super.queryPageInfo(entity, pageQuery);
-        Map<String, Object> extra = new HashMap(16) {{
-            put("userLevel", userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)));
-            put("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)));
-        }};
-        result.getData().setExtra(extra);
-        return result;
+    public Result<List<User>> queryList(User entity, PageQuery pageQuery) {
+        return super.queryList(entity, pageQuery)
+                .addExtra("userLevel", userLevelService.queryAll().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)))
+                .addExtra("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)));
     }
 
 }

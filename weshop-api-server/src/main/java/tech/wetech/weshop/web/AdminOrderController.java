@@ -12,11 +12,9 @@ import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderVO;
-import tech.wetech.weshop.vo.PageInfoVO;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -30,14 +28,10 @@ public class AdminOrderController extends BaseController<Order> {
     private OrderService orderService;
 
     @Override
-    public Result<PageInfoVO<Order>> queryPageInfo(Order entity, PageQuery pageQuery) {
-        Map<String, Object> extra = new HashMap(16) {{
-            put("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)));
-            put("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
-        }};
-        Result<PageInfoVO<Order>> result = super.queryPageInfo(entity, pageQuery);
-        result.getData().setExtra(extra);
-        return result;
+    public Result<List<Order>> queryList(Order entity, PageQuery pageQuery) {
+        return super.queryList(entity, pageQuery)
+                .addExtra("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)))
+                .addExtra("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
     }
 
     @GetMapping("/detail/{orderId}")

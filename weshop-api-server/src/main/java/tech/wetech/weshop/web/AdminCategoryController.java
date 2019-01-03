@@ -8,11 +8,9 @@ import tech.wetech.weshop.po.Category;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.CategoryService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.PageInfoVO;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -26,13 +24,9 @@ public class AdminCategoryController extends BaseController<Category> {
     private CategoryService categoryService;
 
     @Override
-    public Result<PageInfoVO<Category>> queryPageInfo(Category entity, PageQuery pageQuery) {
-        Result<PageInfoVO<Category>> result = super.queryPageInfo(entity, pageQuery);
-        Map<String, Object> extra = new HashMap(16) {{
-            put("categoryLevel", Arrays.stream(CategoryLevelEnum.values()).collect(Collectors.toMap(c -> c, CategoryLevelEnum::getName)));
-            put("l1", categoryService.queryCategoryByLevel(CategoryLevelEnum.L1));
-        }};
-        result.getData().setExtra(extra);
-        return result;
+    public Result<List<Category>> queryList(Category entity, PageQuery pageQuery) {
+        return super.queryList(entity, pageQuery)
+                .addExtra("categoryLevel", Arrays.stream(CategoryLevelEnum.values()).collect(Collectors.toMap(c -> c, CategoryLevelEnum::getName)))
+                .addExtra("l1", categoryService.queryCategoryByLevel(CategoryLevelEnum.L1));
     }
 }
