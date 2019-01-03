@@ -3,10 +3,10 @@ package tech.wetech.weshop.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.po.Comment;
 import tech.wetech.weshop.query.CommentQuery;
 import tech.wetech.weshop.service.CommentService;
 import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.vo.CommentPostVO;
 import tech.wetech.weshop.vo.CommentResultVO;
 
 import java.util.List;
@@ -29,8 +29,8 @@ public class WechatCommentController {
     }
 
     @PostMapping
-    public Result postComment(@RequestBody @Validated Comment comment) {
-        commentService.create(comment);
+    public Result postComment(@RequestBody @Validated CommentPostVO commentPostVO) {
+        commentService.create(commentPostVO.toPO());
         return Result.success();
     }
 
