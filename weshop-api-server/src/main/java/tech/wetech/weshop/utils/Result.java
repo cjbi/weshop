@@ -157,7 +157,7 @@ public class Result<T> implements Serializable {
             while (var3.hasNext()) {
                 FieldError error = (FieldError) var3.next();
                 map.put(error.getField(), error.getDefaultMessage());
-                s.append(error.getDefaultMessage()).append("，");
+                s.append(error.getField()).append(error.getDefaultMessage()).append("，");
             }
             if (s.length() > 0) {
                 s.deleteCharAt(s.length() - 1);

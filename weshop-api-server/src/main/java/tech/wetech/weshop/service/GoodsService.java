@@ -1,6 +1,5 @@
 package tech.wetech.weshop.service;
 
-import com.github.pagehelper.PageInfo;
 import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.query.GoodsSearchQuery;
 
@@ -17,7 +16,7 @@ public interface GoodsService extends IService<Goods> {
 
     List<Goods> queryGoodsByCategoryId(Integer categoryId);
 
-    PageInfo<Goods> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery);
+    List<Goods> queryList(GoodsSearchQuery goodsSearchQuery);
 
     List<Integer> queryGoodsCategoryIds(GoodsSearchQuery goodsSearchQuery);
 

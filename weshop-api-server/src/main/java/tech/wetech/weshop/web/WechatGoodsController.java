@@ -131,14 +131,15 @@ public class WechatGoodsController {
 
 
     @GetMapping("/list")
-    public Result<PageInfoVO<Goods>> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
+    public Result<List<Goods>> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
 
         //没传分类id就查全部
         if (goodsSearchQuery.getCategoryId() == null) {
             goodsSearchQuery.setCategoryId(0);
         }
-        PageInfoVO<Goods> goodsPageInfo = (PageInfoVO<Goods>) goodsService.queryGoodsPageInfo(goodsSearchQuery);
-        if (goodsPageInfo.getList().isEmpty()) {
+        List<Goods> goodsList = goodsService.queryList(goodsSearchQuery);
+
+        if (goodsList.isEmpty()) {
             return Result.success();
         }
         List<Integer> categoryIds = goodsService.queryGoodsCategoryIds(goodsSearchQuery);
@@ -153,10 +154,8 @@ public class WechatGoodsController {
         }};
 
         categoryFilter.forEach(categoryFilterVO -> categoryFilterVO.setChecked(categoryFilterVO.getId().equals(goodsSearchQuery.getCategoryId())));
-                goodsPageInfo
-                .addExtra("categoryFilter", categoryFilter);
 
-        return Result.success(goodsPageInfo);
+        return Result.success(goodsList).addExtra("categoryFilter", categoryFilter);
     }
 
     @GetMapping("/detail/{goodsId}")

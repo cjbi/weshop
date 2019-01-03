@@ -35,12 +35,6 @@ public abstract class BaseController<T> {
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
     public Result queryList(T entity, PageQuery pageQuery) {
-        if (pageQuery.getPageNum() == null) {
-            pageQuery.setPageNum(Constants.DEFAULT_PAGE_NUM);
-        }
-        if (pageQuery.getPageSize() == null) {
-            pageQuery.setPageSize(Constants.DEFAULT_PAGE_SIZE);
-        }
         if (pageQuery.getOrderBy() != null) {
             pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
         }

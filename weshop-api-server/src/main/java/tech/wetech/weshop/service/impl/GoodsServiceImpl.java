@@ -69,7 +69,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
     }
 
     @Override
-    public PageInfo<Goods> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
+    public List<Goods> queryList(GoodsSearchQuery goodsSearchQuery) {
         Weekend<Goods> example = Weekend.of(Goods.class);
         example.selectProperties(Reflections.fnToFieldName(
                 Goods::getId,
@@ -87,7 +87,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
             //根据一级分类ID查询二级分类ID
             List<Integer> idList = categoryMapper.selectIdsByParentId(goodsSearchQuery.getCategoryId());
             if (idList.isEmpty()) {
-                return new PageInfo<>(Collections.emptyList());
+                return Collections.emptyList();
             }
             criteria.andIn(Goods::getCategoryId, idList);
         }
@@ -120,7 +120,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         }
 
         return PageHelper.startPage(goodsSearchQuery.getPageNum(), goodsSearchQuery.getPageSize())
-                .doSelectPageInfo(() -> goodsMapper.selectByExample(example));
+                .doSelectPage(() -> goodsMapper.selectByExample(example));
     }
 
     @Override
