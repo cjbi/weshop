@@ -34,7 +34,7 @@ public abstract class BaseController<T> {
 
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
-    public Result<List<T>> queryList(T entity, PageQuery pageQuery) {
+    public Result queryList(T entity, PageQuery pageQuery) {
         if (pageQuery.getPageNum() == null) {
             pageQuery.setPageNum(Constants.DEFAULT_PAGE_NUM);
         }
