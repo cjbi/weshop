@@ -34,6 +34,7 @@ public class Result<T> implements Serializable {
     @ApiModelProperty("数据")
     private T data;
 
+    @ApiModelProperty("额外数据")
     private Map<String, Object> extra;
 
     public Result<T> addExtra(String key, Object value) {
