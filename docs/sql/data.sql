@@ -1567,7 +1567,8 @@ CREATE TABLE `weshop_comment_picture` (
   `comment_id` int(11) unsigned NOT NULL DEFAULT '0',
   `pic_url` varchar(255) NOT NULL DEFAULT '',
   `sort_order` tinyint(1) unsigned NOT NULL DEFAULT '5',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+    KEY `idx_comment_id` (`comment_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
