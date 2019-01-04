@@ -11,7 +11,8 @@ import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
-import tech.wetech.weshop.vo.PageInfoVO;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/wechat/order")
@@ -25,7 +26,7 @@ public class WechatOrderController {
     private OrderExpressService orderExpressService;
 
     @GetMapping("/list")
-    public Result<PageInfoVO<OrderListVO>> queryOrderPageInfo(OrderQuery orderQuery) {
+    public Result<List<OrderListVO>> queryOrderPageInfo(OrderQuery orderQuery) {
 
         return null;
     }

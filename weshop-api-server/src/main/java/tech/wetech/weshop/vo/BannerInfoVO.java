@@ -12,23 +12,26 @@ public class BannerInfoVO {
         return url;
     }
 
-    public void setUrl(String url) {
+    public BannerInfoVO setUrl(String url) {
         this.url = url;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public BannerInfoVO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
+    public BannerInfoVO setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+        return this;
     }
 }

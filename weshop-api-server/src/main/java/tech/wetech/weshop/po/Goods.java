@@ -1,8 +1,8 @@
 package tech.wetech.weshop.po;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "weshop_goods")
 public class Goods {
@@ -128,467 +128,273 @@ public class Goods {
     @Column(name = "goods_desc")
     private String goodsDesc;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Goods setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return category_id
-     */
     public Integer getCategoryId() {
         return categoryId;
     }
 
-    /**
-     * @param categoryId
-     */
-    public void setCategoryId(Integer categoryId) {
+    public Goods setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+        return this;
     }
 
-    /**
-     * @return goods_sn
-     */
     public String getGoodsSn() {
         return goodsSn;
     }
 
-    /**
-     * @param goodsSn
-     */
-    public void setGoodsSn(String goodsSn) {
+    public Goods setGoodsSn(String goodsSn) {
         this.goodsSn = goodsSn;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Goods setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return brand_id
-     */
     public Integer getBrandId() {
         return brandId;
     }
 
-    /**
-     * @param brandId
-     */
-    public void setBrandId(Integer brandId) {
+    public Goods setBrandId(Integer brandId) {
         this.brandId = brandId;
+        return this;
     }
 
-    /**
-     * @return goods_number
-     */
     public Integer getGoodsNumber() {
         return goodsNumber;
     }
 
-    /**
-     * @param goodsNumber
-     */
-    public void setGoodsNumber(Integer goodsNumber) {
+    public Goods setGoodsNumber(Integer goodsNumber) {
         this.goodsNumber = goodsNumber;
+        return this;
     }
 
-    /**
-     * @return keywords
-     */
     public String getKeywords() {
         return keywords;
     }
 
-    /**
-     * @param keywords
-     */
-    public void setKeywords(String keywords) {
+    public Goods setKeywords(String keywords) {
         this.keywords = keywords;
+        return this;
     }
 
-    /**
-     * @return goods_brief
-     */
     public String getGoodsBrief() {
         return goodsBrief;
     }
 
-    /**
-     * @param goodsBrief
-     */
-    public void setGoodsBrief(String goodsBrief) {
+    public Goods setGoodsBrief(String goodsBrief) {
         this.goodsBrief = goodsBrief;
+        return this;
     }
 
-    /**
-     * @return is_on_sale
-     */
-    public Boolean getIsOnSale() {
+    public Boolean getOnSale() {
         return isOnSale;
     }
 
-    /**
-     * @param isOnSale
-     */
-    public void setIsOnSale(Boolean isOnSale) {
-        this.isOnSale = isOnSale;
+    public Goods setOnSale(Boolean onSale) {
+        isOnSale = onSale;
+        return this;
     }
 
-    /**
-     * @return create_time
-     */
     public Date getCreateTime() {
         return createTime;
     }
 
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
+    public Goods setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Short getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Short sortOrder) {
+    public Goods setSortOrder(Short sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 
-    /**
-     * @return is_delete
-     */
-    public Boolean getIsDelete() {
+    public Boolean getDelete() {
         return isDelete;
     }
 
-    /**
-     * @param isDelete
-     */
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
+    public Goods setDelete(Boolean delete) {
+        isDelete = delete;
+        return this;
     }
 
-    /**
-     * @return attribute_category
-     */
     public Integer getAttributeCategory() {
         return attributeCategory;
     }
 
-    /**
-     * @param attributeCategory
-     */
-    public void setAttributeCategory(Integer attributeCategory) {
+    public Goods setAttributeCategory(Integer attributeCategory) {
         this.attributeCategory = attributeCategory;
+        return this;
     }
 
-    /**
-     * 获取专柜价格
-     *
-     * @return counter_price - 专柜价格
-     */
     public BigDecimal getCounterPrice() {
         return counterPrice;
     }
 
-    /**
-     * 设置专柜价格
-     *
-     * @param counterPrice 专柜价格
-     */
-    public void setCounterPrice(BigDecimal counterPrice) {
+    public Goods setCounterPrice(BigDecimal counterPrice) {
         this.counterPrice = counterPrice;
+        return this;
     }
 
-    /**
-     * 获取附加价格
-     *
-     * @return extra_price - 附加价格
-     */
     public BigDecimal getExtraPrice() {
         return extraPrice;
     }
 
-    /**
-     * 设置附加价格
-     *
-     * @param extraPrice 附加价格
-     */
-    public void setExtraPrice(BigDecimal extraPrice) {
+    public Goods setExtraPrice(BigDecimal extraPrice) {
         this.extraPrice = extraPrice;
+        return this;
     }
 
-    /**
-     * @return is_new
-     */
-    public Boolean getIsNew() {
+    public Boolean getNew() {
         return isNew;
     }
 
-    /**
-     * @param isNew
-     */
-    public void setIsNew(Boolean isNew) {
-        this.isNew = isNew;
+    public Goods setNew(Boolean aNew) {
+        isNew = aNew;
+        return this;
     }
 
-    /**
-     * 获取商品单位
-     *
-     * @return goods_unit - 商品单位
-     */
     public String getGoodsUnit() {
         return goodsUnit;
     }
 
-    /**
-     * 设置商品单位
-     *
-     * @param goodsUnit 商品单位
-     */
-    public void setGoodsUnit(String goodsUnit) {
+    public Goods setGoodsUnit(String goodsUnit) {
         this.goodsUnit = goodsUnit;
+        return this;
     }
 
-    /**
-     * 获取商品主图
-     *
-     * @return primary_pic_url - 商品主图
-     */
     public String getPrimaryPicUrl() {
         return primaryPicUrl;
     }
 
-    /**
-     * 设置商品主图
-     *
-     * @param primaryPicUrl 商品主图
-     */
-    public void setPrimaryPicUrl(String primaryPicUrl) {
+    public Goods setPrimaryPicUrl(String primaryPicUrl) {
         this.primaryPicUrl = primaryPicUrl;
+        return this;
     }
 
-    /**
-     * 获取商品列表图
-     *
-     * @return list_pic_url - 商品列表图
-     */
     public String getListPicUrl() {
         return listPicUrl;
     }
 
-    /**
-     * 设置商品列表图
-     *
-     * @param listPicUrl 商品列表图
-     */
-    public void setListPicUrl(String listPicUrl) {
+    public Goods setListPicUrl(String listPicUrl) {
         this.listPicUrl = listPicUrl;
+        return this;
     }
 
-    /**
-     * 获取零售价格
-     *
-     * @return retail_price - 零售价格
-     */
     public BigDecimal getRetailPrice() {
         return retailPrice;
     }
 
-    /**
-     * 设置零售价格
-     *
-     * @param retailPrice 零售价格
-     */
-    public void setRetailPrice(BigDecimal retailPrice) {
+    public Goods setRetailPrice(BigDecimal retailPrice) {
         this.retailPrice = retailPrice;
+        return this;
     }
 
-    /**
-     * 获取销售量
-     *
-     * @return sell_volume - 销售量
-     */
     public Integer getSellVolume() {
         return sellVolume;
     }
 
-    /**
-     * 设置销售量
-     *
-     * @param sellVolume 销售量
-     */
-    public void setSellVolume(Integer sellVolume) {
+    public Goods setSellVolume(Integer sellVolume) {
         this.sellVolume = sellVolume;
+        return this;
     }
 
-    /**
-     * 获取主sku　product_id
-     *
-     * @return primary_product_id - 主sku　product_id
-     */
     public Integer getPrimaryProductId() {
         return primaryProductId;
     }
 
-    /**
-     * 设置主sku　product_id
-     *
-     * @param primaryProductId 主sku　product_id
-     */
-    public void setPrimaryProductId(Integer primaryProductId) {
+    public Goods setPrimaryProductId(Integer primaryProductId) {
         this.primaryProductId = primaryProductId;
+        return this;
     }
 
-    /**
-     * 获取单位价格，单价
-     *
-     * @return unit_price - 单位价格，单价
-     */
     public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    /**
-     * 设置单位价格，单价
-     *
-     * @param unitPrice 单位价格，单价
-     */
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public Goods setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
+        return this;
     }
 
-    /**
-     * @return promotion_desc
-     */
     public String getPromotionDesc() {
         return promotionDesc;
     }
 
-    /**
-     * @param promotionDesc
-     */
-    public void setPromotionDesc(String promotionDesc) {
+    public Goods setPromotionDesc(String promotionDesc) {
         this.promotionDesc = promotionDesc;
+        return this;
     }
 
-    /**
-     * @return promotion_tag
-     */
     public String getPromotionTag() {
         return promotionTag;
     }
 
-    /**
-     * @param promotionTag
-     */
-    public void setPromotionTag(String promotionTag) {
+    public Goods setPromotionTag(String promotionTag) {
         this.promotionTag = promotionTag;
+        return this;
     }
 
-    /**
-     * 获取APP专享价
-     *
-     * @return app_exclusive_price - APP专享价
-     */
     public BigDecimal getAppExclusivePrice() {
         return appExclusivePrice;
     }
 
-    /**
-     * 设置APP专享价
-     *
-     * @param appExclusivePrice APP专享价
-     */
-    public void setAppExclusivePrice(BigDecimal appExclusivePrice) {
+    public Goods setAppExclusivePrice(BigDecimal appExclusivePrice) {
         this.appExclusivePrice = appExclusivePrice;
+        return this;
     }
 
-    /**
-     * 获取是否是APP专属
-     *
-     * @return is_app_exclusive - 是否是APP专属
-     */
-    public Boolean getIsAppExclusive() {
+    public Boolean getAppExclusive() {
         return isAppExclusive;
     }
 
-    /**
-     * 设置是否是APP专属
-     *
-     * @param isAppExclusive 是否是APP专属
-     */
-    public void setIsAppExclusive(Boolean isAppExclusive) {
-        this.isAppExclusive = isAppExclusive;
+    public Goods setAppExclusive(Boolean appExclusive) {
+        isAppExclusive = appExclusive;
+        return this;
     }
 
-    /**
-     * @return is_limited
-     */
-    public Boolean getIsLimited() {
+    public Boolean getLimited() {
         return isLimited;
     }
 
-    /**
-     * @param isLimited
-     */
-    public void setIsLimited(Boolean isLimited) {
-        this.isLimited = isLimited;
+    public Goods setLimited(Boolean limited) {
+        isLimited = limited;
+        return this;
     }
 
-    /**
-     * @return is_hot
-     */
-    public Boolean getIsHot() {
+    public Boolean getHot() {
         return isHot;
     }
 
-    /**
-     * @param isHot
-     */
-    public void setIsHot(Boolean isHot) {
-        this.isHot = isHot;
+    public Goods setHot(Boolean hot) {
+        isHot = hot;
+        return this;
     }
 
-    /**
-     * @return goods_desc
-     */
     public String getGoodsDesc() {
         return goodsDesc;
     }
 
-    /**
-     * @param goodsDesc
-     */
-    public void setGoodsDesc(String goodsDesc) {
+    public Goods setGoodsDesc(String goodsDesc) {
         this.goodsDesc = goodsDesc;
+        return this;
     }
 }

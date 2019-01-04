@@ -27,55 +27,62 @@ public class IndexVO {
         return bannerList;
     }
 
-    public void setBannerList(List<Ad> bannerList) {
+    public IndexVO setBannerList(List<Ad> bannerList) {
         this.bannerList = bannerList;
+        return this;
     }
 
     public List<Brand> getBrandList() {
         return brandList;
     }
 
-    public void setBrandList(List<Brand> brandList) {
+    public IndexVO setBrandList(List<Brand> brandList) {
         this.brandList = brandList;
+        return this;
     }
 
     public List<HomeCategoryVO> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<HomeCategoryVO> categoryList) {
+    public IndexVO setCategoryList(List<HomeCategoryVO> categoryList) {
         this.categoryList = categoryList;
+        return this;
     }
 
     public List<Channel> getChannelList() {
         return channelList;
     }
 
-    public void setChannelList(List<Channel> channelList) {
+    public IndexVO setChannelList(List<Channel> channelList) {
         this.channelList = channelList;
+        return this;
     }
 
     public List<Goods> getHotGoodsList() {
         return hotGoodsList;
     }
 
-    public void setHotGoodsList(List<Goods> hotGoodsList) {
+    public IndexVO setHotGoodsList(List<Goods> hotGoodsList) {
         this.hotGoodsList = hotGoodsList;
+        return this;
     }
 
     public List<Goods> getNewGoodsList() {
         return newGoodsList;
     }
 
-    public void setNewGoodsList(List<Goods> newGoodsList) {
+    public IndexVO setNewGoodsList(List<Goods> newGoodsList) {
         this.newGoodsList = newGoodsList;
+        return this;
     }
 
     public List<Topic> getTopicList() {
         return topicList;
     }
 
-    public void setTopicList(List<Topic> topicList) {
+    public IndexVO setTopicList(List<Topic> topicList) {
         this.topicList = topicList;
+        return this;
     }
 }

@@ -17,6 +17,7 @@ import tk.mybatis.mapper.util.StringUtil;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author cjbi
@@ -73,7 +74,7 @@ public abstract class BaseController<T> {
     @DeleteMapping
     @ApiOperation("删除多条数据")
     public Result deleteBatchIds(@RequestBody @NotNull Object[] ids) {
-        Arrays.stream(ids).forEach(id -> service.deleteById(id));
+        Arrays.stream(ids).parallel().forEach(id -> service.deleteById(id));
         return Result.success();
     }
 

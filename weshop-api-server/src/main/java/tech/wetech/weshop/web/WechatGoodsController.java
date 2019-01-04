@@ -61,10 +61,7 @@ public class WechatGoodsController {
 
     @GetMapping("/count")
     public Result count() {
-        return Result.success(goodsService.count(new Goods() {{
-            setIsDelete(false);
-            setIsOnSale(true);
-        }}));
+        return Result.success(goodsService.count(new Goods().setDelete(false).setOnSale(true)));
     }
 
     @GetMapping("/related")

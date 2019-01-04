@@ -21,87 +21,57 @@ public class Attribute {
 
     private String values;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Attribute setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return attribute_category_id
-     */
     public Integer getAttributeCategoryId() {
         return attributeCategoryId;
     }
 
-    /**
-     * @param attributeCategoryId
-     */
-    public void setAttributeCategoryId(Integer attributeCategoryId) {
+    public Attribute setAttributeCategoryId(Integer attributeCategoryId) {
         this.attributeCategoryId = attributeCategoryId;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Attribute setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return input_type
-     */
     public Boolean getInputType() {
         return inputType;
     }
 
-    /**
-     * @param inputType
-     */
-    public void setInputType(Boolean inputType) {
+    public Attribute setInputType(Boolean inputType) {
         this.inputType = inputType;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Byte getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Byte sortOrder) {
+    public Attribute setSortOrder(Byte sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 
-    /**
-     * @return values
-     */
     public String getValues() {
         return values;
     }
 
-    /**
-     * @param values
-     */
-    public void setValues(String values) {
+    public Attribute setValues(String values) {
         this.values = values;
+        return this;
     }
 }

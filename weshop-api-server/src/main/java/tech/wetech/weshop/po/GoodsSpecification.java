@@ -19,73 +19,48 @@ public class GoodsSpecification {
     @Column(name = "pic_url")
     private String picUrl;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public GoodsSpecification setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return goods_id
-     */
     public Integer getGoodsId() {
         return goodsId;
     }
 
-    /**
-     * @param goodsId
-     */
-    public void setGoodsId(Integer goodsId) {
+    public GoodsSpecification setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 
-    /**
-     * @return specification_id
-     */
     public Integer getSpecificationId() {
         return specificationId;
     }
 
-    /**
-     * @param specificationId
-     */
-    public void setSpecificationId(Integer specificationId) {
+    public GoodsSpecification setSpecificationId(Integer specificationId) {
         this.specificationId = specificationId;
+        return this;
     }
 
-    /**
-     * @return value
-     */
     public String getValue() {
         return value;
     }
 
-    /**
-     * @param value
-     */
-    public void setValue(String value) {
+    public GoodsSpecification setValue(String value) {
         this.value = value;
+        return this;
     }
 
-    /**
-     * @return pic_url
-     */
     public String getPicUrl() {
         return picUrl;
     }
 
-    /**
-     * @param picUrl
-     */
-    public void setPicUrl(String picUrl) {
+    public GoodsSpecification setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+        return this;
     }
 }

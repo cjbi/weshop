@@ -12,45 +12,30 @@ public class UserLevel {
 
     private String description;
 
-    /**
-     * @return id
-     */
     public Byte getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Byte id) {
+    public UserLevel setId(Byte id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public UserLevel setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return description
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description
-     */
-    public void setDescription(String description) {
+    public UserLevel setDescription(String description) {
         this.description = description;
+        return this;
     }
 }

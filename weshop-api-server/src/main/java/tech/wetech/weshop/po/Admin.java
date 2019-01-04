@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_admin")
 public class Admin {
@@ -33,143 +33,93 @@ public class Admin {
     @Column(name = "admin_role_id")
     private Integer adminRoleId;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Admin setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return username
-     */
     public String getUsername() {
         return username;
     }
 
-    /**
-     * @param username
-     */
-    public void setUsername(String username) {
+    public Admin setUsername(String username) {
         this.username = username;
+        return this;
     }
 
-    /**
-     * @return password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * @param password
-     */
-    public void setPassword(String password) {
+    public Admin setPassword(String password) {
         this.password = password;
+        return this;
     }
 
-    /**
-     * @return password_salt
-     */
     public String getPasswordSalt() {
         return passwordSalt;
     }
 
-    /**
-     * @param passwordSalt
-     */
-    public void setPasswordSalt(String passwordSalt) {
+    public Admin setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
+        return this;
     }
 
-    /**
-     * @return last_login_ip
-     */
     public String getLastLoginIp() {
         return lastLoginIp;
     }
 
-    /**
-     * @param lastLoginIp
-     */
-    public void setLastLoginIp(String lastLoginIp) {
+    public Admin setLastLoginIp(String lastLoginIp) {
         this.lastLoginIp = lastLoginIp;
+        return this;
     }
 
-    /**
-     * @return last_login_time
-     */
     public Date getLastLoginTime() {
         return lastLoginTime;
     }
 
-    /**
-     * @param lastLoginTime
-     */
-    public void setLastLoginTime(Date lastLoginTime) {
+    public Admin setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+        return this;
     }
 
-    /**
-     * @return create_time
-     */
     public Date getCreateTime() {
         return createTime;
     }
 
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
+    public Admin setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
     }
 
-    /**
-     * @return update_time
-     */
     public Date getUpdateTime() {
         return updateTime;
     }
 
-    /**
-     * @param updateTime
-     */
-    public void setUpdateTime(Date updateTime) {
+    public Admin setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
-    /**
-     * @return avatar
-     */
     public String getAvatar() {
         return avatar;
     }
 
-    /**
-     * @param avatar
-     */
-    public void setAvatar(String avatar) {
+    public Admin setAvatar(String avatar) {
         this.avatar = avatar;
+        return this;
     }
 
-    /**
-     * @return admin_role_id
-     */
     public Integer getAdminRoleId() {
         return adminRoleId;
     }
 
-    /**
-     * @param adminRoleId
-     */
-    public void setAdminRoleId(Integer adminRoleId) {
+    public Admin setAdminRoleId(Integer adminRoleId) {
         this.adminRoleId = adminRoleId;
+        return this;
     }
 }

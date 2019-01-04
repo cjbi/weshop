@@ -14,15 +14,17 @@ public class CartCheckedVO {
         return cartId;
     }
 
-    public void setCartId(Integer cartId) {
+    public CartCheckedVO setCartId(Integer cartId) {
         this.cartId = cartId;
+        return this;
     }
 
     public Boolean getChecked() {
         return checked;
     }
 
-    public void setChecked(Boolean checked) {
+    public CartCheckedVO setChecked(Boolean checked) {
         this.checked = checked;
+        return this;
     }
 }

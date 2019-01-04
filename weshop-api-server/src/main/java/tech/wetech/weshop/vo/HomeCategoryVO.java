@@ -25,23 +25,26 @@ public class HomeCategoryVO {
         return id;
     }
 
-    public void setId(Integer id) {
+    public HomeCategoryVO setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public HomeCategoryVO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public List<Goods> getGoodsList() {
         return goodsList;
     }
 
-    public void setGoodsList(List<Goods> goodsList) {
+    public HomeCategoryVO setGoodsList(List<Goods> goodsList) {
         this.goodsList = goodsList;
+        return this;
     }
 }

@@ -22,23 +22,26 @@ public class GoodsCategoryVO {
         return currentCategory;
     }
 
-    public void setCurrentCategory(Category currentCategory) {
+    public GoodsCategoryVO setCurrentCategory(Category currentCategory) {
         this.currentCategory = currentCategory;
+        return this;
     }
 
     public Category getParentCategory() {
         return parentCategory;
     }
 
-    public void setParentCategory(Category parentCategory) {
+    public GoodsCategoryVO setParentCategory(Category parentCategory) {
         this.parentCategory = parentCategory;
+        return this;
     }
 
     public List<Category> getBrotherCategory() {
         return brotherCategory;
     }
 
-    public void setBrotherCategory(List<Category> brotherCategory) {
+    public GoodsCategoryVO setBrotherCategory(List<Category> brotherCategory) {
         this.brotherCategory = brotherCategory;
+        return this;
     }
 }

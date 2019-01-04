@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.math.BigDecimal;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "weshop_cart")
 public class Cart {
@@ -52,207 +52,129 @@ public class Cart {
     @Column(name = "goods_specifition_name_value")
     private String goodsSpecifitionNameValue;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Cart setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return user_id
-     */
     public Integer getUserId() {
         return userId;
     }
 
-    /**
-     * @param userId
-     */
-    public void setUserId(Integer userId) {
+    public Cart setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
-    /**
-     * @return session_id
-     */
     public String getSessionId() {
         return sessionId;
     }
 
-    /**
-     * @param sessionId
-     */
-    public void setSessionId(String sessionId) {
+    public Cart setSessionId(String sessionId) {
         this.sessionId = sessionId;
+        return this;
     }
 
-    /**
-     * @return goods_id
-     */
     public Integer getGoodsId() {
         return goodsId;
     }
 
-    /**
-     * @param goodsId
-     */
-    public void setGoodsId(Integer goodsId) {
+    public Cart setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 
-    /**
-     * @return goods_sn
-     */
     public String getGoodsSn() {
         return goodsSn;
     }
 
-    /**
-     * @param goodsSn
-     */
-    public void setGoodsSn(String goodsSn) {
+    public Cart setGoodsSn(String goodsSn) {
         this.goodsSn = goodsSn;
+        return this;
     }
 
-    /**
-     * @return product_id
-     */
     public Integer getProductId() {
         return productId;
     }
 
-    /**
-     * @param productId
-     */
-    public void setProductId(Integer productId) {
+    public Cart setProductId(Integer productId) {
         this.productId = productId;
+        return this;
     }
 
-    /**
-     * @return goods_name
-     */
     public String getGoodsName() {
         return goodsName;
     }
 
-    /**
-     * @param goodsName
-     */
-    public void setGoodsName(String goodsName) {
+    public Cart setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+        return this;
     }
 
-    /**
-     * @return market_price
-     */
     public BigDecimal getMarketPrice() {
         return marketPrice;
     }
 
-    /**
-     * @param marketPrice
-     */
-    public void setMarketPrice(BigDecimal marketPrice) {
+    public Cart setMarketPrice(BigDecimal marketPrice) {
         this.marketPrice = marketPrice;
+        return this;
     }
 
-    /**
-     * @return retail_price
-     */
     public BigDecimal getRetailPrice() {
         return retailPrice;
     }
 
-    /**
-     * @param retailPrice
-     */
-    public void setRetailPrice(BigDecimal retailPrice) {
+    public Cart setRetailPrice(BigDecimal retailPrice) {
         this.retailPrice = retailPrice;
+        return this;
     }
 
-    /**
-     * @return number
-     */
     public Short getNumber() {
         return number;
     }
 
-    /**
-     * @param number
-     */
-    public void setNumber(Short number) {
+    public Cart setNumber(Short number) {
         this.number = number;
+        return this;
     }
 
-    /**
-     * 获取product表对应的goods_specifition_ids
-     *
-     * @return goods_specifition_ids - product表对应的goods_specifition_ids
-     */
     public String getGoodsSpecifitionIds() {
         return goodsSpecifitionIds;
     }
 
-    /**
-     * 设置product表对应的goods_specifition_ids
-     *
-     * @param goodsSpecifitionIds product表对应的goods_specifition_ids
-     */
-    public void setGoodsSpecifitionIds(String goodsSpecifitionIds) {
+    public Cart setGoodsSpecifitionIds(String goodsSpecifitionIds) {
         this.goodsSpecifitionIds = goodsSpecifitionIds;
+        return this;
     }
 
-    /**
-     * @return checked
-     */
     public Boolean getChecked() {
         return checked;
     }
 
-    /**
-     * @param checked
-     */
-    public void setChecked(Boolean checked) {
+    public Cart setChecked(Boolean checked) {
         this.checked = checked;
+        return this;
     }
 
-    /**
-     * @return list_pic_url
-     */
     public String getListPicUrl() {
         return listPicUrl;
     }
 
-    /**
-     * @param listPicUrl
-     */
-    public void setListPicUrl(String listPicUrl) {
+    public Cart setListPicUrl(String listPicUrl) {
         this.listPicUrl = listPicUrl;
+        return this;
     }
 
-    /**
-     * 获取规格属性组成的字符串，用来显示用
-     *
-     * @return goods_specifition_name_value - 规格属性组成的字符串，用来显示用
-     */
     public String getGoodsSpecifitionNameValue() {
         return goodsSpecifitionNameValue;
     }
 
-    /**
-     * 设置规格属性组成的字符串，用来显示用
-     *
-     * @param goodsSpecifitionNameValue 规格属性组成的字符串，用来显示用
-     */
-    public void setGoodsSpecifitionNameValue(String goodsSpecifitionNameValue) {
+    public Cart setGoodsSpecifitionNameValue(String goodsSpecifitionNameValue) {
         this.goodsSpecifitionNameValue = goodsSpecifitionNameValue;
+        return this;
     }
 }

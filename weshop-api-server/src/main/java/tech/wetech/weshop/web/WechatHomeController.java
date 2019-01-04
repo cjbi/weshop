@@ -54,17 +54,17 @@ public class WechatHomeController {
 
         PageHelper.startPage(1, 4);
         List<Goods> newGoodsList = goodsService.queryList(new Goods() {{
-            setIsNew(true);
+            setNew(true);
         }});
 
         PageHelper.startPage(1, 4);
         List<Goods> hotGoodsList = goodsService.queryList(new Goods() {{
-            setIsHot(true);
+            setHot(true);
         }});
 
         PageHelper.orderBy("new_sort_order asc");
         List<Brand> brandList = brandService.queryList(new Brand() {{
-            setIsNew(true);
+            setNew(true);
         }});
 
         PageHelper.startPage(1, 3);

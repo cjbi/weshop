@@ -29,6 +29,7 @@ public class WechatSearchController {
 
     @GetMapping("/helper")
     public Result<List<String>> helper(String keyword) {
+        keywordsService.queryList(new Keywords(),new PageQuery().setPageNum(1).setPageSize(10));
         return Result.success();
     }
 
@@ -37,11 +38,11 @@ public class WechatSearchController {
         // 取出输入框默认的关键词
         PageHelper.offsetPage(0, 1);
         Keywords defaultKeyword = keywordsService.queryOne(new Keywords() {{
-            setIsDefault(true);
+            setDefault(true);
         }});
         // 取出热闹关键词
         List<Keywords> hotKeywordList = keywordsService.queryList(new Keywords() {{
-            setIsHot(true);
+            setHot(true);
         }}, new PageQuery().setPageNum(1).setPageSize(10));
 
         List<String> historyKeywordList = searchHistoryService.queryList(new SearchHistory() {{

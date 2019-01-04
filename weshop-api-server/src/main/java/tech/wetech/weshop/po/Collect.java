@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_collect")
 public class Collect {
@@ -27,91 +27,57 @@ public class Collect {
     @Column(name = "type_id")
     private Integer typeId;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Collect setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return user_id
-     */
     public Integer getUserId() {
         return userId;
     }
 
-    /**
-     * @param userId
-     */
-    public void setUserId(Integer userId) {
+    public Collect setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
-    /**
-     * @return value_id
-     */
     public Integer getValueId() {
         return valueId;
     }
 
-    /**
-     * @param valueId
-     */
-    public void setValueId(Integer valueId) {
+    public Collect setValueId(Integer valueId) {
         this.valueId = valueId;
+        return this;
     }
 
-    /**
-     * @return create_time
-     */
     public Date getCreateTime() {
         return createTime;
     }
 
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
+    public Collect setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
     }
 
-    /**
-     * 获取是否是关注
-     *
-     * @return is_attention - 是否是关注
-     */
-    public Boolean getIsAttention() {
+    public Boolean getAttention() {
         return isAttention;
     }
 
-    /**
-     * 设置是否是关注
-     *
-     * @param isAttention 是否是关注
-     */
-    public void setIsAttention(Boolean isAttention) {
-        this.isAttention = isAttention;
+    public Collect setAttention(Boolean attention) {
+        isAttention = attention;
+        return this;
     }
 
-    /**
-     * @return type_id
-     */
     public Integer getTypeId() {
         return typeId;
     }
 
-    /**
-     * @param typeId
-     */
-    public void setTypeId(Integer typeId) {
+    public Collect setTypeId(Integer typeId) {
         this.typeId = typeId;
+        return this;
     }
 }

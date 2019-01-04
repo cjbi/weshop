@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_ad")
 public class Ad {
@@ -29,129 +29,84 @@ public class Ad {
     @Column(name = "image_url")
     private String imageUrl;
 
-    /**
-     * @return id
-     */
     public Short getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Short id) {
+    public Ad setId(Short id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return ad_position_id
-     */
     public Short getAdPositionId() {
         return adPositionId;
     }
 
-    /**
-     * @param adPositionId
-     */
-    public void setAdPositionId(Short adPositionId) {
+    public Ad setAdPositionId(Short adPositionId) {
         this.adPositionId = adPositionId;
+        return this;
     }
 
-    /**
-     * @return media_type
-     */
     public Byte getMediaType() {
         return mediaType;
     }
 
-    /**
-     * @param mediaType
-     */
-    public void setMediaType(Byte mediaType) {
+    public Ad setMediaType(Byte mediaType) {
         this.mediaType = mediaType;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Ad setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return link
-     */
     public String getLink() {
         return link;
     }
 
-    /**
-     * @param link
-     */
-    public void setLink(String link) {
+    public Ad setLink(String link) {
         this.link = link;
+        return this;
     }
 
-    /**
-     * @return content
-     */
     public String getContent() {
         return content;
     }
 
-    /**
-     * @param content
-     */
-    public void setContent(String content) {
+    public Ad setContent(String content) {
         this.content = content;
+        return this;
     }
 
-    /**
-     * @return end_time
-     */
     public Date getEndTime() {
         return endTime;
     }
 
-    /**
-     * @param endTime
-     */
-    public void setEndTime(Date endTime) {
+    public Ad setEndTime(Date endTime) {
         this.endTime = endTime;
+        return this;
     }
 
-    /**
-     * @return enabled
-     */
     public Byte getEnabled() {
         return enabled;
     }
 
-    /**
-     * @param enabled
-     */
-    public void setEnabled(Byte enabled) {
+    public Ad setEnabled(Byte enabled) {
         this.enabled = enabled;
+        return this;
     }
 
-    /**
-     * @return image_url
-     */
     public String getImageUrl() {
         return imageUrl;
     }
 
-    /**
-     * @param imageUrl
-     */
-    public void setImageUrl(String imageUrl) {
+    public Ad setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 }

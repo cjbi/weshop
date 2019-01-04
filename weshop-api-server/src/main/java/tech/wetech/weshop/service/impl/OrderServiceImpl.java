@@ -14,7 +14,6 @@ import tech.wetech.weshop.utils.IdGenerator;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
 import tech.wetech.weshop.vo.OrderVO;
-import tech.wetech.weshop.vo.PageInfoVO;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -44,14 +43,13 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     private CartMapper cartMapper;
 
     @Override
-    public PageInfoVO<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery) {
+    public List<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery) {
         PageHelper.startPage(orderQuery.getPageNum(), orderQuery.getPageSize());
         List<Order> orderList = orderMapper.selectAll();
         List<OrderListVO> orderVOList = orderList.stream()
                 .map(OrderListVO::new)
                 .collect(Collectors.toList());
-//        PageInfoVO pageInfoVO = new PageInfoVO(orderList);
-        return null;
+        return orderVOList;
     }
 
     @Override

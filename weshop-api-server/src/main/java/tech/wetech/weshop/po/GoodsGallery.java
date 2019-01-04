@@ -20,73 +20,48 @@ public class GoodsGallery {
     @Column(name = "sort_order")
     private Integer sortOrder;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public GoodsGallery setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return goods_id
-     */
     public Integer getGoodsId() {
         return goodsId;
     }
 
-    /**
-     * @param goodsId
-     */
-    public void setGoodsId(Integer goodsId) {
+    public GoodsGallery setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 
-    /**
-     * @return img_url
-     */
     public String getImgUrl() {
         return imgUrl;
     }
 
-    /**
-     * @param imgUrl
-     */
-    public void setImgUrl(String imgUrl) {
+    public GoodsGallery setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+        return this;
     }
 
-    /**
-     * @return img_desc
-     */
     public String getImgDesc() {
         return imgDesc;
     }
 
-    /**
-     * @param imgDesc
-     */
-    public void setImgDesc(String imgDesc) {
+    public GoodsGallery setImgDesc(String imgDesc) {
         this.imgDesc = imgDesc;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Integer getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Integer sortOrder) {
+    public GoodsGallery setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 }

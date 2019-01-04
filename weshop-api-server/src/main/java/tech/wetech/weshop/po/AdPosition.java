@@ -16,73 +16,48 @@ public class AdPosition {
 
     private String desc;
 
-    /**
-     * @return id
-     */
     public Byte getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Byte id) {
+    public AdPosition setId(Byte id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public AdPosition setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return width
-     */
     public Short getWidth() {
         return width;
     }
 
-    /**
-     * @param width
-     */
-    public void setWidth(Short width) {
+    public AdPosition setWidth(Short width) {
         this.width = width;
+        return this;
     }
 
-    /**
-     * @return height
-     */
     public Short getHeight() {
         return height;
     }
 
-    /**
-     * @param height
-     */
-    public void setHeight(Short height) {
+    public AdPosition setHeight(Short height) {
         this.height = height;
+        return this;
     }
 
-    /**
-     * @return desc
-     */
     public String getDesc() {
         return desc;
     }
 
-    /**
-     * @param desc
-     */
-    public void setDesc(String desc) {
+    public AdPosition setDesc(String desc) {
         this.desc = desc;
+        return this;
     }
 }

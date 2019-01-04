@@ -21,73 +21,48 @@ public class Region {
     @Column(name = "agency_id")
     private Short agencyId;
 
-    /**
-     * @return id
-     */
     public Short getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Short id) {
+    public Region setId(Short id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return parent_id
-     */
     public Short getParentId() {
         return parentId;
     }
 
-    /**
-     * @param parentId
-     */
-    public void setParentId(Short parentId) {
+    public Region setParentId(Short parentId) {
         this.parentId = parentId;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Region setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return type
-     */
     public RegionTypeEnum getType() {
         return type;
     }
 
-    /**
-     * @param type
-     */
-    public void setType(RegionTypeEnum type) {
+    public Region setType(RegionTypeEnum type) {
         this.type = type;
+        return this;
     }
 
-    /**
-     * @return agency_id
-     */
     public Short getAgencyId() {
         return agencyId;
     }
 
-    /**
-     * @param agencyId
-     */
-    public void setAgencyId(Short agencyId) {
+    public Region setAgencyId(Short agencyId) {
         this.agencyId = agencyId;
+        return this;
     }
 }

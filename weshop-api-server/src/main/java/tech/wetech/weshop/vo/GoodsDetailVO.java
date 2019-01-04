@@ -45,16 +45,18 @@ public class GoodsDetailVO {
             return name;
         }
 
-        public void setName(String name) {
+        public GoodsAttributeVO setName(String name) {
             this.name = name;
+            return this;
         }
 
         public String getValue() {
             return value;
         }
 
-        public void setValue(String value) {
+        public GoodsAttributeVO setValue(String value) {
             this.value = value;
+            return this;
         }
     }
 
@@ -70,24 +72,27 @@ public class GoodsDetailVO {
             return id;
         }
 
-        public void setId(Integer id) {
+        public GoodsSpecificationVO setId(Integer id) {
             this.id = id;
+            return this;
         }
 
         public String getName() {
             return name;
         }
 
-        public void setName(String name) {
+        public GoodsSpecificationVO setName(String name) {
             this.name = name;
+            return this;
         }
 
         public List<GoodsSpecificationBO> getGoodsSpecificationList() {
             return goodsSpecificationList;
         }
 
-        public void setGoodsSpecificationList(List<GoodsSpecificationBO> goodsSpecificationList) {
+        public GoodsSpecificationVO setGoodsSpecificationList(List<GoodsSpecificationBO> goodsSpecificationList) {
             this.goodsSpecificationList = goodsSpecificationList;
+            return this;
         }
     }
 
@@ -113,40 +118,45 @@ public class GoodsDetailVO {
                 return content;
             }
 
-            public void setContent(String content) {
+            public CommentVO setContent(String content) {
                 this.content = content;
+                return this;
             }
 
             public Date getCreateTime() {
                 return createTime;
             }
 
-            public void setCreateTime(Date createTime) {
+            public CommentVO setCreateTime(Date createTime) {
                 this.createTime = createTime;
+                return this;
             }
 
             public String getNickname() {
                 return nickname;
             }
 
-            public void setNickname(String nickname) {
+            public CommentVO setNickname(String nickname) {
                 this.nickname = nickname;
+                return this;
             }
 
             public String getAvatar() {
                 return avatar;
             }
 
-            public void setAvatar(String avatar) {
+            public CommentVO setAvatar(String avatar) {
                 this.avatar = avatar;
+                return this;
             }
 
             public List<String> getPicList() {
                 return picList;
             }
 
-            public void setPicList(List<String> picList) {
+            public CommentVO setPicList(List<String> picList) {
                 this.picList = picList;
+                return this;
             }
         }
 
@@ -162,16 +172,18 @@ public class GoodsDetailVO {
             return count;
         }
 
-        public void setCount(int count) {
+        public CommentsVO setCount(int count) {
             this.count = count;
+            return this;
         }
 
         public List<CommentVO> getData() {
             return data;
         }
 
-        public void setData(List<CommentVO> data) {
+        public CommentsVO setData(List<CommentVO> data) {
             this.data = data;
+            return this;
         }
     }
 
@@ -179,71 +191,80 @@ public class GoodsDetailVO {
         return goods;
     }
 
-    public void setGoods(Goods goods) {
+    public GoodsDetailVO setGoods(Goods goods) {
         this.goods = goods;
+        return this;
     }
 
     public List<GoodsAttributeVO> getGoodsAttributeList() {
         return goodsAttributeList;
     }
 
-    public void setGoodsAttributeList(List<GoodsAttributeVO> goodsAttributeList) {
+    public GoodsDetailVO setGoodsAttributeList(List<GoodsAttributeVO> goodsAttributeList) {
         this.goodsAttributeList = goodsAttributeList;
+        return this;
     }
 
     public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    public GoodsDetailVO setBrand(Brand brand) {
         this.brand = brand;
+        return this;
     }
 
     public CommentsVO getComments() {
         return comments;
     }
 
-    public void setComments(CommentsVO comments) {
+    public GoodsDetailVO setComments(CommentsVO comments) {
         this.comments = comments;
+        return this;
     }
 
     public List<GoodsGallery> getGoodsGalleryList() {
         return goodsGalleryList;
     }
 
-    public void setGoodsGalleryList(List<GoodsGallery> goodsGalleryList) {
+    public GoodsDetailVO setGoodsGalleryList(List<GoodsGallery> goodsGalleryList) {
         this.goodsGalleryList = goodsGalleryList;
+        return this;
     }
 
     public List<GoodsIssue> getGoodsIssueList() {
         return goodsIssueList;
     }
 
-    public void setGoodsIssueList(List<GoodsIssue> goodsIssueList) {
+    public GoodsDetailVO setGoodsIssueList(List<GoodsIssue> goodsIssueList) {
         this.goodsIssueList = goodsIssueList;
+        return this;
     }
 
     public List<Product> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<Product> productList) {
+    public GoodsDetailVO setProductList(List<Product> productList) {
         this.productList = productList;
+        return this;
     }
 
     public List<GoodsSpecificationVO> getGoodsSpecificationList() {
         return goodsSpecificationList;
     }
 
-    public void setGoodsSpecificationList(List<GoodsSpecificationVO> goodsSpecificationList) {
+    public GoodsDetailVO setGoodsSpecificationList(List<GoodsSpecificationVO> goodsSpecificationList) {
         this.goodsSpecificationList = goodsSpecificationList;
+        return this;
     }
 
     public boolean isUserHasCollect() {
         return userHasCollect;
     }
 
-    public void setUserHasCollect(boolean userHasCollect) {
+    public GoodsDetailVO setUserHasCollect(boolean userHasCollect) {
         this.userHasCollect = userHasCollect;
+        return this;
     }
 }

@@ -24,71 +24,39 @@ public class Shipper {
     @Column(name = "sort_order")
     private Integer sortOrder;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Shipper setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * 获取快递公司名称
-     *
-     * @return name - 快递公司名称
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * 设置快递公司名称
-     *
-     * @param name 快递公司名称
-     */
-    public void setName(String name) {
+    public Shipper setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * 获取快递公司代码
-     *
-     * @return code - 快递公司代码
-     */
     public String getCode() {
         return code;
     }
 
-    /**
-     * 设置快递公司代码
-     *
-     * @param code 快递公司代码
-     */
-    public void setCode(String code) {
+    public Shipper setCode(String code) {
         this.code = code;
+        return this;
     }
 
-    /**
-     * 获取排序
-     *
-     * @return sort_order - 排序
-     */
     public Integer getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * 设置排序
-     *
-     * @param sortOrder 排序
-     */
-    public void setSortOrder(Integer sortOrder) {
+    public Shipper setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 }

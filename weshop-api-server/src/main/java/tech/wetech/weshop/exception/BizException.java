@@ -32,15 +32,17 @@ public class BizException extends RuntimeException {
         return code;
     }
 
-    public void setCode(String code) {
+    public BizException setCode(String code) {
         this.code = code;
+        return this;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public BizException setMsg(String msg) {
         this.msg = msg;
+        return this;
     }
 }

@@ -15,60 +15,39 @@ public class GoodsIssue {
     @Column(name = "goods_id")
     private String goodsId;
 
-
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public GoodsIssue setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return question
-     */
     public String getQuestion() {
         return question;
     }
 
-    /**
-     * @param question
-     */
-    public void setQuestion(String question) {
+    public GoodsIssue setQuestion(String question) {
         this.question = question;
+        return this;
     }
 
-    /**
-     * @return answer
-     */
     public String getAnswer() {
         return answer;
     }
 
-    /**
-     * @param answer
-     */
-    public void setAnswer(String answer) {
+    public GoodsIssue setAnswer(String answer) {
         this.answer = answer;
+        return this;
     }
 
-    /**
-     * @return goods_id
-     */
     public String getGoodsId() {
         return goodsId;
     }
 
-    /**
-     * @param goodsId
-     */
-    public void setGoodsId(String goodsId) {
+    public GoodsIssue setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 }

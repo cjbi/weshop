@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.math.BigDecimal;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "weshop_product")
 public class Product {
@@ -66,45 +66,30 @@ public class Product {
         this.goodsSpecificationIds = goodsSpecificationIds;
     }
 
-    /**
-     * @return goods_sn
-     */
     public String getGoodsSn() {
         return goodsSn;
     }
 
-    /**
-     * @param goodsSn
-     */
-    public void setGoodsSn(String goodsSn) {
+    public Product setGoodsSn(String goodsSn) {
         this.goodsSn = goodsSn;
+        return this;
     }
 
-    /**
-     * @return goods_number
-     */
     public Integer getGoodsNumber() {
         return goodsNumber;
     }
 
-    /**
-     * @param goodsNumber
-     */
-    public void setGoodsNumber(Integer goodsNumber) {
+    public Product setGoodsNumber(Integer goodsNumber) {
         this.goodsNumber = goodsNumber;
+        return this;
     }
 
-    /**
-     * @return retail_price
-     */
     public BigDecimal getRetailPrice() {
         return retailPrice;
     }
 
-    /**
-     * @param retailPrice
-     */
-    public void setRetailPrice(BigDecimal retailPrice) {
+    public Product setRetailPrice(BigDecimal retailPrice) {
         this.retailPrice = retailPrice;
+        return this;
     }
 }

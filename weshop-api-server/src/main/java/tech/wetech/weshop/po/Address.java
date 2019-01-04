@@ -32,143 +32,93 @@ public class Address {
     @Column(name = "is_default")
     private Boolean isDefault;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Address setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Address setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return user_id
-     */
     public Integer getUserId() {
         return userId;
     }
 
-    /**
-     * @param userId
-     */
-    public void setUserId(Integer userId) {
+    public Address setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
-    /**
-     * @return country_id
-     */
     public Short getCountryId() {
         return countryId;
     }
 
-    /**
-     * @param countryId
-     */
-    public void setCountryId(Short countryId) {
+    public Address setCountryId(Short countryId) {
         this.countryId = countryId;
+        return this;
     }
 
-    /**
-     * @return province_id
-     */
     public Short getProvinceId() {
         return provinceId;
     }
 
-    /**
-     * @param provinceId
-     */
-    public void setProvinceId(Short provinceId) {
+    public Address setProvinceId(Short provinceId) {
         this.provinceId = provinceId;
+        return this;
     }
 
-    /**
-     * @return city_id
-     */
     public Short getCityId() {
         return cityId;
     }
 
-    /**
-     * @param cityId
-     */
-    public void setCityId(Short cityId) {
+    public Address setCityId(Short cityId) {
         this.cityId = cityId;
+        return this;
     }
 
-    /**
-     * @return district_id
-     */
     public Short getDistrictId() {
         return districtId;
     }
 
-    /**
-     * @param districtId
-     */
-    public void setDistrictId(Short districtId) {
+    public Address setDistrictId(Short districtId) {
         this.districtId = districtId;
+        return this;
     }
 
-    /**
-     * @return address
-     */
     public String getAddress() {
         return address;
     }
 
-    /**
-     * @param address
-     */
-    public void setAddress(String address) {
+    public Address setAddress(String address) {
         this.address = address;
+        return this;
     }
 
-    /**
-     * @return mobile
-     */
     public String getMobile() {
         return mobile;
     }
 
-    /**
-     * @param mobile
-     */
-    public void setMobile(String mobile) {
+    public Address setMobile(String mobile) {
         this.mobile = mobile;
+        return this;
     }
 
-    /**
-     * @return is_default
-     */
-    public Boolean getIsDefault() {
+    public Boolean getDefault() {
         return isDefault;
     }
 
-    /**
-     * @param isDefault
-     */
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
+    public Address setDefault(Boolean aDefault) {
+        isDefault = aDefault;
+        return this;
     }
 }

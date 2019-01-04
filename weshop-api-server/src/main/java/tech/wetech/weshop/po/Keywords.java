@@ -30,122 +30,75 @@ public class Keywords {
 
     private Integer type;
 
-    public Keywords() {
-    }
-
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Keywords setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return keyword
-     */
     public String getKeyword() {
         return keyword;
     }
 
-    /**
-     * @param keyword
-     */
-    public void setKeyword(String keyword) {
+    public Keywords setKeyword(String keyword) {
         this.keyword = keyword;
+        return this;
     }
 
-    /**
-     * @return is_hot
-     */
-    public Boolean getIsHot() {
+    public Boolean getHot() {
         return isHot;
     }
 
-    /**
-     * @param isHot
-     */
-    public void setIsHot(Boolean isHot) {
-        this.isHot = isHot;
+    public Keywords setHot(Boolean hot) {
+        isHot = hot;
+        return this;
     }
 
-    /**
-     * @return is_default
-     */
-    public Boolean getIsDefault() {
+    public Boolean getDefault() {
         return isDefault;
     }
 
-    /**
-     * @param isDefault
-     */
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
+    public Keywords setDefault(Boolean aDefault) {
+        isDefault = aDefault;
+        return this;
     }
 
-    /**
-     * @return is_show
-     */
-    public Boolean getIsShow() {
+    public Boolean getShow() {
         return isShow;
     }
 
-    /**
-     * @param isShow
-     */
-    public void setIsShow(Boolean isShow) {
-        this.isShow = isShow;
+    public Keywords setShow(Boolean show) {
+        isShow = show;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Integer getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Integer sortOrder) {
+    public Keywords setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 
-    /**
-     * 获取关键词的跳转链接
-     *
-     * @return scheme _url - 关键词的跳转链接
-     */
     public String getSchemeUrl() {
         return schemeUrl;
     }
 
-    /**
-     * 设置关键词的跳转链接
-     *
-     * @param schemeUrl 关键词的跳转链接
-     */
-    public void setSchemeUrl(String schemeUrl) {
+    public Keywords setSchemeUrl(String schemeUrl) {
         this.schemeUrl = schemeUrl;
+        return this;
     }
 
-    /**
-     * @return type
-     */
     public Integer getType() {
         return type;
     }
 
-    /**
-     * @param type
-     */
-    public void setType(Integer type) {
+    public Keywords setType(Integer type) {
         this.type = type;
+        return this;
     }
 }

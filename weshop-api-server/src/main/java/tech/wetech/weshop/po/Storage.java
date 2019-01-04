@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_storage")
 public class Storage {
@@ -47,143 +47,75 @@ public class Storage {
     @Column(name = "update_time")
     private Date updateTime;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Storage setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * 获取文件的唯一索引
-     *
-     * @return key - 文件的唯一索引
-     */
     public String getKey() {
         return key;
     }
 
-    /**
-     * 设置文件的唯一索引
-     *
-     * @param key 文件的唯一索引
-     */
-    public void setKey(String key) {
+    public Storage setKey(String key) {
         this.key = key;
+        return this;
     }
 
-    /**
-     * 获取文件名
-     *
-     * @return name - 文件名
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * 设置文件名
-     *
-     * @param name 文件名
-     */
-    public void setName(String name) {
+    public Storage setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * 获取文件类型
-     *
-     * @return type - 文件类型
-     */
     public String getType() {
         return type;
     }
 
-    /**
-     * 设置文件类型
-     *
-     * @param type 文件类型
-     */
-    public void setType(String type) {
+    public Storage setType(String type) {
         this.type = type;
+        return this;
     }
 
-    /**
-     * 获取文件大小
-     *
-     * @return size - 文件大小
-     */
     public Long getSize() {
         return size;
     }
 
-    /**
-     * 设置文件大小
-     *
-     * @param size 文件大小
-     */
-    public void setSize(Long size) {
+    public Storage setSize(Long size) {
         this.size = size;
+        return this;
     }
 
-    /**
-     * 获取文件访问链接
-     *
-     * @return url - 文件访问链接
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * 设置文件访问链接
-     *
-     * @param url 文件访问链接
-     */
-    public void setUrl(String url) {
+    public Storage setUrl(String url) {
         this.url = url;
+        return this;
     }
 
-    /**
-     * 获取创建时间
-     *
-     * @return create_time - 创建时间
-     */
     public Date getCreateTime() {
         return createTime;
     }
 
-    /**
-     * 设置创建时间
-     *
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Date createTime) {
+    public Storage setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
     }
 
-    /**
-     * 获取更新时间
-     *
-     * @return update_time - 更新时间
-     */
     public Date getUpdateTime() {
         return updateTime;
     }
 
-    /**
-     * 设置更新时间
-     *
-     * @param updateTime 更新时间
-     */
-    public void setUpdateTime(Date updateTime) {
+    public Storage setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 }

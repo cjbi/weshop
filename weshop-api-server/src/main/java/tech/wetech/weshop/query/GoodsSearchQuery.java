@@ -24,71 +24,80 @@ public class GoodsSearchQuery {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public GoodsSearchQuery setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+        return this;
     }
 
     public Integer getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Integer brandId) {
+    public GoodsSearchQuery setBrandId(Integer brandId) {
         this.brandId = brandId;
+        return this;
     }
 
     public String getKeyword() {
         return keyword;
     }
 
-    public void setKeyword(String keyword) {
+    public GoodsSearchQuery setKeyword(String keyword) {
         this.keyword = keyword;
+        return this;
     }
 
-    public Boolean getIsNew() {
+    public Boolean getNew() {
         return isNew;
     }
 
-    public void setIsNew(Boolean isNew) {
-        this.isNew = isNew;
+    public GoodsSearchQuery setNew(Boolean aNew) {
+        isNew = aNew;
+        return this;
     }
 
-    public Boolean getIsHot() {
+    public Boolean getHot() {
         return isHot;
     }
 
-    public void setIsHot(Boolean isHot) {
-        this.isHot = isHot;
+    public GoodsSearchQuery setHot(Boolean hot) {
+        isHot = hot;
+        return this;
     }
 
     public Integer getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(Integer pageNum) {
+    public GoodsSearchQuery setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
+        return this;
     }
 
     public Integer getPageSize() {
         return PageSize;
     }
 
-    public void setPageSize(Integer pageSize) {
+    public GoodsSearchQuery setPageSize(Integer pageSize) {
         PageSize = pageSize;
+        return this;
     }
 
     public String getSort() {
         return sort;
     }
 
-    public void setSort(String sort) {
+    public GoodsSearchQuery setSort(String sort) {
         this.sort = sort;
+        return this;
     }
 
     public String getOrder() {
         return order;
     }
 
-    public void setOrder(String order) {
+    public GoodsSearchQuery setOrder(String order) {
         this.order = order;
+        return this;
     }
 }

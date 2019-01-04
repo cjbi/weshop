@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_comment")
 public class Comment {
@@ -31,119 +31,75 @@ public class Comment {
     @Column(name = "new_content")
     private String newContent;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Comment setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return type_id
-     */
     public Byte getTypeId() {
         return typeId;
     }
 
-    /**
-     * @param typeId
-     */
-    public void setTypeId(Byte typeId) {
+    public Comment setTypeId(Byte typeId) {
         this.typeId = typeId;
+        return this;
     }
 
-    /**
-     * @return value_id
-     */
     public Integer getValueId() {
         return valueId;
     }
 
-    /**
-     * @param valueId
-     */
-    public void setValueId(Integer valueId) {
+    public Comment setValueId(Integer valueId) {
         this.valueId = valueId;
+        return this;
     }
 
-    /**
-     * 获取储存为base64编码
-     *
-     * @return content - 储存为base64编码
-     */
     public String getContent() {
         return content;
     }
 
-    /**
-     * 设置储存为base64编码
-     *
-     * @param content 储存为base64编码
-     */
-    public void setContent(String content) {
+    public Comment setContent(String content) {
         this.content = content;
+        return this;
     }
 
-    /**
-     * @return create_time
-     */
     public Date getCreateTime() {
         return createTime;
     }
 
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
+    public Comment setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
     }
 
-    /**
-     * @return status
-     */
     public Byte getStatus() {
         return status;
     }
 
-    /**
-     * @param status
-     */
-    public void setStatus(Byte status) {
+    public Comment setStatus(Byte status) {
         this.status = status;
+        return this;
     }
 
-    /**
-     * @return user_id
-     */
     public Integer getUserId() {
         return userId;
     }
 
-    /**
-     * @param userId
-     */
-    public void setUserId(Integer userId) {
+    public Comment setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
-    /**
-     * @return new_content
-     */
     public String getNewContent() {
         return newContent;
     }
 
-    /**
-     * @param newContent
-     */
-    public void setNewContent(String newContent) {
+    public Comment setNewContent(String newContent) {
         this.newContent = newContent;
+        return this;
     }
 }

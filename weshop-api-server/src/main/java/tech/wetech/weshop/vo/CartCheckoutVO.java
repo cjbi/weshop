@@ -67,7 +67,7 @@ public class CartCheckoutVO {
             this.districtId = address.getDistrictId();
             this.address = address.getAddress();
             this.mobile = address.getMobile();
-            this.isDefault = address.getIsDefault();
+            this.isDefault = address.getDefault();
             this.provinceName = null;
             this.cityName = null;
             this.districtName = null;
@@ -78,112 +78,126 @@ public class CartCheckoutVO {
             return id;
         }
 
-        public void setId(Integer id) {
+        public CheckedAddressVO setId(Integer id) {
             this.id = id;
+            return this;
         }
 
         public String getName() {
             return name;
         }
 
-        public void setName(String name) {
+        public CheckedAddressVO setName(String name) {
             this.name = name;
+            return this;
         }
 
         public Integer getUserId() {
             return userId;
         }
 
-        public void setUserId(Integer userId) {
+        public CheckedAddressVO setUserId(Integer userId) {
             this.userId = userId;
+            return this;
         }
 
         public Short getCountryId() {
             return countryId;
         }
 
-        public void setCountryId(Short countryId) {
+        public CheckedAddressVO setCountryId(Short countryId) {
             this.countryId = countryId;
+            return this;
         }
 
         public Short getProvinceId() {
             return provinceId;
         }
 
-        public void setProvinceId(Short provinceId) {
+        public CheckedAddressVO setProvinceId(Short provinceId) {
             this.provinceId = provinceId;
+            return this;
         }
 
         public Short getCityId() {
             return cityId;
         }
 
-        public void setCityId(Short cityId) {
+        public CheckedAddressVO setCityId(Short cityId) {
             this.cityId = cityId;
+            return this;
         }
 
         public Short getDistrictId() {
             return districtId;
         }
 
-        public void setDistrictId(Short districtId) {
+        public CheckedAddressVO setDistrictId(Short districtId) {
             this.districtId = districtId;
+            return this;
         }
 
         public String getAddress() {
             return address;
         }
 
-        public void setAddress(String address) {
+        public CheckedAddressVO setAddress(String address) {
             this.address = address;
+            return this;
         }
 
         public String getMobile() {
             return mobile;
         }
 
-        public void setMobile(String mobile) {
+        public CheckedAddressVO setMobile(String mobile) {
             this.mobile = mobile;
+            return this;
         }
 
         public Boolean getDefault() {
             return isDefault;
         }
 
-        public void setDefault(Boolean aDefault) {
+        public CheckedAddressVO setDefault(Boolean aDefault) {
             isDefault = aDefault;
+            return this;
         }
 
         public String getProvinceName() {
             return provinceName;
         }
 
-        public void setProvinceName(String provinceName) {
+        public CheckedAddressVO setProvinceName(String provinceName) {
             this.provinceName = provinceName;
+            return this;
         }
 
         public String getCityName() {
             return cityName;
         }
 
-        public void setCityName(String cityName) {
+        public CheckedAddressVO setCityName(String cityName) {
             this.cityName = cityName;
+            return this;
         }
 
         public String getDistrictName() {
             return districtName;
         }
 
-        public void setDistrictName(String districtName) {
+        public CheckedAddressVO setDistrictName(String districtName) {
             this.districtName = districtName;
+            return this;
         }
 
         public String getFullRegion() {
             return fullRegion;
         }
 
-        public void setFullRegion(String fullRegion) {
+        public CheckedAddressVO setFullRegion(String fullRegion) {
             this.fullRegion = fullRegion;
+            return this;
         }
     }
 
@@ -191,16 +205,18 @@ public class CartCheckoutVO {
         return actualPrice;
     }
 
-    public void setActualPrice(BigDecimal actualPrice) {
+    public CartCheckoutVO setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
+        return this;
     }
 
     public CheckedAddressVO getCheckedAddress() {
         return checkedAddress;
     }
 
-    public void setCheckedAddress(CheckedAddressVO checkedAddress) {
+    public CartCheckoutVO setCheckedAddress(CheckedAddressVO checkedAddress) {
         this.checkedAddress = checkedAddress;
+        return this;
     }
 
     public UserCoupon getCheckedCoupon() {
@@ -234,31 +250,35 @@ public class CartCheckoutVO {
         return couponPrice;
     }
 
-    public void setCouponPrice(BigDecimal couponPrice) {
+    public CartCheckoutVO setCouponPrice(BigDecimal couponPrice) {
         this.couponPrice = couponPrice;
+        return this;
     }
 
     public BigDecimal getFreightPrice() {
         return freightPrice;
     }
 
-    public void setFreightPrice(BigDecimal freightPrice) {
+    public CartCheckoutVO setFreightPrice(BigDecimal freightPrice) {
         this.freightPrice = freightPrice;
+        return this;
     }
 
     public BigDecimal getGoodsTotalPrice() {
         return goodsTotalPrice;
     }
 
-    public void setGoodsTotalPrice(BigDecimal goodsTotalPrice) {
+    public CartCheckoutVO setGoodsTotalPrice(BigDecimal goodsTotalPrice) {
         this.goodsTotalPrice = goodsTotalPrice;
+        return this;
     }
 
     public BigDecimal getOrderTotalPrice() {
         return orderTotalPrice;
     }
 
-    public void setOrderTotalPrice(BigDecimal orderTotalPrice) {
+    public CartCheckoutVO setOrderTotalPrice(BigDecimal orderTotalPrice) {
         this.orderTotalPrice = orderTotalPrice;
+        return this;
     }
 }

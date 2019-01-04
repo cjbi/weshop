@@ -20,15 +20,17 @@ public class CategoryIndexVO {
         return categoryList;
     }
 
-    public void setCategoryList(List<CategoryVO> categoryList) {
+    public CategoryIndexVO setCategoryList(List<CategoryVO> categoryList) {
         this.categoryList = categoryList;
+        return this;
     }
 
     public CategoryVO getCurrentCategory() {
         return currentCategory;
     }
 
-    public void setCurrentCategory(CategoryVO currentCategory) {
+    public CategoryIndexVO setCurrentCategory(CategoryVO currentCategory) {
         this.currentCategory = currentCategory;
+        return this;
     }
 }

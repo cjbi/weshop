@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.math.BigDecimal;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "weshop_order_goods")
 public class OrderGoods {
@@ -44,185 +44,120 @@ public class OrderGoods {
     @Column(name = "goods_specifition_name_value")
     private String goodsSpecifitionNameValue;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public OrderGoods setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return order_id
-     */
     public Integer getOrderId() {
         return orderId;
     }
 
-    /**
-     * @param orderId
-     */
-    public void setOrderId(Integer orderId) {
+    public OrderGoods setOrderId(Integer orderId) {
         this.orderId = orderId;
+        return this;
     }
 
-    /**
-     * @return goods_id
-     */
     public Integer getGoodsId() {
         return goodsId;
     }
 
-    /**
-     * @param goodsId
-     */
-    public void setGoodsId(Integer goodsId) {
+    public OrderGoods setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 
-    /**
-     * @return goods_name
-     */
     public String getGoodsName() {
         return goodsName;
     }
 
-    /**
-     * @param goodsName
-     */
-    public void setGoodsName(String goodsName) {
+    public OrderGoods setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+        return this;
     }
 
-    /**
-     * @return goods_sn
-     */
     public String getGoodsSn() {
         return goodsSn;
     }
 
-    /**
-     * @param goodsSn
-     */
-    public void setGoodsSn(String goodsSn) {
+    public OrderGoods setGoodsSn(String goodsSn) {
         this.goodsSn = goodsSn;
+        return this;
     }
 
-    /**
-     * @return product_id
-     */
     public Integer getProductId() {
         return productId;
     }
 
-    /**
-     * @param productId
-     */
-    public void setProductId(Integer productId) {
+    public OrderGoods setProductId(Integer productId) {
         this.productId = productId;
+        return this;
     }
 
-    /**
-     * @return number
-     */
     public Short getNumber() {
         return number;
     }
 
-    /**
-     * @param number
-     */
-    public void setNumber(Short number) {
+    public OrderGoods setNumber(Short number) {
         this.number = number;
+        return this;
     }
 
-    /**
-     * @return market_price
-     */
     public BigDecimal getMarketPrice() {
         return marketPrice;
     }
 
-    /**
-     * @param marketPrice
-     */
-    public void setMarketPrice(BigDecimal marketPrice) {
+    public OrderGoods setMarketPrice(BigDecimal marketPrice) {
         this.marketPrice = marketPrice;
+        return this;
     }
 
-    /**
-     * @return retail_price
-     */
     public BigDecimal getRetailPrice() {
         return retailPrice;
     }
 
-    /**
-     * @param retailPrice
-     */
-    public void setRetailPrice(BigDecimal retailPrice) {
+    public OrderGoods setRetailPrice(BigDecimal retailPrice) {
         this.retailPrice = retailPrice;
+        return this;
     }
 
-    /**
-     * @return is_real
-     */
-    public Boolean getIsReal() {
+    public Boolean getReal() {
         return isReal;
     }
 
-    /**
-     * @param isReal
-     */
-    public void setIsReal(Boolean isReal) {
-        this.isReal = isReal;
+    public OrderGoods setReal(Boolean real) {
+        isReal = real;
+        return this;
     }
 
-    /**
-     * @return goods_specifition_ids
-     */
     public String getGoodsSpecifitionIds() {
         return goodsSpecifitionIds;
     }
 
-    /**
-     * @param goodsSpecifitionIds
-     */
-    public void setGoodsSpecifitionIds(String goodsSpecifitionIds) {
+    public OrderGoods setGoodsSpecifitionIds(String goodsSpecifitionIds) {
         this.goodsSpecifitionIds = goodsSpecifitionIds;
+        return this;
     }
 
-    /**
-     * @return list_pic_url
-     */
     public String getListPicUrl() {
         return listPicUrl;
     }
 
-    /**
-     * @param listPicUrl
-     */
-    public void setListPicUrl(String listPicUrl) {
+    public OrderGoods setListPicUrl(String listPicUrl) {
         this.listPicUrl = listPicUrl;
+        return this;
     }
 
-    /**
-     * @return goods_specifition_name_value
-     */
     public String getGoodsSpecifitionNameValue() {
         return goodsSpecifitionNameValue;
     }
 
-    /**
-     * @param goodsSpecifitionNameValue
-     */
-    public void setGoodsSpecifitionNameValue(String goodsSpecifitionNameValue) {
+    public OrderGoods setGoodsSpecifitionNameValue(String goodsSpecifitionNameValue) {
         this.goodsSpecifitionNameValue = goodsSpecifitionNameValue;
+        return this;
     }
 }

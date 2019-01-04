@@ -5,7 +5,8 @@ import tech.wetech.weshop.query.OrderQuery;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
 import tech.wetech.weshop.vo.OrderVO;
-import tech.wetech.weshop.vo.PageInfoVO;
+
+import java.util.List;
 
 /**
  * @author cjbi
@@ -17,7 +18,7 @@ public interface OrderService extends IService<Order> {
      * @param orderQuery
      * @return
      */
-    PageInfoVO<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery);
+    List<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery);
 
     /**
      * 查询订单详情

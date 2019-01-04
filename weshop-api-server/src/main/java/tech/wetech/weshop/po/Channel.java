@@ -18,73 +18,48 @@ public class Channel {
     @Column(name = "sort_order")
     private Integer sortOrder;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Channel setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Channel setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return url
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * @param url
-     */
-    public void setUrl(String url) {
+    public Channel setUrl(String url) {
         this.url = url;
+        return this;
     }
 
-    /**
-     * @return icon_url
-     */
     public String getIconUrl() {
         return iconUrl;
     }
 
-    /**
-     * @param iconUrl
-     */
-    public void setIconUrl(String iconUrl) {
+    public Channel setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Integer getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Integer sortOrder) {
+    public Channel setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 }

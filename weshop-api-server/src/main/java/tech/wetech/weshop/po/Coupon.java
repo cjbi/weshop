@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.math.BigDecimal;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "weshop_coupon")
 public class Coupon {
@@ -38,157 +38,102 @@ public class Coupon {
     @Column(name = "min_goods_amount")
     private BigDecimal minGoodsAmount;
 
-    /**
-     * @return id
-     */
     public Short getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Short id) {
+    public Coupon setId(Short id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Coupon setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return type_money
-     */
     public BigDecimal getTypeMoney() {
         return typeMoney;
     }
 
-    /**
-     * @param typeMoney
-     */
-    public void setTypeMoney(BigDecimal typeMoney) {
+    public Coupon setTypeMoney(BigDecimal typeMoney) {
         this.typeMoney = typeMoney;
+        return this;
     }
 
-    /**
-     * @return send_type
-     */
     public Byte getSendType() {
         return sendType;
     }
 
-    /**
-     * @param sendType
-     */
-    public void setSendType(Byte sendType) {
+    public Coupon setSendType(Byte sendType) {
         this.sendType = sendType;
+        return this;
     }
 
-    /**
-     * @return min_amount
-     */
     public BigDecimal getMinAmount() {
         return minAmount;
     }
 
-    /**
-     * @param minAmount
-     */
-    public void setMinAmount(BigDecimal minAmount) {
+    public Coupon setMinAmount(BigDecimal minAmount) {
         this.minAmount = minAmount;
+        return this;
     }
 
-    /**
-     * @return max_amount
-     */
     public BigDecimal getMaxAmount() {
         return maxAmount;
     }
 
-    /**
-     * @param maxAmount
-     */
-    public void setMaxAmount(BigDecimal maxAmount) {
+    public Coupon setMaxAmount(BigDecimal maxAmount) {
         this.maxAmount = maxAmount;
+        return this;
     }
 
-    /**
-     * @return send_start_date
-     */
     public Integer getSendStartDate() {
         return sendStartDate;
     }
 
-    /**
-     * @param sendStartDate
-     */
-    public void setSendStartDate(Integer sendStartDate) {
+    public Coupon setSendStartDate(Integer sendStartDate) {
         this.sendStartDate = sendStartDate;
+        return this;
     }
 
-    /**
-     * @return send_end_date
-     */
     public Integer getSendEndDate() {
         return sendEndDate;
     }
 
-    /**
-     * @param sendEndDate
-     */
-    public void setSendEndDate(Integer sendEndDate) {
+    public Coupon setSendEndDate(Integer sendEndDate) {
         this.sendEndDate = sendEndDate;
+        return this;
     }
 
-    /**
-     * @return use_start_date
-     */
     public Integer getUseStartDate() {
         return useStartDate;
     }
 
-    /**
-     * @param useStartDate
-     */
-    public void setUseStartDate(Integer useStartDate) {
+    public Coupon setUseStartDate(Integer useStartDate) {
         this.useStartDate = useStartDate;
+        return this;
     }
 
-    /**
-     * @return use_end_date
-     */
     public Integer getUseEndDate() {
         return useEndDate;
     }
 
-    /**
-     * @param useEndDate
-     */
-    public void setUseEndDate(Integer useEndDate) {
+    public Coupon setUseEndDate(Integer useEndDate) {
         this.useEndDate = useEndDate;
+        return this;
     }
 
-    /**
-     * @return min_goods_amount
-     */
     public BigDecimal getMinGoodsAmount() {
         return minGoodsAmount;
     }
 
-    /**
-     * @param minGoodsAmount
-     */
-    public void setMinGoodsAmount(BigDecimal minGoodsAmount) {
+    public Coupon setMinGoodsAmount(BigDecimal minGoodsAmount) {
         this.minGoodsAmount = minGoodsAmount;
+        return this;
     }
 }

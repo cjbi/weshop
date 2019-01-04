@@ -7,10 +7,7 @@ import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author cjbi
@@ -131,7 +128,7 @@ public class Result<T> implements Serializable {
         result.setMsg(ResultCodeEnum.OK.getMsg());
         if (obj == null) {
             // 若数据为null 统一给前端{}
-            result.setData(new HashMap<>(1));
+            result.setData(Collections.EMPTY_MAP);
         } else {
             result.setData(obj);
         }

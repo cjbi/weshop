@@ -25,8 +25,9 @@ public class GoodsListVO {
         return id;
     }
 
-    public void setId(Integer id) {
+    public GoodsListVO setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
@@ -42,15 +43,17 @@ public class GoodsListVO {
         return listPicUrl;
     }
 
-    public void setListPicUrl(String listPicUrl) {
+    public GoodsListVO setListPicUrl(String listPicUrl) {
         this.listPicUrl = listPicUrl;
+        return this;
     }
 
     public BigDecimal getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(BigDecimal retailPrice) {
+    public GoodsListVO setRetailPrice(BigDecimal retailPrice) {
         this.retailPrice = retailPrice;
+        return this;
     }
 }

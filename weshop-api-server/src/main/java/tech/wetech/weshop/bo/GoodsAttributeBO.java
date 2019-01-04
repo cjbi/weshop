@@ -19,15 +19,17 @@ public class GoodsAttributeBO {
         return name;
     }
 
-    public void setName(String name) {
+    public GoodsAttributeBO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public GoodsAttributeBO setValue(String value) {
         this.value = value;
+        return this;
     }
 }

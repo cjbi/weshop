@@ -106,443 +106,273 @@ public class Order {
     @Column(name = "callback_status")
     private String callbackStatus;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Order setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return order_sn
-     */
     public String getOrderSN() {
         return orderSN;
     }
 
-    /**
-     * @param orderSN
-     */
-    public void setOrderSN(String orderSN) {
+    public Order setOrderSN(String orderSN) {
         this.orderSN = orderSN;
+        return this;
     }
 
-    /**
-     * @return user_id
-     */
     public Integer getUserId() {
         return userId;
     }
 
-    /**
-     * @param userId
-     */
-    public void setUserId(Integer userId) {
+    public Order setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
-    /**
-     * @return order_status
-     */
     public OrderStatusEnum getOrderStatus() {
         return orderStatus;
     }
 
-    /**
-     * @param orderStatus
-     */
-    public void setOrderStatus(OrderStatusEnum orderStatus) {
+    public Order setOrderStatus(OrderStatusEnum orderStatus) {
         this.orderStatus = orderStatus;
+        return this;
     }
 
-    /**
-     * @return shipping_status
-     */
     public Short getShippingStatus() {
         return shippingStatus;
     }
 
-    /**
-     * @param shippingStatus
-     */
-    public void setShippingStatus(Short shippingStatus) {
+    public Order setShippingStatus(Short shippingStatus) {
         this.shippingStatus = shippingStatus;
+        return this;
     }
 
-    /**
-     * @return pay_status
-     */
     public PayStatusEnum getPayStatus() {
         return payStatus;
     }
 
-    /**
-     * @param payStatus
-     */
-    public void setPayStatus(PayStatusEnum payStatus) {
+    public Order setPayStatus(PayStatusEnum payStatus) {
         this.payStatus = payStatus;
+        return this;
     }
 
-    /**
-     * @return consignee
-     */
     public String getConsignee() {
         return consignee;
     }
 
-    /**
-     * @param consignee
-     */
-    public void setConsignee(String consignee) {
+    public Order setConsignee(String consignee) {
         this.consignee = consignee;
+        return this;
     }
 
-    /**
-     * @return country
-     */
     public Short getCountry() {
         return country;
     }
 
-    /**
-     * @param country
-     */
-    public void setCountry(Short country) {
+    public Order setCountry(Short country) {
         this.country = country;
+        return this;
     }
 
-    /**
-     * @return province
-     */
     public Short getProvince() {
         return province;
     }
 
-    /**
-     * @param province
-     */
-    public void setProvince(Short province) {
+    public Order setProvince(Short province) {
         this.province = province;
+        return this;
     }
 
-    /**
-     * @return city
-     */
     public Short getCity() {
         return city;
     }
 
-    /**
-     * @param city
-     */
-    public void setCity(Short city) {
+    public Order setCity(Short city) {
         this.city = city;
+        return this;
     }
 
-    /**
-     * @return district
-     */
     public Short getDistrict() {
         return district;
     }
 
-    /**
-     * @param district
-     */
-    public void setDistrict(Short district) {
+    public Order setDistrict(Short district) {
         this.district = district;
+        return this;
     }
 
-    /**
-     * @return address
-     */
     public String getAddress() {
         return address;
     }
 
-    /**
-     * @param address
-     */
-    public void setAddress(String address) {
+    public Order setAddress(String address) {
         this.address = address;
+        return this;
     }
 
-    /**
-     * @return mobile
-     */
     public String getMobile() {
         return mobile;
     }
 
-    /**
-     * @param mobile
-     */
-    public void setMobile(String mobile) {
+    public Order setMobile(String mobile) {
         this.mobile = mobile;
+        return this;
     }
 
-    /**
-     * @return postscript
-     */
     public String getPostscript() {
         return postscript;
     }
 
-    /**
-     * @param postscript
-     */
-    public void setPostscript(String postscript) {
+    public Order setPostscript(String postscript) {
         this.postscript = postscript;
+        return this;
     }
 
-    /**
-     * @return shipping_fee
-     */
     public BigDecimal getShippingFee() {
         return shippingFee;
     }
 
-    /**
-     * @param shippingFee
-     */
-    public void setShippingFee(BigDecimal shippingFee) {
+    public Order setShippingFee(BigDecimal shippingFee) {
         this.shippingFee = shippingFee;
+        return this;
     }
 
-    /**
-     * @return pay_name
-     */
     public String getPayName() {
         return payName;
     }
 
-    /**
-     * @param payName
-     */
-    public void setPayName(String payName) {
+    public Order setPayName(String payName) {
         this.payName = payName;
+        return this;
     }
 
-    /**
-     * @return pay_id
-     */
     public Byte getPayId() {
         return payId;
     }
 
-    /**
-     * @param payId
-     */
-    public void setPayId(Byte payId) {
+    public Order setPayId(Byte payId) {
         this.payId = payId;
+        return this;
     }
 
-    /**
-     * 获取实际需要支付的金额
-     *
-     * @return actual_price - 实际需要支付的金额
-     */
     public BigDecimal getActualPrice() {
         return actualPrice;
     }
 
-    /**
-     * 设置实际需要支付的金额
-     *
-     * @param actualPrice 实际需要支付的金额
-     */
-    public void setActualPrice(BigDecimal actualPrice) {
+    public Order setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
+        return this;
     }
 
-    /**
-     * @return integral
-     */
     public Integer getIntegral() {
         return integral;
     }
 
-    /**
-     * @param integral
-     */
-    public void setIntegral(Integer integral) {
+    public Order setIntegral(Integer integral) {
         this.integral = integral;
+        return this;
     }
 
-    /**
-     * @return integral_money
-     */
     public BigDecimal getIntegralMoney() {
         return integralMoney;
     }
 
-    /**
-     * @param integralMoney
-     */
-    public void setIntegralMoney(BigDecimal integralMoney) {
+    public Order setIntegralMoney(BigDecimal integralMoney) {
         this.integralMoney = integralMoney;
+        return this;
     }
 
-    /**
-     * 获取订单总价
-     *
-     * @return order_price - 订单总价
-     */
     public BigDecimal getOrderPrice() {
         return orderPrice;
     }
 
-    /**
-     * 设置订单总价
-     *
-     * @param orderPrice 订单总价
-     */
-    public void setOrderPrice(BigDecimal orderPrice) {
+    public Order setOrderPrice(BigDecimal orderPrice) {
         this.orderPrice = orderPrice;
+        return this;
     }
 
-    /**
-     * 获取商品总价
-     *
-     * @return goods_price - 商品总价
-     */
     public BigDecimal getGoodsPrice() {
         return goodsPrice;
     }
 
-    /**
-     * 设置商品总价
-     *
-     * @param goodsPrice 商品总价
-     */
-    public void setGoodsPrice(BigDecimal goodsPrice) {
+    public Order setGoodsPrice(BigDecimal goodsPrice) {
         this.goodsPrice = goodsPrice;
+        return this;
     }
 
-    /**
-     * @return create_time
-     */
     public Date getCreateTime() {
         return createTime;
     }
 
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
+    public Order setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
     }
 
-    /**
-     * @return confirm_time
-     */
     public Date getConfirmTime() {
         return confirmTime;
     }
 
-    /**
-     * @param confirmTime
-     */
-    public void setConfirmTime(Date confirmTime) {
+    public Order setConfirmTime(Date confirmTime) {
         this.confirmTime = confirmTime;
+        return this;
     }
 
-    /**
-     * @return pay_time
-     */
     public Date getPayTime() {
         return payTime;
     }
 
-    /**
-     * @param payTime
-     */
-    public void setPayTime(Date payTime) {
+    public Order setPayTime(Date payTime) {
         this.payTime = payTime;
+        return this;
     }
 
-    /**
-     * 获取配送费用
-     *
-     * @return freight_price - 配送费用
-     */
     public BigDecimal getFreightPrice() {
         return freightPrice;
     }
 
-    /**
-     * 设置配送费用
-     *
-     * @param freightPrice 配送费用
-     */
-    public void setFreightPrice(BigDecimal freightPrice) {
+    public Order setFreightPrice(BigDecimal freightPrice) {
         this.freightPrice = freightPrice;
+        return this;
     }
 
-    /**
-     * 获取使用的优惠券id
-     *
-     * @return coupon_id - 使用的优惠券id
-     */
     public Integer getCouponId() {
         return couponId;
     }
 
-    /**
-     * 设置使用的优惠券id
-     *
-     * @param couponId 使用的优惠券id
-     */
-    public void setCouponId(Integer couponId) {
+    public Order setCouponId(Integer couponId) {
         this.couponId = couponId;
+        return this;
     }
 
-    /**
-     * @return parent_id
-     */
     public Integer getParentId() {
         return parentId;
     }
 
-    /**
-     * @param parentId
-     */
-    public void setParentId(Integer parentId) {
+    public Order setParentId(Integer parentId) {
         this.parentId = parentId;
+        return this;
     }
 
-    /**
-     * @return coupon_price
-     */
     public BigDecimal getCouponPrice() {
         return couponPrice;
     }
 
-    /**
-     * @param couponPrice
-     */
-    public void setCouponPrice(BigDecimal couponPrice) {
+    public Order setCouponPrice(BigDecimal couponPrice) {
         this.couponPrice = couponPrice;
+        return this;
     }
 
-    /**
-     * @return callback_status
-     */
     public String getCallbackStatus() {
         return callbackStatus;
     }
 
-    /**
-     * @param callbackStatus
-     */
-    public void setCallbackStatus(String callbackStatus) {
+    public Order setCallbackStatus(String callbackStatus) {
         this.callbackStatus = callbackStatus;
+        return this;
     }
 }

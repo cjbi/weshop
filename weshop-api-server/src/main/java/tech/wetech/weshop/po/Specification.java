@@ -13,45 +13,30 @@ public class Specification {
     @Column(name = "sort_order")
     private Byte sortOrder;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Specification setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Specification setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Byte getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Byte sortOrder) {
+    public Specification setSortOrder(Byte sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 }

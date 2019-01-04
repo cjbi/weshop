@@ -41,171 +41,111 @@ public class Brand {
     @Column(name = "new_sort_order")
     private Byte newSortOrder;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Brand setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
+    public Brand setName(String name) {
         this.name = name;
+        return this;
     }
 
-    /**
-     * @return list_pic_url
-     */
     public String getListPicUrl() {
         return listPicUrl;
     }
 
-    /**
-     * @param listPicUrl
-     */
-    public void setListPicUrl(String listPicUrl) {
+    public Brand setListPicUrl(String listPicUrl) {
         this.listPicUrl = listPicUrl;
+        return this;
     }
 
-    /**
-     * @return simple_desc
-     */
     public String getSimpleDesc() {
         return simpleDesc;
     }
 
-    /**
-     * @param simpleDesc
-     */
-    public void setSimpleDesc(String simpleDesc) {
+    public Brand setSimpleDesc(String simpleDesc) {
         this.simpleDesc = simpleDesc;
+        return this;
     }
 
-    /**
-     * @return pic_url
-     */
     public String getPicUrl() {
         return picUrl;
     }
 
-    /**
-     * @param picUrl
-     */
-    public void setPicUrl(String picUrl) {
+    public Brand setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Byte getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Byte sortOrder) {
+    public Brand setSortOrder(Byte sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 
-    /**
-     * @return is_show
-     */
-    public Boolean getIsShow() {
+    public Boolean getShow() {
         return isShow;
     }
 
-    /**
-     * @param isShow
-     */
-    public void setIsShow(Boolean isShow) {
-        this.isShow = isShow;
+    public Brand setShow(Boolean show) {
+        isShow = show;
+        return this;
     }
 
-    /**
-     * @return floor_price
-     */
     public BigDecimal getFloorPrice() {
         return floorPrice;
     }
 
-    /**
-     * @param floorPrice
-     */
-    public void setFloorPrice(BigDecimal floorPrice) {
+    public Brand setFloorPrice(BigDecimal floorPrice) {
         this.floorPrice = floorPrice;
+        return this;
     }
 
-    /**
-     * @return app_list_pic_url
-     */
     public String getAppListPicUrl() {
         return appListPicUrl;
     }
 
-    /**
-     * @param appListPicUrl
-     */
-    public void setAppListPicUrl(String appListPicUrl) {
+    public Brand setAppListPicUrl(String appListPicUrl) {
         this.appListPicUrl = appListPicUrl;
+        return this;
     }
 
-    /**
-     * @return is_new
-     */
-    public Boolean getIsNew() {
+    public Boolean getNew() {
         return isNew;
     }
 
-    /**
-     * @param isNew
-     */
-    public void setIsNew(Boolean isNew) {
-        this.isNew = isNew;
+    public Brand setNew(Boolean aNew) {
+        isNew = aNew;
+        return this;
     }
 
-    /**
-     * @return new_pic_url
-     */
     public String getNewPicUrl() {
         return newPicUrl;
     }
 
-    /**
-     * @param newPicUrl
-     */
-    public void setNewPicUrl(String newPicUrl) {
+    public Brand setNewPicUrl(String newPicUrl) {
         this.newPicUrl = newPicUrl;
+        return this;
     }
 
-    /**
-     * @return new_sort_order
-     */
     public Byte getNewSortOrder() {
         return newSortOrder;
     }
 
-    /**
-     * @param newSortOrder
-     */
-    public void setNewSortOrder(Byte newSortOrder) {
+    public Brand setNewSortOrder(Byte newSortOrder) {
         this.newSortOrder = newSortOrder;
+        return this;
     }
 }

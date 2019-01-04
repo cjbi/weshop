@@ -1,7 +1,9 @@
 package tech.wetech.weshop.po;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "weshop_feedback")
 public class Feedback {
@@ -45,185 +47,120 @@ public class Feedback {
     @Column(name = "msg_content")
     private String msgContent;
 
-    /**
-     * @return msg_id
-     */
     public Integer getMsgId() {
         return msgId;
     }
 
-    /**
-     * @param msgId
-     */
-    public void setMsgId(Integer msgId) {
+    public Feedback setMsgId(Integer msgId) {
         this.msgId = msgId;
+        return this;
     }
 
-    /**
-     * @return parent_id
-     */
     public Integer getParentId() {
         return parentId;
     }
 
-    /**
-     * @param parentId
-     */
-    public void setParentId(Integer parentId) {
+    public Feedback setParentId(Integer parentId) {
         this.parentId = parentId;
+        return this;
     }
 
-    /**
-     * @return user_id
-     */
     public Integer getUserId() {
         return userId;
     }
 
-    /**
-     * @param userId
-     */
-    public void setUserId(Integer userId) {
+    public Feedback setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
-    /**
-     * @return user_name
-     */
     public String getUserName() {
         return userName;
     }
 
-    /**
-     * @param userName
-     */
-    public void setUserName(String userName) {
+    public Feedback setUserName(String userName) {
         this.userName = userName;
+        return this;
     }
 
-    /**
-     * @return user_email
-     */
     public String getUserEmail() {
         return userEmail;
     }
 
-    /**
-     * @param userEmail
-     */
-    public void setUserEmail(String userEmail) {
+    public Feedback setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+        return this;
     }
 
-    /**
-     * @return msg_title
-     */
     public String getMsgTitle() {
         return msgTitle;
     }
 
-    /**
-     * @param msgTitle
-     */
-    public void setMsgTitle(String msgTitle) {
+    public Feedback setMsgTitle(String msgTitle) {
         this.msgTitle = msgTitle;
+        return this;
     }
 
-    /**
-     * @return msg_type
-     */
     public Boolean getMsgType() {
         return msgType;
     }
 
-    /**
-     * @param msgType
-     */
-    public void setMsgType(Boolean msgType) {
+    public Feedback setMsgType(Boolean msgType) {
         this.msgType = msgType;
+        return this;
     }
 
-    /**
-     * @return msg_status
-     */
     public Boolean getMsgStatus() {
         return msgStatus;
     }
 
-    /**
-     * @param msgStatus
-     */
-    public void setMsgStatus(Boolean msgStatus) {
+    public Feedback setMsgStatus(Boolean msgStatus) {
         this.msgStatus = msgStatus;
+        return this;
     }
 
-    /**
-     * @return msg_time
-     */
     public Date getMsgTime() {
         return msgTime;
     }
 
-    /**
-     * @param msgTime
-     */
-    public void setMsgTime(Date msgTime) {
+    public Feedback setMsgTime(Date msgTime) {
         this.msgTime = msgTime;
+        return this;
     }
 
-    /**
-     * @return message_img
-     */
     public String getMessageImg() {
         return messageImg;
     }
 
-    /**
-     * @param messageImg
-     */
-    public void setMessageImg(String messageImg) {
+    public Feedback setMessageImg(String messageImg) {
         this.messageImg = messageImg;
+        return this;
     }
 
-    /**
-     * @return order_id
-     */
     public Integer getOrderId() {
         return orderId;
     }
 
-    /**
-     * @param orderId
-     */
-    public void setOrderId(Integer orderId) {
+    public Feedback setOrderId(Integer orderId) {
         this.orderId = orderId;
+        return this;
     }
 
-    /**
-     * @return msg_area
-     */
     public Boolean getMsgArea() {
         return msgArea;
     }
 
-    /**
-     * @param msgArea
-     */
-    public void setMsgArea(Boolean msgArea) {
+    public Feedback setMsgArea(Boolean msgArea) {
         this.msgArea = msgArea;
+        return this;
     }
 
-    /**
-     * @return msg_content
-     */
     public String getMsgContent() {
         return msgContent;
     }
 
-    /**
-     * @param msgContent
-     */
-    public void setMsgContent(String msgContent) {
+    public Feedback setMsgContent(String msgContent) {
         this.msgContent = msgContent;
+        return this;
     }
 }

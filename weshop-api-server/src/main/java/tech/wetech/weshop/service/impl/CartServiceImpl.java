@@ -70,10 +70,10 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
             }
         }
 
-        cartTotalVO.setGoodsCount(goodsCount);
-        cartTotalVO.setGoodsAmount(goodsAmount);
-        cartTotalVO.setCheckedGoodsCount(checkedGoodsCount);
-        cartTotalVO.setCheckedGoodsAmount(checkedGoodsAmount);
+        cartTotalVO.setGoodsCount(goodsCount)
+                .setGoodsAmount(goodsAmount)
+                .setCheckedGoodsCount(checkedGoodsCount)
+                .setCheckedGoodsAmount(checkedGoodsAmount);
         return new CartResultVO(cartList, cartTotalVO);
     }
 
@@ -81,7 +81,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     @Transactional
     public void addGoodsToCart(CartParamVO cartParamVO) {
         Goods goods = goodsMapper.selectByPrimaryKey(cartParamVO.getGoodsId());
-        if (goods == null || goods.getIsDelete()) {
+        if (goods == null || goods.getDelete()) {
             //商品已下架
             throw new BizException(ResultCodeEnum.GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES);
         }
@@ -109,23 +109,23 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                     goodsSpecificationValueList = goodsSpecificationMapper.selectValueByGoodsIdAndIdIn(cartParamVO.getGoodsId(), specificationIdList);
                 }
             }
-            Cart cartData = new Cart();
-            cartData.setGoodsId(cartParamVO.getGoodsId());
-            cartData.setProductId(cartParamVO.getProductId());
-            cartData.setGoodsSn(product.getGoodsSn());
-            cartData.setGoodsName(goods.getName());
-            cartData.setListPicUrl(goods.getListPicUrl());
-            cartData.setNumber(cartParamVO.getNumber().shortValue());
-            cartData.setSessionId("1");
-            cartData.setUserId(1);
-            cartData.setRetailPrice(product.getRetailPrice());
-            cartData.setMarketPrice(product.getRetailPrice());
-            cartData.setGoodsSpecifitionNameValue(
-                    goodsSpecificationValueList.stream()
-                            .collect(Collectors.joining(";"))
-            );
-            cartData.setGoodsSpecifitionIds(product.getGoodsSpecificationIds());
-            cartData.setChecked(true);
+            Cart cartData = new Cart()
+                    .setGoodsId(cartParamVO.getGoodsId())
+                    .setProductId(cartParamVO.getProductId())
+                    .setGoodsSn(product.getGoodsSn())
+                    .setGoodsName(goods.getName())
+                    .setListPicUrl(goods.getListPicUrl())
+                    .setNumber(cartParamVO.getNumber().shortValue())
+                    .setSessionId("1")
+                    .setUserId(1)
+                    .setRetailPrice(product.getRetailPrice())
+                    .setMarketPrice(product.getRetailPrice())
+                    .setGoodsSpecifitionNameValue(
+                            goodsSpecificationValueList.stream()
+                                    .collect(Collectors.joining(";"))
+                    )
+                    .setGoodsSpecifitionIds(product.getGoodsSpecificationIds())
+                    .setChecked(true);
             cartMapper.insertSelective(cartData);
         } else {
             // 如果已经存在购物车中，则数量增加
@@ -159,12 +159,13 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
             }});
             return;
         }
-        Cart newCartInfo = cartMapper.selectOne(new Cart() {{
-            setUserId(Constants.CURRENT_USER_ID);
-            setSessionId(Constants.SESSION_ID);
-            setGoodsId(cartParamVO.getGoodsId());
-            setProductId(cartParamVO.getProductId());
-        }});
+        Cart newCartInfo = cartMapper.selectOne(
+                new Cart()
+                        .setUserId(Constants.CURRENT_USER_ID)
+                        .setSessionId(Constants.SESSION_ID)
+                        .setGoodsId(cartParamVO.getGoodsId())
+                        .setProductId(cartParamVO.getProductId())
+        );
         if (newCartInfo == null) {
             //直接更新原来的cartInfo
             // 判断购物车中是否存在此规格商品
@@ -179,18 +180,18 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                     goodsSpecificationValueList = goodsSpecificationMapper.selectValueByGoodsIdAndIdIn(cartParamVO.getGoodsId(), specificationIdList);
                 }
             }
-            Cart cartData = new Cart();
-            cartData.setId(cartData.getId());
-            cartData.setNumber(cartParamVO.getNumber().shortValue());
-            cartData.setGoodsSpecifitionNameValue(
-                    goodsSpecificationValueList.stream()
-                            .collect(Collectors.joining(";"))
-            );
-            cartData.setGoodsSpecifitionIds(product.getGoodsSpecificationIds());
-            cartData.setRetailPrice(product.getRetailPrice());
-            cartData.setMarketPrice(product.getRetailPrice());
-            cartData.setProductId(cartParamVO.getProductId());
-            cartData.setGoodsSn(product.getGoodsSn());
+            Cart cartData = new Cart()
+                    .setId(cartParamVO.getId())
+                    .setNumber(cartParamVO.getNumber().shortValue())
+                    .setGoodsSpecifitionNameValue(
+                            goodsSpecificationValueList.stream()
+                                    .collect(Collectors.joining(";"))
+                    )
+                    .setGoodsSpecifitionIds(product.getGoodsSpecificationIds())
+                    .setRetailPrice(product.getRetailPrice())
+                    .setMarketPrice(product.getRetailPrice())
+                    .setProductId(cartParamVO.getProductId())
+                    .setGoodsSn(product.getGoodsSn());
             cartMapper.updateByPrimaryKeySelective(cartData);
         } else {
             // 合并购物车已有的product信息，删除已有的数据
@@ -200,15 +201,15 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                 throw new BizException(ResultCodeEnum.UNDER_STOCK);
             }
             cartMapper.deleteByPrimaryKey(newCartInfo.getId());
-            Cart cartData = new Cart();
-            cartData.setId(cartParamVO.getId());
-            cartData.setNumber(newNumber.shortValue());
-            cartData.setGoodsSpecifitionNameValue(newCartInfo.getGoodsSpecifitionNameValue());
-            cartData.setGoodsSpecifitionIds(newCartInfo.getGoodsSpecifitionIds());
-            cartData.setRetailPrice(product.getRetailPrice());
-            cartData.setMarketPrice(product.getRetailPrice());
-            cartData.setProductId(cartParamVO.getProductId());
-            cartData.setGoodsSn(product.getGoodsSn());
+            Cart cartData = new Cart()
+                    .setId(cartParamVO.getId())
+                    .setNumber(newNumber.shortValue())
+                    .setGoodsSpecifitionNameValue(newCartInfo.getGoodsSpecifitionNameValue())
+                    .setGoodsSpecifitionIds(newCartInfo.getGoodsSpecifitionIds())
+                    .setRetailPrice(product.getRetailPrice())
+                    .setMarketPrice(product.getRetailPrice())
+                    .setProductId(cartParamVO.getProductId())
+                    .setGoodsSn(product.getGoodsSn());
             cartMapper.updateByPrimaryKeySelective(cartData);
         }
 
@@ -228,25 +229,25 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
         } else {
             checkedAddress = addressMapper.selectOne(new Address() {{
                 setUserId(1);
-                setIsDefault(true);
+                setDefault(true);
             }});
         }
 
         CartCheckoutVO.CheckedAddressVO checkedAddressVO = null;
         if (checkedAddress != null) {
-            checkedAddressVO = new CartCheckoutVO.CheckedAddressVO(checkedAddress);
-            checkedAddressVO.setProvinceName(
-                    regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
-            );
-            checkedAddressVO.setCityName(
-                    regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
-            );
-            checkedAddressVO.setDistrictName(
-                    regionMapper.selectNameById(checkedAddress.getDistrictId().intValue())
-            );
-            checkedAddressVO.setFullRegion(
-                    checkedAddressVO.getProvinceName() + checkedAddressVO.getCityName() + checkedAddressVO.getDistrictName()
-            );
+            checkedAddressVO = new CartCheckoutVO.CheckedAddressVO(checkedAddress)
+                    .setProvinceName(
+                            regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
+                    )
+                    .setCityName(
+                            regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
+                    )
+                    .setDistrictName(
+                            regionMapper.selectNameById(checkedAddress.getDistrictId().intValue())
+                    )
+                    .setFullRegion(
+                            checkedAddressVO.getProvinceName() + checkedAddressVO.getCityName() + checkedAddressVO.getDistrictName()
+                    );
         }
         // 根据收货地址计算运费，未实现
         BigDecimal freightPrice = BigDecimal.ZERO;

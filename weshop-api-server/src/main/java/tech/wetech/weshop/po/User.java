@@ -44,199 +44,129 @@ public class User {
     @Column(name = "wechat_open_id")
     private String wechatOpenId;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public User setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return username
-     */
     public String getUsername() {
         return username;
     }
 
-    /**
-     * @param username
-     */
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
-    /**
-     * @return password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * @param password
-     */
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
-    /**
-     * @return gender
-     */
     public GenderEnum getGender() {
         return gender;
     }
 
-    /**
-     * @param gender
-     */
-    public void setGender(GenderEnum gender) {
+    public User setGender(GenderEnum gender) {
         this.gender = gender;
+        return this;
     }
 
-    /**
-     * @return birthday
-     */
     public Date getBirthday() {
         return birthday;
     }
 
-    /**
-     * @param birthday
-     */
-    public void setBirthday(Date birthday) {
+    public User setBirthday(Date birthday) {
         this.birthday = birthday;
+        return this;
     }
 
-    /**
-     * @return register_time
-     */
     public Date getRegisterTime() {
         return registerTime;
     }
 
-    /**
-     * @param registerTime
-     */
-    public void setRegisterTime(Date registerTime) {
+    public User setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
+        return this;
     }
 
-    /**
-     * @return last_login_time
-     */
     public Date getLastLoginTime() {
         return lastLoginTime;
     }
 
-    /**
-     * @param lastLoginTime
-     */
-    public void setLastLoginTime(Date lastLoginTime) {
+    public User setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+        return this;
     }
 
-    /**
-     * @return last_login_ip
-     */
     public String getLastLoginIp() {
         return lastLoginIp;
     }
 
-    /**
-     * @param lastLoginIp
-     */
-    public void setLastLoginIp(String lastLoginIp) {
+    public User setLastLoginIp(String lastLoginIp) {
         this.lastLoginIp = lastLoginIp;
+        return this;
     }
 
-    /**
-     * @return user_level_id
-     */
     public Byte getUserLevelId() {
         return userLevelId;
     }
 
-    /**
-     * @param userLevelId
-     */
-    public void setUserLevelId(Byte userLevelId) {
+    public User setUserLevelId(Byte userLevelId) {
         this.userLevelId = userLevelId;
+        return this;
     }
 
-    /**
-     * @return nickname
-     */
     public String getNickname() {
         return nickname;
     }
 
-    /**
-     * @param nickname
-     */
-    public void setNickname(String nickname) {
+    public User setNickname(String nickname) {
         this.nickname = nickname;
+        return this;
     }
 
-    /**
-     * @return mobile
-     */
     public String getMobile() {
         return mobile;
     }
 
-    /**
-     * @param mobile
-     */
-    public void setMobile(String mobile) {
+    public User setMobile(String mobile) {
         this.mobile = mobile;
+        return this;
     }
 
-    /**
-     * @return register_ip
-     */
     public String getRegisterIp() {
         return registerIp;
     }
 
-    /**
-     * @param registerIp
-     */
-    public void setRegisterIp(String registerIp) {
+    public User setRegisterIp(String registerIp) {
         this.registerIp = registerIp;
+        return this;
     }
 
-    /**
-     * @return avatar
-     */
     public String getAvatar() {
         return avatar;
     }
 
-    /**
-     * @param avatar
-     */
-    public void setAvatar(String avatar) {
+    public User setAvatar(String avatar) {
         this.avatar = avatar;
+        return this;
     }
 
-    /**
-     * @return wechat_open_id
-     */
     public String getWechatOpenId() {
         return wechatOpenId;
     }
 
-    /**
-     * @param wechatOpenId
-     */
-    public void setWechatOpenId(String wechatOpenId) {
+    public User setWechatOpenId(String wechatOpenId) {
         this.wechatOpenId = wechatOpenId;
+        return this;
     }
 }

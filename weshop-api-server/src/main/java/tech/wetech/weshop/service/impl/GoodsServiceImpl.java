@@ -97,11 +97,11 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         if (goodsSearchQuery.getKeyword() != null) {
             criteria.andLike(Goods::getName, "%" + goodsSearchQuery.getKeyword() + "%");
         }
-        if (goodsSearchQuery.getIsNew() != null) {
-            criteria.andEqualTo(Goods::getIsNew, goodsSearchQuery.getIsNew());
+        if (goodsSearchQuery.getNew() != null) {
+            criteria.andEqualTo(Goods::getNew, goodsSearchQuery.getNew());
         }
-        if (goodsSearchQuery.getIsHot() != null) {
-            criteria.andEqualTo(Goods::getIsHot, goodsSearchQuery.getIsHot());
+        if (goodsSearchQuery.getHot() != null) {
+            criteria.andEqualTo(Goods::getHot, goodsSearchQuery.getHot());
         }
         if (goodsSearchQuery.getOrder() != null) {
             EntityColumn entityColumn = EntityHelper.getColumns(Goods.class)
@@ -135,11 +135,11 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         if (goodsSearchQuery.getKeyword() != null) {
             criteria.andLike(Goods::getName, "%" + goodsSearchQuery.getKeyword() + "%");
         }
-        if (goodsSearchQuery.getIsNew() != null) {
-            criteria.andEqualTo(Goods::getIsNew, goodsSearchQuery.getIsNew());
+        if (goodsSearchQuery.getNew() != null) {
+            criteria.andEqualTo(Goods::getNew, goodsSearchQuery.getNew());
         }
-        if (goodsSearchQuery.getIsHot() != null) {
-            criteria.andEqualTo(Goods::getIsHot, goodsSearchQuery.getIsHot());
+        if (goodsSearchQuery.getHot() != null) {
+            criteria.andEqualTo(Goods::getHot, goodsSearchQuery.getHot());
         }
         PageHelper.startPage(1, 10000);
         return goodsMapper.selectByExample(example).stream()

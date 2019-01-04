@@ -16,59 +16,39 @@ public class GoodsAttribute {
 
     private String value;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public GoodsAttribute setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return goods_id
-     */
     public Integer getGoodsId() {
         return goodsId;
     }
 
-    /**
-     * @param goodsId
-     */
-    public void setGoodsId(Integer goodsId) {
+    public GoodsAttribute setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 
-    /**
-     * @return attribute_id
-     */
     public Integer getAttributeId() {
         return attributeId;
     }
 
-    /**
-     * @param attributeId
-     */
-    public void setAttributeId(Integer attributeId) {
+    public GoodsAttribute setAttributeId(Integer attributeId) {
         this.attributeId = attributeId;
+        return this;
     }
 
-    /**
-     * @return value
-     */
     public String getValue() {
         return value;
     }
 
-    /**
-     * @param value
-     */
-    public void setValue(String value) {
+    public GoodsAttribute setValue(String value) {
         this.value = value;
+        return this;
     }
 }

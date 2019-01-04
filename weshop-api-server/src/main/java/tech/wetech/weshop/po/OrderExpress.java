@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_order_express")
 public class OrderExpress {
@@ -65,203 +65,111 @@ public class OrderExpress {
     @Column(name = "update_time")
     private Date updateTime;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public OrderExpress setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return order_id
-     */
     public Integer getOrderId() {
         return orderId;
     }
 
-    /**
-     * @param orderId
-     */
-    public void setOrderId(Integer orderId) {
+    public OrderExpress setOrderId(Integer orderId) {
         this.orderId = orderId;
+        return this;
     }
 
-    /**
-     * @return shipper_id
-     */
     public Integer getShipperId() {
         return shipperId;
     }
 
-    /**
-     * @param shipperId
-     */
-    public void setShipperId(Integer shipperId) {
+    public OrderExpress setShipperId(Integer shipperId) {
         this.shipperId = shipperId;
+        return this;
     }
 
-    /**
-     * 获取物流公司名称
-     *
-     * @return shipper_name - 物流公司名称
-     */
     public String getShipperName() {
         return shipperName;
     }
 
-    /**
-     * 设置物流公司名称
-     *
-     * @param shipperName 物流公司名称
-     */
-    public void setShipperName(String shipperName) {
+    public OrderExpress setShipperName(String shipperName) {
         this.shipperName = shipperName;
+        return this;
     }
 
-    /**
-     * 获取物流公司代码
-     *
-     * @return shipper_code - 物流公司代码
-     */
     public String getShipperCode() {
         return shipperCode;
     }
 
-    /**
-     * 设置物流公司代码
-     *
-     * @param shipperCode 物流公司代码
-     */
-    public void setShipperCode(String shipperCode) {
+    public OrderExpress setShipperCode(String shipperCode) {
         this.shipperCode = shipperCode;
+        return this;
     }
 
-    /**
-     * 获取快递单号
-     *
-     * @return logistic_code - 快递单号
-     */
     public String getLogisticCode() {
         return logisticCode;
     }
 
-    /**
-     * 设置快递单号
-     *
-     * @param logisticCode 快递单号
-     */
-    public void setLogisticCode(String logisticCode) {
+    public OrderExpress setLogisticCode(String logisticCode) {
         this.logisticCode = logisticCode;
+        return this;
     }
 
-    /**
-     * 获取物流跟踪信息
-     *
-     * @return traces - 物流跟踪信息
-     */
     public String getTraces() {
         return traces;
     }
 
-    /**
-     * 设置物流跟踪信息
-     *
-     * @param traces 物流跟踪信息
-     */
-    public void setTraces(String traces) {
+    public OrderExpress setTraces(String traces) {
         this.traces = traces;
+        return this;
     }
 
-    /**
-     * @return is_finish
-     */
-    public Boolean getIsFinish() {
+    public Boolean getFinish() {
         return isFinish;
     }
 
-    /**
-     * @param isFinish
-     */
-    public void setIsFinish(Boolean isFinish) {
-        this.isFinish = isFinish;
+    public OrderExpress setFinish(Boolean finish) {
+        isFinish = finish;
+        return this;
     }
 
-    /**
-     * 获取总查询次数
-     *
-     * @return request_count - 总查询次数
-     */
     public Integer getRequestCount() {
         return requestCount;
     }
 
-    /**
-     * 设置总查询次数
-     *
-     * @param requestCount 总查询次数
-     */
-    public void setRequestCount(Integer requestCount) {
+    public OrderExpress setRequestCount(Integer requestCount) {
         this.requestCount = requestCount;
+        return this;
     }
 
-    /**
-     * 获取最近一次向第三方查询物流信息时间
-     *
-     * @return request_time - 最近一次向第三方查询物流信息时间
-     */
     public Date getRequestTime() {
         return requestTime;
     }
 
-    /**
-     * 设置最近一次向第三方查询物流信息时间
-     *
-     * @param requestTime 最近一次向第三方查询物流信息时间
-     */
-    public void setRequestTime(Date requestTime) {
+    public OrderExpress setRequestTime(Date requestTime) {
         this.requestTime = requestTime;
+        return this;
     }
 
-    /**
-     * 获取添加时间
-     *
-     * @return create_time - 添加时间
-     */
     public Date getCreateTime() {
         return createTime;
     }
 
-    /**
-     * 设置添加时间
-     *
-     * @param createTime 添加时间
-     */
-    public void setCreateTime(Date createTime) {
+    public OrderExpress setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
     }
 
-    /**
-     * 获取更新时间
-     *
-     * @return update_time - 更新时间
-     */
     public Date getUpdateTime() {
         return updateTime;
     }
 
-    /**
-     * 设置更新时间
-     *
-     * @param updateTime 更新时间
-     */
-    public void setUpdateTime(Date updateTime) {
+    public OrderExpress setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 }

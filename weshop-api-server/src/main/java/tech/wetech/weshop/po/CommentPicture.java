@@ -17,59 +17,39 @@ public class CommentPicture {
     @Column(name = "sort_order")
     private Boolean sortOrder;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public CommentPicture setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return comment_id
-     */
     public Integer getCommentId() {
         return commentId;
     }
 
-    /**
-     * @param commentId
-     */
-    public void setCommentId(Integer commentId) {
+    public CommentPicture setCommentId(Integer commentId) {
         this.commentId = commentId;
+        return this;
     }
 
-    /**
-     * @return pic_url
-     */
     public String getPicUrl() {
         return picUrl;
     }
 
-    /**
-     * @param picUrl
-     */
-    public void setPicUrl(String picUrl) {
+    public CommentPicture setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+        return this;
     }
 
-    /**
-     * @return sort_order
-     */
     public Boolean getSortOrder() {
         return sortOrder;
     }
 
-    /**
-     * @param sortOrder
-     */
-    public void setSortOrder(Boolean sortOrder) {
+    public CommentPicture setSortOrder(Boolean sortOrder) {
         this.sortOrder = sortOrder;
+        return this;
     }
 }

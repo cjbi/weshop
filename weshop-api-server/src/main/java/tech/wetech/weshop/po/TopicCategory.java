@@ -13,45 +13,30 @@ public class TopicCategory {
     @Column(name = "pic_url")
     private String picUrl;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public TopicCategory setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return title
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * @param title
-     */
-    public void setTitle(String title) {
+    public TopicCategory setTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    /**
-     * @return pic_url
-     */
     public String getPicUrl() {
         return picUrl;
     }
 
-    /**
-     * @param picUrl
-     */
-    public void setPicUrl(String picUrl) {
+    public TopicCategory setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+        return this;
     }
 }

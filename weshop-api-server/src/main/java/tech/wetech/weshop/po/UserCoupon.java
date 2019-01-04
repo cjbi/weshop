@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "weshop_user_coupon")
 public class UserCoupon {
@@ -24,87 +24,57 @@ public class UserCoupon {
     @Column(name = "order_id")
     private Integer orderId;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public UserCoupon setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return coupon_id
-     */
     public Byte getCouponId() {
         return couponId;
     }
 
-    /**
-     * @param couponId
-     */
-    public void setCouponId(Byte couponId) {
+    public UserCoupon setCouponId(Byte couponId) {
         this.couponId = couponId;
+        return this;
     }
 
-    /**
-     * @return coupon_number
-     */
     public String getCouponNumber() {
         return couponNumber;
     }
 
-    /**
-     * @param couponNumber
-     */
-    public void setCouponNumber(String couponNumber) {
+    public UserCoupon setCouponNumber(String couponNumber) {
         this.couponNumber = couponNumber;
+        return this;
     }
 
-    /**
-     * @return user_id
-     */
     public Integer getUserId() {
         return userId;
     }
 
-    /**
-     * @param userId
-     */
-    public void setUserId(Integer userId) {
+    public UserCoupon setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
-    /**
-     * @return used_time
-     */
     public Date getUsedTime() {
         return usedTime;
     }
 
-    /**
-     * @param usedTime
-     */
-    public void setUsedTime(Date usedTime) {
+    public UserCoupon setUsedTime(Date usedTime) {
         this.usedTime = usedTime;
+        return this;
     }
 
-    /**
-     * @return order_id
-     */
     public Integer getOrderId() {
         return orderId;
     }
 
-    /**
-     * @param orderId
-     */
-    public void setOrderId(Integer orderId) {
+    public UserCoupon setOrderId(Integer orderId) {
         this.orderId = orderId;
+        return this;
     }
 }
