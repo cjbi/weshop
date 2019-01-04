@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.IService;
+import tk.mybatis.mapper.code.Style;
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
 
@@ -48,6 +50,9 @@ public abstract class BaseService<T> implements IService<T> {
 
     @Override
     public List<T> queryList(T entity, PageQuery pageQuery) {
+        if (pageQuery.getOrderBy() != null) {
+            pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
+        }
         return PageHelper.startPage(pageQuery)
                 .doSelectPage(() -> mapper.select(entity));
     }

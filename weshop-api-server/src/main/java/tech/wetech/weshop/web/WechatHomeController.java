@@ -9,7 +9,7 @@ import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.service.*;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.HomeCategoryVO;
-import tech.wetech.weshop.vo.IndexVO;
+import tech.wetech.weshop.vo.HomeIndexVO;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -42,8 +42,8 @@ public class WechatHomeController {
 
 
     @GetMapping("/index")
-    public Result<IndexVO> index() {
-        IndexVO indexVO = new IndexVO();
+    public Result<HomeIndexVO> index() {
+        HomeIndexVO homeIndexVO = new HomeIndexVO();
 
         List<Ad> bannerList = adService.queryList(new Ad() {{
             setAdPositionId((short) 1);
@@ -53,32 +53,24 @@ public class WechatHomeController {
         List<Channel> channelList = channelService.queryAll();
 
         PageHelper.startPage(1, 4);
-        List<Goods> newGoodsList = goodsService.queryList(new Goods() {{
-            setNew(true);
-        }});
+        List<Goods> newGoodsList = goodsService.queryList(new Goods().setNew(true));
 
         PageHelper.startPage(1, 4);
-        List<Goods> hotGoodsList = goodsService.queryList(new Goods() {{
-            setHot(true);
-        }});
+        List<Goods> hotGoodsList = goodsService.queryList(new Goods().setHot(true));
 
         PageHelper.orderBy("new_sort_order asc");
-        List<Brand> brandList = brandService.queryList(new Brand() {{
-            setNew(true);
-        }});
+        List<Brand> brandList = brandService.queryList(new Brand().setNew(true));
 
         PageHelper.startPage(1, 3);
         List<Topic> topicList = topicService.queryAll();
 
         List<HomeCategoryVO> categoryList = new LinkedList<>();
 
-        categoryService.queryList(new Category() {{
-            setParentId(0);
-        }}).forEach(c -> {
+        categoryService.queryList(
+                new Category().setParentId(0)
+        ).forEach(c -> {
 
-            List<Integer> categoryIdList = categoryService.queryList(new Category() {{
-                setParentId(c.getId());
-            }}).stream()
+            List<Integer> categoryIdList = categoryService.queryList(new Category().setParentId(c.getId())).stream()
                     .map(Category::getId)
                     .collect(Collectors.toList());
 
@@ -86,15 +78,15 @@ public class WechatHomeController {
             List<Goods> goodsList = goodsService.queryGoodsByCategoryIdIn(categoryIdList);
             categoryList.add(new HomeCategoryVO(c.getId(), c.getName(), goodsList));
         });
-        indexVO.setBannerList(bannerList);
-        indexVO.setChannelList(channelList);
-        indexVO.setNewGoodsList(newGoodsList);
-        indexVO.setHotGoodsList(hotGoodsList);
-        indexVO.setBrandList(brandList);
-        indexVO.setTopicList(topicList);
-        indexVO.setCategoryList(categoryList);
+        homeIndexVO.setBannerList(bannerList)
+                .setChannelList(channelList)
+                .setNewGoodsList(newGoodsList)
+                .setHotGoodsList(hotGoodsList)
+                .setBrandList(brandList)
+                .setTopicList(topicList)
+                .setCategoryList(categoryList);
 
-        return Result.success(indexVO);
+        return Result.success(homeIndexVO);
     }
 
 }

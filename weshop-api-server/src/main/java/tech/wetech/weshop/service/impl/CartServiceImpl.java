@@ -153,10 +153,10 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
         Cart cart = cartMapper.selectByPrimaryKey(cartParamVO.getId());
         if (cart.getProductId().equals(cartParamVO.getProductId())) {
             // 只是更新number
-            cartMapper.updateByPrimaryKeySelective(new Cart() {{
-                setNumber(cartParamVO.getNumber().shortValue());
-                setId(cartParamVO.getId());
-            }});
+            cartMapper.updateByPrimaryKeySelective(new Cart()
+                    .setNumber(cartParamVO.getNumber().shortValue())
+                    .setId(cartParamVO.getId())
+            );
             return;
         }
         Cart newCartInfo = cartMapper.selectOne(
@@ -227,10 +227,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                 setUserId(1);
             }});
         } else {
-            checkedAddress = addressMapper.selectOne(new Address() {{
-                setUserId(1);
-                setDefault(true);
-            }});
+            checkedAddress = addressMapper.selectOne(new Address().setUserId(1).setDefault(true));
         }
 
         CartCheckoutVO.CheckedAddressVO checkedAddressVO = null;

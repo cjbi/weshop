@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author cjbi
  */
-public class IndexVO {
+public class HomeIndexVO {
 
     private List<Ad> bannerList;
 
@@ -27,7 +27,7 @@ public class IndexVO {
         return bannerList;
     }
 
-    public IndexVO setBannerList(List<Ad> bannerList) {
+    public HomeIndexVO setBannerList(List<Ad> bannerList) {
         this.bannerList = bannerList;
         return this;
     }
@@ -36,7 +36,7 @@ public class IndexVO {
         return brandList;
     }
 
-    public IndexVO setBrandList(List<Brand> brandList) {
+    public HomeIndexVO setBrandList(List<Brand> brandList) {
         this.brandList = brandList;
         return this;
     }
@@ -45,7 +45,7 @@ public class IndexVO {
         return categoryList;
     }
 
-    public IndexVO setCategoryList(List<HomeCategoryVO> categoryList) {
+    public HomeIndexVO setCategoryList(List<HomeCategoryVO> categoryList) {
         this.categoryList = categoryList;
         return this;
     }
@@ -54,7 +54,7 @@ public class IndexVO {
         return channelList;
     }
 
-    public IndexVO setChannelList(List<Channel> channelList) {
+    public HomeIndexVO setChannelList(List<Channel> channelList) {
         this.channelList = channelList;
         return this;
     }
@@ -63,7 +63,7 @@ public class IndexVO {
         return hotGoodsList;
     }
 
-    public IndexVO setHotGoodsList(List<Goods> hotGoodsList) {
+    public HomeIndexVO setHotGoodsList(List<Goods> hotGoodsList) {
         this.hotGoodsList = hotGoodsList;
         return this;
     }
@@ -72,7 +72,7 @@ public class IndexVO {
         return newGoodsList;
     }
 
-    public IndexVO setNewGoodsList(List<Goods> newGoodsList) {
+    public HomeIndexVO setNewGoodsList(List<Goods> newGoodsList) {
         this.newGoodsList = newGoodsList;
         return this;
     }
@@ -81,7 +81,7 @@ public class IndexVO {
         return topicList;
     }
 
-    public IndexVO setTopicList(List<Topic> topicList) {
+    public HomeIndexVO setTopicList(List<Topic> topicList) {
         this.topicList = topicList;
         return this;
     }

@@ -2,6 +2,7 @@ package tech.wetech.weshop.web;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,12 @@ public class WechatSearchController {
 
     @GetMapping("/helper")
     public Result<List<String>> helper(String keyword) {
-        keywordsService.queryList(new Keywords(),new PageQuery().setPageNum(1).setPageSize(10));
+        return Result.success(keywordsService.helper(keyword));
+    }
+
+    @DeleteMapping("/clear-history")
+    public Result clearHistory() {
+        searchHistoryService.delete(new SearchHistory().setUserId(Constants.CURRENT_USER_ID));
         return Result.success();
     }
 
@@ -37,17 +43,17 @@ public class WechatSearchController {
     public Result<SearchIndexVO> index() {
         // 取出输入框默认的关键词
         PageHelper.offsetPage(0, 1);
-        Keywords defaultKeyword = keywordsService.queryOne(new Keywords() {{
-            setDefault(true);
-        }});
+        Keywords defaultKeyword = keywordsService.queryOne(new Keywords().setDefault(true));
         // 取出热闹关键词
-        List<Keywords> hotKeywordList = keywordsService.queryList(new Keywords() {{
-            setHot(true);
-        }}, new PageQuery().setPageNum(1).setPageSize(10));
+        List<Keywords> hotKeywordList = keywordsService.queryList(
+                new Keywords().setHot(true),
+                new PageQuery().setPageNum(1).setPageSize(10)
+        );
 
-        List<String> historyKeywordList = searchHistoryService.queryList(new SearchHistory() {{
-            setUserId(Constants.CURRENT_USER_ID);
-        }}, new PageQuery().setPageNum(1).setPageSize(10)).stream()
+        List<String> historyKeywordList = searchHistoryService.queryList(
+                new SearchHistory().setUserId(Constants.CURRENT_USER_ID),
+                new PageQuery().setPageNum(1).setPageSize(10)
+        ).stream()
                 .map(SearchHistory::getKeyword)
                 .collect(Collectors.toList());
 

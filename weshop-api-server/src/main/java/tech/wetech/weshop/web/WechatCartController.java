@@ -45,19 +45,17 @@ public class WechatCartController {
 
     @PostMapping("/checked")
     public Result<CartResultVO> checkedCartGoods(@RequestBody @Validated CartCheckedVO cartCheckedVO) {
-        cartService.updateNotNull(new Cart() {{
-            setId(cartCheckedVO.getCartId());
-            setChecked(cartCheckedVO.getChecked());
-        }});
+        cartService.updateNotNull(new Cart()
+                .setId(cartCheckedVO.getCartId())
+                .setChecked(cartCheckedVO.getChecked()));
         return Result.success(cartService.getCart());
     }
 
     @GetMapping("/goods-count")
     public Result<Integer> goodsCount() {
-        int count = cartService.count(new Cart() {{
-            setUserId(Constants.CURRENT_USER_ID);
-            setSessionId(Constants.SESSION_ID);
-        }});
+        int count = cartService.count(new Cart()
+                .setUserId(Constants.CURRENT_USER_ID)
+                .setSessionId(Constants.SESSION_ID));
         return Result.success(count);
     }
 

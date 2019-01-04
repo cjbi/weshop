@@ -36,9 +36,6 @@ public abstract class BaseController<T> {
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
     public Result queryList(T entity, PageQuery pageQuery) {
-        if (pageQuery.getOrderBy() != null) {
-            pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
-        }
         List<T> list = service.queryList(entity, pageQuery);
         return Result.success(service.queryList(entity, pageQuery))
                 .addExtra("total", ((Page) list).getTotal());
