@@ -28,9 +28,6 @@ public abstract class BaseCrudController<T> extends BaseController {
     @Autowired
     protected IService<T> service;
 
-    public BaseCrudController() {
-    }
-
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
     public Result queryList(T entity, PageQuery pageQuery) {
