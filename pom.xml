@@ -19,7 +19,7 @@
 
     <modules>
         <module>weshop-admin</module>
-        <module>weshop-api-server</module>
-        <module>weshop-frontend-app</module>
+        <module>weshop-server</module>
+        <module>weshop-mini-program</module>
     </modules>
 </project>

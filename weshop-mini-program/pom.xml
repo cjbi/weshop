@@ -10,6 +10,6 @@
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>weshop-frontend-app</artifactId>
+    <artifactId>weshop-mini-program</artifactId>
 
 </project>

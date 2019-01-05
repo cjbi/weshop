@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>tech.wetech</groupId>
-    <artifactId>weshop-api-server</artifactId>
+    <artifactId>weshop-server</artifactId>
     <packaging>jar</packaging>
 
-    <name>weshop-api-server</name>
+    <name>weshop-server</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
