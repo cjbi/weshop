@@ -6,18 +6,18 @@ const user = require('../../services/user.js');
 const app = getApp()
 Page({
   data: {
-    newGoods: [],
-    hotGoods: [],
-    topics: [],
-    brands: [],
+    newGoodsList: [],
+    hotGoodsList: [],
+    topicList: [],
+    brandList: [],
     floorGoods: [],
-    banner: [],
-    channel: []
+    bannerList: [],
+    channelList: []
   },
   onShareAppMessage: function () {
     return {
-      title: 'NideShop',
-      desc: '仿网易严选微信小程序商城',
+      title: 'weshop',
+      desc: '严选微信小程序商城',
       path: '/pages/index/index'
     }
   },
@@ -25,15 +25,15 @@ Page({
   getIndexData: function () {
     let that = this;
     util.request(api.IndexUrl).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
-          newGoods: res.data.newGoodsList,
-          hotGoods: res.data.hotGoodsList,
-          topics: res.data.topicList,
-          brand: res.data.brandList,
+          newGoodsList: res.data.newGoodsList,
+          hotGoodsList: res.data.hotGoodsList,
+          topicList: res.data.topicList,
+          brandList: res.data.brandList,
           floorGoods: res.data.categoryList,
-          banner: res.data.banner,
-          channel: res.data.channel
+          bannerList: res.data.bannerList,
+          channelList: res.data.channelList
         });
       }
     });

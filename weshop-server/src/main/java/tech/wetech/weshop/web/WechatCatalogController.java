@@ -16,8 +16,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/wechat/category")
-public class WechatCategoryController {
+@RequestMapping("/wechat/catalog")
+public class WechatCatalogController {
 
     @Autowired
     private CategoryService categoryService;
@@ -32,9 +32,7 @@ public class WechatCategoryController {
             setParentId(0);
         }}).forEach(c -> {
             CategoryVO categoryVO = new CategoryVO(c);
-            List<Category> subCategoryList = categoryService.queryList(new Category() {{
-                setParentId(c.getId());
-            }});
+            List<Category> subCategoryList = categoryService.queryList(new Category().setParentId(c.getId()));
             categoryVO.setSubCategoryList(subCategoryList);
             categoryList.add(categoryVO);
         });
@@ -50,7 +48,10 @@ public class WechatCategoryController {
 
     @GetMapping("/{id}")
     public Result<CategoryVO> current(@PathVariable Integer id) {
-        return Result.success(new CategoryVO(categoryService.queryById(id)));
+        CategoryVO categoryVO = new CategoryVO(categoryService.queryById(id));
+        List<Category> subCategoryList = categoryService.queryList(new Category().setParentId(id));
+        categoryVO.setSubCategoryList(subCategoryList);
+        return Result.success(categoryVO);
     }
 
 }
