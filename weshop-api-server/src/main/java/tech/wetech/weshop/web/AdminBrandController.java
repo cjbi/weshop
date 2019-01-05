@@ -8,6 +8,6 @@ import tech.wetech.weshop.po.Brand;
  */
 @RestController
 @RequestMapping("/admin/brand")
-public class AdminBrandCrudController extends BaseCrudController<Brand> {
+public class AdminBrandController extends BaseCrudController<Brand> {
 
 }

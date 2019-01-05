@@ -9,6 +9,6 @@ import tech.wetech.weshop.po.Collect;
  */
 @RestController
 @RequestMapping("/admin/collect")
-public class AdminCollectCrudController extends BaseCrudController<Collect> {
+public class AdminCollectController extends BaseCrudController<Collect> {
 
 }

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/wechat/address")
-public class WechatAddressCrudController extends BaseCrudController<Address> {
+public class WechatAddressController extends BaseCrudController<Address> {
 
     @Autowired
     private AddressService addressService;

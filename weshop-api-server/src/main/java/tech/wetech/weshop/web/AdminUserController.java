@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/admin/user")
-public class AdminUserCrudController extends BaseCrudController<User> {
+public class AdminUserController extends BaseCrudController<User> {
 
     @Autowired
     private UserLevelService userLevelService;

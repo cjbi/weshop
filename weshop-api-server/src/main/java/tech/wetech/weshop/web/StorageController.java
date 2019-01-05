@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/storage")
-public class StorageCrudController extends BaseCrudController<Storage> {
+public class StorageController extends BaseCrudController<Storage> {
 
     @Autowired
     private StorageService storageService;

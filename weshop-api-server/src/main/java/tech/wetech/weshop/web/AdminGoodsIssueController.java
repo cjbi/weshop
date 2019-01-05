@@ -2,13 +2,13 @@ package tech.wetech.weshop.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.po.Feedback;
+import tech.wetech.weshop.po.GoodsIssue;
 
 /**
  * @author cjbi
  */
 @RestController
-@RequestMapping("/admin/feedback")
-public class AdminFeedbackCrudController extends BaseCrudController<Feedback> {
+@RequestMapping("/admin/goods-issue")
+public class AdminGoodsIssueController extends BaseCrudController<GoodsIssue> {
 
 }

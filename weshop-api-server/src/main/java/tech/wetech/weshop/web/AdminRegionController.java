@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/admin/region")
-public class AdminRegionCrudController extends BaseCrudController<Region> {
+public class AdminRegionController extends BaseCrudController<Region> {
 
     @Override
     public Result<List<Region>> queryList(Region entity, PageQuery page) {
