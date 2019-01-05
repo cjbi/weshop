@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/admin/category")
-public class AdminCategoryController extends BaseController<Category> {
+public class AdminCategoryCrudController extends BaseCrudController<Category> {
 
     @Autowired
     private CategoryService categoryService;

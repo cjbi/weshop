@@ -9,6 +9,6 @@ import tech.wetech.weshop.po.Feedback;
  */
 @RestController
 @RequestMapping("/admin/feedback")
-public class AdminFeedbackController extends BaseController<Feedback> {
+public class AdminFeedbackCrudController extends BaseCrudController<Feedback> {
 
 }

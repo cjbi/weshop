@@ -9,6 +9,6 @@ import tech.wetech.weshop.po.Keywords;
  */
 @RestController
 @RequestMapping("/admin/keywords")
-public class AdminKeywordsController extends BaseController<Keywords> {
+public class AdminKeywordsCrudController extends BaseCrudController<Keywords> {
 
 }

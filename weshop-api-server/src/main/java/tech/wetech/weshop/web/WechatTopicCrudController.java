@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequestMapping("/wechat/topic")
 @RestController
-public class WechatTopicController extends BaseController<Topic> {
+public class WechatTopicCrudController extends BaseCrudController<Topic> {
 
     @Autowired
     private TopicService topicService;

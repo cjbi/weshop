@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/admin/order")
-public class AdminOrderController extends BaseController<Order> {
+public class AdminOrderCrudController extends BaseCrudController<Order> {
 
     @Autowired
     private OrderService orderService;

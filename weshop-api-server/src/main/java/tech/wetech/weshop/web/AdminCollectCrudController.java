@@ -2,13 +2,13 @@ package tech.wetech.weshop.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.po.Address;
+import tech.wetech.weshop.po.Collect;
 
 /**
  * @author cjbi
  */
 @RestController
-@RequestMapping("/admin/address")
-public class AdminAddressController extends BaseCrudController<Address> {
+@RequestMapping("/admin/collect")
+public class AdminCollectCrudController extends BaseCrudController<Collect> {
 
 }

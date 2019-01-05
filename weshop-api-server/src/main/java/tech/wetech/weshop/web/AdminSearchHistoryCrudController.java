@@ -2,13 +2,13 @@ package tech.wetech.weshop.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.po.Goods;
+import tech.wetech.weshop.po.SearchHistory;
 
 /**
  * @author cjbi
  */
 @RestController
-@RequestMapping("/admin/goods")
-public class AdminGoodsController extends BaseController<Goods> {
+@RequestMapping("/admin/search-history")
+public class AdminSearchHistoryCrudController extends BaseCrudController<SearchHistory> {
 
 }

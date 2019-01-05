@@ -9,6 +9,6 @@ import tech.wetech.weshop.po.Footprint;
  */
 @RestController
 @RequestMapping("/admin/footprint")
-public class AdminFootprintController extends BaseController<Footprint> {
+public class AdminFootprintCrudController extends BaseCrudController<Footprint> {
 
 }

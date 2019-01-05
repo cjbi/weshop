@@ -13,7 +13,7 @@ import tech.wetech.weshop.vo.AddOrDeleteResultVO;
 
 @RestController
 @RequestMapping("/wechat/collect")
-public class WechatCollectController extends BaseController<Collect> {
+public class WechatCollectCrudController extends BaseCrudController<Collect> {
 
     @Autowired
     private CollectService collectService;

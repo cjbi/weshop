@@ -8,6 +8,6 @@ import tech.wetech.weshop.po.Comment;
  */
 @RestController
 @RequestMapping("/admin/comment")
-public class AdminCommentController extends BaseController<Comment> {
+public class AdminCommentCrudController extends BaseCrudController<Comment> {
 
 }
