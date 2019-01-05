@@ -1,6 +1,5 @@
 package tech.wetech.weshop.po;
 
-import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
 
 import javax.persistence.*;
@@ -20,7 +19,7 @@ public class Order {
     private Integer userId;
 
     @Column(name = "order_status")
-    private OrderStatusEnum orderStatus;
+    private Integer orderStatus;
 
     @Column(name = "shipping_status")
     private Short shippingStatus;
@@ -133,11 +132,11 @@ public class Order {
         return this;
     }
 
-    public OrderStatusEnum getOrderStatus() {
+    public Integer getOrderStatus() {
         return orderStatus;
     }
 
-    public Order setOrderStatus(OrderStatusEnum orderStatus) {
+    public Order setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
         return this;
     }

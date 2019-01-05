@@ -1,10 +1,10 @@
 package tech.wetech.weshop.vo;
 
-public class AddOrDeleteResultVO {
+public class CollectAddOrDeleteResultVO {
 
     private HandleType handleType;
 
-    public AddOrDeleteResultVO(HandleType handleType) {
+    public CollectAddOrDeleteResultVO(HandleType handleType) {
         this.handleType = handleType;
     }
 
@@ -16,7 +16,7 @@ public class AddOrDeleteResultVO {
         return handleType;
     }
 
-    public AddOrDeleteResultVO setHandleType(HandleType handleType) {
+    public CollectAddOrDeleteResultVO setHandleType(HandleType handleType) {
         this.handleType = handleType;
         return this;
     }

@@ -6,8 +6,8 @@ import tech.wetech.weshop.mapper.CollectMapper;
 import tech.wetech.weshop.po.Collect;
 import tech.wetech.weshop.service.CollectService;
 import tech.wetech.weshop.utils.Constants;
-import tech.wetech.weshop.vo.AddOrDeleteParamVO;
-import tech.wetech.weshop.vo.AddOrDeleteResultVO;
+import tech.wetech.weshop.vo.CollectAddOrDeleteParamVO;
+import tech.wetech.weshop.vo.CollectAddOrDeleteResultVO;
 
 /**
  * @author cjbi
@@ -19,24 +19,24 @@ public class CollectServiceImpl extends BaseService<Collect> implements CollectS
     private CollectMapper collectMapper;
 
     @Override
-    public AddOrDeleteResultVO addOrDelete(AddOrDeleteParamVO addOrDeleteParamVO) {
+    public CollectAddOrDeleteResultVO addOrDelete(CollectAddOrDeleteParamVO collectAddOrDeleteParamVO) {
         Collect collect = collectMapper.selectOne(new Collect() {{
-            setTypeId(addOrDeleteParamVO.getTypeId());
-            setValueId(addOrDeleteParamVO.getValueId());
+            setTypeId(collectAddOrDeleteParamVO.getTypeId());
+            setValueId(collectAddOrDeleteParamVO.getValueId());
             setUserId(Constants.CURRENT_USER_ID);
         }});
-        AddOrDeleteResultVO.HandleType handleType = AddOrDeleteResultVO.HandleType.add;
+        CollectAddOrDeleteResultVO.HandleType handleType = CollectAddOrDeleteResultVO.HandleType.add;
         //添加收藏
         if (collect == null) {
             collectMapper.insertSelective(new Collect() {{
-                setTypeId(addOrDeleteParamVO.getTypeId());
-                setValueId(addOrDeleteParamVO.getValueId());
+                setTypeId(collectAddOrDeleteParamVO.getTypeId());
+                setValueId(collectAddOrDeleteParamVO.getValueId());
                 setUserId(Constants.CURRENT_USER_ID);
             }});
         } else {
             collectMapper.deleteByPrimaryKey(collect.getId());
-            handleType = AddOrDeleteResultVO.HandleType.delete;
+            handleType = CollectAddOrDeleteResultVO.HandleType.delete;
         }
-        return new AddOrDeleteResultVO(handleType);
+        return new CollectAddOrDeleteResultVO(handleType);
     }
 }

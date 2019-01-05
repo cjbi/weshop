@@ -1,6 +1,6 @@
 package tech.wetech.weshop.vo;
 
-public class AddOrDeleteParamVO {
+public class CollectAddOrDeleteParamVO {
 
     private Integer valueId;
 
@@ -10,7 +10,7 @@ public class AddOrDeleteParamVO {
         return valueId;
     }
 
-    public AddOrDeleteParamVO setValueId(Integer valueId) {
+    public CollectAddOrDeleteParamVO setValueId(Integer valueId) {
         this.valueId = valueId;
         return this;
     }
@@ -19,7 +19,7 @@ public class AddOrDeleteParamVO {
         return typeId;
     }
 
-    public AddOrDeleteParamVO setTypeId(Integer typeId) {
+    public CollectAddOrDeleteParamVO setTypeId(Integer typeId) {
         this.typeId = typeId;
         return this;
     }

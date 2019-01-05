@@ -11,6 +11,7 @@ import tech.wetech.weshop.query.OrderQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.IdGenerator;
+import tech.wetech.weshop.vo.HandleOptionVO;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
 import tech.wetech.weshop.vo.OrderVO;
@@ -56,15 +57,11 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     public OrderVO queryOrderDetail(Integer orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
 
-        List<OrderGoods> orderGoodsList = orderGoodsMapper.select(new OrderGoods() {{
-            setOrderId(orderId);
-        }});
+        List<OrderGoods> orderGoodsList = orderGoodsMapper.select(new OrderGoods().setOrderId(orderId));
 
-        OrderExpress orderExpress = orderExpressMapper.selectOne(new OrderExpress() {{
-            setOrderId(orderId);
-        }});
+        OrderExpress orderExpress = orderExpressMapper.selectOne(new OrderExpress().setOrderId(orderId));
 
-        return new OrderVO(order, orderGoodsList, orderExpress);
+        return new OrderVO(order, orderGoodsList, orderExpress, new HandleOptionVO(order.getOrderStatus()));
     }
 
     @Override

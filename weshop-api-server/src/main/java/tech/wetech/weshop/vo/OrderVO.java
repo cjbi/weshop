@@ -17,13 +17,16 @@ public class OrderVO {
 
     private OrderExpress orderExpress;
 
+    private HandleOptionVO handleOption;
+
     public OrderVO() {
     }
 
-    public OrderVO(Order order, List<OrderGoods> orderGoods, OrderExpress orderExpress) {
+    public OrderVO(Order order, List<OrderGoods> orderGoods, OrderExpress orderExpress, HandleOptionVO handleOption) {
         this.order = order;
         this.orderGoods = orderGoods;
         this.orderExpress = orderExpress;
+        this.handleOption = handleOption;
     }
 
     public List<OrderGoods> getOrderGoods() {
@@ -48,5 +51,14 @@ public class OrderVO {
 
     public void setOrderExpress(OrderExpress orderExpress) {
         this.orderExpress = orderExpress;
+    }
+
+    public HandleOptionVO getHandleOption() {
+        return handleOption;
+    }
+
+    public OrderVO setHandleOption(HandleOptionVO handleOption) {
+        this.handleOption = handleOption;
+        return this;
     }
 }

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.po.Collect;
 import tech.wetech.weshop.service.CollectService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.AddOrDeleteParamVO;
-import tech.wetech.weshop.vo.AddOrDeleteResultVO;
+import tech.wetech.weshop.vo.CollectAddOrDeleteParamVO;
+import tech.wetech.weshop.vo.CollectAddOrDeleteResultVO;
 
 @RestController
 @RequestMapping("/wechat/collect")
@@ -19,8 +19,8 @@ public class WechatCollectController extends BaseCrudController<Collect> {
     private CollectService collectService;
 
     @PostMapping("/add-or-delete")
-    public Result<AddOrDeleteResultVO> addOrDelete(@RequestBody AddOrDeleteParamVO addOrDeleteParamVO) {
-        return Result.success(collectService.addOrDelete(addOrDeleteParamVO));
+    public Result<CollectAddOrDeleteResultVO> addOrDelete(@RequestBody CollectAddOrDeleteParamVO collectAddOrDeleteParamVO) {
+        return Result.success(collectService.addOrDelete(collectAddOrDeleteParamVO));
     }
 
 }
