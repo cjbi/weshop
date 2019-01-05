@@ -234,13 +234,13 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
         if (checkedAddress != null) {
             checkedAddressVO = new CartCheckoutVO.CheckedAddressVO(checkedAddress)
                     .setProvinceName(
-                            regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
+                            regionMapper.selectNameById(checkedAddress.getProvinceId())
                     )
                     .setCityName(
-                            regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
+                            regionMapper.selectNameById(checkedAddress.getProvinceId())
                     )
                     .setDistrictName(
-                            regionMapper.selectNameById(checkedAddress.getDistrictId().intValue())
+                            regionMapper.selectNameById(checkedAddress.getDistrictId())
                     )
                     .setFullRegion(
                             checkedAddressVO.getProvinceName() + checkedAddressVO.getCityName() + checkedAddressVO.getDistrictName()

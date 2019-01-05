@@ -43,15 +43,6 @@ public class PageQuery implements Serializable {
     @ApiModelProperty("排序")
     private String orderBy;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public PageQuery limit(int limit, int offset) {
-
-        return this;
-    }
-
     public int getPageNum() {
         return pageNum;
     }

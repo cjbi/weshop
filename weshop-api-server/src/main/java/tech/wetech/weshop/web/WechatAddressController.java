@@ -9,6 +9,7 @@ import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.AddressService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.vo.AddressVO;
 
 import javax.validation.constraints.NotNull;
 
@@ -31,8 +32,8 @@ public class WechatAddressController extends BaseController<Address> {
     }
 
     @GetMapping("/detail")
-    public Result queryDetail(Integer id) {
-        return null;
+    public Result<AddressVO> queryDetail(Integer id) {
+        return Result.success(addressService.queryDetail(id));
     }
 
     @Override

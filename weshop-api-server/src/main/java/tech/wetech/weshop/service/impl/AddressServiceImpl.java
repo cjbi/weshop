@@ -8,8 +8,6 @@ import tech.wetech.weshop.po.Address;
 import tech.wetech.weshop.service.AddressService;
 import tech.wetech.weshop.vo.AddressVO;
 
-import java.util.Optional;
-
 /**
  * @author cjbi
  */
@@ -24,22 +22,24 @@ public class AddressServiceImpl extends BaseService<Address> implements AddressS
 
     @Override
     public AddressVO queryDetail(Integer id) {
-        Address checkedAddress = Optional.ofNullable(addressMapper.selectByPrimaryKey(id)).orElseGet(() -> new Address());
-        AddressVO addressVO = new AddressVO(checkedAddress)
-                .setProvinceName(
-                        regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
-                )
-                .setCityName(
-                        regionMapper.selectNameById(checkedAddress.getProvinceId().intValue())
-                )
-                .setDistrictName(
-                        regionMapper.selectNameById(checkedAddress.getDistrictId().intValue())
-                );
+        Address address = addressMapper.selectByPrimaryKey(id);
+        AddressVO addressVO = null;
+        if (address != null) {
+            addressVO = new AddressVO(address)
+                    .setProvinceName(
+                            regionMapper.selectNameById(address.getProvinceId())
+                    )
+                    .setCityName(
+                            regionMapper.selectNameById(address.getProvinceId())
+                    )
+                    .setDistrictName(
+                            regionMapper.selectNameById(address.getDistrictId())
+                    );
 
-        addressVO.setFullRegion(
-                addressVO.getProvinceName() + addressVO.getCityName() + addressVO.getDistrictName()
-        );
-
+            addressVO.setFullRegion(
+                    addressVO.getProvinceName() + addressVO.getCityName() + addressVO.getDistrictName()
+            );
+        }
         return addressVO;
     }
 }

@@ -5,5 +5,5 @@ import tech.wetech.weshop.po.Region;
 
 public interface RegionMapper extends MyMapper<Region> {
 
-    String selectNameById(Integer id);
+    String selectNameById(Short id);
 }
