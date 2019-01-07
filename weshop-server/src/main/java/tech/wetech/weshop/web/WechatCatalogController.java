@@ -28,9 +28,7 @@ public class WechatCatalogController {
         List<CategoryVO> categoryList = new LinkedList<>();
 
         PageHelper.startPage(1, 10);
-        categoryService.queryList(new Category() {{
-            setParentId(0);
-        }}).forEach(c -> {
+        categoryService.queryList(new Category().setParentId(0)).forEach(c -> {
             CategoryVO categoryVO = new CategoryVO(c);
             List<Category> subCategoryList = categoryService.queryList(new Category().setParentId(c.getId()));
             categoryVO.setSubCategoryList(subCategoryList);

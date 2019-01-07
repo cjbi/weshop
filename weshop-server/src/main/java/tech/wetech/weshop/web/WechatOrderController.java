@@ -47,9 +47,7 @@ public class WechatOrderController {
      */
     @GetMapping("/express/{orderId}")
     public Result<OrderExpress> queryLatestExpressInfo(@PathVariable Integer orderId) {
-        return Result.success(orderExpressService.queryOne(new OrderExpress() {{
-            setOrderId(orderId);
-        }}));
+        return Result.success(orderExpressService.queryOne(new OrderExpress().setOrderId(orderId)));
     }
 
 }

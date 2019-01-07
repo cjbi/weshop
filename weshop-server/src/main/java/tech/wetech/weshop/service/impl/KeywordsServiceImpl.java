@@ -16,20 +16,4 @@ import java.util.stream.Collectors;
 @Service
 public class KeywordsServiceImpl extends BaseService<Keywords> implements KeywordsService {
 
-    @Autowired
-    private KeywordsMapper keywordsMapper;
-
-    @Override
-    public List<String> helper(String keyword) {
-        Weekend<Keywords> example = Weekend.of(Keywords.class);
-        example.selectProperties(Reflections.fnToFieldName(Keywords::getKeyword));
-        WeekendCriteria<Keywords, Object> criteria = example.weekendCriteria();
-        criteria.andLike(Keywords::getKeyword, "%" + keyword + "%");
-
-        return PageHelper.startPage(1, 10).doSelectPage(() ->
-                keywordsMapper.selectByExample(example).stream()
-                        .map(Keywords::getKeyword)
-                        .collect(Collectors.toList())
-        );
-    }
 }

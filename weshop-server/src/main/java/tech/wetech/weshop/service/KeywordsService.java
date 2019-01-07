@@ -9,6 +9,4 @@ import java.util.List;
  */
 public interface KeywordsService extends IService<Keywords> {
 
-    List<String> helper(String keyword);
-
 }
