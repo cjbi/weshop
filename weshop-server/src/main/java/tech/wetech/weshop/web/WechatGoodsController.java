@@ -1,6 +1,5 @@
 package tech.wetech.weshop.web;
 
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,15 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.po.Category;
 import tech.wetech.weshop.po.Goods;
-import tech.wetech.weshop.po.RelatedGoods;
 import tech.wetech.weshop.query.GoodsSearchQuery;
-import tech.wetech.weshop.service.*;
+import tech.wetech.weshop.service.CategoryService;
+import tech.wetech.weshop.service.GoodsService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author cjbi
@@ -31,9 +29,6 @@ public class WechatGoodsController {
     private GoodsService goodsService;
 
     @Autowired
-    private RelatedGoodsService relatedGoodsService;
-
-    @Autowired
     private CategoryService categoryService;
 
     @GetMapping("/count")
@@ -43,26 +38,7 @@ public class WechatGoodsController {
 
     @GetMapping("/related")
     public Result<List<GoodsListVO>> queryRelatedGoods(@NotNull Integer id) {
-        List<RelatedGoods> relatedGoodsList = relatedGoodsService.queryList(new RelatedGoods().setGoodsId(id));
-        List<GoodsListVO> goodsList = null;
-
-        if (relatedGoodsList.isEmpty()) {
-            //查找同分类下的商品
-            Goods goods = goodsService.queryById(id);
-            PageHelper.startPage(1, 8);
-            goodsList = goodsService.queryGoodsByCategoryId(goods.getCategoryId()).stream()
-                    .map(GoodsListVO::new)
-                    .collect(Collectors.toList());
-        } else {
-            List<Integer> goodsIdList = relatedGoodsList.stream()
-                    .map(RelatedGoods::getGoodsId)
-                    .collect(Collectors.toList());
-            PageHelper.startPage(1, 8);
-            goodsList = goodsService.queryGoodsByIdIn(goodsIdList).stream()
-                    .map(GoodsListVO::new)
-                    .collect(Collectors.toList());
-        }
-        return Result.success(goodsList);
+        return Result.success(goodsService.queryRelatedGoods(id));
     }
 
     /**
