@@ -30,4 +30,10 @@
             #{item}
         </foreach>
     </select>
+    <select id="selectByIdIn" resultType="tech.wetech.weshop.po.Category">
+        select * from weshop_category where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

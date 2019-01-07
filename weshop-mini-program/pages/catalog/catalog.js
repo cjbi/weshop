@@ -29,7 +29,7 @@ Page({
     });
     util.request(api.GoodsCount).then(function(res) {
       that.setData({
-        goodsCount: res.data.goodsCount
+        goodsCount: res.data
       });
     });
 
@@ -57,7 +57,7 @@ Page({
   },
   getList: function() {
     var that = this;
-    util.request(api.ApiRootUrl + 'api/catalog/' + that.data.currentCategory.cat_id)
+    util.request(api.ApiRootUrl + 'api/catalog/' + that.data.currentCategory.id)
       .then(function(res) {
         that.setData({
           categoryList: res.data,

@@ -12,10 +12,9 @@ Page({
   getFootprintList() {
     let that = this;
     util.request(api.FootprintList).then(function (res) {
-      if (res.errno === 0) {
-        console.log(res.data);
+      if (res.success) {
         that.setData({
-          footprintList: res.data.data
+          footprintList: res.data
         });
       }
     });
@@ -33,7 +32,7 @@ Page({
         success: function (res) {
           if (res.confirm) {
             util.request(api.FootprintDelete, { footprintId: footprint.id }, 'POST').then(function (res) {
-              if (res.errno === 0) {
+              if (res.success) {
                 wx.showToast({
                   title: '删除成功',
                   icon: 'success',
@@ -48,7 +47,7 @@ Page({
       });
     } else {
       wx.navigateTo({
-        url: '/pages/goods/goods?id=' + footprint.goods_id,
+        url: '/pages/goods/goods?id=' + footprint.goodsId,
       });
     }
     

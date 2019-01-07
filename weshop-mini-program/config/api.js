@@ -8,7 +8,7 @@ module.exports = {
 
   AuthLoginByWeixin: ApiRootUrl + 'auth/loginByWeixin', //微信登录
 
-  GoodsCount: ApiRootUrl + 'goods/count',  //统计商品总数
+  GoodsCount: BaseUrl + 'goods/count',  //统计商品总数
   GoodsList: ApiRootUrl + 'goods/list',  //获得商品列表
   GoodsCategory: ApiRootUrl + 'goods/category',  //获得分类数据
   GoodsDetail: ApiRootUrl + 'goods/detail',  //获得商品的详情
@@ -58,6 +58,6 @@ module.exports = {
   OrderCancel: ApiRootUrl + 'order/cancel',  //取消订单
   OrderExpress: ApiRootUrl + 'order/express', //物流详情
 
-  FootprintList: ApiRootUrl + 'footprint/list',  //足迹列表
-  FootprintDelete: ApiRootUrl + 'footprint/delete',  //删除足迹
+  FootprintList: BaseUrl + 'footprint/list',  //足迹列表
+  FootprintDelete: BaseUrl + 'footprint',  //删除足迹
 };

@@ -126,33 +126,9 @@ public class WechatGoodsController {
         return Result.success(new GoodsCategoryVO(currentCategory, parentCategory, brotherCategory));
     }
 
-
     @GetMapping("/list")
-    public Result<List<Goods>> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
-
-        //没传分类id就查全部
-        if (goodsSearchQuery.getCategoryId() == null) {
-            goodsSearchQuery.setCategoryId(0);
-        }
-        List<Goods> goodsList = goodsService.queryList(goodsSearchQuery);
-
-        if (goodsList.isEmpty()) {
-            return Result.success();
-        }
-        List<Integer> categoryIds = goodsService.queryGoodsCategoryIds(goodsSearchQuery);
-        //查询二级分类的parentIds
-        List<Integer> parentIds = categoryService.queryParentIdsByIdIn(categoryIds);
-        //一级分类
-        List<CategoryFilterVO> categoryFilter = new LinkedList<CategoryFilterVO>() {{
-            add(new CategoryFilterVO(0, "全部", false));
-            addAll(categoryService.queryCategoryByIdIn(parentIds).stream()
-                    .map(CategoryFilterVO::new)
-                    .collect(Collectors.toList()));
-        }};
-
-        categoryFilter.forEach(categoryFilterVO -> categoryFilterVO.setChecked(categoryFilterVO.getId().equals(goodsSearchQuery.getCategoryId())));
-
-        return Result.success(goodsList).addExtra("categoryFilter", categoryFilter);
+    public Result<GoodsResultVO> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
+        return Result.success(goodsService.queryList(goodsSearchQuery));
     }
 
     @GetMapping("/detail/{goodsId}")

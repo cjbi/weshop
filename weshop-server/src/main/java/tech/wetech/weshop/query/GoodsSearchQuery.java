@@ -1,6 +1,6 @@
 package tech.wetech.weshop.query;
 
-public class GoodsSearchQuery {
+public class GoodsSearchQuery extends PageQuery {
 
     private Integer categoryId;
 
@@ -11,14 +11,6 @@ public class GoodsSearchQuery {
     private Boolean isNew;
 
     private Boolean isHot;
-
-    private Integer pageNum;
-
-    private Integer PageSize;
-
-    private String sort;
-
-    private String order;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -62,42 +54,6 @@ public class GoodsSearchQuery {
 
     public GoodsSearchQuery setHot(Boolean hot) {
         isHot = hot;
-        return this;
-    }
-
-    public Integer getPageNum() {
-        return pageNum;
-    }
-
-    public GoodsSearchQuery setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
-        return this;
-    }
-
-    public Integer getPageSize() {
-        return PageSize;
-    }
-
-    public GoodsSearchQuery setPageSize(Integer pageSize) {
-        PageSize = pageSize;
-        return this;
-    }
-
-    public String getSort() {
-        return sort;
-    }
-
-    public GoodsSearchQuery setSort(String sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public GoodsSearchQuery setOrder(String order) {
-        this.order = order;
         return this;
     }
 }

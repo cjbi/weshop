@@ -1,6 +1,5 @@
 package tech.wetech.weshop.mapper;
 
-import org.apache.ibatis.annotations.Param;
 import tech.wetech.weshop.po.Category;
 import tech.wetech.weshop.utils.MyMapper;
 
@@ -11,5 +10,7 @@ public interface CategoryMapper extends MyMapper<Category> {
     List<Integer> selectIdsByParentId(Integer parentId);
 
     List<Integer> selectParentIdsByIdIn( List<Integer> ids);
+
+    List<Category> selectByIdIn(List<Integer> ids);
 
 }

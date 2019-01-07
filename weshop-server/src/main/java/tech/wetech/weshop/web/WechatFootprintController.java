@@ -9,7 +9,6 @@ import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/wechat/footprint")
@@ -18,8 +17,8 @@ public class WechatFootprintController extends BaseController {
     @Autowired
     private FootprintService footprintService;
 
-    @GetMapping("/timeline")
-    public Result<Map<String, List<GoodsFootprintBO>>> queryGoodsFootprintTimeLine() {
+    @GetMapping("/list")
+    public Result<List<List<GoodsFootprintBO>>> queryGoodsFootprintList() {
         return Result.success(footprintService.queryGoodsFootprintTimeLine());
     }
 

@@ -2,6 +2,7 @@ package tech.wetech.weshop.service;
 
 import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.query.GoodsSearchQuery;
+import tech.wetech.weshop.vo.GoodsResultVO;
 
 import java.util.List;
 
@@ -16,8 +17,5 @@ public interface GoodsService extends IService<Goods> {
 
     List<Goods> queryGoodsByCategoryId(Integer categoryId);
 
-    List<Goods> queryList(GoodsSearchQuery goodsSearchQuery);
-
-    List<Integer> queryGoodsCategoryIds(GoodsSearchQuery goodsSearchQuery);
-
+    GoodsResultVO queryList(GoodsSearchQuery goodsSearchQuery);
 }

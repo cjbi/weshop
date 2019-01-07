@@ -2,7 +2,6 @@ package tech.wetech.weshop.bo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class GoodsFootprintBO {
 
@@ -94,16 +93,17 @@ public class GoodsFootprintBO {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof GoodsFootprintBO)) return false;
-        GoodsFootprintBO that = (GoodsFootprintBO) o;
-        return Objects.equals(getGoodsId(), that.getGoodsId());
+    public String getDisplayTime() {
+        if (LocalDate.now().isEqual(createTime)) {
+            return "今天";
+        }
+        if (LocalDate.now().minusDays(1).isEqual(createTime)) {
+            return "昨天";
+        }
+        if (LocalDate.now().minusDays(2).isEqual(createTime)) {
+            return "前天";
+        }
+        return createTime.toString();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getUserId(), getGoodsId(), getCreateTime(), getName(), getListPicUrl(), getGoodsBrief(), getRetailPrice());
-    }
 }

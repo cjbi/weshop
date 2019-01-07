@@ -37,7 +37,7 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "仿网易严选",
+    "navigationBarTitleText": "严选商城",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },

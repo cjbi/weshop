@@ -9,10 +9,7 @@ import tech.wetech.weshop.service.FootprintService;
 import tech.wetech.weshop.utils.Constants;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -25,12 +22,10 @@ public class FootprintServiceImpl extends BaseService<Footprint> implements Foot
     private FootprintMapper footprintMapper;
 
     @Override
-    public Map<String, List<GoodsFootprintBO>> queryGoodsFootprintTimeLine() {
+    public List<List<GoodsFootprintBO>> queryGoodsFootprintTimeLine() {
         List<GoodsFootprintBO> goodsFootprintList = footprintMapper.selectGoodsFootprintByUserId(Constants.CURRENT_USER_ID);
 
-        Map<String, List<GoodsFootprintBO>> timeLineMap = new LinkedHashMap<>();
-
-        goodsFootprintList.stream()
+        return goodsFootprintList.stream()
                 .collect(Collectors.groupingBy(gf -> gf.getCreateTime()))
                 .entrySet()
                 .stream()
@@ -38,17 +33,7 @@ public class FootprintServiceImpl extends BaseService<Footprint> implements Foot
                     Long d1 = e1.getKey().toEpochDay();
                     Long d2 = e2.getKey().toEpochDay();
                     return d2.compareTo(d1);
-                }).forEachOrdered(e -> {
-            if (LocalDate.now().isEqual(e.getKey())) {
-                timeLineMap.put("今天", e.getValue());
-            } else if (LocalDate.now().minusDays(1).isEqual(e.getKey())) {
-                timeLineMap.put("昨天", e.getValue());
-            } else if (LocalDate.now().minusDays(2).isEqual(e.getKey())) {
-                timeLineMap.put("前天", e.getValue());
-            } else {
-                timeLineMap.put(e.getKey().toString(), e.getValue());
-            }
-        });
-        return timeLineMap;
+                }).map(Map.Entry::getValue)
+                .collect(Collectors.toList());
     }
 }
