@@ -27,7 +27,6 @@ public class WechatOrderController {
 
     @GetMapping("/list")
     public Result<List<OrderListVO>> queryOrderPageInfo(OrderQuery orderQuery) {
-
         return null;
     }
 

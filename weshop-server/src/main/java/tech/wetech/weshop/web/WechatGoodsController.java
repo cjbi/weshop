@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.po.Category;
 import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.query.GoodsSearchQuery;
-import tech.wetech.weshop.service.CategoryService;
 import tech.wetech.weshop.service.GoodsService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.*;
@@ -27,9 +25,6 @@ public class WechatGoodsController {
 
     @Autowired
     private GoodsService goodsService;
-
-    @Autowired
-    private CategoryService categoryService;
 
     @GetMapping("/count")
     public Result count() {
@@ -69,13 +64,7 @@ public class WechatGoodsController {
 
     @GetMapping("/category")
     public Result<GoodsCategoryVO> queryGoodsCategory(@RequestParam("categoryId") @NotNull Integer categoryId) {
-        Category currentCategory = categoryService.queryById(categoryId);
-        if (currentCategory == null) {
-            return Result.success();
-        }
-        Category parentCategory = categoryService.queryById(currentCategory.getParentId());
-        List<Category> brotherCategory = categoryService.queryList(new Category().setParentId(currentCategory.getParentId()));
-        return Result.success(new GoodsCategoryVO(currentCategory, parentCategory, brotherCategory));
+        return Result.success(goodsService.queryGoodsCategory(categoryId));
     }
 
     @GetMapping("/list")

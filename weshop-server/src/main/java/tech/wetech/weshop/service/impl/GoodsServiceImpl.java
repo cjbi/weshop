@@ -1,7 +1,6 @@
 package tech.wetech.weshop.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.bo.GoodsAttributeBO;
@@ -9,16 +8,9 @@ import tech.wetech.weshop.bo.GoodsSpecificationBO;
 import tech.wetech.weshop.mapper.*;
 import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.query.GoodsSearchQuery;
-import tech.wetech.weshop.service.CategoryService;
 import tech.wetech.weshop.service.GoodsService;
-import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Reflections;
-import tech.wetech.weshop.vo.CategoryFilterVO;
-import tech.wetech.weshop.vo.GoodsDetailVO;
-import tech.wetech.weshop.vo.GoodsListVO;
-import tech.wetech.weshop.vo.GoodsResultVO;
-import tk.mybatis.mapper.entity.EntityColumn;
-import tk.mybatis.mapper.mapperhelper.EntityHelper;
+import tech.wetech.weshop.vo.*;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 
@@ -63,46 +55,6 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
 
     @Autowired
     private RelatedGoodsMapper relatedGoodsMapper;
-
-
-    @Override
-    public List<Goods> queryGoodsByIdIn(List<Integer> ids) {
-        Weekend<Goods> example = Weekend.of(Goods.class);
-        example.selectProperties(Reflections.fnToFieldName(
-                Goods::getId,
-                Goods::getName,
-                Goods::getListPicUrl,
-                Goods::getRetailPrice));
-        WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
-        criteria.andIn(Goods::getCategoryId, ids);
-        return goodsMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<Goods> queryGoodsByCategoryIdIn(List<Integer> categoryIds) {
-        Weekend<Goods> example = Weekend.of(Goods.class);
-        example.selectProperties(Reflections.fnToFieldName(
-                Goods::getId,
-                Goods::getName,
-                Goods::getListPicUrl,
-                Goods::getRetailPrice));
-        WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
-        criteria.andIn(Goods::getCategoryId, categoryIds);
-        return goodsMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<Goods> queryGoodsByCategoryId(Integer categoryId) {
-        Weekend<Goods> example = Weekend.of(Goods.class);
-        example.selectProperties(Reflections.fnToFieldName(
-                Goods::getId,
-                Goods::getName,
-                Goods::getListPicUrl,
-                Goods::getRetailPrice));
-        WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
-        criteria.andEqualTo(Goods::getCategoryId, categoryId);
-        return goodsMapper.selectByExample(example);
-    }
 
     @Override
     public GoodsResultVO queryList(GoodsSearchQuery goodsSearchQuery) {
@@ -256,5 +208,16 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
                     .collect(Collectors.toList());
         }
         return goodsList;
+    }
+
+    @Override
+    public GoodsCategoryVO queryGoodsCategory(Integer categoryId) {
+        Category currentCategory = categoryMapper.selectByPrimaryKey(categoryId);
+        if (currentCategory == null) {
+            return null;
+        }
+        Category parentCategory = categoryMapper.selectByPrimaryKey(currentCategory.getParentId());
+        List<Category> brotherCategory = categoryMapper.select(new Category().setParentId(currentCategory.getParentId()));
+        return new GoodsCategoryVO(currentCategory, parentCategory, brotherCategory);
     }
 }

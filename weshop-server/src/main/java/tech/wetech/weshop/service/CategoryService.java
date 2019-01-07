@@ -2,6 +2,8 @@ package tech.wetech.weshop.service;
 
 import tech.wetech.weshop.enums.CategoryLevelEnum;
 import tech.wetech.weshop.po.Category;
+import tech.wetech.weshop.vo.CategoryIndexVO;
+import tech.wetech.weshop.vo.CategoryVO;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public interface CategoryService extends IService<Category> {
      */
     List<Category> queryCategoryByLevel(CategoryLevelEnum categoryLevel);
 
-    List<Integer> queryParentIdsByIdIn(List<Integer> ids);
+    CategoryIndexVO index(Integer cateogyId);
 
-    List<Category> queryCategoryByIdIn(List<Integer> ids);
+    CategoryVO current(Integer id);
 }
