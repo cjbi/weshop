@@ -40,8 +40,6 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public HomeIndexVO index() {
 
-        HomeIndexVO homeIndexVO = new HomeIndexVO();
-
         List<Ad> bannerList = adMapper.select(new Ad().setAdPositionId((short) 1));
 
         PageHelper.orderBy("sort_order asc");
@@ -81,14 +79,14 @@ public class HomeServiceImpl implements HomeService {
             List<Goods> goodsList = goodsMapper.selectByExample(goodsWeekend);
             categoryList.add(new HomeCategoryVO(c.getId(), c.getName(), goodsList));
         });
-        homeIndexVO.setBannerList(bannerList)
+
+        return new HomeIndexVO().setBannerList(bannerList)
                 .setChannelList(channelList)
                 .setNewGoodsList(newGoodsList)
                 .setHotGoodsList(hotGoodsList)
                 .setBrandList(brandList)
                 .setTopicList(topicList)
                 .setCategoryList(categoryList);
-        return null;
     }
 
 }

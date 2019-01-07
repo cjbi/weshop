@@ -15,28 +15,4 @@ import java.util.stream.Collectors;
 @Service
 public class GoodsSpecificationServiceImpl extends BaseService<GoodsSpecification> implements GoodsSpecificationService {
 
-    @Autowired
-    private GoodsSpecificationMapper goodsSpecificationMapper;
-
-    @Override
-    public List<GoodsDetailVO.GoodsSpecificationVO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
-        List<GoodsDetailVO.GoodsSpecificationVO> goodsSpecificationVOList = new LinkedList<>();
-        List<GoodsSpecificationBO> goodsSpecificationBOList = goodsSpecificationMapper.selectGoodsDetailSpecificationByGoodsId(goodsId);
-
-        goodsSpecificationBOList.stream()
-                .collect(Collectors.toMap(GoodsSpecificationBO::getSpecificationId, g -> g, (g1, g2) -> g2))
-                .forEach((k, v) -> {
-                    GoodsDetailVO.GoodsSpecificationVO goodsSpecificationVO = new GoodsDetailVO.GoodsSpecificationVO();
-                    goodsSpecificationVO.setId(k);
-                    goodsSpecificationVO.setName(v.getName());
-                    goodsSpecificationVO.setGoodsSpecificationList(
-                            goodsSpecificationBOList.stream()
-                                    .filter(g -> g.getSpecificationId().equals(v.getSpecificationId()))
-                                    .collect(Collectors.toList())
-                    );
-                    goodsSpecificationVOList.add(goodsSpecificationVO);
-                });
-
-        return goodsSpecificationVOList;
-    }
 }
