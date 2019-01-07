@@ -36,4 +36,10 @@
     <result column="is_hot" property="isHot" jdbcType="BIT" />
     <result column="goods_desc" property="goodsDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
+    <select id="selectByIdIn" resultMap="BaseResultMap">
+      select * from weshop_goods
+      <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </select>
 </mapper>

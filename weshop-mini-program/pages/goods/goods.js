@@ -27,15 +27,15 @@ Page({
   getGoodsInfo: function () {
     let that = this;
     util.request(api.GoodsDetail, { id: that.data.id }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
-          goods: res.data.info,
-          gallery: res.data.gallery,
-          attribute: res.data.attribute,
-          issueList: res.data.issue,
-          comment: res.data.comment,
+          goods: res.data.goods,
+          gallery: res.data.goodsGalleryList,
+          attribute: res.data.goodsAttributeList,
+          issueList: res.data.goodsIssueList,
+          comment: res.data.comments,
           brand: res.data.brand,
-          specificationList: res.data.specificationList,
+          specificationList: res.data.goodsSpecificationList,
           productList: res.data.productList,
           userHasCollect: res.data.userHasCollect
         });
@@ -50,7 +50,7 @@ Page({
           });
         }
 
-        WxParse.wxParse('goodsDetail', 'html', res.data.info.goods_desc, that);
+        WxParse.wxParse('goodsDetail', 'html', res.data.goods.goodsDesc, that);
 
         that.getGoodsRelated();
       }
@@ -60,9 +60,9 @@ Page({
   getGoodsRelated: function () {
     let that = this;
     util.request(api.GoodsRelated, { id: that.data.id }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
-          relatedGoods: res.data.goodsList,
+          relatedGoods: res.data,
         });
       }
     });
@@ -78,7 +78,7 @@ Page({
     //TODO 性能优化，可在wx:for中添加index，可以直接获取点击的属性名和属性值，不用循环
     let _specificationList = this.data.specificationList;
     for (let i = 0; i < _specificationList.length; i++) {
-      if (_specificationList[i].specification_id == specNameId) {
+      if (_specificationList[i].specificationId == specNameId) {
         for (let j = 0; j < _specificationList[i].valueList.length; j++) {
           if (_specificationList[i].valueList[j].id == specValueId) {
             //如果已经选中，则反选
@@ -185,9 +185,9 @@ Page({
     var that = this;
     this.getGoodsInfo();
     util.request(api.CartGoodsCount).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
-          cartGoodsCount: res.data.cartTotal.goodsCount
+          cartGoodsCount: res.data
         });
 
       }
@@ -227,7 +227,7 @@ Page({
     util.request(api.CollectAddOrDelete, { typeId: 0, valueId: this.data.id }, "POST")
       .then(function (res) {
         let _res = res;
-        if (_res.errno == 0) {
+        if (_res.success) {
           if (_res.data.type == 'add') {
             that.setData({
               'collectBackImage': that.data.hasCollectImage
@@ -298,7 +298,7 @@ Page({
       util.request(api.CartAdd, { goodsId: this.data.goods.id, number: this.data.number, productId: checkedProduct[0].id }, "POST")
         .then(function (res) {
           let _res = res;
-          if (_res.errno == 0) {
+          if (_res.success) {
             wx.showToast({
               title: '添加成功'
             });

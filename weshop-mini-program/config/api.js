@@ -9,12 +9,12 @@ module.exports = {
   AuthLoginByWeixin: ApiRootUrl + 'auth/loginByWeixin', //微信登录
 
   GoodsCount: BaseUrl + 'goods/count',  //统计商品总数
-  GoodsList: ApiRootUrl + 'goods/list',  //获得商品列表
-  GoodsCategory: ApiRootUrl + 'goods/category',  //获得分类数据
-  GoodsDetail: ApiRootUrl + 'goods/detail',  //获得商品的详情
-  GoodsNew: ApiRootUrl + 'goods/new',  //新品
-  GoodsHot: ApiRootUrl + 'goods/hot',  //热门
-  GoodsRelated: ApiRootUrl + 'goods/related',  //商品详情页的关联商品（大家都在看）
+  GoodsList: BaseUrl + 'goods/list',  //获得商品列表
+  GoodsCategory: BaseUrl + 'goods/category',  //获得分类数据
+  GoodsDetail: BaseUrl + 'goods/detail',  //获得商品的详情
+  GoodsNew: BaseUrl + 'goods/new',  //新品
+  GoodsHot: BaseUrl + 'goods/hot',  //热门
+  GoodsRelated: BaseUrl + 'goods/related',  //商品详情页的关联商品（大家都在看）
 
   BrandList: ApiRootUrl + 'brand/list',  //品牌列表
   BrandDetail: ApiRootUrl + 'brand/detail',  //品牌详情
@@ -24,7 +24,7 @@ module.exports = {
   CartUpdate: ApiRootUrl + 'cart/update', // 更新购物车的商品
   CartDelete: ApiRootUrl + 'cart/delete', // 删除购物车的商品
   CartChecked: ApiRootUrl + 'cart/checked', // 选择或取消选择商品
-  CartGoodsCount: ApiRootUrl + 'cart/goodscount', // 获取购物车商品件数
+  CartGoodsCount: BaseUrl + 'cart/goods-count', // 获取购物车商品件数
   CartCheckout: ApiRootUrl + 'cart/checkout', // 下单前信息确认
 
   OrderSubmit: ApiRootUrl + 'order/submit', // 提交订单

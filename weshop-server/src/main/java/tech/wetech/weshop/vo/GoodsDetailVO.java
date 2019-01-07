@@ -1,6 +1,7 @@
 package tech.wetech.weshop.vo;
 
 
+import tech.wetech.weshop.bo.GoodsAttributeBO;
 import tech.wetech.weshop.bo.GoodsSpecificationBO;
 import tech.wetech.weshop.po.*;
 
@@ -11,7 +12,7 @@ public class GoodsDetailVO {
 
     private Goods goods;
 
-    private List<GoodsAttributeVO> goodsAttributeList;
+    private List<GoodsAttributeBO> goodsAttributeList;
 
     private Brand brand;
 
@@ -26,39 +27,6 @@ public class GoodsDetailVO {
     private List<GoodsSpecificationVO> goodsSpecificationList;
 
     private boolean userHasCollect;
-
-    public static class GoodsAttributeVO {
-
-        private String name;
-
-        private String value;
-
-        public GoodsAttributeVO() {
-        }
-
-        public GoodsAttributeVO(String name, String value) {
-            this.name = name;
-            this.value = value;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public GoodsAttributeVO setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public GoodsAttributeVO setValue(String value) {
-            this.value = value;
-            return this;
-        }
-    }
 
     public static class GoodsSpecificationVO {
 
@@ -196,14 +164,6 @@ public class GoodsDetailVO {
         return this;
     }
 
-    public List<GoodsAttributeVO> getGoodsAttributeList() {
-        return goodsAttributeList;
-    }
-
-    public GoodsDetailVO setGoodsAttributeList(List<GoodsAttributeVO> goodsAttributeList) {
-        this.goodsAttributeList = goodsAttributeList;
-        return this;
-    }
 
     public Brand getBrand() {
         return brand;
@@ -265,6 +225,15 @@ public class GoodsDetailVO {
 
     public GoodsDetailVO setUserHasCollect(boolean userHasCollect) {
         this.userHasCollect = userHasCollect;
+        return this;
+    }
+
+    public List<GoodsAttributeBO> getGoodsAttributeList() {
+        return goodsAttributeList;
+    }
+
+    public GoodsDetailVO setGoodsAttributeList(List<GoodsAttributeBO> goodsAttributeList) {
+        this.goodsAttributeList = goodsAttributeList;
         return this;
     }
 }

@@ -24,46 +24,31 @@ public class Product {
     @Column(name = "retail_price")
     private BigDecimal retailPrice;
 
-    /**
-     * @return id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
+    public Product setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    /**
-     * @return goods_id
-     */
     public Integer getGoodsId() {
         return goodsId;
     }
 
-    /**
-     * @param goodsId
-     */
-    public void setGoodsId(Integer goodsId) {
+    public Product setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 
-    /**
-     * @return goods_specification_ids
-     */
     public String getGoodsSpecificationIds() {
         return goodsSpecificationIds;
     }
 
-    /**
-     * @param goodsSpecificationIds
-     */
-    public void setGoodsSpecificationIds(String goodsSpecificationIds) {
+    public Product setGoodsSpecificationIds(String goodsSpecificationIds) {
         this.goodsSpecificationIds = goodsSpecificationIds;
+        return this;
     }
 
     public String getGoodsSn() {
