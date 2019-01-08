@@ -101,8 +101,18 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
             idList.addAll(Optional.ofNullable(categoryMapper.selectIdsByParentId(goodsSearchQuery.getCategoryId())).orElse(Collections.EMPTY_LIST));
             criteria.andIn(Goods::getCategoryId, idList);
         }
-        if (goodsSearchQuery.getOrderBy() != null) {
-            example.setOrderByClause(goodsSearchQuery.getOrderBy());
+        if (goodsSearchQuery.getSort() != null) {
+            String orderBy = null;
+            switch (goodsSearchQuery.getSort()) {
+                case "price":
+                    orderBy = "retail_price";
+                default:
+                    orderBy = "id";
+            }
+            if (goodsSearchQuery.getOrder() != null) {
+                orderBy += " " + goodsSearchQuery.getOrder();
+            }
+            example.setOrderByClause(orderBy);
         } else {
             //默认按照添加时间排序
             example.setOrderByClause("id desc");

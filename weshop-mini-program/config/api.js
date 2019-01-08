@@ -37,9 +37,9 @@ module.exports = {
   CommentCount: ApiRootUrl + 'comment/count',  //评论总数
   CommentPost: ApiRootUrl + 'comment/post',   //发表评论
 
-  TopicList: ApiRootUrl + 'topic/list',  //专题列表
-  TopicDetail: ApiRootUrl + 'topic/detail',  //专题详情
-  TopicRelated: ApiRootUrl + 'topic/related',  //相关专题
+  TopicList: BaseUrl + 'topic/list',  //专题列表
+  TopicDetail: BaseUrl + 'topic/detail',  //专题详情
+  TopicRelated: BaseUrl + 'topic/related',  //相关专题
 
   SearchIndex: ApiRootUrl + 'search/index',  //搜索页面数据
   SearchResult: ApiRootUrl + 'search/result',  //搜索数据

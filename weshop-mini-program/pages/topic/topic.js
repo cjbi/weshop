@@ -58,14 +58,14 @@ Page({
             duration: 2000
         });
 
-        util.request(api.TopicList, { page: that.data.page, size: that.data.size }).then(function (res) {
-          if (res.errno === 0) {
+        util.request(api.TopicList, { pageNum: that.data.page, pageSize: that.data.size }).then(function (res) {
+          if (res.success) {
 
             that.setData({
               scrollTop: 0,
-              topicList: res.data.data,
+              topicList: res.data,
               showPage: true,
-              count: res.data.count
+              count: res.extra.total
             });
           }
           wx.hideToast();

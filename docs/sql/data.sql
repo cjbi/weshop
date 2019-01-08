@@ -9311,6 +9311,7 @@ CREATE TABLE `weshop_topic` (
   `topic_tag_id` int(11) unsigned NOT NULL DEFAULT '0',
   `sort_order` int(11) unsigned NOT NULL DEFAULT '100',
   `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
   KEY `topic_id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

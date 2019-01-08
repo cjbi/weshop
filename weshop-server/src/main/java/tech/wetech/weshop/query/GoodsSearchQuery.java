@@ -12,6 +12,10 @@ public class GoodsSearchQuery extends PageQuery {
 
     private Boolean hot;
 
+    private String sort;
+
+    private String order;
+
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -43,8 +47,8 @@ public class GoodsSearchQuery extends PageQuery {
         return newly;
     }
 
-    public GoodsSearchQuery setNewly(Boolean aNew) {
-        newly = aNew;
+    public GoodsSearchQuery setNewly(Boolean newly) {
+        this.newly = newly;
         return this;
     }
 
@@ -55,5 +59,21 @@ public class GoodsSearchQuery extends PageQuery {
     public GoodsSearchQuery setHot(Boolean hot) {
         this.hot = hot;
         return this;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
     }
 }

@@ -12,7 +12,7 @@ Page({
     filterCategory: [],
     goodsList: [],
     categoryId: 0,
-    currentSortType: 'id',
+    currentSortType: 'default',
     currentSortOrder: 'desc',
     pageNum: 1,
     pageSize: 1000
@@ -31,7 +31,7 @@ Page({
   getGoodsList() {
     var that = this;
 
-    util.request(api.GoodsList, { 'new': 1, pageNum: that.data.pageNum, pageSize: that.data.pageSize, order: that.data.currentSortOrder, sort: that.data.currentSortType, categoryId: that.data.categoryId })
+    util.request(api.GoodsList, { newly: 1, pageNum: that.data.pageNum, pageSize: that.data.pageSize, order: that.data.currentSortOrder, sort: that.data.currentSortType, categoryId: that.data.categoryId })
       .then(function (res) {
         if (res.success) {
           that.setData({
