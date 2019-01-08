@@ -70,8 +70,8 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         if (goodsSearchQuery.getKeyword() != null) {
             criteria.andLike(Goods::getName, "%" + goodsSearchQuery.getKeyword() + "%");
         }
-        if (goodsSearchQuery.getNew() != null) {
-            criteria.andEqualTo(Goods::getNew, goodsSearchQuery.getNew());
+        if (goodsSearchQuery.getNewly() != null) {
+            criteria.andEqualTo(Goods::getNewly, goodsSearchQuery.getNewly());
         }
         if (goodsSearchQuery.getHot() != null) {
             criteria.andEqualTo(Goods::getHot, goodsSearchQuery.getHot());

@@ -30,7 +30,7 @@ public class Category {
     private Boolean showIndex;
 
     @Column(name = "is_show")
-    private Boolean isShow;
+    private Boolean show;
 
     @Column(name = "banner_url")
     private String bannerUrl;
@@ -116,11 +116,11 @@ public class Category {
     }
 
     public Boolean getShow() {
-        return isShow;
+        return show;
     }
 
     public Category setShow(Boolean show) {
-        isShow = show;
+        this.show = show;
         return this;
     }
 

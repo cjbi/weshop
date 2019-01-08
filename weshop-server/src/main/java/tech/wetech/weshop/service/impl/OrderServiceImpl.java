@@ -143,8 +143,8 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
             orderGoods.setMarketPrice(goodsItem.getMarketPrice());
             orderGoods.setRetailPrice(goodsItem.getRetailPrice());
             orderGoods.setNumber(goodsItem.getNumber());
-            orderGoods.setGoodsSpecifitionNameValue(goodsItem.getGoodsSpecifitionNameValue());
-            orderGoods.setGoodsSpecifitionIds(goodsItem.getGoodsSpecifitionIds());
+            orderGoods.setGoodsSpecificationNameValue(goodsItem.getGoodsSpecificationNameValue());
+            orderGoods.setGoodsSpecificationIds(goodsItem.getGoodsSpecificationIds());
 
             orderGoodsList.add(orderGoods);
         }

@@ -8,9 +8,9 @@ public class GoodsSearchQuery extends PageQuery {
 
     private String keyword;
 
-    private Boolean isNew;
+    private Boolean newly;
 
-    private Boolean isHot;
+    private Boolean hot;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -39,21 +39,21 @@ public class GoodsSearchQuery extends PageQuery {
         return this;
     }
 
-    public Boolean getNew() {
-        return isNew;
+    public Boolean getNewly() {
+        return newly;
     }
 
-    public GoodsSearchQuery setNew(Boolean aNew) {
-        isNew = aNew;
+    public GoodsSearchQuery setNewly(Boolean aNew) {
+        newly = aNew;
         return this;
     }
 
     public Boolean getHot() {
-        return isHot;
+        return hot;
     }
 
     public GoodsSearchQuery setHot(Boolean hot) {
-        isHot = hot;
+        this.hot = hot;
         return this;
     }
 }

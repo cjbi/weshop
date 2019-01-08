@@ -33,16 +33,16 @@ public class OrderGoods {
     private BigDecimal retailPrice;
 
     @Column(name = "is_real")
-    private Boolean isReal;
+    private Boolean real;
 
-    @Column(name = "goods_specifition_ids")
-    private String goodsSpecifitionIds;
+    @Column(name = "goods_specification_ids")
+    private String goodsSpecificationIds;
 
     @Column(name = "list_pic_url")
     private String listPicUrl;
 
-    @Column(name = "goods_specifition_name_value")
-    private String goodsSpecifitionNameValue;
+    @Column(name = "goods_specification_name_value")
+    private String goodsSpecificationNameValue;
 
     public Integer getId() {
         return id;
@@ -126,20 +126,20 @@ public class OrderGoods {
     }
 
     public Boolean getReal() {
-        return isReal;
+        return real;
     }
 
     public OrderGoods setReal(Boolean real) {
-        isReal = real;
+        this.real = real;
         return this;
     }
 
-    public String getGoodsSpecifitionIds() {
-        return goodsSpecifitionIds;
+    public String getGoodsSpecificationIds() {
+        return goodsSpecificationIds;
     }
 
-    public OrderGoods setGoodsSpecifitionIds(String goodsSpecifitionIds) {
-        this.goodsSpecifitionIds = goodsSpecifitionIds;
+    public OrderGoods setGoodsSpecificationIds(String goodsSpecificationIds) {
+        this.goodsSpecificationIds = goodsSpecificationIds;
         return this;
     }
 
@@ -152,12 +152,12 @@ public class OrderGoods {
         return this;
     }
 
-    public String getGoodsSpecifitionNameValue() {
-        return goodsSpecifitionNameValue;
+    public String getGoodsSpecificationNameValue() {
+        return goodsSpecificationNameValue;
     }
 
-    public OrderGoods setGoodsSpecifitionNameValue(String goodsSpecifitionNameValue) {
-        this.goodsSpecifitionNameValue = goodsSpecifitionNameValue;
+    public OrderGoods setGoodsSpecificationNameValue(String goodsSpecificationNameValue) {
+        this.goodsSpecificationNameValue = goodsSpecificationNameValue;
         return this;
     }
 }

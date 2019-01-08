@@ -120,11 +120,11 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                     .setUserId(1)
                     .setRetailPrice(product.getRetailPrice())
                     .setMarketPrice(product.getRetailPrice())
-                    .setGoodsSpecifitionNameValue(
+                    .setGoodsSpecificationNameValue(
                             goodsSpecificationValueList.stream()
                                     .collect(Collectors.joining(";"))
                     )
-                    .setGoodsSpecifitionIds(product.getGoodsSpecificationIds())
+                    .setGoodsSpecificationIds(product.getGoodsSpecificationIds())
                     .setChecked(true);
             cartMapper.insertSelective(cartData);
         } else {
@@ -183,11 +183,11 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
             Cart cartData = new Cart()
                     .setId(cartParamVO.getId())
                     .setNumber(cartParamVO.getNumber().shortValue())
-                    .setGoodsSpecifitionNameValue(
+                    .setGoodsSpecificationNameValue(
                             goodsSpecificationValueList.stream()
                                     .collect(Collectors.joining(";"))
                     )
-                    .setGoodsSpecifitionIds(product.getGoodsSpecificationIds())
+                    .setGoodsSpecificationIds(product.getGoodsSpecificationIds())
                     .setRetailPrice(product.getRetailPrice())
                     .setMarketPrice(product.getRetailPrice())
                     .setProductId(cartParamVO.getProductId())
@@ -204,8 +204,8 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
             Cart cartData = new Cart()
                     .setId(cartParamVO.getId())
                     .setNumber(newNumber.shortValue())
-                    .setGoodsSpecifitionNameValue(newCartInfo.getGoodsSpecifitionNameValue())
-                    .setGoodsSpecifitionIds(newCartInfo.getGoodsSpecifitionIds())
+                    .setGoodsSpecificationNameValue(newCartInfo.getGoodsSpecificationNameValue())
+                    .setGoodsSpecificationIds(newCartInfo.getGoodsSpecificationIds())
                     .setRetailPrice(product.getRetailPrice())
                     .setMarketPrice(product.getRetailPrice())
                     .setProductId(cartParamVO.getProductId())
@@ -227,7 +227,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                 setUserId(1);
             }});
         } else {
-            checkedAddress = addressMapper.selectOne(new Address().setUserId(1).setDefault(true));
+            checkedAddress = addressMapper.selectOne(new Address().setUserId(1).setRequireDefault(true));
         }
 
         CartCheckoutVO.CheckedAddressVO checkedAddressVO = null;

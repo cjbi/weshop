@@ -39,7 +39,7 @@ public class OrderExpress {
     private String traces;
 
     @Column(name = "is_finish")
-    private Boolean isFinish;
+    private Boolean finish;
 
     /**
      * 总查询次数
@@ -129,11 +129,11 @@ public class OrderExpress {
     }
 
     public Boolean getFinish() {
-        return isFinish;
+        return finish;
     }
 
     public OrderExpress setFinish(Boolean finish) {
-        isFinish = finish;
+        this.finish = finish;
         return this;
     }
 

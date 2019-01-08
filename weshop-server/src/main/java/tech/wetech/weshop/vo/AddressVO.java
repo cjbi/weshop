@@ -22,7 +22,7 @@ public class AddressVO {
 
     private String mobile;
 
-    private Boolean isDefault;
+    private Boolean requireDefault;
 
     private String provinceName;
 
@@ -42,7 +42,7 @@ public class AddressVO {
         this.districtId = address.getDistrictId();
         this.address = address.getAddress();
         this.mobile = address.getMobile();
-        this.isDefault = address.getDefault();
+        this.requireDefault = address.getRequireDefault();
         this.provinceName = null;
         this.cityName = null;
         this.districtName = null;
@@ -131,11 +131,11 @@ public class AddressVO {
     }
 
     public Boolean getDefault() {
-        return isDefault;
+        return requireDefault;
     }
 
     public AddressVO setDefault(Boolean aDefault) {
-        isDefault = aDefault;
+        requireDefault = aDefault;
         return this;
     }
 

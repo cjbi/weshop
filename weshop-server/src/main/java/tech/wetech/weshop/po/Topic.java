@@ -42,7 +42,7 @@ public class Topic {
     private Integer sortOrder;
 
     @Column(name = "is_show")
-    private Boolean isShow;
+    private Boolean show;
 
     private String content;
 
@@ -155,11 +155,11 @@ public class Topic {
     }
 
     public Boolean getShow() {
-        return isShow;
+        return show;
     }
 
     public Topic setShow(Boolean show) {
-        isShow = show;
+        this.show = show;
         return this;
     }
 

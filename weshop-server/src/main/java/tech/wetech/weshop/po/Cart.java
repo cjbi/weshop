@@ -36,10 +36,10 @@ public class Cart {
     private Short number;
 
     /**
-     * product表对应的goods_specifition_ids
+     * product表对应的goods_specification_ids
      */
-    @Column(name = "goods_specifition_ids")
-    private String goodsSpecifitionIds;
+    @Column(name = "goods_specification_ids")
+    private String goodsSpecificationIds;
 
     private Boolean checked;
 
@@ -49,8 +49,8 @@ public class Cart {
     /**
      * 规格属性组成的字符串，用来显示用
      */
-    @Column(name = "goods_specifition_name_value")
-    private String goodsSpecifitionNameValue;
+    @Column(name = "goods_specification_name_value")
+    private String goodsSpecificationNameValue;
 
     public Integer getId() {
         return id;
@@ -142,12 +142,12 @@ public class Cart {
         return this;
     }
 
-    public String getGoodsSpecifitionIds() {
-        return goodsSpecifitionIds;
+    public String getGoodsSpecificationIds() {
+        return goodsSpecificationIds;
     }
 
-    public Cart setGoodsSpecifitionIds(String goodsSpecifitionIds) {
-        this.goodsSpecifitionIds = goodsSpecifitionIds;
+    public Cart setGoodsSpecificationIds(String goodsSpecificationIds) {
+        this.goodsSpecificationIds = goodsSpecificationIds;
         return this;
     }
 
@@ -169,12 +169,12 @@ public class Cart {
         return this;
     }
 
-    public String getGoodsSpecifitionNameValue() {
-        return goodsSpecifitionNameValue;
+    public String getGoodsSpecificationNameValue() {
+        return goodsSpecificationNameValue;
     }
 
-    public Cart setGoodsSpecifitionNameValue(String goodsSpecifitionNameValue) {
-        this.goodsSpecifitionNameValue = goodsSpecifitionNameValue;
+    public Cart setGoodsSpecificationNameValue(String goodsSpecificationNameValue) {
+        this.goodsSpecificationNameValue = goodsSpecificationNameValue;
         return this;
     }
 }

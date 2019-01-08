@@ -24,7 +24,7 @@ public class Brand {
     private Byte sortOrder;
 
     @Column(name = "is_show")
-    private Boolean isShow;
+    private Boolean show;
 
     @Column(name = "floor_price")
     private BigDecimal floorPrice;
@@ -33,7 +33,7 @@ public class Brand {
     private String appListPicUrl;
 
     @Column(name = "is_new")
-    private Boolean isNew;
+    private Boolean newly;
 
     @Column(name = "new_pic_url")
     private String newPicUrl;
@@ -96,11 +96,11 @@ public class Brand {
     }
 
     public Boolean getShow() {
-        return isShow;
+        return show;
     }
 
     public Brand setShow(Boolean show) {
-        isShow = show;
+        this.show = show;
         return this;
     }
 
@@ -122,12 +122,12 @@ public class Brand {
         return this;
     }
 
-    public Boolean getNew() {
-        return isNew;
+    public Boolean getNewly() {
+        return newly;
     }
 
-    public Brand setNew(Boolean aNew) {
-        isNew = aNew;
+    public Brand setNewly(Boolean newly) {
+        this.newly = newly;
         return this;
     }
 

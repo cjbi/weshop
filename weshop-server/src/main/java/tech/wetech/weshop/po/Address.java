@@ -30,7 +30,7 @@ public class Address {
     private String mobile;
 
     @Column(name = "is_default")
-    private Boolean isDefault;
+    private Boolean requireDefault;
 
     public Integer getId() {
         return id;
@@ -113,12 +113,12 @@ public class Address {
         return this;
     }
 
-    public Boolean getDefault() {
-        return isDefault;
+    public Boolean getRequireDefault() {
+        return requireDefault;
     }
 
-    public Address setDefault(Boolean aDefault) {
-        isDefault = aDefault;
+    public Address setRequireDefault(Boolean requireDefault) {
+        this.requireDefault = requireDefault;
         return this;
     }
 }

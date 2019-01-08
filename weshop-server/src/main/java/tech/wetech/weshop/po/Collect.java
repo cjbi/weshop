@@ -22,7 +22,7 @@ public class Collect {
      * 是否是关注
      */
     @Column(name = "is_attention")
-    private Boolean isAttention;
+    private Boolean attention;
 
     @Column(name = "type_id")
     private Integer typeId;
@@ -64,11 +64,11 @@ public class Collect {
     }
 
     public Boolean getAttention() {
-        return isAttention;
+        return attention;
     }
 
     public Collect setAttention(Boolean attention) {
-        isAttention = attention;
+        this.attention = attention;
         return this;
     }
 

@@ -15,8 +15,8 @@
     <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
     <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
     <result column="is_real" property="isReal" jdbcType="BIT" />
-    <result column="goods_specifition_ids" property="goodsSpecifitionIds" jdbcType="VARCHAR" />
+    <result column="goods_specification_ids" property="goodsSpecificationIds" jdbcType="VARCHAR" />
     <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR" />
-    <result column="goods_specifition_name_value" property="goodsSpecifitionNameValue" jdbcType="LONGVARCHAR" />
+    <result column="goods_specification_name_value" property="goodsSpecificationNameValue" jdbcType="LONGVARCHAR" />
   </resultMap>
 </mapper>

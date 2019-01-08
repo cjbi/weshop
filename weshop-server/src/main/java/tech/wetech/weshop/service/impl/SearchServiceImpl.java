@@ -49,7 +49,7 @@ public class SearchServiceImpl implements SearchService {
     public SearchIndexVO index() {
         // 取出输入框默认的关键词
         PageHelper.offsetPage(0, 1);
-        Keywords defaultKeyword = keywordsMapper.selectOne(new Keywords().setDefault(true));
+        Keywords defaultKeyword = keywordsMapper.selectOne(new Keywords().setrequireDefault(true));
         // 取出热闹关键词
         PageHelper.startPage(1, 10);
         List<Keywords> hotKeywordList = keywordsMapper.select(new Keywords().setHot(true));

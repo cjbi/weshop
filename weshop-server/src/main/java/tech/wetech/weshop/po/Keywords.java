@@ -11,13 +11,13 @@ public class Keywords {
     private String keyword;
 
     @Column(name = "is_hot")
-    private Boolean isHot;
+    private Boolean hot;
 
     @Column(name = "is_default")
-    private Boolean isDefault;
+    private Boolean requireDefault;
 
     @Column(name = "is_show")
-    private Boolean isShow;
+    private Boolean show;
 
     @Column(name = "sort_order")
     private Integer sortOrder;
@@ -49,29 +49,29 @@ public class Keywords {
     }
 
     public Boolean getHot() {
-        return isHot;
+        return hot;
     }
 
     public Keywords setHot(Boolean hot) {
-        isHot = hot;
+        this.hot = hot;
         return this;
     }
 
-    public Boolean getDefault() {
-        return isDefault;
+    public Boolean getrequireDefault() {
+        return requireDefault;
     }
 
-    public Keywords setDefault(Boolean aDefault) {
-        isDefault = aDefault;
+    public Keywords setrequireDefault(Boolean aDefault) {
+        requireDefault = aDefault;
         return this;
     }
 
     public Boolean getShow() {
-        return isShow;
+        return show;
     }
 
     public Keywords setShow(Boolean show) {
-        isShow = show;
+        this.show = show;
         return this;
     }
 

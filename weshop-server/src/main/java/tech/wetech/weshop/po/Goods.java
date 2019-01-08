@@ -30,7 +30,7 @@ public class Goods {
     private String goodsBrief;
 
     @Column(name = "is_on_sale")
-    private Boolean isOnSale;
+    private Boolean onSale;
 
     @Column(name = "create_time")
     private Date createTime;
@@ -39,7 +39,7 @@ public class Goods {
     private Short sortOrder;
 
     @Column(name = "is_delete")
-    private Boolean isDelete;
+    private Boolean delete;
 
     @Column(name = "attribute_category")
     private Integer attributeCategory;
@@ -57,7 +57,7 @@ public class Goods {
     private BigDecimal extraPrice;
 
     @Column(name = "is_new")
-    private Boolean isNew;
+    private Boolean newly;
 
     /**
      * 商品单位
@@ -117,13 +117,13 @@ public class Goods {
      * 是否是APP专属
      */
     @Column(name = "is_app_exclusive")
-    private Boolean isAppExclusive;
+    private Boolean appExclusive;
 
     @Column(name = "is_limited")
-    private Boolean isLimited;
+    private Boolean limited;
 
     @Column(name = "is_hot")
-    private Boolean isHot;
+    private Boolean hot;
 
     @Column(name = "goods_desc")
     private String goodsDesc;
@@ -201,11 +201,11 @@ public class Goods {
     }
 
     public Boolean getOnSale() {
-        return isOnSale;
+        return onSale;
     }
 
     public Goods setOnSale(Boolean onSale) {
-        isOnSale = onSale;
+        this.onSale = onSale;
         return this;
     }
 
@@ -228,11 +228,11 @@ public class Goods {
     }
 
     public Boolean getDelete() {
-        return isDelete;
+        return delete;
     }
 
     public Goods setDelete(Boolean delete) {
-        isDelete = delete;
+        this.delete = delete;
         return this;
     }
 
@@ -263,12 +263,12 @@ public class Goods {
         return this;
     }
 
-    public Boolean getNew() {
-        return isNew;
+    public Boolean getNewly() {
+        return newly;
     }
 
-    public Goods setNew(Boolean aNew) {
-        isNew = aNew;
+    public Goods setNewly(Boolean aNew) {
+        newly = aNew;
         return this;
     }
 
@@ -363,29 +363,29 @@ public class Goods {
     }
 
     public Boolean getAppExclusive() {
-        return isAppExclusive;
+        return appExclusive;
     }
 
     public Goods setAppExclusive(Boolean appExclusive) {
-        isAppExclusive = appExclusive;
+        this.appExclusive = appExclusive;
         return this;
     }
 
     public Boolean getLimited() {
-        return isLimited;
+        return limited;
     }
 
     public Goods setLimited(Boolean limited) {
-        isLimited = limited;
+        this.limited = limited;
         return this;
     }
 
     public Boolean getHot() {
-        return isHot;
+        return hot;
     }
 
     public Goods setHot(Boolean hot) {
-        isHot = hot;
+        this.hot = hot;
         return this;
     }
 

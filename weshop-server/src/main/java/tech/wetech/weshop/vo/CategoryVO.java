@@ -21,7 +21,7 @@ public class CategoryVO {
 
     private Boolean showIndex;
 
-    private Boolean isShow;
+    private Boolean show;
 
     private String bannerUrl;
 
@@ -50,7 +50,7 @@ public class CategoryVO {
         this.parentId = category.getParentId();
         this.sortOrder = category.getSortOrder();
         this.showIndex = category.getShowIndex();
-        this.isShow = category.getShow();
+        this.show = category.getShow();
         this.bannerUrl = category.getBannerUrl();
         this.iconUrl = category.getIconUrl();
         this.imgUrl = category.getImgUrl();
@@ -124,11 +124,11 @@ public class CategoryVO {
     }
 
     public Boolean getShow() {
-        return isShow;
+        return show;
     }
 
     public CategoryVO setShow(Boolean show) {
-        isShow = show;
+        this.show = show;
         return this;
     }
 

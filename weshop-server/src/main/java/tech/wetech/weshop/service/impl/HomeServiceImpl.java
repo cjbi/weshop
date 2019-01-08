@@ -46,13 +46,13 @@ public class HomeServiceImpl implements HomeService {
         List<Channel> channelList = channelMapper.selectAll();
 
         PageHelper.startPage(1, 4);
-        List<Goods> newGoodsList = goodsMapper.select(new Goods().setNew(true));
+        List<Goods> newGoodsList = goodsMapper.select(new Goods().setNewly(true));
 
         PageHelper.startPage(1, 4);
         List<Goods> hotGoodsList = goodsMapper.select(new Goods().setHot(true));
 
         PageHelper.orderBy("new_sort_order asc");
-        List<Brand> brandList = brandMapper.select(new Brand().setNew(true));
+        List<Brand> brandList = brandMapper.select(new Brand().setNewly(true));
 
         PageHelper.startPage(1, 3);
         List<Topic> topicList = topicMapper.selectAll();

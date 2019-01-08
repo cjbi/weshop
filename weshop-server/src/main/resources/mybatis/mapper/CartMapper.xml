@@ -15,10 +15,10 @@
     <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
     <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
     <result column="number" property="number" jdbcType="SMALLINT" />
-    <result column="goods_specifition_ids" property="goodsSpecifitionIds" jdbcType="VARCHAR" />
+    <result column="goods_specification_ids" property="goodsSpecificationIds" jdbcType="VARCHAR" />
     <result column="checked" property="checked" jdbcType="BIT" />
     <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR" />
-    <result column="goods_specifition_name_value" property="goodsSpecifitionNameValue" jdbcType="LONGVARCHAR" />
+    <result column="goods_specification_name_value" property="goodsSpecificationNameValue" jdbcType="LONGVARCHAR" />
   </resultMap>
   <update id="incrementNumberById">
     update weshop_cart set `number`=`number`+1 where id=${id}
