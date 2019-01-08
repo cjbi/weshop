@@ -5,24 +5,24 @@ var app = getApp();
 Page({
   data: {
     bannerInfo: {
-      'img_url': '',
+      'imgUrl': '',
       'name': ''
     },
     categoryFilter: false,
     filterCategory: [],
     goodsList: [],
     categoryId: 0,
-    currentSortType: 'default',
+    currentSortType: 'id',
     currentSortOrder: 'desc',
-    page: 1,
-    size: 1000
+    pageNum: 1,
+    pageSize: 1000
   },
   getData: function () {
     let that = this;
     util.request(api.GoodsHot).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
-          bannerInfo: res.data.bannerInfo,
+          bannerInfo: res.data,
         });
         that.getGoodsList();
       }
@@ -31,9 +31,9 @@ Page({
   getGoodsList() {
     var that = this;
 
-    util.request(api.GoodsList, { isNew: 1, page: that.data.page, size: that.data.size, order: that.data.currentSortOrder, sort: that.data.currentSortType, categoryId: that.data.categoryId })
+    util.request(api.GoodsList, { 'new': 1, pageNum: that.data.pageNum, pageSize: that.data.pageSize, order: that.data.currentSortOrder, sort: that.data.currentSortType, categoryId: that.data.categoryId })
       .then(function (res) {
-        if (res.errno === 0) {
+        if (res.success) {
           that.setData({
             goodsList: res.data.goodsList,
             filterCategory: res.data.filterCategory

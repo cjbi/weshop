@@ -23,7 +23,7 @@
   </view>
   <view class="section-nav section-attr" bindtap="switchAttrPop">
     <view class="t">请选择规格数量</view>
-    <image class="i" src="../../static/images/addressRight.png" background-size="cover"></image>
+    <image class="i" src="../../static/images/address_right.png" background-size="cover"></image>
   </view>
   <!--<view class="section-nav section-act">
       <view class="t">

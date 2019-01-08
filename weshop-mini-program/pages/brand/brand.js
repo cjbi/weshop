@@ -4,8 +4,8 @@ var app = getApp();
 Page({
   data: {
     brandList: [],
-    page: 1,
-    size: 10,
+    pageNum: 1,
+    pageSize: 10,
     totalPages: 1
   },
   onLoad: function (options) {
@@ -17,10 +17,10 @@ Page({
       title: '加载中...',
     });
     let that = this;
-    util.request(api.BrandList, { page: that.data.page, size: that.data.size }).then(function (res) {
-      if (res.errno === 0) {
+    util.request(api.BrandList, { pageNum: that.data.pageNum, pageSize: that.data.pageSize }).then(function (res) {
+      if (res.success) {
         that.setData({
-          brandList: that.data.brandList.concat(res.data.data),
+          brandList: that.data.brandList.concat(res.data),
           totalPages: res.data.totalPages
         });
       }

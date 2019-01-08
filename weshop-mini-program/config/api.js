@@ -16,8 +16,8 @@ module.exports = {
   GoodsHot: BaseUrl + 'goods/hot',  //热门
   GoodsRelated: BaseUrl + 'goods/related',  //商品详情页的关联商品（大家都在看）
 
-  BrandList: ApiRootUrl + 'brand/list',  //品牌列表
-  BrandDetail: ApiRootUrl + 'brand/detail',  //品牌详情
+  BrandList: BaseUrl + 'brand/list',  //品牌列表
+  BrandDetail: BaseUrl + 'brand' +'/',  //品牌详情
 
   CartList: ApiRootUrl + 'cart/index', //获取购物车的数据
   CartAdd: ApiRootUrl + 'cart/add', // 添加商品到购物车
