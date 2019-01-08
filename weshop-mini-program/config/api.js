@@ -41,10 +41,10 @@ module.exports = {
   TopicDetail: BaseUrl + 'topic' + '/',  //专题详情
   TopicRelated: BaseUrl + 'topic/related',  //相关专题
 
-  SearchIndex: ApiRootUrl + 'search/index',  //搜索页面数据
-  SearchResult: ApiRootUrl + 'search/result',  //搜索数据
-  SearchHelper: ApiRootUrl + 'search/helper',  //搜索帮助
-  SearchClearHistory: ApiRootUrl + 'search/clearhistory',  //搜索帮助
+  SearchIndex: BaseUrl + 'search/index',  //搜索页面数据
+  SearchResult: BaseUrl + 'search/result',  //搜索数据
+  SearchHelper: BaseUrl + 'search/helper',  //搜索帮助
+  SearchClearHistory: BaseUrl + 'search/clearhistory',  //搜索帮助
 
   AddressList: ApiRootUrl + 'address/list',  //收货地址列表
   AddressDetail: ApiRootUrl + 'address/detail',  //收货地址详情

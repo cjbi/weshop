@@ -39,7 +39,7 @@ Page({
   getSearchKeyword() {
     let that = this;
     util.request(api.SearchIndex).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
           historyKeyword: res.data.historyKeywordList,
           defaultKeyword: res.data.defaultKeyword,
@@ -60,7 +60,7 @@ Page({
   getHelpKeyword: function () {
     let that = this;
     util.request(api.SearchHelper, { keyword: that.data.keyword }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
           helpKeyword: res.data
         });
@@ -89,12 +89,12 @@ Page({
   },
   getGoodsList: function () {
     let that = this;
-    util.request(api.GoodsList, { keyword: that.data.keyword, page: that.data.page, size: that.data.size, sort: that.data.currentSortType, order: that.data.currentSortOrder, categoryId: that.data.categoryId }).then(function (res) {
-      if (res.errno === 0) {
+    util.request(api.GoodsList, { keyword: that.data.keyword, pageNum: that.data.page, pageSize: that.data.size, sort: that.data.currentSortType, order: that.data.currentSortOrder, categoryId: that.data.categoryId }).then(function (res) {
+      if (res.success) {
         that.setData({
           searchStatus: true,
           categoryFilter: false,
-          goodsList: res.data.data,
+          goodsList: res.data.goodsList,
           filterCategory: res.data.filterCategory,
           page: res.data.currentPage,
           size: res.data.numsPerPage
