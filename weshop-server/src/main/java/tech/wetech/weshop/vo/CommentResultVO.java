@@ -3,7 +3,8 @@ package tech.wetech.weshop.vo;
 import tech.wetech.weshop.po.Comment;
 import tech.wetech.weshop.po.User;
 
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.List;
 
 public class CommentResultVO {
@@ -18,7 +19,7 @@ public class CommentResultVO {
 
     private Integer userId;
 
-    private Date createTime;
+    private String createTime;
 
     private UserInfoVO userInfo;
 
@@ -26,11 +27,16 @@ public class CommentResultVO {
 
     public CommentResultVO(Comment comment) {
         this.id = comment.getId();
-        this.content = comment.getContent();
+        try {
+            this.content = new String(Base64.getDecoder().decode(comment.getContent()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.typeId = comment.getTypeId().intValue();
         this.valueId = comment.getValueId();
         this.userId = comment.getUserId();
-        this.createTime = comment.getCreateTime();
+        this.createTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(comment.getCreateTime());
     }
 
     public static class UserInfoVO {
@@ -111,13 +117,8 @@ public class CommentResultVO {
         return this;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
-    }
-
-    public CommentResultVO setCreateTime(Date createTime) {
-        this.createTime = createTime;
-        return this;
     }
 
     public UserInfoVO getUserInfo() {

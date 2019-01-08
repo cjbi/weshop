@@ -33,12 +33,12 @@ module.exports = {
   CollectList: ApiRootUrl + 'collect/list',  //收藏列表
   CollectAddOrDelete: ApiRootUrl + 'collect/addordelete',  //添加或取消收藏
 
-  CommentList: ApiRootUrl + 'comment/list',  //评论列表
+  CommentList: BaseUrl + 'comment/list',  //评论列表
   CommentCount: ApiRootUrl + 'comment/count',  //评论总数
   CommentPost: ApiRootUrl + 'comment/post',   //发表评论
 
   TopicList: BaseUrl + 'topic/list',  //专题列表
-  TopicDetail: BaseUrl + 'topic/detail',  //专题详情
+  TopicDetail: BaseUrl + 'topic' + '/',  //专题详情
   TopicRelated: BaseUrl + 'topic/related',  //相关专题
 
   SearchIndex: ApiRootUrl + 'search/index',  //搜索页面数据

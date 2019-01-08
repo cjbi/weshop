@@ -5,7 +5,6 @@ import tech.wetech.weshop.utils.Constants;
 
 import javax.validation.constraints.NotNull;
 import java.util.Base64;
-import java.util.Date;
 
 public class CommentPostVO {
 
@@ -29,7 +28,6 @@ public class CommentPostVO {
         comment.setTypeId(typeId);
         comment.setValueId(valueId);
         comment.setContent(Base64.getEncoder().encodeToString(content.getBytes()));
-        comment.setCreateTime(new Date());
         comment.setUserId(Constants.CURRENT_USER_ID);
         return comment;
     }

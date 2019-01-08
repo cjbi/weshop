@@ -11,15 +11,15 @@ Page({
     commentCount: 0,
     commentList: []
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
     that.setData({
       id: parseInt(options.id)
     });
 
-    util.request(api.TopicDetail, { id: that.data.id}).then(function (res) {
-      if (res.errno === 0) {
+    util.request(api.TopicDetail + that.data.id).then(function(res) {
+      if (res.success) {
 
         that.setData({
           topic: res.data,
@@ -29,8 +29,10 @@ Page({
       }
     });
 
-    util.request(api.TopicRelated, { id: that.data.id}).then(function (res) {
-      if (res.errno === 0) {
+    util.request(api.TopicRelated, {
+      id: that.data.id
+    }).then(function(res) {
+      if (res.success) {
 
         that.setData({
           topicList: res.data
@@ -38,35 +40,39 @@ Page({
       }
     });
   },
-  getCommentList(){
+  getCommentList() {
     let that = this;
-    util.request(api.CommentList, { valueId: that.data.id, typeId: 1, size: 5 }).then(function (res) {
-      if (res.errno === 0) {
+    util.request(api.CommentList, {
+      valueId: that.data.id,
+      typeId: 1,
+      size: 5
+    }).then(function(res) {
+      if (res.success) {
 
         that.setData({
-          commentList: res.data.data,
-          commentCount: res.data.count
+          commentList: res.data,
+          commentCount: res.extra.total
         });
       }
     });
   },
-  postComment (){
+  postComment() {
     wx.navigateTo({
-      url: '/pages/commentPost/commentPost?valueId='+this.data.id + '&typeId=1',
+      url: '/pages/commentPost/commentPost?valueId=' + this.data.id + '&typeId=1',
     })
   },
-  onReady: function () {
+  onReady: function() {
 
   },
-  onShow: function () {
+  onShow: function() {
     // 页面显示
     this.getCommentList();
   },
-  onHide: function () {
+  onHide: function() {
     // 页面隐藏
 
   },
-  onUnload: function () {
+  onUnload: function() {
     // 页面关闭
 
   }

@@ -5,7 +5,7 @@ import tech.wetech.weshop.bo.GoodsAttributeBO;
 import tech.wetech.weshop.bo.GoodsSpecificationBO;
 import tech.wetech.weshop.po.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class GoodsDetailVO {
@@ -74,7 +74,7 @@ public class GoodsDetailVO {
 
             private String content;
 
-            private Date createTime;
+            private LocalDateTime createTime;
 
             private String nickname;
 
@@ -91,11 +91,11 @@ public class GoodsDetailVO {
                 return this;
             }
 
-            public Date getCreateTime() {
+            public LocalDateTime getCreateTime() {
                 return createTime;
             }
 
-            public CommentVO setCreateTime(Date createTime) {
+            public CommentVO setCreateTime(LocalDateTime createTime) {
                 this.createTime = createTime;
                 return this;
             }

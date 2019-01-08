@@ -20,7 +20,8 @@ public class WechatCommentController {
 
     @GetMapping("/list")
     public Result<List<CommentResultVO>> queryList(@Validated CommentQuery commentQuery) {
-        return Result.success(commentService.queryList(commentQuery));
+        return Result.success(commentService.queryList(commentQuery))
+                .addExtra("total", commentService.countList(commentQuery));
     }
 
     @GetMapping("/count")

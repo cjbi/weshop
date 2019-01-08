@@ -1,7 +1,7 @@
 package tech.wetech.weshop.po;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Table(name = "weshop_comment")
 public class Comment {
@@ -21,7 +21,7 @@ public class Comment {
     private String content;
 
     @Column(name = "create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private Byte status;
 
@@ -67,11 +67,11 @@ public class Comment {
         return this;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public Comment setCreateTime(Date createTime) {
+    public Comment setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
         return this;
     }
