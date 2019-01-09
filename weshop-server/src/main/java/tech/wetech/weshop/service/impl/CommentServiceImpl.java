@@ -10,6 +10,7 @@ import tech.wetech.weshop.po.Comment;
 import tech.wetech.weshop.po.User;
 import tech.wetech.weshop.query.CommentQuery;
 import tech.wetech.weshop.service.CommentService;
+import tech.wetech.weshop.vo.CommentCountVO;
 import tech.wetech.weshop.vo.CommentResultVO;
 
 import java.util.List;
@@ -46,9 +47,13 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
     }
 
     @Override
-    public long countList(CommentQuery commentQuery) {
-        return PageHelper.startPage(commentQuery)
+    public CommentCountVO countList(CommentQuery commentQuery) {
+        long hasPicCount = PageHelper.startPage(commentQuery)
                 .setCount(true)
-                .doCount(() -> commentMapper.selectIfRequirePictureList(commentQuery));
+                .doCount(() -> commentMapper.selectIfRequirePictureList(commentQuery.setRequirePicture(true)));
+        long allCount = PageHelper.startPage(commentQuery)
+                .setCount(true)
+                .doCount(() -> commentMapper.selectIfRequirePictureList(commentQuery.setRequirePicture(false)));
+        return new CommentCountVO(allCount, hasPicCount);
     }
 }

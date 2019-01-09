@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.query.CommentQuery;
 import tech.wetech.weshop.service.CommentService;
 import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.vo.CommentCountVO;
 import tech.wetech.weshop.vo.CommentPostVO;
 import tech.wetech.weshop.vo.CommentResultVO;
 
@@ -20,12 +21,11 @@ public class WechatCommentController {
 
     @GetMapping("/list")
     public Result<List<CommentResultVO>> queryList(@Validated CommentQuery commentQuery) {
-        return Result.success(commentService.queryList(commentQuery))
-                .addExtra("total", commentService.countList(commentQuery));
+        return Result.success(commentService.queryList(commentQuery));
     }
 
     @GetMapping("/count")
-    public Result<Long> countList(@Validated CommentQuery commentQuery) {
+    public Result<CommentCountVO> countList(@Validated CommentQuery commentQuery) {
         return Result.success(commentService.countList(commentQuery));
     }
 

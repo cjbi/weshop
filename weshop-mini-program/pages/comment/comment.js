@@ -19,7 +19,7 @@ Page({
   getCommentCount: function () {
     let that = this;
     util.request(api.CommentCount, { valueId: that.data.valueId, typeId: that.data.typeId}).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
 
         that.setData({
           allCount: res.data.allCount,
@@ -33,23 +33,23 @@ Page({
     util.request(api.CommentList, { 
       valueId: that.data.valueId, 
       typeId: that.data.typeId, 
-      size: that.data.size,
-      page: (that.data.showType == 0 ? that.data.allPage : that.data.picPage),
+      pageSize: that.data.size,
+      pageNum: (that.data.showType == 0 ? that.data.allPage : that.data.picPage),
       showType: that.data.showType 
       }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
 
         if (that.data.showType == 0) {
           that.setData({
-            allCommentList: that.data.allCommentList.concat(res.data.data),
+            allCommentList: that.data.allCommentList.concat(res.data),
             allPage: res.data.currentPage,
-            comments: that.data.allCommentList.concat(res.data.data)
+            comments: that.data.allCommentList.concat(res.data)
           });
         } else {
           that.setData({
-            picCommentList: that.data.picCommentList.concat(res.data.data),
+            picCommentList: that.data.picCommentList.concat(res.data),
             picPage: res.data.currentPage,
-            comments: that.data.picCommentList.concat(res.data.data)
+            comments: that.data.picCommentList.concat(res.data)
           });
         }
       }

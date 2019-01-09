@@ -34,7 +34,7 @@ module.exports = {
   CollectAddOrDelete: ApiRootUrl + 'collect/addordelete',  //添加或取消收藏
 
   CommentList: BaseUrl + 'comment/list',  //评论列表
-  CommentCount: ApiRootUrl + 'comment/count',  //评论总数
+  CommentCount: BaseUrl + 'comment/count',  //评论总数
   CommentPost: ApiRootUrl + 'comment/post',   //发表评论
 
   TopicList: BaseUrl + 'topic/list',  //专题列表
