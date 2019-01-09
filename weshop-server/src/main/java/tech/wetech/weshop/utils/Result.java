@@ -1,13 +1,19 @@
 package tech.wetech.weshop.utils;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author cjbi
@@ -28,6 +34,9 @@ public class Result<T> implements Serializable {
     @ApiModelProperty("错误消息")
     private String errorMsg;
 
+    @ApiModelProperty("异常堆栈信息")
+    private StackTraceElement[] stackTrace;
+
     @ApiModelProperty("数据")
     private T data;
 
@@ -35,8 +44,62 @@ public class Result<T> implements Serializable {
     private Map<String, Object> extra;
 
     public Result<T> addExtra(String key, Object value) {
-        extra = extra == null ? new HashMap<>() : extra;
+        extra = extra == null ? new HashMap<>(16) : extra;
         extra.put(key, value);
+        return this;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public Result<T> setSuccess(boolean success) {
+        this.success = success;
+        return this;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Result<T> setCode(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public Result<T> setMsg(String msg) {
+        this.msg = msg;
+        return this;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public Result<T> setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+        return this;
+    }
+
+    public StackTraceElement[] getStackTrace() {
+        return stackTrace;
+    }
+
+    public Result<T> setStackTrace(StackTraceElement[] stackTrace) {
+        this.stackTrace = stackTrace;
+        return this;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public Result<T> setData(T data) {
+        this.data = data;
         return this;
     }
 
@@ -49,120 +112,55 @@ public class Result<T> implements Serializable {
         return this;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
-
     public static <T> Result<T> success() {
-        return Result.success(null);
-    }
-
-    public static Result failure(ResultCodeEnum resultCodeEnum) {
-        return Result.failure(resultCodeEnum.getCode(), resultCodeEnum.getMsg());
-    }
-
-    public static Result failure(ResultCodeEnum resultCodeEnum, String errorMsg) {
-        return Result.failure(resultCodeEnum.getCode(), resultCodeEnum.getMsg(), errorMsg);
-    }
-
-    public static Result failure(String code, String msg) {
-        return Result.failure(code, msg, null);
-    }
-
-    public static Result failure(BizException e) {
-        return Result.failure(e, e.getCode(), e.getMsg(), e.getMessage());
+        //统一给前端{}
+        return Result.success((T) Collections.EMPTY_MAP);
     }
 
     public static Result failure(Throwable e, ResultCodeEnum resultCodeEnum) {
-        return failure(e, resultCodeEnum.getCode(), resultCodeEnum.getMsg(), e.getMessage());
-    }
-
-    public static Result failure(String code, String msg, String errorMsg) {
-        return failure(null, code, msg, errorMsg);
-    }
-
-    public static <T> Result<T> failure(T obj, String code, String msg) {
-        return failure(obj, code, msg, null);
+        Result result = new Result()
+                .setSuccess(false)
+                .setCode(resultCodeEnum.getCode())
+                .setMsg(resultCodeEnum.getMsg())
+                .setStackTrace(e.getStackTrace())
+                .setErrorMsg(e.getClass().getName() + ": " + e.getMessage());
+        if (e instanceof BizException) {
+            return result.setMsg(((BizException) e).getMsg())
+                    .setCode(((BizException) e).getCode());
+        }
+        BindingResult br = null;
+        if (e instanceof BindException) {
+            br = ((BindException) e).getBindingResult();
+        }
+        if (e instanceof MethodArgumentNotValidException) {
+            br = ((MethodArgumentNotValidException) e).getBindingResult();
+        }
+        if (br != null) {
+            return result.setData(
+                    br.getFieldErrors().stream()
+                            .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (oldValue, newValue) -> oldValue.concat(",").concat(newValue)))
+            ).setMsg(
+                    br.getFieldErrors().stream()
+                            .map(f -> f.getField().concat(f.getDefaultMessage()))
+                            .collect(Collectors.joining(","))
+            );
+        }
+        if (e instanceof ConstraintViolationException) {
+            Set<ConstraintViolation<?>> constraintViolations = ((ConstraintViolationException) e).getConstraintViolations();
+            return result
+                    .setData(
+                            constraintViolations.stream().collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage))
+                    )
+                    .setMsg(e.getMessage());
+        }
+        return result;
     }
 
     public static <T> Result<T> success(T obj) {
-        Result result = new Result();
-        result.setSuccess(true);
-        result.setCode(ResultCodeEnum.OK.getCode());
-        result.setMsg(ResultCodeEnum.OK.getMsg());
-        if (obj == null) {
-            // 若数据为null 统一给前端{}
-            result.setData(Collections.EMPTY_MAP);
-        } else {
-            result.setData(obj);
-        }
-        return result;
-    }
-
-    public static <T> Result<T> failure(T obj, String code, String msg, String errorMsg) {
-        Result result = new Result();
-        result.setData(obj);
-        result.setCode(code);
-        result.setSuccess(false);
-        result.setMsg(msg);
-        result.setErrorMsg(errorMsg);
-        return result;
-    }
-
-    public static Result failure(BindingResult br) {
-        if (null != br && br.hasErrors()) {
-            Map<String, String> map = new HashMap(16);
-            List<FieldError> list = br.getFieldErrors();
-            Iterator var3 = list.iterator();
-            StringBuilder s = new StringBuilder();
-            while (var3.hasNext()) {
-                FieldError error = (FieldError) var3.next();
-                map.put(error.getField(), error.getDefaultMessage());
-                s.append(error.getField()).append(error.getDefaultMessage()).append("，");
-            }
-            if (s.length() > 0) {
-                s.deleteCharAt(s.length() - 1);
-            }
-            return failure(map, ResultCodeEnum.PARAM_ERROR.getCode(), s.toString());
-        } else {
-            return failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
-        }
+        return new Result()
+                .setCode(ResultCodeEnum.OK.getCode())
+                .setMsg(ResultCodeEnum.OK.getMsg())
+                .setData(obj);
     }
 
 }

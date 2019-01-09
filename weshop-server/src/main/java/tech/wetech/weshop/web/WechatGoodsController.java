@@ -73,7 +73,7 @@ public class WechatGoodsController {
     }
 
     @GetMapping("/detail")
-    public Result<GoodsDetailVO> queryGoodsDetail(Integer id) {
+    public Result<GoodsDetailVO> queryGoodsDetail(@NotNull Integer id) {
         return Result.success(goodsService.queryGoodsDetail(id));
     }
 

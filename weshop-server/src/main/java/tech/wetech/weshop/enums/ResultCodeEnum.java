@@ -17,6 +17,8 @@ public enum ResultCodeEnum {
 
     GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES("600", "商品已下架"),
     UNDER_STOCK("601", "库存不足"),
+    PLEASE_SELECT_GOODS("602","请选择商品"),
+    PLEASE_SELECT_SHIPPING_ADDRESS("603","请选择收货地址")
     ;
     private String code;
     private String msg;

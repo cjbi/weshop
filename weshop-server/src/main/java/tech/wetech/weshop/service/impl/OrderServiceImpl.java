@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.mapper.*;
 import tech.wetech.weshop.po.*;
@@ -68,7 +69,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     public Order submitOrder(OrderSubmitParamVO orderSubmitParamVO) {
         Address checkedAddress = addressMapper.selectByPrimaryKey(orderSubmitParamVO.getAddressId());
         if (checkedAddress == null) {
-            throw new BizException("请选择收货地址");
+            throw new BizException(ResultCodeEnum.PLEASE_SELECT_SHIPPING_ADDRESS);
         }
 
         //获取要购买的商品
@@ -78,7 +79,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
             setChecked(true);
         }});
         if (checkedGoodsList.isEmpty()) {
-            throw new BizException("请选择商品");
+            throw new BizException(ResultCodeEnum.PLEASE_SELECT_SHIPPING_ADDRESS);
         }
 
         //统计商品总价
