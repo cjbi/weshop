@@ -31,12 +31,6 @@ public class Result<T> implements Serializable {
     @ApiModelProperty("消息")
     private String msg;
 
-    @ApiModelProperty("错误消息")
-    private String errorMsg;
-
-    @ApiModelProperty("异常堆栈信息")
-    private StackTraceElement[] stackTrace;
-
     @ApiModelProperty("数据")
     private T data;
 
@@ -76,24 +70,6 @@ public class Result<T> implements Serializable {
         return this;
     }
 
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public Result<T> setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-        return this;
-    }
-
-    public StackTraceElement[] getStackTrace() {
-        return stackTrace;
-    }
-
-    public Result<T> setStackTrace(StackTraceElement[] stackTrace) {
-        this.stackTrace = stackTrace;
-        return this;
-    }
-
     public T getData() {
         return data;
     }
@@ -122,8 +98,8 @@ public class Result<T> implements Serializable {
                 .setSuccess(false)
                 .setCode(resultCodeEnum.getCode())
                 .setMsg(resultCodeEnum.getMsg())
-                .setStackTrace(e.getStackTrace())
-                .setErrorMsg(e.getClass().getName() + ": " + e.getMessage());
+                .addExtra("stackTrace",e.getStackTrace())
+                .addExtra("exceptionMessage",e.getClass().getName() + ": " + e.getMessage());
         if (e instanceof BizException) {
             return result.setMsg(((BizException) e).getMsg())
                     .setCode(((BizException) e).getCode());
