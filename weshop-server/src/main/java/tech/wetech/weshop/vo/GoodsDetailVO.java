@@ -5,7 +5,6 @@ import tech.wetech.weshop.bo.GoodsAttributeBO;
 import tech.wetech.weshop.bo.GoodsSpecificationBO;
 import tech.wetech.weshop.po.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class GoodsDetailVO {
@@ -16,7 +15,7 @@ public class GoodsDetailVO {
 
     private Brand brand;
 
-    private CommentsVO comments;
+    private CommentVO comment;
 
     private List<GoodsGallery> goodsGalleryList;
 
@@ -30,18 +29,18 @@ public class GoodsDetailVO {
 
     public static class GoodsSpecificationVO {
 
-        private Integer id;
+        private Integer specificationId;
 
         private String name;
 
-        private List<GoodsSpecificationBO> goodsSpecificationList;
+        private List<GoodsSpecificationBO> valueList;
 
-        public Integer getId() {
-            return id;
+        public Integer getSpecificationId() {
+            return specificationId;
         }
 
-        public GoodsSpecificationVO setId(Integer id) {
-            this.id = id;
+        public GoodsSpecificationVO setSpecificationId(Integer specificationId) {
+            this.specificationId = specificationId;
             return this;
         }
 
@@ -54,27 +53,27 @@ public class GoodsDetailVO {
             return this;
         }
 
-        public List<GoodsSpecificationBO> getGoodsSpecificationList() {
-            return goodsSpecificationList;
+        public List<GoodsSpecificationBO> getValueList() {
+            return valueList;
         }
 
-        public GoodsSpecificationVO setGoodsSpecificationList(List<GoodsSpecificationBO> goodsSpecificationList) {
-            this.goodsSpecificationList = goodsSpecificationList;
+        public GoodsSpecificationVO setValueList(List<GoodsSpecificationBO> valueList) {
+            this.valueList = valueList;
             return this;
         }
     }
 
-    public static class CommentsVO {
+    public static class CommentVO {
 
         private int count;
 
-        private List<CommentVO> data;
+        private CommentDataVO data;
 
-        public static class CommentVO {
+        public static class CommentDataVO {
 
             private String content;
 
-            private LocalDateTime createTime;
+            private String createTime;
 
             private String nickname;
 
@@ -86,16 +85,16 @@ public class GoodsDetailVO {
                 return content;
             }
 
-            public CommentVO setContent(String content) {
+            public CommentDataVO setContent(String content) {
                 this.content = content;
                 return this;
             }
 
-            public LocalDateTime getCreateTime() {
+            public String getCreateTime() {
                 return createTime;
             }
 
-            public CommentVO setCreateTime(LocalDateTime createTime) {
+            public CommentDataVO setCreateTime(String createTime) {
                 this.createTime = createTime;
                 return this;
             }
@@ -104,7 +103,7 @@ public class GoodsDetailVO {
                 return nickname;
             }
 
-            public CommentVO setNickname(String nickname) {
+            public CommentDataVO setNickname(String nickname) {
                 this.nickname = nickname;
                 return this;
             }
@@ -113,7 +112,7 @@ public class GoodsDetailVO {
                 return avatar;
             }
 
-            public CommentVO setAvatar(String avatar) {
+            public CommentDataVO setAvatar(String avatar) {
                 this.avatar = avatar;
                 return this;
             }
@@ -122,34 +121,34 @@ public class GoodsDetailVO {
                 return picList;
             }
 
-            public CommentVO setPicList(List<String> picList) {
+            public CommentDataVO setPicList(List<String> picList) {
                 this.picList = picList;
                 return this;
             }
         }
 
-        public CommentsVO() {
-        }
-
-        public CommentsVO(int count, List<CommentVO> data) {
+        public CommentVO(int count, CommentDataVO data) {
             this.count = count;
             this.data = data;
+        }
+
+        public CommentVO() {
         }
 
         public int getCount() {
             return count;
         }
 
-        public CommentsVO setCount(int count) {
+        public CommentVO setCount(int count) {
             this.count = count;
             return this;
         }
 
-        public List<CommentVO> getData() {
+        public CommentDataVO getData() {
             return data;
         }
 
-        public CommentsVO setData(List<CommentVO> data) {
+        public CommentVO setData(CommentDataVO data) {
             this.data = data;
             return this;
         }
@@ -174,14 +173,6 @@ public class GoodsDetailVO {
         return this;
     }
 
-    public CommentsVO getComments() {
-        return comments;
-    }
-
-    public GoodsDetailVO setComments(CommentsVO comments) {
-        this.comments = comments;
-        return this;
-    }
 
     public List<GoodsGallery> getGoodsGalleryList() {
         return goodsGalleryList;
@@ -219,6 +210,7 @@ public class GoodsDetailVO {
         return this;
     }
 
+
     public boolean isUserHasCollect() {
         return userHasCollect;
     }
@@ -234,6 +226,15 @@ public class GoodsDetailVO {
 
     public GoodsDetailVO setGoodsAttributeList(List<GoodsAttributeBO> goodsAttributeList) {
         this.goodsAttributeList = goodsAttributeList;
+        return this;
+    }
+
+    public CommentVO getComment() {
+        return comment;
+    }
+
+    public GoodsDetailVO setComment(CommentVO comment) {
+        this.comment = comment;
         return this;
     }
 }

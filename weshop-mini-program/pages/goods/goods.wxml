@@ -47,13 +47,13 @@
             <image src="{{comment.data.avatar}}"></image>
             <text>{{comment.data.nickname}}</text>
           </view>
-          <view class="time">{{comment.data.addTime}}</view>
+          <view class="time">{{comment.data.createTime}}</view>
         </view>
         <view class="content">
           {{comment.data.content}}
         </view>
         <view class="imgs" wx:if="{{comment.data.picList.length > 0}}">
-          <image class="img" wx:for="{{comment.data.picList}}" wx:key="{{item.id}}" src="{{item.picUrl}}"></image>
+          <image class="img" wx:for="{{comment.data.picList}}" src="{{item}}"></image>
         </view>
         <!-- <view class="spec">白色 2件</view> -->
       </view>

@@ -33,7 +33,7 @@ Page({
           gallery: res.data.goodsGalleryList,
           attribute: res.data.goodsAttributeList,
           issueList: res.data.goodsIssueList,
-          comment: res.data.comments,
+          comment: res.data.comment,
           brand: res.data.brand,
           specificationList: res.data.goodsSpecificationList,
           productList: res.data.productList,
@@ -241,7 +241,7 @@ Page({
         } else {
           wx.showToast({
             image: '/static/images/icon_error.png',
-            title: _res.errmsg,
+            title: _res.msg,
             mask: true
           });
         }
@@ -309,7 +309,7 @@ Page({
           } else {
             wx.showToast({
               image: '/static/images/icon_error.png',
-              title: _res.errmsg,
+              title: _res.msg,
               mask: true
             });
           }

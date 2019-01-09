@@ -14,6 +14,7 @@ import tech.wetech.weshop.vo.*;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -136,9 +137,9 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
                 .collect(Collectors.toMap(GoodsSpecificationBO::getSpecificationId, g -> g, (g1, g2) -> g2))
                 .forEach((k, v) -> {
                     GoodsDetailVO.GoodsSpecificationVO goodsSpecificationVO = new GoodsDetailVO.GoodsSpecificationVO();
-                    goodsSpecificationVO.setId(k);
+                    goodsSpecificationVO.setSpecificationId(k);
                     goodsSpecificationVO.setName(v.getName());
-                    goodsSpecificationVO.setGoodsSpecificationList(
+                    goodsSpecificationVO.setValueList(
                             goodsSpecificationBOList.stream()
                                     .filter(g -> g.getSpecificationId().equals(v.getSpecificationId()))
                                     .collect(Collectors.toList())
@@ -161,28 +162,30 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
 
         //商品评价
         int commentCount = commentMapper.selectCount(new Comment().setValueId(id).setTypeId((byte) 0));
-        List<Comment> hotCommentList = commentMapper.select(new Comment().setValueId(id).setTypeId((byte) 0));
-        List<GoodsDetailVO.CommentsVO.CommentVO> commentVOList = new LinkedList<>();
-        for (Comment comment : hotCommentList) {
-            GoodsDetailVO.CommentsVO.CommentVO commentVO = new GoodsDetailVO.CommentsVO.CommentVO();
-            String content = new String(Base64.getDecoder().decode(comment.getContent()));
-            User user = userMapper.selectByPrimaryKey(comment.getUserId());
-            List<String> picList = commentPictureMapper.select(new CommentPicture().setCommentId(comment.getId())).stream()
+        PageHelper.startPage(1, 1);
+        Comment hotComment = commentMapper.selectOne(new Comment().setValueId(id).setTypeId((byte) 0));
+        if (hotComment != null) {
+            GoodsDetailVO.CommentVO.CommentDataVO commentData = new GoodsDetailVO.CommentVO.CommentDataVO();
+            String content = new String(Base64.getDecoder().decode(hotComment.getContent()));
+            User user = userMapper.selectByPrimaryKey(hotComment.getUserId());
+            List<String> picList = commentPictureMapper.select(new CommentPicture().setCommentId(hotComment.getId())).stream()
                     .map(CommentPicture::getPicUrl)
                     .collect(Collectors.toList());
 
-            commentVO.setContent(content);
-            commentVO.setNickname(user.getNickname());
-            commentVO.setAvatar(user.getAvatar());
-            commentVO.setPicList(picList);
-            commentVO.setCreateTime(comment.getCreateTime());
-            commentVOList.add(commentVO);
+            commentData.setContent(content);
+            commentData.setNickname(user.getNickname());
+            commentData.setAvatar(user.getAvatar());
+            commentData.setPicList(picList);
+            commentData.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(hotComment.getCreateTime()));
+            goodsDetailVO.setComment(new GoodsDetailVO.CommentVO(commentCount, commentData));
         }
+
+
         List<GoodsDetailVO.GoodsSpecificationVO> goodsSpecificationVOList = this.queryGoodsDetailSpecificationByGoodsId(id);
         List<Product> productList = productMapper.select(new Product().setGoodsId(id));
 
         goodsDetailVO.setGoods(goods);
-        goodsDetailVO.setComments(new GoodsDetailVO.CommentsVO(commentCount, commentVOList));
+
         goodsDetailVO.setBrand(brand);
         goodsDetailVO.setGoodsGalleryList(goodsGalleryVOList);
         goodsDetailVO.setGoodsAttributeList(goodsAttributeVOList);
