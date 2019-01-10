@@ -42,13 +42,13 @@ Page({
         if (that.data.showType == 0) {
           that.setData({
             allCommentList: that.data.allCommentList.concat(res.data),
-            allPage: res.data.currentPage,
+            // allPage: res.data.currentPage,
             comments: that.data.allCommentList.concat(res.data)
           });
         } else {
           that.setData({
             picCommentList: that.data.picCommentList.concat(res.data),
-            picPage: res.data.currentPage,
+            // picPage: res.data.currentPage,
             comments: that.data.picCommentList.concat(res.data)
           });
         }

@@ -2,12 +2,15 @@ package tech.wetech.weshop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.bo.GoodsCollectBO;
 import tech.wetech.weshop.mapper.CollectMapper;
 import tech.wetech.weshop.po.Collect;
 import tech.wetech.weshop.service.CollectService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.vo.CollectAddOrDeleteParamVO;
 import tech.wetech.weshop.vo.CollectAddOrDeleteResultVO;
+
+import java.util.List;
 
 /**
  * @author cjbi
@@ -25,7 +28,7 @@ public class CollectServiceImpl extends BaseService<Collect> implements CollectS
             setValueId(collectAddOrDeleteParamVO.getValueId());
             setUserId(Constants.CURRENT_USER_ID);
         }});
-        CollectAddOrDeleteResultVO.HandleType handleType = CollectAddOrDeleteResultVO.HandleType.add;
+        CollectAddOrDeleteResultVO.HandleType type = CollectAddOrDeleteResultVO.HandleType.add;
         //添加收藏
         if (collect == null) {
             collectMapper.insertSelective(new Collect() {{
@@ -35,8 +38,13 @@ public class CollectServiceImpl extends BaseService<Collect> implements CollectS
             }});
         } else {
             collectMapper.deleteByPrimaryKey(collect.getId());
-            handleType = CollectAddOrDeleteResultVO.HandleType.delete;
+            type = CollectAddOrDeleteResultVO.HandleType.delete;
         }
-        return new CollectAddOrDeleteResultVO(handleType);
+        return new CollectAddOrDeleteResultVO(type);
+    }
+
+    @Override
+    public List<GoodsCollectBO> queryGoodsCollectList() {
+        return collectMapper.selectGoodsCollectByUserId(Constants.CURRENT_USER_ID);
     }
 }

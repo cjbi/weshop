@@ -47,7 +47,7 @@ public class CartCheckoutVO {
 
         private String mobile;
 
-        private Boolean requiredDefault;
+        private Boolean isDefault;
 
         private String provinceName;
 
@@ -67,7 +67,7 @@ public class CartCheckoutVO {
             this.districtId = address.getDistrictId();
             this.address = address.getAddress();
             this.mobile = address.getMobile();
-            this.requiredDefault = address.getRequireDefault();
+            this.isDefault = address.getIsDefault();
             this.provinceName = null;
             this.cityName = null;
             this.districtName = null;
@@ -155,12 +155,12 @@ public class CartCheckoutVO {
             return this;
         }
 
-        public Boolean getDefault() {
-            return requiredDefault;
+        public Boolean getIsDefault() {
+            return isDefault;
         }
 
-        public CheckedAddressVO setDefault(Boolean aDefault) {
-            requiredDefault = aDefault;
+        public CheckedAddressVO setIsDefault(Boolean isDefault) {
+            this.isDefault = isDefault;
             return this;
         }
 

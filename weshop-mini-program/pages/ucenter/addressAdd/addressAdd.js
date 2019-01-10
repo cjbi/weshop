@@ -5,21 +5,21 @@ Page({
   data: {
     address: {
       id:0,
-      province_id: 0,
-      city_id: 0,
-      district_id: 0,
+      provinceId: 0,
+      cityId: 0,
+      districtId: 0,
       address: '',
-      full_region: '',
+      fullRegion: '',
       name: '',
       mobile: '',
-      is_default: 0
+      'default': 0
     },
     addressId: 0,
     openSelectRegion: false,
     selectRegionList: [
-      { id: 0, name: '省份', parent_id: 1, type: 1 },
-      { id: 0, name: '城市', parent_id: 1, type: 2 },
-      { id: 0, name: '区县', parent_id: 1, type: 3 }
+      { id: 0, name: '省份', parentId: 1, type: 1 },
+      { id: 0, name: '城市', parentId: 1, type: 2 },
+      { id: 0, name: '区县', parentId: 1, type: 3 }
     ],
     regionType: 1,
     regionList: [],
@@ -48,7 +48,7 @@ Page({
   },
   bindIsDefault(){
     let address = this.data.address;
-    address.is_default = !address.is_default;
+    address.isDefault = !address.isDefault;
     this.setData({
       address: address
     });
@@ -56,7 +56,7 @@ Page({
   getAddressDetail() {
     let that = this;
     util.request(api.AddressDetail, { id: that.data.addressId }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
           address: res.data
         });
@@ -82,32 +82,32 @@ Page({
 
     //设置区域选择数据
     let address = this.data.address;
-    if (address.province_id > 0 && address.city_id > 0 && address.district_id > 0) {
+    if (address.provinceId > 0 && address.cityId > 0 && address.districtId > 0) {
       let selectRegionList = this.data.selectRegionList;
-      selectRegionList[0].id = address.province_id;
-      selectRegionList[0].name = address.province_name;
-      selectRegionList[0].parent_id = 1;
+      selectRegionList[0].id = address.provinceId;
+      selectRegionList[0].name = address.provinceName;
+      selectRegionList[0].parentId = 1;
 
-      selectRegionList[1].id = address.city_id;
-      selectRegionList[1].name = address.city_name;
-      selectRegionList[1].parent_id = address.province_id;
+      selectRegionList[1].id = address.cityId;
+      selectRegionList[1].name = address.cityName;
+      selectRegionList[1].parentId = address.provinceId;
 
-      selectRegionList[2].id = address.district_id;
-      selectRegionList[2].name = address.district_name;
-      selectRegionList[2].parent_id = address.city_id;
+      selectRegionList[2].id = address.districtId;
+      selectRegionList[2].name = address.districtName;
+      selectRegionList[2].parentId = address.cityId;
 
       this.setData({
         selectRegionList: selectRegionList,
         regionType: 3
       });
 
-      this.getRegionList(address.city_id);
+      this.getRegionList(address.cityId);
     } else {
       this.setData({
         selectRegionList: [
-          { id: 0, name: '省份', parent_id: 1, type: 1 },
-          { id: 0, name: '城市', parent_id: 1, type: 2 },
-          { id: 0, name: '区县', parent_id: 1, type: 3 }
+          { id: 0, name: '省份', parentId: 1, type: 1 },
+          { id: 0, name: '城市', parentId: 1, type: 2 },
+          { id: 0, name: '区县', parentId: 1, type: 3 }
         ],
         regionType: 1
       })
@@ -149,7 +149,7 @@ Page({
     
     let selectRegionItem = selectRegionList[regionTypeIndex];
 
-    this.getRegionList(selectRegionItem.parent_id);
+    this.getRegionList(selectRegionItem.parentId);
 
     this.setRegionDoneStatus();
 
@@ -180,7 +180,7 @@ Page({
       if (index > regionType - 1) {
         item.id = 0;
         item.name = index == 1 ? '城市' : '区县';
-        item.parent_id = 0;
+        item.parentId = 0;
       }
       return item;
     });
@@ -214,13 +214,13 @@ Page({
 
     let address = this.data.address;
     let selectRegionList = this.data.selectRegionList;
-    address.province_id = selectRegionList[0].id;
-    address.city_id = selectRegionList[1].id;
-    address.district_id = selectRegionList[2].id;
-    address.province_name = selectRegionList[0].name;
-    address.city_name = selectRegionList[1].name;
-    address.district_name = selectRegionList[2].name;
-    address.full_region = selectRegionList.map(item => {
+    address.provinceId = selectRegionList[0].id;
+    address.cityId = selectRegionList[1].id;
+    address.districtId = selectRegionList[2].id;
+    address.provinceName = selectRegionList[0].name;
+    address.cityName = selectRegionList[1].name;
+    address.districtName = selectRegionList[2].name;
+    address.fullRegion = selectRegionList.map(item => {
       return item.name;
     }).join('');
 
@@ -241,7 +241,7 @@ Page({
     let that = this;
     let regionType = that.data.regionType;
     util.request(api.RegionList, { parentId: regionId }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         that.setData({
           regionList: res.data.map(item => {
 
@@ -279,7 +279,7 @@ Page({
     }
 
 
-    if (address.district_id == 0) {
+    if (address.districtId == 0) {
       util.showErrorToast('请输入省市区');
       return false;
     }
@@ -295,13 +295,13 @@ Page({
       id: address.id,
       name: address.name,
       mobile: address.mobile,
-      province_id: address.province_id,
-      city_id: address.city_id,
-      district_id: address.district_id,
+      provinceId: address.provinceId,
+      cityId: address.cityId,
+      districtId: address.districtId,
       address: address.address,
-      is_default: address.is_default,
+      isDefault: address.isDefault,
     }, 'POST').then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         wx.navigateTo({
           url: '/pages/ucenter/address/address',
         })

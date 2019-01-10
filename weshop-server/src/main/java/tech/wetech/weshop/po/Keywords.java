@@ -14,7 +14,7 @@ public class Keywords {
     private Boolean hot;
 
     @Column(name = "is_default")
-    private Boolean requireDefault;
+    private Boolean isDefault;
 
     @Column(name = "is_show")
     private Boolean show;
@@ -57,12 +57,12 @@ public class Keywords {
         return this;
     }
 
-    public Boolean getrequireDefault() {
-        return requireDefault;
+    public Boolean getIsDefault() {
+        return isDefault;
     }
 
-    public Keywords setrequireDefault(Boolean aDefault) {
-        requireDefault = aDefault;
+    public Keywords setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
         return this;
     }
 

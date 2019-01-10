@@ -149,7 +149,7 @@ page{
 }
 
 .region-select .region-list{
-  height: auto;
+  height: 100%;
   overflow: scroll;
 
 }

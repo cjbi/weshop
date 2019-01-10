@@ -1,6 +1,6 @@
 const ApiRootUrl = 'http://192.168.2.204:8360/';
 
-const BaseUrl = 'http://localhost:8081/wechat/';
+const BaseUrl = 'http://localhost:8082/wechat/';
 module.exports = {
   IndexUrl: BaseUrl + 'home/index', //首页数据接口
   CatalogList: BaseUrl + 'catalog/index',  //分类目录全部分类数据接口
@@ -30,8 +30,8 @@ module.exports = {
   OrderSubmit: ApiRootUrl + 'order/submit', // 提交订单
   PayPrepayId: ApiRootUrl + 'pay/prepay', //获取微信统一下单prepay_id
 
-  CollectList: ApiRootUrl + 'collect/list',  //收藏列表
-  CollectAddOrDelete: ApiRootUrl + 'collect/addordelete',  //添加或取消收藏
+  CollectList: BaseUrl + 'collect/list',  //收藏列表
+  CollectAddOrDelete: BaseUrl + 'collect/add-or-delete',  //添加或取消收藏
 
   CommentList: BaseUrl + 'comment/list',  //评论列表
   CommentCount: BaseUrl + 'comment/count',  //评论总数
@@ -46,12 +46,12 @@ module.exports = {
   SearchHelper: BaseUrl + 'search/helper',  //搜索帮助
   SearchClearHistory: BaseUrl + 'search/clearhistory',  //搜索帮助
 
-  AddressList: ApiRootUrl + 'address/list',  //收货地址列表
-  AddressDetail: ApiRootUrl + 'address/detail',  //收货地址详情
+  AddressList: BaseUrl + 'address/list',  //收货地址列表
+  AddressDetail: BaseUrl + 'address/detail',  //收货地址详情
   AddressSave: ApiRootUrl + 'address/save',  //保存收货地址
   AddressDelete: ApiRootUrl + 'address/delete',  //保存收货地址
 
-  RegionList: ApiRootUrl + 'region/list',  //获取区域列表
+  RegionList: BaseUrl + 'region/list',  //获取区域列表
 
   OrderList: ApiRootUrl + 'order/list',  //订单列表
   OrderDetail: ApiRootUrl + 'order/detail',  //订单详情

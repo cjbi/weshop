@@ -7,11 +7,14 @@
     -->
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="keyword" property="keyword" jdbcType="VARCHAR" />
-    <result column="is_hot" property="isHot" jdbcType="BIT" />
+    <result column="is_hot" property="hot" jdbcType="BIT" />
     <result column="is_default" property="isDefault" jdbcType="BIT" />
-    <result column="is_show" property="isShow" jdbcType="BIT" />
+    <result column="is_show" property="show" jdbcType="BIT" />
     <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
     <result column="scheme _url" property="schemeUrl" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
   </resultMap>
+    <select id="selectByKeywordLike" resultType="java.lang.String">
+      select keyword from weshop_keywords where keyword like #{keyword}
+    </select>
 </mapper>

@@ -227,7 +227,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                 setUserId(1);
             }});
         } else {
-            checkedAddress = addressMapper.selectOne(new Address().setUserId(1).setRequireDefault(true));
+            checkedAddress = addressMapper.selectOne(new Address().setUserId(1).setIsDefault(true));
         }
 
         CartCheckoutVO.CheckedAddressVO checkedAddressVO = null;
@@ -237,14 +237,15 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                             regionMapper.selectNameById(checkedAddress.getProvinceId())
                     )
                     .setCityName(
-                            regionMapper.selectNameById(checkedAddress.getProvinceId())
+                            regionMapper.selectNameById(checkedAddress.getCityId())
                     )
                     .setDistrictName(
                             regionMapper.selectNameById(checkedAddress.getDistrictId())
-                    )
-                    .setFullRegion(
-                            checkedAddressVO.getProvinceName() + checkedAddressVO.getCityName() + checkedAddressVO.getDistrictName()
                     );
+
+            checkedAddressVO.setFullRegion(
+                    checkedAddressVO.getProvinceName() + checkedAddressVO.getCityName() + checkedAddressVO.getDistrictName()
+            );
         }
         // 根据收货地址计算运费，未实现
         BigDecimal freightPrice = BigDecimal.ZERO;

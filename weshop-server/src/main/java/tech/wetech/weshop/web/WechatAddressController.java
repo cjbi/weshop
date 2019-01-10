@@ -1,34 +1,25 @@
 package tech.wetech.weshop.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.po.Address;
-import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.AddressService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.AddressVO;
 
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping("/wechat/address")
-public class WechatAddressController extends BaseCrudController<Address> {
+public class WechatAddressController {
 
     @Autowired
     private AddressService addressService;
 
-    @Override
-    public Result queryList(Address entity, PageQuery pageQuery) {
-        entity.setUserId(Constants.CURRENT_USER_ID);
-        return super.queryList(entity, pageQuery);
-    }
-
-    @Override
-    public Result query(Object id) {
-        return super.query(id);
+    @GetMapping("/list")
+    public Result<List<AddressVO>> queryList() {
+        return Result.success(addressService.queryDetailList());
     }
 
     @GetMapping("/detail")
@@ -36,25 +27,23 @@ public class WechatAddressController extends BaseCrudController<Address> {
         return Result.success(addressService.queryDetail(id));
     }
 
-    @Override
+    @PostMapping
     public Result create(Address entity) {
         entity.setUserId(Constants.CURRENT_USER_ID);
-        return super.create(entity);
+        addressService.create(entity);
+        return Result.success();
     }
 
-    @Override
+    @PutMapping
     public Result update(Address entity) {
         entity.setUserId(Constants.CURRENT_USER_ID);
-        return super.update(entity);
+        addressService.updateNotNull(entity);
+        return Result.success();
     }
 
-    @Override
+    @DeleteMapping
     public Result delete(Object id) {
-        return super.delete(id);
-    }
-
-    @Override
-    public Result deleteBatchIds(@NotNull Object[] ids) {
-        return super.deleteBatchIds(ids);
+        addressService.deleteById(id);
+        return Result.success();
     }
 }

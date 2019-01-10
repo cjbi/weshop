@@ -9,10 +9,7 @@ import tech.wetech.weshop.po.Keywords;
 import tech.wetech.weshop.po.SearchHistory;
 import tech.wetech.weshop.service.SearchService;
 import tech.wetech.weshop.utils.Constants;
-import tech.wetech.weshop.utils.Reflections;
 import tech.wetech.weshop.vo.SearchIndexVO;
-import tk.mybatis.mapper.weekend.Weekend;
-import tk.mybatis.mapper.weekend.WeekendCriteria;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,16 +25,8 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<String> helper(String keyword) {
-        Weekend<Keywords> example = Weekend.of(Keywords.class);
-        example.selectProperties(Reflections.fnToFieldName(Keywords::getKeyword));
-        WeekendCriteria<Keywords, Object> criteria = example.weekendCriteria();
-        criteria.andLike(Keywords::getKeyword, "%" + keyword + "%");
 
-        return PageHelper.startPage(1, 10).doSelectPage(() ->
-                keywordsMapper.selectByExample(example).stream()
-                        .map(Keywords::getKeyword)
-                        .collect(Collectors.toList())
-        );
+        return keywordsMapper.selectByKeywordLike("%" + keyword + "%");
     }
 
     @Override
@@ -49,7 +38,7 @@ public class SearchServiceImpl implements SearchService {
     public SearchIndexVO index() {
         // 取出输入框默认的关键词
         PageHelper.offsetPage(0, 1);
-        Keywords defaultKeyword = keywordsMapper.selectOne(new Keywords().setrequireDefault(true));
+        Keywords defaultKeyword = keywordsMapper.selectOne(new Keywords().setIsDefault(true));
         // 取出热闹关键词
         PageHelper.startPage(1, 10);
         List<Keywords> hotKeywordList = keywordsMapper.select(new Keywords().setHot(true));

@@ -2,6 +2,7 @@ package tech.wetech.weshop.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +10,10 @@ import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.context.request.RequestContextListener;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -46,6 +50,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         //不显示为null的字段
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //序列化枚举是以ordinal()来输出
+        objectMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
         SimpleModule simpleModule = new SimpleModule();
 //        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
 //        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);

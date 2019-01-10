@@ -9,6 +9,7 @@ import tech.wetech.weshop.mapper.*;
 import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.query.GoodsSearchQuery;
 import tech.wetech.weshop.service.GoodsService;
+import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Reflections;
 import tech.wetech.weshop.vo.*;
 import tk.mybatis.mapper.weekend.Weekend;
@@ -47,6 +48,9 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private CollectMapper collectMapper;
 
     @Autowired
     private GoodsSpecificationMapper goodsSpecificationMapper;
@@ -193,7 +197,10 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         goodsDetailVO.setGoodsSpecificationList(goodsSpecificationVOList);
         goodsDetailVO.setProductList(productList);
 
-        //TODO 当前用户是否收藏
+        //用户是否收藏
+        PageHelper.startPage(1, 1);
+        Collect userCollect = collectMapper.selectOne(new Collect().setUserId(Constants.CURRENT_USER_ID).setValueId(id));
+        goodsDetailVO.setUserHasCollect(userCollect == null ? false : true);
         //TODO 记录用户足迹
         return goodsDetailVO;
     }
