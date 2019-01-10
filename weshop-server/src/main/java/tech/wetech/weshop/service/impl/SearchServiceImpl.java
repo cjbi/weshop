@@ -25,7 +25,6 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<String> helper(String keyword) {
-
         return keywordsMapper.selectByKeywordLike("%" + keyword + "%");
     }
 
