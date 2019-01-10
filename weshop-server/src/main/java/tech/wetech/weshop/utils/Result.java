@@ -97,6 +97,7 @@ public class Result<T> implements Serializable {
         return new Result()
                 .setCode(ResultCodeEnum.OK.getCode())
                 .setMsg(ResultCodeEnum.OK.getMsg())
+                .setSuccess(true)
                 .setData(obj);
     }
 
