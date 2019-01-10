@@ -4,28 +4,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author cjbi
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class DefaultExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
 
-    @ResponseBody
     @ExceptionHandler({Throwable.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> handleThrowable(HttpServletRequest request, Throwable e) {
         LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
-        return Result.failure(e, ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR)
+                .addExtra("stackTrace", e.getStackTrace())
+                .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
     }
 
     /**
@@ -35,12 +41,15 @@ public class DefaultExceptionHandler {
      * @param e
      * @return
      */
-    @ResponseBody
     @ExceptionHandler({BizException.class})
     public Result handleBizException(HttpServletRequest request, BizException e) {
         LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
-        return Result.failure(e, ResultCodeEnum.NOT_IMPLEMENTED);
+        return Result.failure(ResultCodeEnum.PARAM_ERROR)
+                .addExtra("stackTrace", e.getStackTrace())
+                .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
     }
+
+
 
     /**
      * 参数校验异常
@@ -53,11 +62,42 @@ public class DefaultExceptionHandler {
      * @param e
      * @return
      */
-    @ResponseBody
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, ConstraintViolationException.class})
     public Result handleNotValidException(HttpServletRequest request, Exception e) {
         LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
-        return Result.failure(e, ResultCodeEnum.PARAM_ERROR);
+        BindingResult br = null;
+        Result result = new Result()
+                .setSuccess(false)
+                .setCode(ResultCodeEnum.PARAM_ERROR.getCode())
+                .setMsg(ResultCodeEnum.PARAM_ERROR.getMsg())
+                .addExtra("stackTrace", e.getStackTrace())
+                .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
+
+        if (e instanceof BindException) {
+            br = ((BindException) e).getBindingResult();
+        }
+        if (e instanceof MethodArgumentNotValidException) {
+            br = ((MethodArgumentNotValidException) e).getBindingResult();
+        }
+        if (br != null) {
+            return result.setData(
+                    br.getFieldErrors().stream()
+                            .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (oldValue, newValue) -> oldValue.concat(",").concat(newValue)))
+            ).setMsg(
+                    br.getFieldErrors().stream()
+                            .map(f -> f.getField().concat(f.getDefaultMessage()))
+                            .collect(Collectors.joining(","))
+            );
+        }
+        if (e instanceof ConstraintViolationException) {
+            Set<ConstraintViolation<?>> constraintViolations = ((ConstraintViolationException) e).getConstraintViolations();
+            return result
+                    .setData(
+                            constraintViolations.stream().collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage))
+                    )
+                    .setMsg(e.getMessage());
+        }
+        return result;
     }
 
 }

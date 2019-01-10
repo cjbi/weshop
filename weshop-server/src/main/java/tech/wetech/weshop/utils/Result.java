@@ -1,19 +1,12 @@
 package tech.wetech.weshop.utils;
 
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import tech.wetech.weshop.enums.ResultCodeEnum;
-import tech.wetech.weshop.exception.BizException;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author cjbi
@@ -93,43 +86,11 @@ public class Result<T> implements Serializable {
         return Result.success((T) Collections.EMPTY_MAP);
     }
 
-    public static Result failure(Throwable e, ResultCodeEnum resultCodeEnum) {
-        Result result = new Result()
+    public static Result failure(ResultCodeEnum resultCodeEnum) {
+        return new Result()
                 .setSuccess(false)
                 .setCode(resultCodeEnum.getCode())
-                .setMsg(resultCodeEnum.getMsg())
-                .addExtra("stackTrace",e.getStackTrace())
-                .addExtra("exceptionMessage",e.getClass().getName() + ": " + e.getMessage());
-        if (e instanceof BizException) {
-            return result.setMsg(((BizException) e).getMsg())
-                    .setCode(((BizException) e).getCode());
-        }
-        BindingResult br = null;
-        if (e instanceof BindException) {
-            br = ((BindException) e).getBindingResult();
-        }
-        if (e instanceof MethodArgumentNotValidException) {
-            br = ((MethodArgumentNotValidException) e).getBindingResult();
-        }
-        if (br != null) {
-            return result.setData(
-                    br.getFieldErrors().stream()
-                            .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (oldValue, newValue) -> oldValue.concat(",").concat(newValue)))
-            ).setMsg(
-                    br.getFieldErrors().stream()
-                            .map(f -> f.getField().concat(f.getDefaultMessage()))
-                            .collect(Collectors.joining(","))
-            );
-        }
-        if (e instanceof ConstraintViolationException) {
-            Set<ConstraintViolation<?>> constraintViolations = ((ConstraintViolationException) e).getConstraintViolations();
-            return result
-                    .setData(
-                            constraintViolations.stream().collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage))
-                    )
-                    .setMsg(e.getMessage());
-        }
-        return result;
+                .setMsg(resultCodeEnum.getMsg());
     }
 
     public static <T> Result<T> success(T obj) {
