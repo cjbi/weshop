@@ -49,8 +49,6 @@ public class DefaultExceptionHandler {
                 .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
     }
 
-
-
     /**
      * 参数校验异常
      * <p>使用 @Valid 注解，方法上加@RequestBody注解修饰的方法未校验通过会抛MethodArgumentNotValidException，否则抛BindException。
