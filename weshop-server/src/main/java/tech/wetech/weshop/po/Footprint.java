@@ -53,4 +53,14 @@ public class Footprint {
         this.createTime = createTime;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Footprint{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", goodsId=" + goodsId +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

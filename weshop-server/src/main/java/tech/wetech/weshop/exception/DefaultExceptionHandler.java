@@ -61,7 +61,7 @@ public class DefaultExceptionHandler {
      * @return
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, ConstraintViolationException.class})
-    public Result handleNotValidException(HttpServletRequest request, Exception e) {
+    public Result handleJSR303Exception(HttpServletRequest request, Exception e) {
         LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
         BindingResult br = null;
         Result result = new Result()

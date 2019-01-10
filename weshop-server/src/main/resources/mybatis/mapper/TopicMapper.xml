@@ -17,7 +17,7 @@
     <result column="topic_template_id" property="topicTemplateId" jdbcType="INTEGER" />
     <result column="topic_tag_id" property="topicTagId" jdbcType="INTEGER" />
     <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
-    <result column="is_show" property="isShow" jdbcType="BIT" />
+    <result column="is_show" property="show" jdbcType="BIT" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
 </mapper>

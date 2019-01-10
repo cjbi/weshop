@@ -2,6 +2,8 @@ package tech.wetech.weshop.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.bo.GoodsAttributeBO;
 import tech.wetech.weshop.bo.GoodsSpecificationBO;
@@ -50,6 +52,9 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
     private UserMapper userMapper;
 
     @Autowired
+    private FootprintMapper footprintMapper;
+
+    @Autowired
     private CollectMapper collectMapper;
 
     @Autowired
@@ -60,6 +65,9 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
 
     @Autowired
     private RelatedGoodsMapper relatedGoodsMapper;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public GoodsResultVO queryList(GoodsSearchQuery goodsSearchQuery) {
@@ -201,7 +209,9 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         PageHelper.startPage(1, 1);
         Collect userCollect = collectMapper.selectOne(new Collect().setUserId(Constants.CURRENT_USER_ID).setValueId(id));
         goodsDetailVO.setUserHasCollect(userCollect == null ? false : true);
-        //TODO 记录用户足迹
+
+        //记录用户足迹 此处使用异步处理
+        applicationEventPublisher.publishEvent(new Footprint().setUserId(Constants.CURRENT_USER_ID).setGoodsId(id));
         return goodsDetailVO;
     }
 
