@@ -211,7 +211,10 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         goodsDetailVO.setUserHasCollect(userCollect == null ? false : true);
 
         //记录用户足迹 此处使用异步处理
-        applicationEventPublisher.publishEvent(new Footprint().setUserId(Constants.CURRENT_USER_ID).setGoodsId(id));
+        Footprint footprint = new Footprint()
+                .setUserId(Constants.CURRENT_USER_ID)
+                .setGoodsId(id);
+        applicationEventPublisher.publishEvent(footprint);
         return goodsDetailVO;
     }
 

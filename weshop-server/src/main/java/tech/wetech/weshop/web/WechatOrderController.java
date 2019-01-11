@@ -26,8 +26,8 @@ public class WechatOrderController {
     private OrderExpressService orderExpressService;
 
     @GetMapping("/list")
-    public Result<List<OrderListVO>> queryOrderPageInfo(OrderQuery orderQuery) {
-        return null;
+    public Result<List<OrderListVO>> queryOrderList(OrderQuery orderQuery) {
+        return Result.success(orderService.queryOrderList(orderQuery));
     }
 
     /**

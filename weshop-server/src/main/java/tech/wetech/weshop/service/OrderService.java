@@ -18,7 +18,7 @@ public interface OrderService extends IService<Order> {
      * @param orderQuery
      * @return
      */
-    List<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery);
+    List<OrderListVO> queryOrderList(OrderQuery orderQuery);
 
     /**
      * 查询订单详情

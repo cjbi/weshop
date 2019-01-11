@@ -45,8 +45,8 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     private CartMapper cartMapper;
 
     @Override
-    public List<OrderListVO> queryOrderPageInfo(OrderQuery orderQuery) {
-        PageHelper.startPage(orderQuery.getPageNum(), orderQuery.getPageSize());
+    public List<OrderListVO> queryOrderList(OrderQuery orderQuery) {
+        PageHelper.startPage(orderQuery);
         List<Order> orderList = orderMapper.selectAll();
         List<OrderListVO> orderVOList = orderList.stream()
                 .map(OrderListVO::new)
