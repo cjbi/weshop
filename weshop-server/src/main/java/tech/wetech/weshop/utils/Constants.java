@@ -13,6 +13,8 @@ public class Constants {
 
     public static final String SESSION_ID = "1";
 
+    public static final int ADDRESS_ID = 3;
+
     private Constants() {
     }
 

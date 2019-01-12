@@ -95,6 +95,9 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
                 .map(Goods::getCategoryId)
                 .collect(Collectors.toList());
 
+        if (categoryIds.isEmpty()) {
+            return null;
+        }
         //查询二级分类的parentIds
         List<Integer> parentIds = categoryMapper.selectParentIdsByIdIn(categoryIds);
         //一级分类

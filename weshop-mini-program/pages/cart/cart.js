@@ -116,7 +116,7 @@ Page({
         return v.productId;
       });
       util.request(api.CartChecked, { productIds: productIds.join(','), isChecked: that.isCheckedAll() ? 0 : 1 }, 'POST').then(function (res) {
-        if (res.errno === 0) {
+        if (res.success) {
           console.log(res.data);
           that.setData({
             cartGoods: res.data.cartList,
@@ -176,7 +176,7 @@ Page({
       number: number,
       id: id
     }, 'POST').then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         console.log(res.data);
         that.setData({
           //cartGoods: res.data.cartList,
@@ -259,7 +259,7 @@ Page({
     util.request(api.CartDelete, {
       productIds: productIds.join(',')
     }, 'POST').then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         console.log(res.data);
         let cartList = res.data.cartList.map(v => {
           console.log(v);

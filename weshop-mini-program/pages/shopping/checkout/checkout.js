@@ -45,7 +45,7 @@ Page({
   getCheckoutInfo: function () {
     let that = this;
     util.request(api.CartCheckout, { addressId: that.data.addressId, couponId: that.data.couponId }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         console.log(res.data);
         that.setData({
           checkedGoodsList: res.data.checkedGoodsList,
@@ -98,7 +98,7 @@ Page({
       return false;
     }
     util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId }, 'POST').then(res => {
-      if (res.errno === 0) {
+      if (res.success) {
         const orderId = res.data.orderInfo.id;
         pay.payOrder(parseInt(orderId)).then(res => {
           wx.redirectTo({

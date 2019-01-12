@@ -223,8 +223,8 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
         Address checkedAddress = null;
         if (addressId != null) {
             checkedAddress = addressMapper.selectOne(new Address() {{
-                setId(addressId);
-                setUserId(1);
+                setId(Constants.ADDRESS_ID);
+                setUserId(Constants.CURRENT_USER_ID);
             }});
         } else {
             checkedAddress = addressMapper.selectOne(new Address().setUserId(1).setIsDefault(true));
