@@ -21,6 +21,6 @@
     <result column="goods_specification_name_value" property="goodsSpecificationNameValue" jdbcType="LONGVARCHAR" />
   </resultMap>
   <update id="incrementNumberById">
-    update weshop_cart set `number`=`number`+1 where id=${id}
+    update weshop_cart set `number`=`number`+1 where id=#{id}
   </update>
 </mapper>

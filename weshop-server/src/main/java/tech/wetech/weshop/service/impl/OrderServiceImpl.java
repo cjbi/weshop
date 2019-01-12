@@ -1,7 +1,7 @@
 package tech.wetech.weshop.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.enums.ResultCodeEnum;
@@ -47,10 +47,15 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     @Override
     public List<OrderListVO> queryOrderList(OrderQuery orderQuery) {
         PageHelper.startPage(orderQuery);
-        List<Order> orderList = orderMapper.selectAll();
-        List<OrderListVO> orderVOList = orderList.stream()
-                .map(OrderListVO::new)
-                .collect(Collectors.toList());
+        List<Order> orderList = orderMapper.select(new Order().setUserId(Constants.CURRENT_USER_ID));
+        List<OrderListVO> orderVOList = new LinkedList<>();
+        for (Order order : orderList) {
+            OrderListVO orderVO = new OrderListVO(order)
+                    .setGoodsList(orderGoodsMapper.select(new OrderGoods().setOrderId(order.getId())))
+                    .setHandleOption(new HandleOptionVO(order.getOrderStatus()))
+                    .setOrderStatusText(order.getOrderStatus() == 0 ? "未付款" : "已付款");
+            orderVOList.add(orderVO);
+        }
         return orderVOList;
     }
 

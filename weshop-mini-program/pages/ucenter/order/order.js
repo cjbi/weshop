@@ -13,10 +13,10 @@ Page({
   getOrderList(){
     let that = this;
     util.request(api.OrderList).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         console.log(res.data);
         that.setData({
-          orderList: res.data.data
+          orderList: res.data
         });
       }
     });

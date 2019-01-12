@@ -53,10 +53,10 @@ module.exports = {
 
   RegionList: BaseUrl + 'region/list',  //获取区域列表
 
-  OrderList: ApiRootUrl + 'order/list',  //订单列表
-  OrderDetail: ApiRootUrl + 'order/detail',  //订单详情
+  OrderList: BaseUrl + 'order/list',  //订单列表
+  OrderDetail: BaseUrl + 'order/detail',  //订单详情
   OrderCancel: ApiRootUrl + 'order/cancel',  //取消订单
-  OrderExpress: ApiRootUrl + 'order/express', //物流详情
+  OrderExpress: BaseUrl + 'order/express', //物流详情
 
   FootprintList: BaseUrl + 'footprint/list',  //足迹列表
   FootprintDelete: BaseUrl + 'footprint',  //删除足迹

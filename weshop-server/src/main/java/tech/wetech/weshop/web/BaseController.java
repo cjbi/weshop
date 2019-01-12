@@ -8,6 +8,6 @@ public abstract class BaseController {
     public BaseController() {
     }
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 }

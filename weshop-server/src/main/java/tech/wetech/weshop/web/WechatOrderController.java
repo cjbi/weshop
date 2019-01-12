@@ -25,7 +25,7 @@ public class WechatOrderController {
     @Autowired
     private OrderExpressService orderExpressService;
 
-    @GetMapping("/list")
+    @GetMapping({"/list"})
     public Result<List<OrderListVO>> queryOrderList(OrderQuery orderQuery) {
         return Result.success(orderService.queryOrderList(orderQuery));
     }

@@ -82,7 +82,6 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> success() {
-
         return Result.success(null);
     }
 

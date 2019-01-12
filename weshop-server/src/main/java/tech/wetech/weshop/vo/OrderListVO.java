@@ -1,10 +1,13 @@
 package tech.wetech.weshop.vo;
 
 import tech.wetech.weshop.enums.PayStatusEnum;
+import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.po.Order;
+import tech.wetech.weshop.po.OrderGoods;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class OrderListVO {
 
@@ -88,10 +91,14 @@ public class OrderListVO {
      */
     private Integer goodsCount;
 
+    private List<OrderGoods> goodsList;
+
     /**
      * 订单状态的处理
      */
     private String orderStatusText;
+
+    private HandleOptionVO handleOption;
 
     public OrderListVO(Order order) {
         this.id = order.getId();
@@ -413,6 +420,24 @@ public class OrderListVO {
 
     public OrderListVO setOrderStatusText(String orderStatusText) {
         this.orderStatusText = orderStatusText;
+        return this;
+    }
+
+    public List<OrderGoods> getGoodsList() {
+        return goodsList;
+    }
+
+    public OrderListVO setGoodsList(List<OrderGoods> goodsList) {
+        this.goodsList = goodsList;
+        return this;
+    }
+
+    public HandleOptionVO getHandleOption() {
+        return handleOption;
+    }
+
+    public OrderListVO setHandleOption(HandleOptionVO handleOption) {
+        this.handleOption = handleOption;
         return this;
     }
 }
