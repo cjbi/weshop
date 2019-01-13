@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class OrderVO {
 
-    private Order order;
+    private Order orderInfo;
 
     private List<OrderGoods> orderGoods;
 
@@ -23,7 +23,7 @@ public class OrderVO {
     }
 
     public OrderVO(Order order, List<OrderGoods> orderGoods, OrderExpress orderExpress, HandleOptionVO handleOption) {
-        this.order = order;
+        this.orderInfo = order;
         this.orderGoods = orderGoods;
         this.orderExpress = orderExpress;
         this.handleOption = handleOption;
@@ -37,12 +37,13 @@ public class OrderVO {
         this.orderGoods = orderGoods;
     }
 
-    public Order getOrder() {
-        return order;
+    public Order getOrderInfo() {
+        return orderInfo;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public OrderVO setOrderInfo(Order orderInfo) {
+        this.orderInfo = orderInfo;
+        return this;
     }
 
     public OrderExpress getOrderExpress() {

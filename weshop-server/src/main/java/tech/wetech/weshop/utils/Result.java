@@ -30,6 +30,13 @@ public class Result<T> implements Serializable {
     @ApiModelProperty("额外数据")
     private Map<String, Object> extra;
 
+    public Result<T> addExtraIfTrue(boolean val, String key, Object value) {
+        if (val) {
+            addExtra(key, value);
+        }
+        return this;
+    }
+
     public Result<T> addExtra(String key, Object value) {
         extra = extra == null ? new HashMap<>(16) : extra;
         extra.put(key, value);

@@ -33,7 +33,7 @@ public abstract class BaseCrudController<T> extends BaseController {
     public Result queryList(T entity, PageQuery pageQuery) {
         List<T> list = service.queryList(entity, pageQuery);
         return Result.success(service.queryList(entity, pageQuery))
-                .addExtra("total", ((Page) list).getTotal());
+                .addExtraIfTrue(pageQuery.isCountSql(), "total", ((Page) list).getTotal());
     }
 
     @GetMapping("/{id}")
