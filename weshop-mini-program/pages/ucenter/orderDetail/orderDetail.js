@@ -20,7 +20,7 @@ Page({
     util.request(api.OrderDetail, {
       orderId: that.data.orderId
     }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         console.log(res.data);
         that.setData({
           orderInfo: res.data.orderInfo,
@@ -37,7 +37,7 @@ Page({
 
     setInterval(() => {
       console.log(orderInfo);
-      orderInfo.add_time -= 1;
+      orderInfo.createTime -= 1;
       that.setData({
         orderInfo: orderInfo,
       });
@@ -48,7 +48,7 @@ Page({
     util.request(api.PayPrepayId, {
       orderId: that.data.orderId || 15
     }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.success) {
         const payParam = res.data;
         wx.requestPayment({
           'timeStamp': payParam.timeStamp,

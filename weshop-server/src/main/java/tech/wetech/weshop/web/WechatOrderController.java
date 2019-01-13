@@ -11,6 +11,7 @@ import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
+import tech.wetech.weshop.vo.OrderDetailVO;
 
 import java.util.List;
 
@@ -28,6 +29,11 @@ public class WechatOrderController {
     @GetMapping({"/list"})
     public Result<List<OrderListVO>> queryOrderList(OrderQuery orderQuery) {
         return Result.success(orderService.queryOrderList(orderQuery));
+    }
+
+    @GetMapping("/detail")
+    public Result<OrderDetailVO> queryOrderDetail(Integer orderId) {
+        return Result.success(orderService.queryOrderDetail(orderId));
     }
 
     /**

@@ -2,22 +2,16 @@ package tech.wetech.weshop.web;
 
 import com.github.pagehelper.Page;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.IService;
-import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
-import tk.mybatis.mapper.code.Style;
-import tk.mybatis.mapper.util.StringUtil;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * @author cjbi

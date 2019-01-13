@@ -1,7 +1,6 @@
 package tech.wetech.weshop.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.enums.ResultCodeEnum;
@@ -15,13 +14,13 @@ import tech.wetech.weshop.utils.IdGenerator;
 import tech.wetech.weshop.vo.HandleOptionVO;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
-import tech.wetech.weshop.vo.OrderVO;
+import tech.wetech.weshop.vo.OrderDetailVO;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 /**
  * @author cjbi
@@ -42,6 +41,9 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     private AddressMapper addressMapper;
 
     @Autowired
+    private RegionMapper regionMapper;
+
+    @Autowired
     private CartMapper cartMapper;
 
     @Override
@@ -60,14 +62,27 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     }
 
     @Override
-    public OrderVO queryOrderDetail(Integer orderId) {
-        Order order = orderMapper.selectByPrimaryKey(orderId);
+    public OrderDetailVO queryOrderDetail(Integer orderId) {
+        Order order = Optional.ofNullable(orderMapper.selectByPrimaryKey(orderId))
+                .orElseThrow(() -> new BizException(ResultCodeEnum.RECORD_NOT_EXIST));
+
+        OrderDetailVO.OrderInfoVO orderInfoVO = new OrderDetailVO.OrderInfoVO(order)
+                .setOrderExpress(orderExpressMapper.selectOne(new OrderExpress().setOrderId(orderId)));
+
+        orderInfoVO.setProvinceName(
+                regionMapper.selectNameById(orderInfoVO.getProvince())
+        ).setCityName(
+                regionMapper.selectNameById(orderInfoVO.getCity())
+        ).setDistrictName(
+                regionMapper.selectNameById(orderInfoVO.getDistrict())
+        );
+        orderInfoVO.setFullRegion(
+                orderInfoVO.getProvinceName() + orderInfoVO.getCityName() + orderInfoVO.getDistrictName()
+        );
 
         List<OrderGoods> orderGoodsList = orderGoodsMapper.select(new OrderGoods().setOrderId(orderId));
 
-        OrderExpress orderExpress = orderExpressMapper.selectOne(new OrderExpress().setOrderId(orderId));
-
-        return new OrderVO(order, orderGoodsList, orderExpress, new HandleOptionVO(order.getOrderStatus()));
+        return new OrderDetailVO(orderInfoVO, orderGoodsList, new HandleOptionVO(orderInfoVO.getOrderStatus()));
     }
 
     @Override

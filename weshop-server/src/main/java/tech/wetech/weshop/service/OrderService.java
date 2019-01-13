@@ -4,7 +4,7 @@ import tech.wetech.weshop.po.Order;
 import tech.wetech.weshop.query.OrderQuery;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
-import tech.wetech.weshop.vo.OrderVO;
+import tech.wetech.weshop.vo.OrderDetailVO;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public interface OrderService extends IService<Order> {
      * @param orderId
      * @return
      */
-    OrderVO queryOrderDetail(Integer orderId);
+    OrderDetailVO queryOrderDetail(Integer orderId);
 
     /**
      * 提交订单

@@ -11,7 +11,7 @@ import tech.wetech.weshop.po.Order;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.vo.OrderVO;
+import tech.wetech.weshop.vo.OrderDetailVO;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +35,7 @@ public class AdminOrderController extends BaseCrudController<Order> {
     }
 
     @GetMapping("/detail/{orderId}")
-    public Result<OrderVO> queryOrderDetail(@PathVariable("orderId") Integer orderId) {
+    public Result<OrderDetailVO> queryOrderDetail(@PathVariable("orderId") Integer orderId) {
         return Result.success(orderService.queryOrderDetail(orderId));
     }
 
