@@ -1,6 +1,7 @@
 package tech.wetech.weshop.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.po.Address;
 import tech.wetech.weshop.service.AddressService;
@@ -8,10 +9,12 @@ import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.AddressVO;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
 @RequestMapping("/wechat/address")
+@Validated
 public class WechatAddressController {
 
     @Autowired
@@ -23,26 +26,26 @@ public class WechatAddressController {
     }
 
     @GetMapping("/detail")
-    public Result<AddressVO> queryDetail(Integer id) {
+    public Result<AddressVO> queryDetail(@NotNull Integer id) {
         return Result.success(addressService.queryDetail(id));
     }
 
-    @PostMapping
-    public Result create(Address entity) {
+    @PostMapping("/create")
+    public Result create(@Validated @RequestBody Address entity) {
         entity.setUserId(Constants.CURRENT_USER_ID);
         addressService.create(entity);
         return Result.success();
     }
 
-    @PutMapping
-    public Result update(Address entity) {
+    @PostMapping("/update")
+    public Result update(@Validated @RequestBody Address entity) {
         entity.setUserId(Constants.CURRENT_USER_ID);
         addressService.updateNotNull(entity);
         return Result.success();
     }
 
-    @DeleteMapping
-    public Result delete(Object id) {
+    @PostMapping("/delete")
+    public Result delete(@NotNull Object id) {
         addressService.deleteById(id);
         return Result.success();
     }

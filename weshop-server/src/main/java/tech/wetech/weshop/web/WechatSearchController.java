@@ -1,10 +1,7 @@
 package tech.wetech.weshop.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.service.SearchService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.SearchIndexVO;
@@ -23,7 +20,7 @@ public class WechatSearchController {
         return Result.success(searchService.helper(keyword));
     }
 
-    @DeleteMapping("/clear-history")
+    @PostMapping("/clear-history")
     public Result clearHistory() {
         searchService.clearHistory();
         return Result.success();

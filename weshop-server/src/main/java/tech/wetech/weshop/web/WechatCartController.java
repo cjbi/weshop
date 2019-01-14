@@ -12,6 +12,8 @@ import tech.wetech.weshop.vo.CartCheckoutVO;
 import tech.wetech.weshop.vo.CartParamVO;
 import tech.wetech.weshop.vo.CartResultVO;
 
+import javax.validation.constraints.NotNull;
+
 @RestController
 @RequestMapping("/wechat/cart")
 @Validated
@@ -25,20 +27,20 @@ public class WechatCartController {
         return Result.success(cartService.getCart());
     }
 
-    @PostMapping
+    @PostMapping("/add-to-cart")
     public Result<CartResultVO> addGoodsToCart(@RequestBody @Validated CartParamVO cartParamVO) {
         cartService.addGoodsToCart(cartParamVO);
         return Result.success(cartService.getCart());
     }
 
-    @PutMapping
+    @PostMapping("/update-cart-goods")
     public Result<CartResultVO> updateCartGoods(@RequestBody @Validated(CartParamVO.CartUpdateChecks.class) CartParamVO cartParamVO) {
         cartService.updateGoods(cartParamVO);
         return Result.success(cartService.getCart());
     }
 
-    @DeleteMapping("/{cartId}")
-    public Result<CartResultVO> deleteCartGoods(@PathVariable Integer cartId) {
+    @PostMapping("/delete")
+    public Result<CartResultVO> deleteCartGoods(@NotNull Integer cartId) {
         cartService.deleteById(cartId);
         return Result.success(cartService.getCart());
     }

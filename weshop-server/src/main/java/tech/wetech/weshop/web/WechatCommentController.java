@@ -29,7 +29,7 @@ public class WechatCommentController {
         return Result.success(commentService.countList(commentQuery));
     }
 
-    @PostMapping
+    @PostMapping("post")
     public Result postComment(@RequestBody @Validated CommentPostVO commentPostVO) {
         commentService.create(commentPostVO.toPO());
         return Result.success();

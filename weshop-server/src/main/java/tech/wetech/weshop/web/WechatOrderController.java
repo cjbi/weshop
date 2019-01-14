@@ -13,6 +13,7 @@ import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
 import tech.wetech.weshop.vo.OrderDetailVO;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class WechatOrderController {
     }
 
     @GetMapping("/detail")
-    public Result<OrderDetailVO> queryOrderDetail(Integer orderId) {
+    public Result<OrderDetailVO> queryOrderDetail(@NotNull Integer orderId) {
         return Result.success(orderService.queryOrderDetail(orderId));
     }
 
@@ -50,8 +51,8 @@ public class WechatOrderController {
      * @param orderId
      * @return
      */
-    @GetMapping("/express/{orderId}")
-    public Result<OrderExpress> queryLatestExpressInfo(@PathVariable Integer orderId) {
+    @GetMapping("/express")
+    public Result<OrderExpress> queryLatestExpressInfo(@NotNull Integer orderId) {
         return Result.success(orderExpressService.queryOne(new OrderExpress().setOrderId(orderId)));
     }
 

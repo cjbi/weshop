@@ -30,36 +30,36 @@ public abstract class BaseCrudController<T> extends BaseController {
                 .addExtraIfTrue(pageQuery.isCountSql(), "total", ((Page) list).getTotal());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
     @ApiOperation("查询单条数据")
-    public Result query(@PathVariable Object id) {
+    public Result query(@NotNull @RequestParam("id") Object id) {
         return Result.success(service.queryById(id));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     @ApiOperation("新增数据")
     public Result create(@RequestBody @Validated T entity) {
         service.create(entity);
         return Result.success();
     }
 
-    @PutMapping
+    @PostMapping("/update")
     @ApiOperation("更新数据")
     public Result update(@RequestBody @Validated T entity) {
         service.updateNotNull(entity);
         return Result.success();
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/delete")
     @ApiOperation("删除数据")
-    public Result delete(@PathVariable Object id) {
+    public Result delete(@NotNull @RequestParam("id") Object id) {
         service.deleteById(id);
         return Result.success();
     }
 
-    @DeleteMapping
+    @PostMapping("/delete-batch")
     @ApiOperation("删除多条数据")
-    public Result deleteBatchIds(@RequestBody @NotNull Object[] ids) {
+    public Result deleteBatchByIds(@RequestBody @NotNull Object[] ids) {
         Arrays.stream(ids).parallel().forEach(id -> service.deleteById(id));
         return Result.success();
     }
