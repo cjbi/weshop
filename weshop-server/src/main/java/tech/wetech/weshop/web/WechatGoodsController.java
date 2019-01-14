@@ -11,6 +11,7 @@ import tech.wetech.weshop.query.GoodsSearchQuery;
 import tech.wetech.weshop.service.GoodsService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.*;
+import tech.wetech.weshop.web.base.BaseController;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/wechat/goods")
 @Validated
-public class WechatGoodsController {
+public class WechatGoodsController extends BaseController {
 
     @Autowired
     private GoodsService goodsService;

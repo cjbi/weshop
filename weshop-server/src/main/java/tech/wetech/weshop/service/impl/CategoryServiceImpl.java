@@ -44,11 +44,7 @@ public class CategoryServiceImpl extends BaseService<Category> implements Catego
         });
 
         CategoryVO currentCategory;
-        if (categoryId == null) {
-            currentCategory = categoryList.get(0);
-        } else {
-            currentCategory = new CategoryVO(categoryMapper.selectByPrimaryKey(categoryId));
-        }
+        currentCategory = new CategoryVO(categoryMapper.selectByPrimaryKey(categoryId));
         return new CategoryIndexVO(categoryList, currentCategory);
     }
 

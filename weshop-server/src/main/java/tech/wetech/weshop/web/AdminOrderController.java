@@ -1,10 +1,8 @@
 package tech.wetech.weshop.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.po.Order;
@@ -12,7 +10,9 @@ import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderDetailVO;
+import tech.wetech.weshop.web.base.BaseCrudController;
 
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/admin/order")
+@Validated
 public class AdminOrderController extends BaseCrudController<Order> {
 
     @Autowired
@@ -34,8 +35,8 @@ public class AdminOrderController extends BaseCrudController<Order> {
                 .addExtra("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
     }
 
-    @GetMapping("/detail/{orderId}")
-    public Result<OrderDetailVO> queryOrderDetail(@PathVariable("orderId") Integer orderId) {
+    @GetMapping("/detail")
+    public Result<OrderDetailVO> queryOrderDetail(@RequestParam("orderId") @NotNull Integer orderId) {
         return Result.success(orderService.queryOrderDetail(orderId));
     }
 

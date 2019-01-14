@@ -6,6 +6,7 @@ import tech.wetech.weshop.enums.RegionTypeEnum;
 import tech.wetech.weshop.po.Region;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.web.base.BaseCrudController;
 
 import java.util.Arrays;
 import java.util.List;

@@ -9,12 +9,13 @@ import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.CommentCountVO;
 import tech.wetech.weshop.vo.CommentPostVO;
 import tech.wetech.weshop.vo.CommentResultVO;
+import tech.wetech.weshop.web.base.BaseController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/wechat/comment")
-public class WechatCommentController {
+public class WechatCommentController extends BaseController {
 
     @Autowired
     private CommentService commentService;

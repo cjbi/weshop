@@ -5,12 +5,13 @@ import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.service.SearchService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.SearchIndexVO;
+import tech.wetech.weshop.web.base.BaseController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/wechat/search")
-public class WechatSearchController {
+public class WechatSearchController extends BaseController {
 
     @Autowired
     private SearchService searchService;

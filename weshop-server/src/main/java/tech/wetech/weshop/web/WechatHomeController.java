@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.service.HomeService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.HomeIndexVO;
+import tech.wetech.weshop.web.base.BaseController;
 
 /**
  * @author cjbi
  */
 @RestController
 @RequestMapping("/wechat/home")
-public class WechatHomeController {
+public class WechatHomeController extends BaseController {
 
     @Autowired
     private HomeService homeService;

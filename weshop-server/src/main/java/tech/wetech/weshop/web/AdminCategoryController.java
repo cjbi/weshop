@@ -8,6 +8,7 @@ import tech.wetech.weshop.po.Category;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.CategoryService;
 import tech.wetech.weshop.utils.Result;
+import tech.wetech.weshop.web.base.BaseCrudController;
 
 import java.util.Arrays;
 import java.util.List;

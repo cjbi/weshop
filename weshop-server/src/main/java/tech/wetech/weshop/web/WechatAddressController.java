@@ -8,6 +8,7 @@ import tech.wetech.weshop.service.AddressService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.AddressVO;
+import tech.wetech.weshop.web.base.BaseController;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/wechat/address")
 @Validated
-public class WechatAddressController {
+public class WechatAddressController extends BaseController {
 
     @Autowired
     private AddressService addressService;

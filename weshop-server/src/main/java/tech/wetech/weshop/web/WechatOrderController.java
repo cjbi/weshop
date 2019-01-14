@@ -12,6 +12,7 @@ import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderListVO;
 import tech.wetech.weshop.vo.OrderSubmitParamVO;
 import tech.wetech.weshop.vo.OrderDetailVO;
+import tech.wetech.weshop.web.base.BaseController;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/wechat/order")
 @Validated
-public class WechatOrderController {
+public class WechatOrderController extends BaseController {
 
     @Autowired
     private OrderService orderService;

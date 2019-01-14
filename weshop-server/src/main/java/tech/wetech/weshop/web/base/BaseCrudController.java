@@ -1,4 +1,4 @@
-package tech.wetech.weshop.web;
+package tech.wetech.weshop.web.base;
 
 import com.github.pagehelper.Page;
 import io.swagger.annotations.ApiOperation;

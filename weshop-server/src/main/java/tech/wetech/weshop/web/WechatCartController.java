@@ -33,7 +33,7 @@ public class WechatCartController {
         return Result.success(cartService.getCart());
     }
 
-    @PostMapping("/update-cart-goods")
+    @PostMapping("/update-goods")
     public Result<CartResultVO> updateCartGoods(@RequestBody @Validated(CartParamVO.CartUpdateChecks.class) CartParamVO cartParamVO) {
         cartService.updateGoods(cartParamVO);
         return Result.success(cartService.getCart());
