@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
  * @author cjbi
  */
 @RestControllerAdvice
-public class DefaultExceptionHandler {
+public class GlobalExceptionHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler({Throwable.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
