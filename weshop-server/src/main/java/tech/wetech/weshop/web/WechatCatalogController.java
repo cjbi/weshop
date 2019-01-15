@@ -20,7 +20,7 @@ public class WechatCatalogController {
 
     @GetMapping("/index")
     public Result<CategoryIndexVO> index(Integer id) {
-        return Result.success(categoryService.index(id == null ? 0 : id));
+        return Result.success(categoryService.index(id));
     }
 
     @GetMapping("/current")

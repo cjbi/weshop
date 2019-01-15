@@ -4,7 +4,7 @@ const BaseUrl = 'http://localhost:8082/wechat/';
 module.exports = {
   IndexUrl: BaseUrl + 'home/index', //首页数据接口
   CatalogList: BaseUrl + 'catalog/index',  //分类目录全部分类数据接口
-  CatalogCurrent: BaseUrl + 'catalog',  //分类目录当前分类数据接口
+  CatalogCurrent: BaseUrl + 'catalog/current',  //分类目录当前分类数据接口
 
   AuthLoginByWeixin: ApiRootUrl + 'auth/loginByWeixin', //微信登录
 
@@ -17,7 +17,7 @@ module.exports = {
   GoodsRelated: BaseUrl + 'goods/related',  //商品详情页的关联商品（大家都在看）
 
   BrandList: BaseUrl + 'brand/list',  //品牌列表
-  BrandDetail: BaseUrl + 'brand' +'/',  //品牌详情
+  BrandDetail: BaseUrl + 'brand',  //品牌详情
 
   CartList: BaseUrl + 'cart/index', //获取购物车的数据
   CartAdd: ApiRootUrl + 'cart/add', // 添加商品到购物车
@@ -38,13 +38,13 @@ module.exports = {
   CommentPost: ApiRootUrl + 'comment/post',   //发表评论
 
   TopicList: BaseUrl + 'topic/list',  //专题列表
-  TopicDetail: BaseUrl + 'topic' + '/',  //专题详情
+  TopicDetail: BaseUrl + 'topic',  //专题详情
   TopicRelated: BaseUrl + 'topic/related',  //相关专题
 
   SearchIndex: BaseUrl + 'search/index',  //搜索页面数据
   SearchResult: BaseUrl + 'search/result',  //搜索数据
   SearchHelper: BaseUrl + 'search/helper',  //搜索帮助
-  SearchClearHistory: BaseUrl + 'search/clearhistory',  //搜索帮助
+  SearchClearHistory: BaseUrl + 'search/clear-history',  //搜索帮助
 
   AddressList: BaseUrl + 'address/list',  //收货地址列表
   AddressDetail: BaseUrl + 'address/detail',  //收货地址详情
