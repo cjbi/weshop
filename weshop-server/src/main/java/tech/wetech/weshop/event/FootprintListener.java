@@ -9,11 +9,11 @@ import tech.wetech.weshop.mapper.FootprintMapper;
 import tech.wetech.weshop.po.Footprint;
 
 /**
+ * 用户足迹事件监听
  * @author cjbi
  */
 @Component
-public class AnnotationDrivenListener {
-
+public class FootprintListener {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -24,5 +24,4 @@ public class AnnotationDrivenListener {
         logger.info("Handling footprint event.", footprint);
         footprintMapper.insertSelective(footprint);
     }
-
 }

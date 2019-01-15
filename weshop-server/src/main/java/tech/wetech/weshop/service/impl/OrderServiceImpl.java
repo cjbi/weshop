@@ -179,11 +179,13 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
         }
         orderGoodsMapper.insertList(orderGoodsList);
 
-        cartMapper.delete(new Cart() {{
-            setUserId(Constants.CURRENT_USER_ID);
-            setSessionId(Constants.SESSION_ID);
-            setChecked(true);
-        }});
+        //清空购物车已购买商品
+        cartMapper.delete(
+                new Cart()
+                        .setUserId(Constants.CURRENT_USER_ID)
+                        .setSessionId(Constants.SESSION_ID)
+                        .setChecked(true)
+        );
         return orderInfo;
     }
 
