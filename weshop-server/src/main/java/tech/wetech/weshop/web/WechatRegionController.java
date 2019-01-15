@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.po.Region;
 import tech.wetech.weshop.service.RegionService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.web.base.BaseController;
 
 import java.util.List;
 

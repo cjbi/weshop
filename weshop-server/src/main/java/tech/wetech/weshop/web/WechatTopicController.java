@@ -8,7 +8,6 @@ import tech.wetech.weshop.po.Topic;
 import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.TopicService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.web.base.BaseCrudController;
 
 import java.util.List;
 

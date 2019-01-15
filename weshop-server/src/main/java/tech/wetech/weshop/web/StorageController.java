@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 import tech.wetech.weshop.po.Storage;
 import tech.wetech.weshop.storage.StorageService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.web.base.BaseCrudController;
 
 import java.io.IOException;
 

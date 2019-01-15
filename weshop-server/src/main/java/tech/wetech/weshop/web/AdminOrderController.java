@@ -10,7 +10,6 @@ import tech.wetech.weshop.query.PageQuery;
 import tech.wetech.weshop.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.OrderDetailVO;
-import tech.wetech.weshop.web.base.BaseCrudController;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;

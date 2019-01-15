@@ -6,7 +6,6 @@ import tech.wetech.weshop.service.CollectService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.vo.CollectAddOrDeleteParamVO;
 import tech.wetech.weshop.vo.CollectAddOrDeleteResultVO;
-import tech.wetech.weshop.web.base.BaseController;
 
 @RestController
 @RequestMapping("/wechat/collect")

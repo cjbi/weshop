@@ -8,7 +8,6 @@ import tech.wetech.weshop.po.Footprint;
 import tech.wetech.weshop.service.FootprintService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.web.base.BaseController;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
