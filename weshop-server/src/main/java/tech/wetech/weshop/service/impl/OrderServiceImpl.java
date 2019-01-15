@@ -3,6 +3,7 @@ package tech.wetech.weshop.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
@@ -94,11 +95,12 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
         }
 
         //获取要购买的商品
-        List<Cart> checkedGoodsList = cartMapper.select(new Cart() {{
-            setUserId(Constants.CURRENT_USER_ID);
-            setSessionId(Constants.SESSION_ID);
-            setChecked(true);
-        }});
+        List<Cart> checkedGoodsList = cartMapper.select(
+                new Cart()
+                        .setUserId(Constants.CURRENT_USER_ID)
+                        .setSessionId(Constants.SESSION_ID)
+                        .setChecked(true)
+        );
         if (checkedGoodsList.isEmpty()) {
             throw new BizException(ResultCodeEnum.PLEASE_SELECT_SHIPPING_ADDRESS);
         }
@@ -149,6 +151,11 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
         orderInfo.setGoodsPrice(goodsTotalPrice);
         orderInfo.setOrderPrice(orderTotalPrice);
         orderInfo.setActualPrice(actualPrice);
+
+        //订单状态：提交订单
+        orderInfo.setOrderStatus(OrderStatusEnum.SUBMIT_ORDER);
+        //支付状态：待付款
+        orderInfo.setPayStatus(PayStatusEnum.PENDING_REFUND);
 
         orderMapper.insertSelective(orderInfo);
 
