@@ -1,5 +1,6 @@
 package tech.wetech.weshop.vo;
 
+import tech.wetech.weshop.enums.OrderStatusEnum;
 import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.po.Order;
 import tech.wetech.weshop.po.OrderExpress;
@@ -37,7 +38,7 @@ public class OrderDetailVO {
 
         private Integer userId;
 
-        private Integer orderStatus;
+        private OrderStatusEnum orderStatus;
 
         private Short shippingStatus;
 
@@ -184,11 +185,11 @@ public class OrderDetailVO {
             return this;
         }
 
-        public Integer getOrderStatus() {
+        public OrderStatusEnum getOrderStatus() {
             return orderStatus;
         }
 
-        public OrderInfoVO setOrderStatus(Integer orderStatus) {
+        public OrderInfoVO setOrderStatus(OrderStatusEnum orderStatus) {
             this.orderStatus = orderStatus;
             return this;
         }

@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.bo.GoodsAttributeBO;
 import tech.wetech.weshop.bo.GoodsSpecificationBO;
+import tech.wetech.weshop.enums.ResultCodeEnum;
+import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.mapper.*;
 import tech.wetech.weshop.po.*;
 import tech.wetech.weshop.query.GoodsSearchQuery;
@@ -96,7 +98,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
                 .collect(Collectors.toList());
 
         if (categoryIds.isEmpty()) {
-            return null;
+            return GoodsResultVO.EMPTY_GOODS_RESULT;
         }
         //查询二级分类的parentIds
         List<Integer> parentIds = categoryMapper.selectParentIdsByIdIn(categoryIds);
@@ -248,10 +250,8 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
 
     @Override
     public GoodsCategoryVO queryGoodsCategory(Integer categoryId) {
-        Category currentCategory = categoryMapper.selectByPrimaryKey(categoryId);
-        if (currentCategory == null) {
-            return null;
-        }
+        Category currentCategory = Optional.ofNullable(categoryMapper.selectByPrimaryKey(categoryId))
+                .orElseThrow(() -> new BizException(ResultCodeEnum.RECORD_NOT_EXIST));
         Category parentCategory = categoryMapper.selectByPrimaryKey(currentCategory.getParentId());
         List<Category> brotherCategory = categoryMapper.select(new Category().setParentId(currentCategory.getParentId()));
         return new GoodsCategoryVO(currentCategory, parentCategory, brotherCategory);

@@ -10,6 +10,11 @@ public class GoodsResultVO {
 
     List<CategoryFilterVO> filterCategory;
 
+    public static final  GoodsResultVO EMPTY_GOODS_RESULT = new GoodsResultVO();
+
+    public GoodsResultVO() {
+    }
+
     public GoodsResultVO(List<Goods> goodsList, List<CategoryFilterVO> filterCategory) {
         this.goodsList = goodsList;
         this.filterCategory = filterCategory;

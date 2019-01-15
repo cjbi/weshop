@@ -3,6 +3,7 @@ package tech.wetech.weshop.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.enums.PayStatusEnum;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.mapper.*;
@@ -54,8 +55,8 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
         for (Order order : orderList) {
             OrderListVO orderVO = new OrderListVO(order)
                     .setGoodsList(orderGoodsMapper.select(new OrderGoods().setOrderId(order.getId())))
-                    .setHandleOption(new HandleOptionVO(order.getOrderStatus()))
-                    .setOrderStatusText(order.getOrderStatus() == 0 ? "未付款" : "已付款");
+                    .setHandleOption(new HandleOptionVO(order))
+                    .setOrderStatusText(order.getPayStatus().getName());
             orderVOList.add(orderVO);
         }
         return orderVOList;
@@ -82,7 +83,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 
         List<OrderGoods> orderGoodsList = orderGoodsMapper.select(new OrderGoods().setOrderId(orderId));
 
-        return new OrderDetailVO(orderInfoVO, orderGoodsList, new HandleOptionVO(orderInfoVO.getOrderStatus()));
+        return new OrderDetailVO(orderInfoVO, orderGoodsList, new HandleOptionVO(order));
     }
 
     @Override
