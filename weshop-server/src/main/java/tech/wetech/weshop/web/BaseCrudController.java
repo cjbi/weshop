@@ -12,6 +12,7 @@ import tech.wetech.weshop.utils.Result;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author cjbi
@@ -60,7 +61,7 @@ public abstract class BaseCrudController<T> extends BaseController {
     @PostMapping("/delete-batch")
     @ApiOperation("删除多条数据")
     public Result deleteBatchByIds(@RequestBody @NotNull Object[] ids) {
-        Arrays.stream(ids).parallel().forEach(id -> service.deleteById(id));
+        Stream.of(ids).parallel().forEach(id -> service.deleteById(id));
         return Result.success();
     }
 
