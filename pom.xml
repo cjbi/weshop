@@ -21,5 +21,7 @@
         <module>weshop-admin</module>
         <module>weshop-server</module>
         <module>weshop-mini-program</module>
+        <module>weshop-core</module>
+        <module>weshop-all</module>
     </modules>
 </project>

@@ -15,7 +15,6 @@
         <artifactId>weshop-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -23,6 +22,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -135,7 +139,7 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
                 <configuration>
-                    <configurationFile>${basedir}/src/main/resources/mybatis/generator/generatorConfig.xml</configurationFile>
+                    <configurationFile>../weshop-core/src/main/resources/mybatis/generator/generatorConfig.xml</configurationFile>
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>
