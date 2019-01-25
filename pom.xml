@@ -19,9 +19,17 @@
 
     <modules>
         <module>weshop-admin</module>
-        <module>weshop-server</module>
-        <module>weshop-mini-program</module>
         <module>weshop-core</module>
         <module>weshop-all</module>
+        <module>weshop-wechat</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>

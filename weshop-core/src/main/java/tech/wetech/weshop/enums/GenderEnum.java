@@ -1,7 +1,7 @@
 package tech.wetech.weshop.enums;
 
 /**
- * @author cjbi
+ * @author cjbi@outlook.com
  */
 
 public enum GenderEnum {

@@ -5,7 +5,7 @@ import tech.wetech.weshop.enums.CategoryLevelEnum;
 import javax.persistence.*;
 
 /**
- * @author cjbi
+ * @author cjbi@outlook.com
  */
 @Table(name = "weshop_category")
 public class Category {
