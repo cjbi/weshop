@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import tech.wetech.weshop.mapper.StorageMapper;
 import tech.wetech.weshop.po.Storage;
-import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.service.BaseService;
 import tech.wetech.weshop.utils.CharUtil;
 
@@ -15,7 +14,7 @@ import java.util.stream.Stream;
 /**
  * 提供存储服务类，所有存储服务均由该类对外提供
  */
-public class StorageService extends BaseService<Storage> implements IService<Storage> {
+public class StorageService extends BaseService<Storage> {
 
     private String active;
 
