@@ -77,7 +77,7 @@ public class GoodsDetailDTO {
 
             private String nickname;
 
-            private String  avatar;
+            private String avatar;
 
             private List<String> picList;
 

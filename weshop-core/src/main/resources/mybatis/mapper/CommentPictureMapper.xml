@@ -14,8 +14,8 @@
         SELECT
         pic_url
         FROM
-            weshop_comment_picture
+        weshop_comment_picture
         WHERE
-            comment_id = #{commentId}
+        comment_id = #{commentId}
     </select>
 </mapper>

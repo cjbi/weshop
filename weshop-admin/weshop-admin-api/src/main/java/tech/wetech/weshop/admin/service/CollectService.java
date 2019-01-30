@@ -1,9 +1,10 @@
 package tech.wetech.weshop.admin.service;
 
-import tech.wetech.weshop.bo.GoodsCollectBO;
-import tech.wetech.weshop.po.Collect;
 import tech.wetech.weshop.admin.dto.CollectAddOrDeleteParamDTO;
 import tech.wetech.weshop.admin.dto.CollectAddOrDeleteResultDTO;
+import tech.wetech.weshop.bo.GoodsCollectBO;
+import tech.wetech.weshop.po.Collect;
+import tech.wetech.weshop.service.IService;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 /target/
-!weshop-api-server/.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -18,51 +18,8 @@
 
 ### NetBeans ###
 /nbproject/private/
-/build/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-
-
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-**/node_modules
-# roadhog-api-doc ignore
-/src/utils/request-temp.js
-_roadhog-api-doc
-
-# production
-/dist
-/.vscode
-
-# misc
-.DS_Store
-npm-debug.log*
-yarn-error.log
-
-/coverage
-.idea
-yarn.lock
-package-lock.json
-*bak
-.vscode
-
-# visual studio code
-.history
-*.log
-
-functions/mock
-.temp/**
-
-# umi
-.umi
-.umi-production
-
-# screenshot
-screenshot
-.firebase
-/weshop-api-server/target/
-/weshop-frontend-app/target/
+/build/

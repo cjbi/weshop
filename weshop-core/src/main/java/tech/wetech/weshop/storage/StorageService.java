@@ -5,7 +5,7 @@ import org.springframework.core.io.Resource;
 import tech.wetech.weshop.mapper.StorageMapper;
 import tech.wetech.weshop.po.Storage;
 import tech.wetech.weshop.service.IService;
-import tech.wetech.weshop.service.impl.BaseService;
+import tech.wetech.weshop.service.BaseService;
 import tech.wetech.weshop.utils.CharUtil;
 
 import java.io.InputStream;

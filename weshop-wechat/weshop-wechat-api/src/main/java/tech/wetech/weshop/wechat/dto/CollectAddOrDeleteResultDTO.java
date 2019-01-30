@@ -8,8 +8,8 @@ public class CollectAddOrDeleteResultDTO {
         this.type = type;
     }
 
-    public enum HandleType{
-        add,delete
+    public enum HandleType {
+        add, delete
     }
 
     public HandleType getType() {

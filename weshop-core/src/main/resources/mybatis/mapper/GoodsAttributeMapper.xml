@@ -12,12 +12,12 @@
     </resultMap>
     <select id="selectGoodsDetailAttributeByGoodsId" resultType="tech.wetech.weshop.bo.GoodsAttributeBO">
         SELECT
-            a.name, ga.value
+        a.name, ga.value
         FROM
-            weshop_goods_attribute AS ga
-                INNER JOIN
-            weshop_attribute AS a ON a.id = ga.attribute_id
+        weshop_goods_attribute AS ga
+        INNER JOIN
+        weshop_attribute AS a ON a.id = ga.attribute_id
         WHERE
-            ga.goods_id = #{goodsId}
+        ga.goods_id = #{goodsId}
     </select>
 </mapper>

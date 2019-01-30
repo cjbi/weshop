@@ -3,9 +3,9 @@ package tech.wetech.weshop.enums;
 /**
  * @author cjbi@outlook.com
  */
-public enum  CategoryLevelEnum {
+public enum CategoryLevelEnum {
 
-    L1("一级类目"),L2("二级类目");
+    L1("一级类目"), L2("二级类目");
 
     CategoryLevelEnum(String name) {
         this.name = name;

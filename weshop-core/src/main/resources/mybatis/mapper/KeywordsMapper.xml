@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="tech.wetech.weshop.mapper.KeywordsMapper" >
-  <resultMap id="BaseResultMap" type="tech.wetech.weshop.po.Keywords" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
-    <result column="is_hot" property="hot" jdbcType="BIT" />
-    <result column="is_default" property="isDefault" jdbcType="BIT" />
-    <result column="is_show" property="show" jdbcType="BIT" />
-    <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
-    <result column="scheme _url" property="schemeUrl" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-  </resultMap>
+<mapper namespace="tech.wetech.weshop.mapper.KeywordsMapper">
+    <resultMap id="BaseResultMap" type="tech.wetech.weshop.po.Keywords">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="keyword" property="keyword" jdbcType="VARCHAR"/>
+        <result column="is_hot" property="hot" jdbcType="BIT"/>
+        <result column="is_default" property="isDefault" jdbcType="BIT"/>
+        <result column="is_show" property="show" jdbcType="BIT"/>
+        <result column="sort_order" property="sortOrder" jdbcType="INTEGER"/>
+        <result column="scheme _url" property="schemeUrl" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+    </resultMap>
     <select id="selectByKeywordLike" resultType="java.lang.String">
-      select keyword from weshop_keywords where keyword like #{keyword}
+        select keyword from weshop_keywords where keyword like #{keyword}
     </select>
 </mapper>

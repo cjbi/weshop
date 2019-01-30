@@ -12,6 +12,6 @@
         <result column="agency_id" property="agencyId" jdbcType="SMALLINT"/>
     </resultMap>
     <select id="selectNameById" resultType="java.lang.String">
-      select name from weshop_region where id=#{id}
+        select name from weshop_region where id=#{id}
     </select>
 </mapper>

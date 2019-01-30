@@ -29,7 +29,7 @@ public enum IdGenerator {
     }
 
     public static void main(String[] args) {
-       System.out.println(IdGenerator.INSTANCE.nextId());
+        System.out.println(IdGenerator.INSTANCE.nextId());
     }
 
 

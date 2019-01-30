@@ -1,6 +1,8 @@
 package tech.wetech.weshop.utils;
+
 /**
  * 常量定义
+ *
  * @author cjbi@outlook.com
  */
 public class Constants {

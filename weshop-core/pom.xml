@@ -125,10 +125,7 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -147,7 +144,7 @@
                     <dependency>
                         <groupId>tk.mybatis</groupId>
                         <artifactId>mapper-generator</artifactId>
-                            <version>1.0.0</version>
+                        <version>1.0.0</version>
                     </dependency>
                 </dependencies>
             </plugin>

@@ -10,6 +10,7 @@ public interface CommentMapper extends MyMapper<Comment> {
 
     /**
      * 查询有图片的评论
+     *
      * @return
      */
     List<Comment> selectIfRequirePictureList(CommentQuery commentQuery);

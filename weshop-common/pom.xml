@@ -3,21 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>weshop-wechat</artifactId>
+        <artifactId>weshop-parent</artifactId>
         <groupId>tech.wetech</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>weshop-wechat-api</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>weshop-common</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>weshop-common-api</module>
+        <module>weshop-common-service</module>
+        <module>weshop-common-web</module>
+    </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>tech.wetech</groupId>
-            <artifactId>weshop-core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
 </project>

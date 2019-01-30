@@ -22,7 +22,7 @@
         <result column="front_name" property="frontName" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="selectIdsByParentId" resultType="java.lang.Integer">
-      select id from weshop_category where parent_id=#{parentId}
+        select id from weshop_category where parent_id=#{parentId}
     </select>
     <select id="selectParentIdsByIdIn" resultType="java.lang.Integer">
         select distinct parent_id from weshop_category where id in
