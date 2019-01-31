@@ -29,8 +29,6 @@
 		<module>weshop-wechat</module>
 		<module>weshop-common</module>
 		<module>weshop-discovery-server</module>
-        <module>weshop-hystrix-dashboard</module>
-		<module>weshop-hystrix-dashboard</module>
 	</modules>
 
 	<dependencyManagement>
