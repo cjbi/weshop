@@ -25,7 +25,6 @@
 	<modules>
 		<module>weshop-admin</module>
 		<module>weshop-core</module>
-		<module>weshop-all</module>
 		<module>weshop-wechat</module>
 		<module>weshop-common</module>
 		<module>weshop-discovery-server</module>
