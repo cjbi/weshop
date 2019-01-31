@@ -28,7 +28,21 @@
 		<module>weshop-all</module>
 		<module>weshop-wechat</module>
 		<module>weshop-common</module>
-		<module>weshop-discovery</module>
+		<module>weshop-discovery-server</module>
+        <module>weshop-hystrix-dashboard</module>
+		<module>weshop-hystrix-dashboard</module>
 	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>
