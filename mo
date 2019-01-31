@@ -3,4 +3,3 @@
 用户中心 weshop_address weshop_admin weshop_collect weshop_footprint weshop_user weshop_user_coupon weshop_user_level
 营销中心 weshop_ad weshop_ad_position weshop_comment weshop_comment_picture weshop_coupon weshop_feedback weshop_goods_attribute weshop_goods_issue weshop_keywords weshop_related_goods weshop_search_history weshop_topic weshop_topic_category
 公共服务 weshop_region weshop_storage
-
