@@ -8,9 +8,9 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>tech.wetech</groupId>
-	<artifactId>weshop-discovery</artifactId>
+    <artifactId>weshop-discovery-server</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>weshop-discovery</name>
+    <name>weshop-discovery-server</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
