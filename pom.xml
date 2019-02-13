@@ -28,6 +28,7 @@
 		<module>weshop-wechat</module>
 		<module>weshop-common</module>
 		<module>weshop-discovery-server</module>
+		<module>weshop-order</module>
 	</modules>
 
 	<dependencyManagement>
