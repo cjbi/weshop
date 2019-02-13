@@ -17,6 +17,11 @@
             <artifactId>weshop-wechat-service</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-order-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

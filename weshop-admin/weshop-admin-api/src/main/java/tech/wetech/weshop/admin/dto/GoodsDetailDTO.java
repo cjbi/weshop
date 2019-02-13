@@ -3,7 +3,6 @@ package tech.wetech.weshop.admin.dto;
 
 import tech.wetech.weshop.bo.GoodsAttributeBO;
 import tech.wetech.weshop.bo.GoodsSpecificationBO;
-import tech.wetech.weshop.po.*;
 
 import java.util.List;
 

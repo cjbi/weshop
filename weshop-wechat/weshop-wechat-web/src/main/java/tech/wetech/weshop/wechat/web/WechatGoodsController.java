@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.po.Goods;
 import tech.wetech.weshop.query.GoodsSearchQuery;
-import tech.wetech.weshop.wechat.service.GoodsService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.wechat.dto.*;
 import tech.wetech.weshop.web.BaseController;
+import tech.wetech.weshop.wechat.service.GoodsService;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

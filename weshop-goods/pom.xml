@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>weshop-parent</artifactId>
+        <groupId>tech.wetech</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>weshop-goods</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>weshop-goods-api</module>
+        <module>weshop-goods-service</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-framework</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

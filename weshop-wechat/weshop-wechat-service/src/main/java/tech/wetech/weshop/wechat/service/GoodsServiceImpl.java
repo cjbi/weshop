@@ -9,12 +9,12 @@ import tech.wetech.weshop.bo.GoodsSpecificationBO;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.mapper.*;
-import tech.wetech.weshop.po.*;
+import tech.wetech.weshop.po.Comment;
+import tech.wetech.weshop.po.CommentPicture;
 import tech.wetech.weshop.query.GoodsSearchQuery;
 import tech.wetech.weshop.service.BaseService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Reflections;
-import tech.wetech.weshop.wechat.dto.*;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 
