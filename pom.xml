@@ -33,6 +33,8 @@
         <module>weshop-user</module>
         <module>weshop-goods</module>
         <module>weshop-goods</module>
+		<module>weshop-marketing</module>
+		<module>weshop-storage</module>
 	</modules>
 
 	<dependencyManagement>

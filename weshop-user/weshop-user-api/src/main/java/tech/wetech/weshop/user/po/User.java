@@ -1,6 +1,6 @@
 package tech.wetech.weshop.user.po;
 
-import tech.wetech.weshop.enums.GenderEnum;
+import tech.wetech.weshop.user.enums.GenderEnum;
 
 import javax.persistence.*;
 import java.util.Date;

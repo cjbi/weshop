@@ -1,6 +1,6 @@
 package tech.wetech.weshop.user.po;
 
-import tech.wetech.weshop.enums.RegionTypeEnum;
+import tech.wetech.weshop.user.enums.RegionTypeEnum;
 
 import javax.persistence.*;
 

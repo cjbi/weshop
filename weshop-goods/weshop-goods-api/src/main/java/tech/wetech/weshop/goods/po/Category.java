@@ -1,6 +1,6 @@
 package tech.wetech.weshop.goods.po;
 
-import tech.wetech.weshop.enums.CategoryLevelEnum;
+import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 
 import javax.persistence.*;
 

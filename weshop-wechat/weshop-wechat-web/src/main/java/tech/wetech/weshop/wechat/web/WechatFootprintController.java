@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.po.Footprint;
 import tech.wetech.weshop.user.bo.bo.GoodsFootprintBO;
+import tech.wetech.weshop.user.service.FootprintService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.web.BaseController;
-import tech.wetech.weshop.wechat.service.FootprintService;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
