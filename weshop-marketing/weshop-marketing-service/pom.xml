@@ -11,5 +11,12 @@
 
     <artifactId>weshop-marketing-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-marketing-api</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>

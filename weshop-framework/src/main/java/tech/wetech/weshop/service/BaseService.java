@@ -47,7 +47,7 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public List<T> queryList(T entity, PageQuery pageQuery) {
+    public List<T> queryPageList(T entity, PageQuery pageQuery) {
         if (pageQuery.getOrderBy() != null) {
             pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
         }

@@ -3,11 +3,11 @@ package tech.wetech.weshop.wechat.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.po.Address;
-import tech.wetech.weshop.wechat.service.AddressService;
+import tech.wetech.weshop.user.dto.AddressDTO;
+import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.user.service.AddressService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.wechat.dto.AddressDTO;
 import tech.wetech.weshop.web.BaseController;
 
 import javax.validation.constraints.NotNull;

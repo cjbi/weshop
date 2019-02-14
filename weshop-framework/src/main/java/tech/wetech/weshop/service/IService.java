@@ -1,5 +1,9 @@
 package tech.wetech.weshop.service;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import tech.wetech.weshop.query.PageQuery;
 
 import java.util.List;
@@ -12,26 +16,37 @@ import java.util.List;
  */
 public interface IService<T> {
 
+    @GetMapping("/queryAll")
     List<T> queryAll();
 
+    @GetMapping("/queryList")
     List<T> queryList(T entity);
 
+    @GetMapping("/queryOne")
     T queryOne(T entity);
 
-    T queryById(Object id);
+    @GetMapping("/queryById")
+    T queryById(@RequestParam("id") Object id);
 
-    List<T> queryList(T entity, PageQuery pageQuery);
+    @GetMapping("/queryPageList")
+    List<T> queryPageList(T entity, PageQuery pageQuery);
 
-    int create(T entity);
+    @PostMapping("/create")
+    int create(@RequestBody T entity);
 
-    int updateAll(T entity);
+    @PostMapping("/updateAll")
+    int updateAll(@RequestBody T entity);
 
-    int updateNotNull(T entity);
+    @PostMapping("/updateNotNull")
+    int updateNotNull(@RequestBody T entity);
 
-    int delete(T entity);
+    @PostMapping("/delete")
+    int delete(@RequestBody T entity);
 
-    int deleteById(Object id);
+    @PostMapping("/deleteById")
+    int deleteById(@RequestBody Object id);
 
+    @GetMapping("/count")
     int count(T entity);
 
 }

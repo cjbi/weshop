@@ -1,6 +1,7 @@
 package tech.wetech.weshop.marketing.mapper;
 
-import tech.wetech.weshop.po.Keywords;
+
+import tech.wetech.weshop.marketing.po.Keywords;
 import tech.wetech.weshop.utils.MyMapper;
 
 import java.util.List;

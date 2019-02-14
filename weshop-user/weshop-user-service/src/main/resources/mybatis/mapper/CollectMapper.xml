@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="tech.wetech.weshop.mapper.CollectMapper">
-    <resultMap id="BaseResultMap" type="tech.wetech.weshop.po.Collect">
+<mapper namespace="tech.wetech.weshop.user.mapper.CollectMapper">
+    <resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.Collect">
         <!--
           WARNING - @mbg.generated
         -->
@@ -12,7 +12,7 @@
         <result column="is_attention" property="attention" jdbcType="BIT"/>
         <result column="type_id" property="typeId" jdbcType="INTEGER"/>
     </resultMap>
-    <select id="selectGoodsCollectByUserId" resultType="tech.wetech.weshop.bo.GoodsCollectBO">
+    <select id="selectGoodsCollectByUserId" resultType="tech.wetech.weshop.user.bo.GoodsCollectBO">
         SELECT
         c.*, g.name, g.list_pic_url, g.goods_brief, g.retail_price
         FROM

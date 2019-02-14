@@ -43,6 +43,14 @@ public class PageQuery implements Serializable {
     @ApiModelProperty("排序")
     private String orderBy;
 
+    public PageQuery() {
+    }
+
+    public PageQuery(int pageNum, int pageSize) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+    }
+
     public int getPageNum() {
         return pageNum;
     }

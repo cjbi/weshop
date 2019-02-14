@@ -3,13 +3,13 @@ package tech.wetech.weshop.wechat.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.query.CommentQuery;
-import tech.wetech.weshop.web.BaseController;
-import tech.wetech.weshop.wechat.service.CommentService;
+import tech.wetech.weshop.marketing.dto.CommentCountDTO;
+import tech.wetech.weshop.marketing.dto.CommentPostDTO;
+import tech.wetech.weshop.marketing.dto.CommentResultDTO;
+import tech.wetech.weshop.marketing.query.CommentQuery;
+import tech.wetech.weshop.marketing.service.CommentService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.wechat.dto.CommentCountDTO;
-import tech.wetech.weshop.wechat.dto.CommentPostDTO;
-import tech.wetech.weshop.wechat.dto.CommentResultDTO;
+import tech.wetech.weshop.web.BaseController;
 
 import java.util.List;
 

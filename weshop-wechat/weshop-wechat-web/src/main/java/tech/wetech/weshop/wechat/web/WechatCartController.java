@@ -3,14 +3,14 @@ package tech.wetech.weshop.wechat.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.po.Cart;
-import tech.wetech.weshop.wechat.service.CartService;
+import tech.wetech.weshop.order.dto.CartCheckoutDTO;
+import tech.wetech.weshop.order.dto.CartParamDTO;
+import tech.wetech.weshop.order.dto.CartResultDTO;
+import tech.wetech.weshop.order.po.Cart;
+import tech.wetech.weshop.order.service.CartService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.wechat.dto.CartCheckedDTO;
-import tech.wetech.weshop.wechat.dto.CartCheckoutDTO;
-import tech.wetech.weshop.wechat.dto.CartParamDTO;
-import tech.wetech.weshop.wechat.dto.CartResultDTO;
+import tech.wetech.weshop.wechat.vo.CartCheckedVO;
 
 import javax.validation.constraints.NotNull;
 
@@ -46,10 +46,10 @@ public class WechatCartController {
     }
 
     @PostMapping("/checked")
-    public Result<CartResultDTO> checkedCartGoods(@RequestBody @Validated CartCheckedDTO cartCheckedDTO) {
+    public Result<CartResultDTO> checkedCartGoods(@RequestBody @Validated CartCheckedVO cartCheckedVO) {
         cartService.updateNotNull(new Cart()
-                .setId(cartCheckedDTO.getCartId())
-                .setChecked(cartCheckedDTO.getChecked()));
+                .setId(cartCheckedVO.getCartId())
+                .setChecked(cartCheckedVO.getChecked()));
         return Result.success(cartService.getCart());
     }
 

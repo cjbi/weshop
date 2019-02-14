@@ -1,10 +1,13 @@
 package tech.wetech.weshop.wechat.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.wechat.service.SearchService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import tech.wetech.weshop.marketing.dto.SearchIndexDTO;
+import tech.wetech.weshop.marketing.service.SearchService;
 import tech.wetech.weshop.utils.Result;
-import tech.wetech.weshop.wechat.dto.SearchIndexDTO;
 import tech.wetech.weshop.web.BaseController;
 
 import java.util.List;

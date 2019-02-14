@@ -1,7 +1,7 @@
 package tech.wetech.weshop.marketing.mapper;
 
-import tech.wetech.weshop.po.Comment;
-import tech.wetech.weshop.query.CommentQuery;
+import tech.wetech.weshop.marketing.po.Comment;
+import tech.wetech.weshop.marketing.query.CommentQuery;
 import tech.wetech.weshop.utils.MyMapper;
 
 import java.util.List;

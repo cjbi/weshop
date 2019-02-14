@@ -9,10 +9,10 @@ import tech.wetech.weshop.order.dto.OrderSubmitParamDTO;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.po.OrderExpress;
 import tech.wetech.weshop.order.query.OrderQuery;
+import tech.wetech.weshop.order.service.OrderExpressService;
+import tech.wetech.weshop.order.service.OrderService;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.web.BaseController;
-import tech.wetech.weshop.wechat.service.OrderExpressService;
-import tech.wetech.weshop.wechat.service.OrderService;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

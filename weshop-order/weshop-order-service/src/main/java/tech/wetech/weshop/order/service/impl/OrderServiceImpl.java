@@ -19,12 +19,12 @@ import tech.wetech.weshop.order.po.Cart;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.po.OrderExpress;
 import tech.wetech.weshop.order.po.OrderGoods;
-import tech.wetech.weshop.order.proxy.AddressServiceProxy;
-import tech.wetech.weshop.order.proxy.RegionServiceProxy;
 import tech.wetech.weshop.order.query.OrderQuery;
 import tech.wetech.weshop.order.service.OrderService;
 import tech.wetech.weshop.service.BaseService;
 import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.user.service.AddressService;
+import tech.wetech.weshop.user.service.RegionService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.IdGenerator;
 
@@ -53,10 +53,10 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
     private CartMapper cartMapper;
 
     @Autowired
-    private AddressServiceProxy addressServiceProxy;
+    private AddressService addressService;
 
     @Autowired
-    private RegionServiceProxy regionServiceProxy;
+    private RegionService regionService;
 
     @Override
     public List<OrderListDTO> queryOrderList(OrderQuery orderQuery) {
@@ -82,11 +82,11 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
                 .setOrderExpress(orderExpressMapper.selectOne(new OrderExpress().setOrderId(orderId)));
 
         orderInfoVO.setProvinceName(
-                regionServiceProxy.queryNameById(orderInfoVO.getProvince())
+                regionService.queryNameById(orderInfoVO.getProvince())
         ).setCityName(
-                regionServiceProxy.queryNameById(orderInfoVO.getCity())
+                regionService.queryNameById(orderInfoVO.getCity())
         ).setDistrictName(
-                regionServiceProxy.queryNameById(orderInfoVO.getDistrict())
+                regionService.queryNameById(orderInfoVO.getDistrict())
         );
         orderInfoVO.setFullRegion(
                 orderInfoVO.getProvinceName() + orderInfoVO.getCityName() + orderInfoVO.getDistrictName()
@@ -99,7 +99,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 
     @Override
     public Order submitOrder(OrderSubmitParamDTO orderSubmitParamDTO) {
-        Address checkedAddress = addressServiceProxy.queryById(orderSubmitParamDTO.getAddressId());
+        Address checkedAddress = addressService.queryById(orderSubmitParamDTO.getAddressId());
         if (checkedAddress == null) {
             throw new BizException(ResultCodeEnum.PLEASE_SELECT_SHIPPING_ADDRESS);
         }

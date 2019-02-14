@@ -15,6 +15,8 @@ import java.util.List;
  */
 public interface GoodsService extends IService<Goods> {
 
+    List<Goods> queryListByCategoryIdIn(List<Integer> categoryIdList);
+
     GoodsResultDTO queryList(GoodsSearchQuery goodsSearchQuery);
 
     GoodsDetailDTO queryGoodsDetail(Integer goodsId);

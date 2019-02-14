@@ -7,16 +7,21 @@ import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.goods.po.Goods;
 import tech.wetech.weshop.goods.po.Product;
+import tech.wetech.weshop.goods.service.GoodsService;
+import tech.wetech.weshop.goods.service.GoodsSpecificationService;
+import tech.wetech.weshop.goods.service.ProductService;
 import tech.wetech.weshop.order.dto.CartCheckoutDTO;
 import tech.wetech.weshop.order.dto.CartParamDTO;
 import tech.wetech.weshop.order.dto.CartResultDTO;
 import tech.wetech.weshop.order.mapper.CartMapper;
 import tech.wetech.weshop.order.po.Cart;
-import tech.wetech.weshop.order.proxy.*;
 import tech.wetech.weshop.order.service.CartService;
 import tech.wetech.weshop.service.BaseService;
 import tech.wetech.weshop.user.po.Address;
 import tech.wetech.weshop.user.po.UserCoupon;
+import tech.wetech.weshop.user.service.AddressService;
+import tech.wetech.weshop.user.service.RegionService;
+import tech.wetech.weshop.user.service.UserCouponService;
 import tech.wetech.weshop.utils.Constants;
 
 import java.math.BigDecimal;
@@ -32,22 +37,22 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     private CartMapper cartMapper;
 
     @Autowired
-    private UserCouponServiceProxy userCouponServiceProxy;
+    private UserCouponService userCouponService;
 
     @Autowired
-    private AddressServiceProxy addressServiceProxy;
+    private AddressService addressService;
 
     @Autowired
-    private RegionServiceProxy regionServiceProxy;
+    private RegionService regionService;
 
     @Autowired
-    private GoodsServiceProxy goodsServiceProxy;
+    private GoodsService goodsService;
 
     @Autowired
-    private GoodsSpecificationServiceProxy goodsSpecificationServiceProxy;
+    private GoodsSpecificationService goodsSpecificationService;
 
     @Autowired
-    private ProductServiceProxy productServiceProxy;
+    private ProductService productService;
 
     @Override
     public CartResultDTO getCart() {
@@ -86,12 +91,12 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     @Override
     @Transactional
     public void addGoodsToCart(CartParamDTO cartParamDTO) {
-        Goods goods = goodsServiceProxy.queryById(cartParamDTO.getGoodsId());
+        Goods goods = goodsService.queryById(cartParamDTO.getGoodsId());
         if (goods == null || goods.getDelete()) {
             //商品已下架
             throw new BizException(ResultCodeEnum.GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES);
         }
-        Product product = productServiceProxy.queryOne(new Product() {{
+        Product product = productService.queryOne(new Product() {{
             setGoodsId(cartParamDTO.getGoodsId());
             setId(cartParamDTO.getProductId());
         }});
@@ -112,7 +117,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                         .map(Integer::valueOf)
                         .collect(Collectors.toList());
                 if (!specificationIdList.isEmpty()) {
-                    goodsSpecificationValueList = goodsSpecificationServiceProxy.queryValueByGoodsIdAndIdIn(cartParamDTO.getGoodsId(), specificationIdList);
+                    goodsSpecificationValueList = goodsSpecificationService.queryValueByGoodsIdAndIdIn(cartParamDTO.getGoodsId(), specificationIdList);
                 }
             }
             Cart cartData = new Cart()
@@ -147,7 +152,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
     @Transactional
     public void updateGoods(CartParamDTO cartParamDTO) {
         // 取得规格的信息,判断规格库存
-        Product product = productServiceProxy.queryOne(new Product()
+        Product product = productService.queryOne(new Product()
                 .setGoodsId(cartParamDTO.getGoodsId())
                 .setId(cartParamDTO.getProductId())
         );
@@ -183,7 +188,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                         .map(Integer::valueOf)
                         .collect(Collectors.toList());
                 if (!specificationIdList.isEmpty()) {
-                    goodsSpecificationValueList = goodsSpecificationServiceProxy.queryValueByGoodsIdAndIdIn(cartParamDTO.getGoodsId(), specificationIdList);
+                    goodsSpecificationValueList = goodsSpecificationService.queryValueByGoodsIdAndIdIn(cartParamDTO.getGoodsId(), specificationIdList);
                 }
             }
             Cart cartData = new Cart()
@@ -228,25 +233,25 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
         //选择收货地址
         Address checkedAddress = null;
         if (addressId != null) {
-            checkedAddress = addressServiceProxy.queryOne(new Address()
+            checkedAddress = addressService.queryOne(new Address()
                     .setId(Constants.ADDRESS_ID)
                     .setUserId(Constants.CURRENT_USER_ID)
             );
         } else {
-            checkedAddress = addressServiceProxy.queryOne(new Address().setUserId(1).setIsDefault(true));
+            checkedAddress = addressService.queryOne(new Address().setUserId(1).setIsDefault(true));
         }
 
         CartCheckoutDTO.CheckedAddressVO checkedAddressVO = null;
         if (checkedAddress != null) {
             checkedAddressVO = new CartCheckoutDTO.CheckedAddressVO(checkedAddress)
                     .setProvinceName(
-                            regionServiceProxy.queryNameById(checkedAddress.getProvinceId())
+                            regionService.queryNameById(checkedAddress.getProvinceId())
                     )
                     .setCityName(
-                            regionServiceProxy.queryNameById(checkedAddress.getCityId())
+                            regionService.queryNameById(checkedAddress.getCityId())
                     )
                     .setDistrictName(
-                            regionServiceProxy.queryNameById(checkedAddress.getDistrictId())
+                            regionService.queryNameById(checkedAddress.getDistrictId())
                     );
 
             checkedAddressVO.setFullRegion(
@@ -262,7 +267,7 @@ public class CartServiceImpl extends BaseService<Cart> implements CartService {
                 .collect(Collectors.toList());
 
         // 获取可用的优惠券信息
-        List<UserCoupon> userCouponList = userCouponServiceProxy.queryList(new UserCoupon() {{
+        List<UserCoupon> userCouponList = userCouponService.queryList(new UserCoupon() {{
             setUserId(Constants.CURRENT_USER_ID);
         }});
         BigDecimal couponPrice = BigDecimal.ZERO;

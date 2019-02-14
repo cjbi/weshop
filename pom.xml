@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -27,7 +27,7 @@
 		<module>weshop-core</module>
 		<module>weshop-wechat</module>
 		<module>weshop-example</module>
-		<module>weshop-discovery-server</module>
+        <module>weshop-eureka-server</module>
 		<module>weshop-order</module>
         <module>weshop-framework</module>
         <module>weshop-user</module>
@@ -39,6 +39,26 @@
 
 	<dependencyManagement>
 		<dependencies>
+            <dependency>
+                <groupId>tech.wetech</groupId>
+                <artifactId>weshop-order-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.wetech</groupId>
+                <artifactId>weshop-user-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.wetech</groupId>
+                <artifactId>weshop-marketing-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.wetech</groupId>
+                <artifactId>weshop-goods-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>tech.wetech</groupId>
                 <artifactId>weshop-framework</artifactId>
