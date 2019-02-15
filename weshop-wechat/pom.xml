@@ -13,8 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>weshop-wechat-ui</module>
-        <module>weshop-wechat-api</module>
-        <module>weshop-wechat-service</module>
         <module>weshop-wechat-web</module>
     </modules>
 

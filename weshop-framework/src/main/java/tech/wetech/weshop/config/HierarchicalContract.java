@@ -1,111 +1,54 @@
 package tech.wetech.weshop.config;
 
-import static feign.Util.checkState;
-import static feign.Util.emptyToNull;
-import static org.springframework.core.annotation.AnnotationUtils.synthesizeAnnotation;
-
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.*;
-
-import org.springframework.cloud.openfeign.support.SpringMvcContract;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import feign.MethodMetadata;
 import feign.Util;
+import org.springframework.cloud.openfeign.AnnotatedParameterProcessor;
+import org.springframework.cloud.openfeign.support.SpringMvcContract;
+import org.springframework.core.convert.ConversionService;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 class HierarchicalContract extends SpringMvcContract {
 
-    private ResourceLoader resourceLoader;
 
-    @Override
-    public List<MethodMetadata> parseAndValidatateMetadata(final Class<?> targetType) {
-        checkState(targetType.getTypeParameters().length == 0,
-                "Parameterized types unsupported: %s",
-                targetType.getSimpleName());
-        final Map<String, MethodMetadata> result = new LinkedHashMap<>();
-        for (final Method method : targetType.getMethods()) {
-            if (method.getDeclaringClass() == Object.class || (method.getModifiers() & Modifier.STATIC) != 0
-                    || Util.isDefault(method)) {
-                continue;
-            }
-            final MethodMetadata metadata = this.parseAndValidateMetadata(targetType, method);
-            checkState(!result.containsKey(metadata.configKey()), "Overrides unsupported: %s", metadata.configKey());
-            result.put(metadata.configKey(), metadata);
-        }
-        return new ArrayList<>(result.values());
+    public HierarchicalContract() {
+        super();
+    }
+
+    public HierarchicalContract(List<AnnotatedParameterProcessor> annotatedParameterProcessors) {
+        super(annotatedParameterProcessors);
+    }
+
+    public HierarchicalContract(List<AnnotatedParameterProcessor> annotatedParameterProcessors, ConversionService conversionService) {
+        super(annotatedParameterProcessors, conversionService);
     }
 
     @Override
-    public MethodMetadata parseAndValidateMetadata(final Class<?> targetType, final Method method) {
-        final MethodMetadata methodMetadata = super.parseAndValidateMetadata(targetType, method);
+    public List<MethodMetadata> parseAndValidatateMetadata(Class<?> targetType) {
+        Util.checkState(targetType.getTypeParameters().length == 0, "Parameterized types unsupported: %s", new Object[]{targetType.getSimpleName()});
+//        Util.checkState(targetType.getInterfaces().length <= 1, "Only single inheritance supported: %s", new Object[]{targetType.getSimpleName()});
+//        if (targetType.getInterfaces().length == 1) {
+//            Util.checkState(targetType.getInterfaces()[0].getInterfaces().length == 0, "Only single-level inheritance supported: %s", new Object[]{targetType.getSimpleName()});
+//        }
 
-        final LinkedList<Class<?>> classHierarchy = new LinkedList<>();
-        classHierarchy.add(targetType);
-        this.findClass(targetType, method.getDeclaringClass(), classHierarchy);
-        classHierarchy.stream()
-                .map(this::processPathValue)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .findFirst()
-                .ifPresent((path) -> methodMetadata.template().insert(0, path));
-        return methodMetadata;
-    }
+        Map<String, MethodMetadata> result = new LinkedHashMap();
+        Method[] var3 = targetType.getMethods();
+        int var4 = var3.length;
 
-    private Optional<String> processPathValue(final Class<?> clz) {
-        Optional<String> result = Optional.empty();
-        final RequestMapping classAnnotation = clz.getAnnotation(RequestMapping.class);
-        if (classAnnotation != null) {
-            final RequestMapping synthesizeAnnotation = synthesizeAnnotation(classAnnotation, clz);
-            // Prepend path from class annotation if specified
-            if (synthesizeAnnotation.value().length > 0) {
-                String pathValue = emptyToNull(synthesizeAnnotation.value()[0]);
-                pathValue = this.resolveValue(pathValue);
-                if (!pathValue.startsWith("/")) {
-                    pathValue = "/" + pathValue;
-                }
-                result = Optional.of(pathValue);
+        for(int var5 = 0; var5 < var4; ++var5) {
+            Method method = var3[var5];
+            if (method.getDeclaringClass() != Object.class && (method.getModifiers() & 8) == 0 && !Util.isDefault(method)) {
+                MethodMetadata metadata = this.parseAndValidateMetadata(targetType, method);
+                Util.checkState(!result.containsKey(metadata.configKey()), "Overrides unsupported: %s", new Object[]{metadata.configKey()});
+                result.put(metadata.configKey(), metadata);
             }
         }
-        return result;
-    }
 
-    private String resolveValue(final String value) {
-        if (StringUtils.hasText(value) && this.resourceLoader instanceof ConfigurableApplicationContext) {
-            return ((ConfigurableApplicationContext) this.resourceLoader).getEnvironment().resolvePlaceholders(value);
-        }
-        return value;
-    }
-
-    @Override
-    protected void processAnnotationOnClass(final MethodMetadata data, final Class<?> clz) {
-        // skip this step
-    }
-
-    private boolean findClass(final Class<?> currentClass, final Class<?> searchClass,
-                              final LinkedList<Class<?>> classHierarchy) {
-        if (currentClass == searchClass) {
-            return true;
-        }
-        final Class<?>[] interfaces = currentClass.getInterfaces();
-        for (final Class<?> currentInterface : interfaces) {
-            classHierarchy.add(currentInterface);
-            final boolean findClass = this.findClass(currentInterface, searchClass, classHierarchy);
-            if (findClass) {
-                return true;
-            }
-            classHierarchy.removeLast();
-        }
-        return false;
-    }
-
-    @Override
-    public void setResourceLoader(final ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-        super.setResourceLoader(resourceLoader);
+        return new ArrayList(result.values());
     }
 }
 

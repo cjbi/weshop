@@ -24,18 +24,27 @@
 
 	<modules>
 		<module>weshop-admin</module>
-		<module>weshop-core</module>
 		<module>weshop-wechat</module>
 		<module>weshop-example</module>
         <module>weshop-eureka-server</module>
-		<module>weshop-order</module>
         <module>weshop-framework</module>
-        <module>weshop-user</module>
+		<module>weshop-order-api</module>
+		<module>weshop-order</module>
+		<module>weshop-user-api</module>
+		<module>weshop-user</module>
+        <module>weshop-goods-api</module>
         <module>weshop-goods</module>
-        <module>weshop-goods</module>
+		<module>weshop-marketing-api</module>
 		<module>weshop-marketing</module>
 		<module>weshop-storage</module>
 	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>tech.wetech</groupId>
+			<artifactId>weshop-framework</artifactId>
+		</dependency>
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>

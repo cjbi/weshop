@@ -10,16 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>weshop-goods</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>weshop-goods-api</module>
-        <module>weshop-goods-service</module>
-    </modules>
 
     <dependencies>
         <dependency>
             <groupId>tech.wetech</groupId>
-            <artifactId>weshop-framework</artifactId>
+            <artifactId>weshop-goods-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-user-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-marketing-api</artifactId>
         </dependency>
     </dependencies>
 
