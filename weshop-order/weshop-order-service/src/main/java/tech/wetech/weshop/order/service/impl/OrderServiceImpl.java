@@ -3,6 +3,7 @@ package tech.wetech.weshop.order.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.order.dto.HandleOptionDTO;
@@ -37,7 +38,7 @@ import java.util.Optional;
 /**
  * @author cjbi@outlook.com
  */
-@Service
+@RestController
 public class OrderServiceImpl extends BaseService<Order> implements OrderService {
 
     @Autowired

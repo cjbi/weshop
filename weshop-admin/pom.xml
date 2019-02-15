@@ -11,8 +11,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>weshop-admin-ui</module>
-        <module>weshop-admin-api</module>
-        <module>weshop-admin-service</module>
         <module>weshop-admin-web</module>
     </modules>
     <artifactId>weshop-admin</artifactId>

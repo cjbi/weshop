@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import tech.wetech.weshop.example.service.fallback.TestServiceFallback;
 
-@FeignClient(value = "weshop-example-service", fallback = TestServiceFallback.class)
+@FeignClient(value = "weshop-example-service")
 public interface TestService {
 
     @GetMapping("/hello/{name}")

@@ -3,6 +3,7 @@ package tech.wetech.weshop.marketing.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.goods.po.Brand;
 import tech.wetech.weshop.goods.po.Category;
 import tech.wetech.weshop.goods.po.Channel;
@@ -24,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@RestController
 public class HomeServiceImpl implements HomeService {
 
     @Autowired

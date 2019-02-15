@@ -3,6 +3,7 @@ package tech.wetech.weshop.marketing.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.marketing.dto.CommentCountDTO;
 import tech.wetech.weshop.marketing.dto.CommentResultDTO;
 import tech.wetech.weshop.marketing.mapper.CommentMapper;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * @author cjbi@outlook.com
  */
-@Service
+@RestController
 public class CommentServiceImpl extends BaseService<Comment> implements CommentService {
 
     @Autowired

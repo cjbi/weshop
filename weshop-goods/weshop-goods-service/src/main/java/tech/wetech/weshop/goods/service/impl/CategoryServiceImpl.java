@@ -3,6 +3,7 @@ package tech.wetech.weshop.goods.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.goods.dto.CategoryDTO;
 import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * @author cjbi@outlook.com
  */
-@Service
+@RestController
 public class CategoryServiceImpl extends BaseService<Category> implements CategoryService {
 
     @Autowired

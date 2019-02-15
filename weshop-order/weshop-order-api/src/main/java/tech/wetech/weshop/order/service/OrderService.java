@@ -1,5 +1,8 @@
 package tech.wetech.weshop.order.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tech.wetech.weshop.order.dto.OrderDetailDTO;
 import tech.wetech.weshop.order.dto.OrderListDTO;
 import tech.wetech.weshop.order.dto.OrderSubmitParamDTO;
@@ -12,6 +15,9 @@ import java.util.List;
 /**
  * @author cjbi@outlook.com
  */
+
+@RequestMapping("/order")
+@FeignClient(value = "weshop-order-service")
 public interface OrderService extends IService<Order> {
 
     /**
@@ -20,6 +26,7 @@ public interface OrderService extends IService<Order> {
      * @param orderQuery
      * @return
      */
+    @GetMapping("/queryOrderList")
     List<OrderListDTO> queryOrderList(OrderQuery orderQuery);
 
     /**
@@ -28,6 +35,7 @@ public interface OrderService extends IService<Order> {
      * @param orderId
      * @return
      */
+    @GetMapping("/queryOrderDetail")
     OrderDetailDTO queryOrderDetail(Integer orderId);
 
     /**
@@ -36,6 +44,7 @@ public interface OrderService extends IService<Order> {
      * @param orderSubmitParamDTO
      * @return
      */
+    @GetMapping("/submitOrder")
     Order submitOrder(OrderSubmitParamDTO orderSubmitParamDTO);
 
 }

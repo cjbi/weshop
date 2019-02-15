@@ -3,11 +3,15 @@ package tech.wetech.weshop.goods.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
 import tech.wetech.weshop.goods.bo.GoodsAttributeBO;
 import tech.wetech.weshop.goods.bo.GoodsSpecificationBO;
+import tech.wetech.weshop.goods.client.CollectClient;
+import tech.wetech.weshop.goods.client.CommentClient;
+import tech.wetech.weshop.goods.client.CommentPictureClient;
+import tech.wetech.weshop.goods.client.UserClient;
 import tech.wetech.weshop.goods.dto.*;
 import tech.wetech.weshop.goods.mapper.*;
 import tech.wetech.weshop.goods.po.*;
@@ -15,15 +19,10 @@ import tech.wetech.weshop.goods.query.GoodsSearchQuery;
 import tech.wetech.weshop.goods.service.GoodsService;
 import tech.wetech.weshop.marketing.po.Comment;
 import tech.wetech.weshop.marketing.po.CommentPicture;
-import tech.wetech.weshop.marketing.service.CommentPictureService;
-import tech.wetech.weshop.marketing.service.CommentService;
 import tech.wetech.weshop.service.BaseService;
 import tech.wetech.weshop.user.po.Collect;
 import tech.wetech.weshop.user.po.Footprint;
 import tech.wetech.weshop.user.po.User;
-import tech.wetech.weshop.user.service.CollectService;
-import tech.wetech.weshop.user.service.FootprintService;
-import tech.wetech.weshop.user.service.UserService;
 import tech.wetech.weshop.utils.Constants;
 import tech.wetech.weshop.utils.Reflections;
 import tk.mybatis.mapper.weekend.Weekend;
@@ -33,7 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service
+@RestController
 public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService {
 
     @Autowired
@@ -55,19 +54,16 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
     private BrandMapper brandMapper;
 
     @Autowired
-    private CommentService commentService;
+    private CommentClient commentClient;
 
     @Autowired
-    private CommentPictureService commentPictureService;
+    private CommentPictureClient commentPictureClient;
 
     @Autowired
-    private UserService userService;
+    private UserClient userClient;
 
     @Autowired
-    private FootprintService footprintService;
-
-    @Autowired
-    private CollectService collectService;
+    private CollectClient collectClient;
 
     @Autowired
     private GoodsSpecificationMapper goodsSpecificationMapper;
@@ -202,14 +198,14 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         Brand brand = brandMapper.selectByPrimaryKey(goods.getBrandId());
 
         //商品评价
-        int commentCount = commentService.count(new Comment().setValueId(id).setTypeId((byte) 0));
+        int commentCount = commentClient.count(new Comment().setValueId(id).setTypeId((byte) 0));
         PageHelper.startPage(1, 1);
-        Comment hotComment = commentService.queryOne(new Comment().setValueId(id).setTypeId((byte) 0));
+        Comment hotComment = commentClient.queryOne(new Comment().setValueId(id).setTypeId((byte) 0));
         if (hotComment != null) {
             GoodsDetailDTO.CommentVO.CommentDataVO commentData = new GoodsDetailDTO.CommentVO.CommentDataVO();
             String content = new String(Base64.getDecoder().decode(hotComment.getContent()));
-            User user = userService.queryById(hotComment.getUserId());
-            List<String> picList = commentPictureService.queryList(new CommentPicture().setCommentId(hotComment.getId())).stream()
+            User user = userClient.queryById(hotComment.getUserId());
+            List<String> picList = commentPictureClient.queryList(new CommentPicture().setCommentId(hotComment.getId())).stream()
                     .map(CommentPicture::getPicUrl)
                     .collect(Collectors.toList());
 
@@ -236,7 +232,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
 
         //用户是否收藏
         PageHelper.startPage(1, 1);
-        Collect userCollect = collectService.queryOne(new Collect().setUserId(Constants.CURRENT_USER_ID).setValueId(id));
+        Collect userCollect = collectClient.queryOne(new Collect().setUserId(Constants.CURRENT_USER_ID).setValueId(id));
         goodsDetailDTO.setUserHasCollect(userCollect == null ? false : true);
 
         //记录用户足迹 此处使用异步处理

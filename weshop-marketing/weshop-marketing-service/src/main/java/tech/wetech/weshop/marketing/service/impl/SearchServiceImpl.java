@@ -3,6 +3,7 @@ package tech.wetech.weshop.marketing.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.marketing.dto.SearchIndexDTO;
 import tech.wetech.weshop.marketing.mapper.KeywordsMapper;
 import tech.wetech.weshop.marketing.mapper.SearchHistoryMapper;
@@ -14,7 +15,7 @@ import tech.wetech.weshop.utils.Constants;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@RestController
 public class SearchServiceImpl implements SearchService {
 
     @Autowired

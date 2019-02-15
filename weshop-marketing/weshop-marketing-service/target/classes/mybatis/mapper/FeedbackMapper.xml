@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tech.wetech.weshop.mapper.FeedbackMapper">
+    <resultMap id="BaseResultMap" type="tech.wetech.weshop.po.Feedback">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="msg_id" property="msgId" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
+        <result column="msg_title" property="msgTitle" jdbcType="VARCHAR"/>
+        <result column="msg_type" property="msgType" jdbcType="BIT"/>
+        <result column="msg_status" property="msgStatus" jdbcType="BIT"/>
+        <result column="msg_time" property="msgTime" jdbcType="TIMESTAMP"/>
+        <result column="message_img" property="messageImg" jdbcType="VARCHAR"/>
+        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <result column="msg_area" property="msgArea" jdbcType="BIT"/>
+        <result column="msg_content" property="msgContent" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+</mapper>
