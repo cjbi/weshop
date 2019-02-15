@@ -7,7 +7,7 @@ import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.user.po.Region;
 
 @RequestMapping("/region")
-@FeignClient(value = "weshop-user-service")
+@FeignClient(value = "weshop-user")
 public interface RegionApi extends Api<Region> {
 
     @GetMapping("/queryNameById")

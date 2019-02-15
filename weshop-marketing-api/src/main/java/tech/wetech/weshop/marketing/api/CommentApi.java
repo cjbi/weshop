@@ -12,7 +12,7 @@ import tech.wetech.weshop.marketing.query.CommentQuery;
 import java.util.List;
 
 @RequestMapping("/comment")
-@FeignClient("weshop-topic-service")
+@FeignClient("weshop-marketing")
 public interface CommentApi extends Api<Comment> {
 
     @GetMapping("/queryList2")

@@ -7,7 +7,7 @@ import tech.wetech.weshop.marketing.dto.SearchIndexDTO;
 
 import java.util.List;
 
-@FeignClient("weshop-topic-service")
+@FeignClient("weshop-marketing")
 @RequestMapping("/search")
 public interface SearchApi {
 

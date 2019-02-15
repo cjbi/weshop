@@ -6,6 +6,6 @@ import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.order.po.OrderExpress;
 
 @RequestMapping("/orderExpress")
-@FeignClient(value = "weshop-order-service")
+@FeignClient(value = "weshop-order")
 public interface OrderExpressApi extends Api<OrderExpress> {
 }

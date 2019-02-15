@@ -6,6 +6,6 @@ import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.marketing.po.Ad;
 
 @RequestMapping("/ad")
-@FeignClient("weshop-topic-service")
+@FeignClient("weshop-marketing")
 public interface AdApi extends Api<Ad> {
 }

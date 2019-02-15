@@ -6,6 +6,6 @@ import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.marketing.po.SearchHistory;
 
 @RequestMapping("/searchHistory")
-@FeignClient("weshop-topic-service")
+@FeignClient("weshop-marketing")
 public interface SearchHistoryApi extends Api<SearchHistory> {
 }

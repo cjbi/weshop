@@ -11,4 +11,8 @@
 
     <artifactId>weshop-example-api</artifactId>
 
+    <dependencies>
+
+    </dependencies>
+
 </project>

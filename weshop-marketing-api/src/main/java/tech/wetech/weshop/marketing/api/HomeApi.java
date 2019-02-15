@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tech.wetech.weshop.marketing.dto.HomeIndexDTO;
 
-@FeignClient("weshop-topic-service")
+@FeignClient("weshop-marketing")
 @RequestMapping("/home")
 public interface HomeApi {
 

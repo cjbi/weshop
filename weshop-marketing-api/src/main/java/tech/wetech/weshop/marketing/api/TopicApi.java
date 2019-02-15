@@ -6,6 +6,6 @@ import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.marketing.po.Topic;
 
 @RequestMapping("/topic")
-@FeignClient("weshop-topic-service")
+@FeignClient("weshop-marketing")
 public interface TopicApi extends Api<Topic> {
 }

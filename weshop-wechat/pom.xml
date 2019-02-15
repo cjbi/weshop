@@ -19,8 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>tech.wetech</groupId>
-            <artifactId>weshop-core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <artifactId>weshop-framework</artifactId>
         </dependency>
     </dependencies>
 

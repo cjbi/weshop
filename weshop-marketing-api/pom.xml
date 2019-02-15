@@ -12,4 +12,20 @@
     <artifactId>weshop-marketing-api</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-framework</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-user-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-goods-api</artifactId>
+        </dependency>
+    </dependencies>
+
+
 </project>

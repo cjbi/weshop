@@ -6,6 +6,6 @@ import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.user.po.UserLevel;
 
 @RequestMapping("/userLevel")
-@FeignClient(value = "weshop-user-service")
+@FeignClient(value = "weshop-user")
 public interface UserLevelApi extends Api<UserLevel> {
 }

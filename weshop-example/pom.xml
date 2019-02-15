@@ -13,8 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>weshop-example-api</module>
-        <module>weshop-example-service</module>
-        <module>weshop-example-web</module>
+        <module>weshop-example-provider</module>
+        <module>weshop-example-consumer</module>
     </modules>
 
     <dependencies>

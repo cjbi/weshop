@@ -13,7 +13,7 @@ import tech.wetech.weshop.order.query.OrderQuery;
 import java.util.List;
 
 @RequestMapping("/order")
-@FeignClient(value = "weshop-order-service")
+@FeignClient(value = "weshop-order")
 public interface OrderApi extends Api<Order> {
 
     /**

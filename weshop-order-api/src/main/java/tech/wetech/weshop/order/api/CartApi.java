@@ -12,7 +12,7 @@ import tech.wetech.weshop.order.dto.CartResultDTO;
 import tech.wetech.weshop.order.po.Cart;
 
 @RequestMapping("/cart")
-@FeignClient(value = "weshop-order-service")
+@FeignClient(value = "weshop-order")
 public interface CartApi extends Api<Cart> {
 
     @GetMapping("/getCart")

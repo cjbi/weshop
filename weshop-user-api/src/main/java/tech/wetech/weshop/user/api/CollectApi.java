@@ -14,7 +14,7 @@ import tech.wetech.weshop.user.po.Collect;
 import java.util.List;
 
 @RequestMapping("/collect")
-@FeignClient(value = "weshop-user-service")
+@FeignClient(value = "weshop-user")
 public interface CollectApi extends Api<Collect> {
 
     @PostMapping("/addOrDelete")

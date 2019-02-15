@@ -39,13 +39,6 @@
 		<module>weshop-storage</module>
 	</modules>
 
-	<dependencies>
-		<dependency>
-			<groupId>tech.wetech</groupId>
-			<artifactId>weshop-framework</artifactId>
-		</dependency>
-	</dependencies>
-
 	<dependencyManagement>
 		<dependencies>
             <dependency>

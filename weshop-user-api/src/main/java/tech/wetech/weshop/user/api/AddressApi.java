@@ -10,7 +10,7 @@ import tech.wetech.weshop.user.po.Address;
 import java.util.List;
 
 @RequestMapping("/address")
-@FeignClient(value = "weshop-user-service")
+@FeignClient(value = "weshop-user")
 public interface AddressApi extends Api<Address> {
 
     @GetMapping("/queryDetail")
