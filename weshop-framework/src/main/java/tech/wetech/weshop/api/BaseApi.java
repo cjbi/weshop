@@ -1,8 +1,13 @@
 package tech.wetech.weshop.api;
 
+import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import tech.wetech.weshop.query.PageQuery;
+import tech.wetech.weshop.query.WrapperPageQuery;
 import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.utils.Result;
+import tk.mybatis.mapper.code.Style;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
 
@@ -19,6 +24,18 @@ public abstract class BaseApi<T> implements Api<T> {
     @Override
     public Result<List<T>> queryList(T entity) {
         return Result.success(service.queryList(entity));
+    }
+
+    @Override
+    public Result<List<T>> queryPageList(WrapperPageQuery<T> wrapperPageQuery) {
+        T data = wrapperPageQuery.getData();
+        PageQuery pageQuery = wrapperPageQuery.getPageQuery();
+        if (pageQuery.getOrderBy() != null) {
+            pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
+        }
+        List<T> list = service.queryPageList(data, pageQuery);
+        return Result.success(list)
+                .addExtraIfTrue(pageQuery.isCountSql(), "total", ((Page) list).getTotal());
     }
 
     @Override

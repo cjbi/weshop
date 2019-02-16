@@ -11,6 +11,6 @@ import tech.wetech.weshop.utils.Result;
 public class RegionApiFallback extends ApiFallback<Region> implements RegionApi {
     @Override
     public Result<String> queryNameById(Short id) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

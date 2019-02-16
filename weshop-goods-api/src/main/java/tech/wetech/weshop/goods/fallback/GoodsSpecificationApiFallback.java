@@ -13,6 +13,6 @@ import java.util.List;
 public class GoodsSpecificationApiFallback extends ApiFallback<GoodsSpecification> implements GoodsSpecificationApi {
     @Override
     public Result<List<String>> queryValueByGoodsIdAndIdIn(Integer goodsId, List<Integer> goodsSpecificationIds) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import tech.wetech.weshop.query.WrapperPageQuery;
 import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public interface Api<T> {
 
     @PostMapping(value = "/queryList")
     Result<List<T>> queryList(@RequestBody T entity);
+
+    @PostMapping(value = "/queryPageList")
+    Result<List<T>> queryPageList(@RequestBody WrapperPageQuery<T> wrapperPageQuery);
 
     @PostMapping("/queryOne")
     Result<T> queryOne(@RequestBody T entity);

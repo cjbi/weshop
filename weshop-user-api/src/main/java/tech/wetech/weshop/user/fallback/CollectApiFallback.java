@@ -16,11 +16,11 @@ import java.util.List;
 public class CollectApiFallback extends ApiFallback<Collect> implements CollectApi {
     @Override
     public Result<CollectAddOrDeleteResultDTO> addOrDelete(CollectAddOrDeleteParamDTO collectAddOrDeleteParamDTO) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<List<GoodsCollectBO>> queryGoodsCollectList() {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

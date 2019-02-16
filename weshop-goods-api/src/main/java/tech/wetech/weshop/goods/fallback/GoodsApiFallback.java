@@ -18,26 +18,26 @@ import java.util.List;
 public class GoodsApiFallback extends ApiFallback<Goods> implements GoodsApi {
     @Override
     public Result<List<Goods>> queryListByCategoryIdIn(List<Integer> categoryIdList) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<GoodsResultDTO> queryList(GoodsSearchQuery goodsSearchQuery) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<GoodsDetailDTO> queryGoodsDetail(Integer goodsId) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<List<GoodsListDTO>> queryRelatedGoods(Integer goodsId) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<GoodsCategoryDTO> queryGoodsCategory(Integer categoryId) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

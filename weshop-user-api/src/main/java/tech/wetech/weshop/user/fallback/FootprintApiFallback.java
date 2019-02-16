@@ -14,6 +14,6 @@ import java.util.List;
 public class FootprintApiFallback extends ApiFallback<Footprint> implements FootprintApi {
     @Override
     public Result<List<List<GoodsFootprintBO>>> queryGoodsFootprintTimeLine() {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

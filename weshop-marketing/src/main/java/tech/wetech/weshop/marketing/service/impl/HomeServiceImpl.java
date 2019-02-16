@@ -18,6 +18,8 @@ import tech.wetech.weshop.marketing.mapper.TopicMapper;
 import tech.wetech.weshop.marketing.po.Ad;
 import tech.wetech.weshop.marketing.po.Topic;
 import tech.wetech.weshop.marketing.service.HomeService;
+import tech.wetech.weshop.query.PageQuery;
+import tech.wetech.weshop.query.WrapperPageQuery;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -52,10 +54,10 @@ public class HomeServiceImpl implements HomeService {
         PageHelper.orderBy("sort_order asc");
         List<Channel> channelList = channelApi.queryAll().getData();
 
-//        List<Goods> newGoodsList = goodsApi.queryPageList(new Goods().setNewly(true), new PageQuery(1, 4));
+        List<Goods> newGoodsList = goodsApi.queryPageList(new WrapperPageQuery<Goods>(new Goods().setNewly(true), new PageQuery(1, 4))).getData();
 
         PageHelper.startPage(1, 4);
-//        List<Goods> hotGoodsList = goodsApi.queryPageList(new Goods().setHot(true), new PageQuery(1, 4));
+        List<Goods> hotGoodsList = goodsApi.queryPageList(new WrapperPageQuery<Goods>(new Goods().setHot(true), new PageQuery(1, 4))).getData();
 
         PageHelper.orderBy("new_sort_order asc");
         List<Brand> brandList = brandApi.queryList(new Brand().setNewly(true)).getData();
@@ -79,8 +81,8 @@ public class HomeServiceImpl implements HomeService {
 
         return new HomeIndexDTO().setBannerList(bannerList)
                 .setChannelList(channelList)
-                .setNewGoodsList(null)
-                .setHotGoodsList(null)
+                .setNewGoodsList(newGoodsList)
+                .setHotGoodsList(hotGoodsList)
                 .setBrandList(brandList)
                 .setTopicList(topicList)
                 .setCategoryList(categoryList);

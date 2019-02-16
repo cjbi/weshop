@@ -15,11 +15,11 @@ public class AddressApiFallback extends ApiFallback<Address> implements AddressA
 
     @Override
     public Result<AddressDTO> queryDetail(Integer id) {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<List<AddressDTO>> queryDetailList() {
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

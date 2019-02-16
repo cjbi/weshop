@@ -15,6 +15,7 @@ public enum ResultCodeEnum {
     INTERNAL_SERVER_ERROR("500", "服务器内部错误"),
     NOT_IMPLEMENTED("501", "业务异常"),
     RECORD_NOT_EXIST("502", "记录不存在"),
+    REMOTE_SERVICE_ERROR("503", "远程服务调用失败"),
 
     GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES("600", "商品已下架"),
     UNDER_STOCK("601", "库存不足"),
