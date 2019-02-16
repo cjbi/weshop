@@ -13,10 +13,10 @@ public interface Api<T> {
     @GetMapping("/queryAll")
     Result<List<T>> queryAll();
 
-    @GetMapping(value = "/queryList")
+    @PostMapping(value = "/queryList")
     Result<List<T>> queryList(@RequestBody T entity);
 
-    @GetMapping("/queryOne")
+    @PostMapping("/queryOne")
     Result<T> queryOne(@RequestBody T entity);
 
     @GetMapping("/queryById")
@@ -37,7 +37,7 @@ public interface Api<T> {
     @PostMapping("/deleteById")
     Result<Integer> deleteById(@RequestBody Object id);
 
-    @GetMapping("/count")
+    @PostMapping("/count")
     Result<Integer> count(@RequestBody T entity);
 
     @GetMapping("/sayHello")

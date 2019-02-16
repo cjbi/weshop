@@ -1,6 +1,7 @@
 package tech.wetech.weshop.user.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.user.api.CollectApi;
 import tech.wetech.weshop.user.bo.GoodsCollectBO;
@@ -15,11 +16,11 @@ import java.util.List;
 public class CollectApiFallback extends ApiFallback<Collect> implements CollectApi {
     @Override
     public Result<CollectAddOrDeleteResultDTO> addOrDelete(CollectAddOrDeleteParamDTO collectAddOrDeleteParamDTO) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Result<List<GoodsCollectBO>> queryGoodsCollectList() {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 }

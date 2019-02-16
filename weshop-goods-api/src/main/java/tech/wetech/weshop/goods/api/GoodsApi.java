@@ -2,6 +2,9 @@ package tech.wetech.weshop.goods.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.goods.dto.GoodsCategoryDTO;
 import tech.wetech.weshop.goods.dto.GoodsDetailDTO;
@@ -20,11 +23,11 @@ import java.util.List;
 @FeignClient(value = "weshop-goods", path = "goods", fallback = GoodsApiFallback.class)
 public interface GoodsApi extends Api<Goods> {
 
-    @GetMapping("/queryListByCategoryIdIn")
-    Result<List<Goods>> queryListByCategoryIdIn(List<Integer> categoryIdList);
+    @PostMapping("/queryListByCategoryIdIn")
+    Result<List<Goods>> queryListByCategoryIdIn(@RequestParam("categoryIdList") List<Integer> categoryIdList);
 
-    @GetMapping("/queryList2")
-    Result<GoodsResultDTO> queryList(GoodsSearchQuery goodsSearchQuery);
+    @PostMapping("/queryList2")
+    Result<GoodsResultDTO> queryList(@RequestBody GoodsSearchQuery goodsSearchQuery);
 
     @GetMapping("/queryGoodsDetail")
     Result<GoodsDetailDTO> queryGoodsDetail(Integer goodsId);

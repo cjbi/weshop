@@ -1,6 +1,7 @@
 package tech.wetech.weshop.user.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.po.Region;
@@ -10,6 +11,6 @@ import tech.wetech.weshop.utils.Result;
 public class RegionApiFallback extends ApiFallback<Region> implements RegionApi {
     @Override
     public Result<String> queryNameById(Short id) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 }

@@ -1,7 +1,7 @@
 package tech.wetech.weshop.goods.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.goods.fallback.BrandApiFallback;
 import tech.wetech.weshop.goods.po.Brand;
@@ -17,7 +17,7 @@ import java.util.List;
 public interface BrandApi extends Api<Brand> {
 
     @Override
-    @GetMapping("/queryList")
+    @PostMapping("/queryList")
     Result<List<Brand>> queryList(Brand entity);
 
 }

@@ -1,6 +1,7 @@
 package tech.wetech.weshop.goods.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.dto.CategoryDTO;
@@ -15,16 +16,16 @@ import java.util.List;
 public class CategoryApiFallback extends ApiFallback<Category> implements CategoryApi {
     @Override
     public Result<List<Category>> queryCategoryByLevel(CategoryLevelEnum categoryLevel) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Result<CategoryIndexDTO> index(Integer cateogyId) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Result<CategoryDTO> current(Integer id) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 }

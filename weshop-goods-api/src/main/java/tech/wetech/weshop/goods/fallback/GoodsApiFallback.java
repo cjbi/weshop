@@ -1,6 +1,7 @@
 package tech.wetech.weshop.goods.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.goods.api.GoodsApi;
 import tech.wetech.weshop.goods.dto.GoodsCategoryDTO;
@@ -17,26 +18,26 @@ import java.util.List;
 public class GoodsApiFallback extends ApiFallback<Goods> implements GoodsApi {
     @Override
     public Result<List<Goods>> queryListByCategoryIdIn(List<Integer> categoryIdList) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Result<GoodsResultDTO> queryList(GoodsSearchQuery goodsSearchQuery) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Result<GoodsDetailDTO> queryGoodsDetail(Integer goodsId) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Result<List<GoodsListDTO>> queryRelatedGoods(Integer goodsId) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Result<GoodsCategoryDTO> queryGoodsCategory(Integer categoryId) {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 }

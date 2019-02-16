@@ -1,6 +1,7 @@
 package tech.wetech.weshop.user.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.user.api.FootprintApi;
 import tech.wetech.weshop.user.bo.GoodsFootprintBO;
@@ -13,6 +14,6 @@ import java.util.List;
 public class FootprintApiFallback extends ApiFallback<Footprint> implements FootprintApi {
     @Override
     public Result<List<List<GoodsFootprintBO>>> queryGoodsFootprintTimeLine() {
-        return null;
+        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR);
     }
 }
