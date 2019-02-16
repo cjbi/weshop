@@ -1,6 +1,7 @@
 package tech.wetech.weshop.marketing.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.marketing.api.CommentApi;
 import tech.wetech.weshop.marketing.dto.CommentCountDTO;
@@ -15,11 +16,11 @@ import java.util.List;
 public class CommentApiFallback extends ApiFallback<Comment> implements CommentApi {
     @Override
     public Result<List<CommentResultDTO>> queryList(CommentQuery commentQuery) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<CommentCountDTO> countList(CommentQuery commentQuery) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

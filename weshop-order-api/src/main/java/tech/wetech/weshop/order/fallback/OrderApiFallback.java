@@ -1,6 +1,7 @@
 package tech.wetech.weshop.order.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.order.api.OrderApi;
 import tech.wetech.weshop.order.dto.OrderDetailDTO;
@@ -16,16 +17,16 @@ import java.util.List;
 public class OrderApiFallback extends ApiFallback<Order> implements OrderApi {
     @Override
     public Result<List<OrderListDTO>> queryOrderList(OrderQuery orderQuery) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<OrderDetailDTO> queryOrderDetail(Integer orderId) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<Order> submitOrder(OrderSubmitParamDTO orderSubmitParamDTO) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }

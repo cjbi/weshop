@@ -4,6 +4,20 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<name>weshop</name>
+    <dependencies>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-framework</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-goods-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-order-api</artifactId>
+        </dependency>
+    </dependencies>
 	<packaging>pom</packaging>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>tech.wetech</groupId>
@@ -23,8 +37,9 @@
 	</properties>
 
 	<modules>
-        <!--<module>weshop-admin</module>
-        <module>weshop-wechat</module>-->
+        <module>weshop-admin</module>
+        <module>weshop-wechat-ui</module>
+        <module>weshop-wechat</module>
 		<module>weshop-example</module>
         <module>weshop-eureka-server</module>
         <module>weshop-framework</module>
@@ -37,6 +52,7 @@
 		<module>weshop-marketing-api</module>
 		<module>weshop-marketing</module>
 		<module>weshop-storage</module>
+        <module>weshop-storage-api</module>
 	</modules>
 
 	<dependencyManagement>
@@ -59,6 +75,11 @@
             <dependency>
                 <groupId>tech.wetech</groupId>
                 <artifactId>weshop-goods-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.wetech</groupId>
+                <artifactId>weshop-storage-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>

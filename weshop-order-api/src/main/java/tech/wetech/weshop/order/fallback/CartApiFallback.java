@@ -1,6 +1,7 @@
 package tech.wetech.weshop.order.fallback;
 
 import org.springframework.stereotype.Component;
+import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.fallback.ApiFallback;
 import tech.wetech.weshop.order.api.CartApi;
 import tech.wetech.weshop.order.dto.CartCheckoutDTO;
@@ -13,21 +14,21 @@ import tech.wetech.weshop.utils.Result;
 public class CartApiFallback extends ApiFallback<Cart> implements CartApi {
     @Override
     public Result<CartResultDTO> getCart() {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result addGoodsToCart(CartParamDTO cartParamDTO) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result updateGoods(CartParamDTO cartParamDTO) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<CartCheckoutDTO> checkoutCart(Integer addressId, Integer couponId) {
-        return null;
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 }
