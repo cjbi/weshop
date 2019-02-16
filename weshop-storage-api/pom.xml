@@ -12,4 +12,11 @@
     <artifactId>weshop-storage-api</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-framework</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
