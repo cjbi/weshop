@@ -2,6 +2,7 @@ package tech.wetech.weshop.goods.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.goods.dto.CategoryDTO;
 import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
@@ -25,11 +26,11 @@ public interface CategoryApi extends Api<Category> {
      * @return
      */
     @GetMapping("/queryCategoryByLevel")
-    Result<List<Category>> queryCategoryByLevel(CategoryLevelEnum categoryLevel);
+    Result<List<Category>> queryCategoryByLevel(@RequestParam("categoryLevel") CategoryLevelEnum categoryLevel);
 
     @GetMapping("/index")
-    Result<CategoryIndexDTO> index(Integer cateogyId);
+    Result<CategoryIndexDTO> index(@RequestParam("cateogyId") Integer cateogyId);
 
     @GetMapping("/current")
-    Result<CategoryDTO> current(Integer id);
+    Result<CategoryDTO> current(@RequestParam("id") Integer id);
 }

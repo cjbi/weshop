@@ -30,11 +30,11 @@ public interface GoodsApi extends Api<Goods> {
     Result<GoodsResultDTO> queryList(@RequestBody GoodsSearchQuery goodsSearchQuery);
 
     @GetMapping("/queryGoodsDetail")
-    Result<GoodsDetailDTO> queryGoodsDetail(Integer goodsId);
+    Result<GoodsDetailDTO> queryGoodsDetail(@RequestParam("goodsId") Integer goodsId);
 
     @GetMapping("/queryRelatedGoods")
-    Result<List<GoodsListDTO>> queryRelatedGoods(Integer goodsId);
+    Result<List<GoodsListDTO>> queryRelatedGoods(@RequestParam("goodsId") Integer goodsId);
 
     @GetMapping("/queryGoodsCategory")
-    Result<GoodsCategoryDTO> queryGoodsCategory(Integer categoryId);
+    Result<GoodsCategoryDTO> queryGoodsCategory(@RequestParam("categoryId") Integer categoryId);
 }

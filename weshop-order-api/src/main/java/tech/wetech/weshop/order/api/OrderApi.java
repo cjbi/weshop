@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.order.dto.OrderDetailDTO;
 import tech.wetech.weshop.order.dto.OrderListDTO;
@@ -34,7 +35,7 @@ public interface OrderApi extends Api<Order> {
      * @return
      */
     @GetMapping("/queryOrderDetail")
-    Result<OrderDetailDTO> queryOrderDetail(Integer orderId);
+    Result<OrderDetailDTO> queryOrderDetail(@RequestParam("orderId") Integer orderId);
 
     /**
      * 提交订单

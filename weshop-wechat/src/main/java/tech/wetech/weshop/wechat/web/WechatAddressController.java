@@ -27,7 +27,7 @@ public class WechatAddressController extends BaseController {
     }
 
     @GetMapping("/detail")
-    public Result<AddressDTO> queryDetail(@NotNull Integer id) {
+    public Result<AddressDTO> queryDetail(@NotNull @RequestParam("/id") Integer id) {
         return addressApi.queryDetail(id);
     }
 
