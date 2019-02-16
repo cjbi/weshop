@@ -13,6 +13,7 @@ import tech.wetech.weshop.marketing.service.CommentService;
 import tech.wetech.weshop.service.BaseService;
 import tech.wetech.weshop.user.api.UserApi;
 import tech.wetech.weshop.user.po.User;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
                 .collect(Collectors.toList());
         for (CommentResultDTO commentResultDTO : commentResultList) {
             commentResultDTO.setPicList(commentPictureMapper.selectPicUrlByCommentId(commentResultDTO.getId()));
-            User user = Optional.ofNullable(userApi.queryById(commentResultDTO.getUserId())).orElseGet(() -> new User());
+            User user = Optional.ofNullable(userApi.queryById(commentResultDTO.getUserId()).getData()).orElseGet(() -> new User());
             commentResultDTO.setUserInfo(new CommentResultDTO.UserInfoVO(user));
         }
         return commentResultList;

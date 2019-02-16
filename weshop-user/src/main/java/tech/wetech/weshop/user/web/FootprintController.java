@@ -8,6 +8,7 @@ import tech.wetech.weshop.user.api.FootprintApi;
 import tech.wetech.weshop.user.bo.GoodsFootprintBO;
 import tech.wetech.weshop.user.po.Footprint;
 import tech.wetech.weshop.user.service.FootprintService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class FootprintController extends BaseApi<Footprint> implements Footprint
     private FootprintService footprintService;
 
     @Override
-    public List<List<GoodsFootprintBO>> queryGoodsFootprintTimeLine() {
-        return footprintService.queryGoodsFootprintTimeLine();
+    public Result<List<List<GoodsFootprintBO>>> queryGoodsFootprintTimeLine() {
+        return Result.success(footprintService.queryGoodsFootprintTimeLine());
     }
 }

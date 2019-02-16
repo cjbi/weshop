@@ -82,11 +82,11 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
                 .setOrderExpress(orderExpressMapper.selectOne(new OrderExpress().setOrderId(orderId)));
 
         orderInfoVO.setProvinceName(
-                regionApi.queryNameById(orderInfoVO.getProvince())
+                regionApi.queryNameById(orderInfoVO.getProvince()).getData()
         ).setCityName(
-                regionApi.queryNameById(orderInfoVO.getCity())
+                regionApi.queryNameById(orderInfoVO.getCity()).getData()
         ).setDistrictName(
-                regionApi.queryNameById(orderInfoVO.getDistrict())
+                regionApi.queryNameById(orderInfoVO.getDistrict()).getData()
         );
         orderInfoVO.setFullRegion(
                 orderInfoVO.getProvinceName() + orderInfoVO.getCityName() + orderInfoVO.getDistrictName()
@@ -99,7 +99,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
 
     @Override
     public Order submitOrder(OrderSubmitParamDTO orderSubmitParamDTO) {
-        Address checkedAddress = addressApi.queryById(orderSubmitParamDTO.getAddressId());
+        Address checkedAddress = addressApi.queryById(orderSubmitParamDTO.getAddressId()).getData();
         if (checkedAddress == null) {
             throw new BizException(ResultCodeEnum.PLEASE_SELECT_SHIPPING_ADDRESS);
         }

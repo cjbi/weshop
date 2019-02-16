@@ -50,7 +50,7 @@ public class HomeServiceImpl implements HomeService {
         List<Ad> bannerList = adMapper.select(new Ad().setAdPositionId((short) 1));
 
         PageHelper.orderBy("sort_order asc");
-        List<Channel> channelList = channelApi.queryAll();
+        List<Channel> channelList = channelApi.queryAll().getData();
 
 //        List<Goods> newGoodsList = goodsApi.queryPageList(new Goods().setNewly(true), new PageQuery(1, 4));
 
@@ -58,7 +58,7 @@ public class HomeServiceImpl implements HomeService {
 //        List<Goods> hotGoodsList = goodsApi.queryPageList(new Goods().setHot(true), new PageQuery(1, 4));
 
         PageHelper.orderBy("new_sort_order asc");
-        List<Brand> brandList = brandApi.queryList(new Brand().setNewly(true));
+        List<Brand> brandList = brandApi.queryList(new Brand().setNewly(true)).getData();
 
         PageHelper.startPage(1, 3);
         List<Topic> topicList = topicMapper.selectAll();
@@ -67,13 +67,13 @@ public class HomeServiceImpl implements HomeService {
 
         categoryApi.queryList(
                 new Category().setParentId(0)
-        ).forEach(c -> {
+        ).getData().forEach(c -> {
 
-            List<Integer> categoryIdList = categoryApi.queryList(new Category().setParentId(c.getId())).stream()
+            List<Integer> categoryIdList = categoryApi.queryList(new Category().setParentId(c.getId())).getData().stream()
                     .map(Category::getId)
                     .collect(Collectors.toList());
 
-            List<Goods> goodsList = goodsApi.queryListByCategoryIdIn(categoryIdList);
+            List<Goods> goodsList = goodsApi.queryListByCategoryIdIn(categoryIdList).getData();
             categoryList.add(new HomeCategoryDTO(c.getId(), c.getName(), goodsList));
         });
 

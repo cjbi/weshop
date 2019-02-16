@@ -8,6 +8,7 @@ import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.dto.AddressDTO;
 import tech.wetech.weshop.user.po.Address;
 import tech.wetech.weshop.user.service.AddressService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -19,12 +20,12 @@ public class AddressController extends BaseApi<Address> implements AddressApi {
     private AddressService addressService;
 
     @Override
-    public AddressDTO queryDetail(Integer id) {
-        return addressService.queryDetail(id);
+    public Result<AddressDTO> queryDetail(Integer id) {
+        return Result.success(addressService.queryDetail(id));
     }
 
     @Override
-    public List<AddressDTO> queryDetailList() {
-        return addressService.queryDetailList();
+    public Result<List<AddressDTO>> queryDetailList() {
+        return Result.success(addressService.queryDetailList());
     }
 }

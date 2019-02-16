@@ -10,6 +10,7 @@ import tech.wetech.weshop.order.dto.CartParamDTO;
 import tech.wetech.weshop.order.dto.CartResultDTO;
 import tech.wetech.weshop.order.po.Cart;
 import tech.wetech.weshop.order.service.CartService;
+import tech.wetech.weshop.utils.Result;
 
 @RequestMapping("/cart")
 @RestController
@@ -19,22 +20,24 @@ public class CartController extends BaseApi<Cart> implements CartApi {
     private CartService cartService;
 
     @Override
-    public CartResultDTO getCart() {
-        return cartService.getCart();
+    public Result<CartResultDTO> getCart() {
+        return Result.success(cartService.getCart());
     }
 
     @Override
-    public void addGoodsToCart(CartParamDTO cartParamDTO) {
+    public Result addGoodsToCart(CartParamDTO cartParamDTO) {
         cartService.addGoodsToCart(cartParamDTO);
+        return Result.success();
     }
 
     @Override
-    public void updateGoods(CartParamDTO cartParamDTO) {
+    public Result updateGoods(CartParamDTO cartParamDTO) {
         cartService.updateGoods(cartParamDTO);
+        return Result.success();
     }
 
     @Override
-    public CartCheckoutDTO checkoutCart(Integer addressId, Integer couponId) {
-        return cartService.checkoutCart(addressId, couponId);
+    public Result<CartCheckoutDTO> checkoutCart(Integer addressId, Integer couponId) {
+        return Result.success(cartService.checkoutCart(addressId, couponId));
     }
 }

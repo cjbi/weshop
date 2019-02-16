@@ -198,14 +198,14 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         Brand brand = brandMapper.selectByPrimaryKey(goods.getBrandId());
 
         //商品评价
-        int commentCount = commentApi.count(new Comment().setValueId(id).setTypeId((byte) 0));
+        int commentCount = commentApi.count(new Comment().setValueId(id).setTypeId((byte) 0)).getData();
         PageHelper.startPage(1, 1);
-        Comment hotComment = commentApi.queryOne(new Comment().setValueId(id).setTypeId((byte) 0));
+        Comment hotComment = commentApi.queryOne(new Comment().setValueId(id).setTypeId((byte) 0)).getData();
         if (hotComment != null) {
             GoodsDetailDTO.CommentVO.CommentDataVO commentData = new GoodsDetailDTO.CommentVO.CommentDataVO();
             String content = new String(Base64.getDecoder().decode(hotComment.getContent()));
-            User user = userApi.queryById(hotComment.getUserId());
-            List<String> picList = commentPictureApi.queryList(new CommentPicture().setCommentId(hotComment.getId())).stream()
+            User user = userApi.queryById(hotComment.getUserId()).getData();
+            List<String> picList = commentPictureApi.queryList(new CommentPicture().setCommentId(hotComment.getId())).getData().stream()
                     .map(CommentPicture::getPicUrl)
                     .collect(Collectors.toList());
 
@@ -232,7 +232,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
 
         //用户是否收藏
         PageHelper.startPage(1, 1);
-        Collect userCollect = collectApi.queryOne(new Collect().setUserId(Constants.CURRENT_USER_ID).setValueId(id));
+        Collect userCollect = collectApi.queryOne(new Collect().setUserId(Constants.CURRENT_USER_ID).setValueId(id)).getData();
         goodsDetailDTO.setUserHasCollect(userCollect == null ? false : true);
 
         //记录用户足迹 此处使用异步处理

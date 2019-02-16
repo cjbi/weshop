@@ -2,66 +2,67 @@ package tech.wetech.weshop.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.service.IService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
-public class BaseApi<T> implements Api<T> {
+public abstract class BaseApi<T> implements Api<T> {
 
     @Autowired
     protected IService<T> service;
 
     @Override
-    public List<T> queryAll() {
-        return service.queryAll();
+    public Result<List<T>> queryAll() {
+        return Result.success(service.queryAll());
     }
 
     @Override
-    public List<T> queryList(T entity) {
-        return service.queryList(entity);
+    public Result<List<T>> queryList(T entity) {
+        return Result.success(service.queryList(entity));
     }
 
     @Override
-    public T queryOne(T entity) {
-        return service.queryOne(entity);
+    public Result<T> queryOne(T entity) {
+        return Result.success(service.queryOne(entity));
     }
 
     @Override
-    public T queryById(Object id) {
-        return service.queryById(id);
+    public Result<T> queryById(Object id) {
+        return Result.success(service.queryById(id));
     }
 
     @Override
-    public int create(T entity) {
-        return service.create(entity);
+    public Result<Integer> create(T entity) {
+        return Result.success(service.create(entity));
     }
 
     @Override
-    public int updateAll(T entity) {
-        return service.updateAll(entity);
+    public Result<Integer> updateAll(T entity) {
+        return Result.success(service.updateAll(entity));
     }
 
     @Override
-    public int updateNotNull(T entity) {
-        return service.updateNotNull(entity);
+    public Result<Integer> updateNotNull(T entity) {
+        return Result.success(service.updateNotNull(entity));
     }
 
     @Override
-    public int delete(T entity) {
-        return service.delete(entity);
+    public Result<Integer> delete(T entity) {
+        return Result.success(service.delete(entity));
     }
 
     @Override
-    public int deleteById(Object id) {
-        return service.deleteById(id);
+    public Result<Integer> deleteById(Object id) {
+        return Result.success(service.deleteById(id));
     }
 
     @Override
-    public int count(T entity) {
-        return service.count(entity);
+    public Result<Integer> count(T entity) {
+        return Result.success(service.count(entity));
     }
 
     @Override
-    public String sayHello(String name) {
-        return "Hello " + name;
+    public Result<String> sayHello(String name) {
+        return Result.success("Hello " + name);
     }
 }

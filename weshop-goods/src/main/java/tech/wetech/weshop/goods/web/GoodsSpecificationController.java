@@ -7,6 +7,7 @@ import tech.wetech.weshop.api.BaseApi;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
 import tech.wetech.weshop.goods.service.GoodsSpecificationService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class GoodsSpecificationController extends BaseApi<GoodsSpecification> im
     private GoodsSpecificationService goodsSpecificationService;
 
     @Override
-    public List<String> queryValueByGoodsIdAndIdIn(Integer goodsId, List<Integer> goodsSpecificationIds) {
-        return goodsSpecificationService.queryValueByGoodsIdAndIdIn(goodsId, goodsSpecificationIds);
+    public Result<List<String>> queryValueByGoodsIdAndIdIn(Integer goodsId, List<Integer> goodsSpecificationIds) {
+        return Result.success(goodsSpecificationService.queryValueByGoodsIdAndIdIn(goodsId, goodsSpecificationIds));
     }
 }

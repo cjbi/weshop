@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.marketing.api.SearchApi;
 import tech.wetech.weshop.marketing.dto.SearchIndexDTO;
 import tech.wetech.weshop.marketing.service.SearchService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -17,17 +18,18 @@ public class SearchController implements SearchApi {
     private SearchService searchService;
 
     @Override
-    public List<String> helper(String keyword) {
-        return searchService.helper(keyword);
+    public Result<List<String>> helper(String keyword) {
+        return Result.success(searchService.helper(keyword));
     }
 
     @Override
-    public void clearHistory() {
+    public Result clearHistory() {
         searchService.clearHistory();
+        return Result.success();
     }
 
     @Override
-    public SearchIndexDTO index() {
-        return searchService.index();
+    public Result<SearchIndexDTO> index() {
+        return Result.success(searchService.index());
     }
 }

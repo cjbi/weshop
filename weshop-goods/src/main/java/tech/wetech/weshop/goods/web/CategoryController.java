@@ -10,6 +10,7 @@ import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 import tech.wetech.weshop.goods.po.Category;
 import tech.wetech.weshop.goods.service.CategoryService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -21,17 +22,17 @@ public class CategoryController extends BaseApi<Category> implements CategoryApi
     private CategoryService categoryService;
 
     @Override
-    public List<Category> queryCategoryByLevel(CategoryLevelEnum categoryLevel) {
-        return categoryService.queryCategoryByLevel(categoryLevel);
+    public Result<List<Category>> queryCategoryByLevel(CategoryLevelEnum categoryLevel) {
+        return Result.success(categoryService.queryCategoryByLevel(categoryLevel));
     }
 
     @Override
-    public CategoryIndexDTO index(Integer cateogyId) {
-        return categoryService.index(cateogyId);
+    public Result<CategoryIndexDTO> index(Integer cateogyId) {
+        return Result.success(categoryService.index(cateogyId));
     }
 
     @Override
-    public CategoryDTO current(Integer id) {
-        return categoryService.current(id);
+    public Result<CategoryDTO> current(Integer id) {
+        return Result.success(categoryService.current(id));
     }
 }

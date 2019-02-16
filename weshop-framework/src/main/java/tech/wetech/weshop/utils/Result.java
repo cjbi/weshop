@@ -30,8 +30,8 @@ public class Result<T> implements Serializable {
     @ApiModelProperty("额外数据")
     private Map<String, Object> extra;
 
-    public Result<T> addExtraIfTrue(boolean val, String key, Object value) {
-        if (val) {
+    public Result<T> addExtraIfTrue(boolean bool, String key, Object value) {
+        if (bool) {
             addExtra(key, value);
         }
         return this;

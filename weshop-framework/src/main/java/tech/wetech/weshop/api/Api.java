@@ -1,42 +1,46 @@
 package tech.wetech.weshop.api;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
 public interface Api<T> {
 
-    @RequestMapping(value = "/queryAll", method = RequestMethod.GET)
-    List<T> queryAll();
+    @GetMapping("/queryAll")
+    Result<List<T>> queryAll();
 
-    @RequestMapping(value = "/queryList", method = RequestMethod.GET)
-    List<T> queryList(T entity);
+    @GetMapping(value = "/queryList")
+    Result<List<T>> queryList(@RequestBody T entity);
 
-    @RequestMapping(value = "/queryOne", method = RequestMethod.GET)
-    T queryOne(T entity);
+    @GetMapping("/queryOne")
+    Result<T> queryOne(@RequestBody T entity);
 
-    @RequestMapping(value = "/queryById", method = RequestMethod.GET)
-    T queryById(@RequestParam("id") Object id);
+    @GetMapping("/queryById")
+    Result<T> queryById(@RequestParam("id") Object id);
 
     @PostMapping("/create")
-    int create(@RequestBody T entity);
+    Result<Integer> create(@RequestBody T entity);
 
     @PostMapping("/updateAll")
-    int updateAll(@RequestBody T entity);
+    Result<Integer> updateAll(@RequestBody T entity);
 
     @PostMapping("/updateNotNull")
-    int updateNotNull(@RequestBody T entity);
+    Result<Integer> updateNotNull(@RequestBody T entity);
 
     @PostMapping("/delete")
-    int delete(@RequestBody T entity);
+    Result<Integer> delete(@RequestBody T entity);
 
     @PostMapping("/deleteById")
-    int deleteById(@RequestBody Object id);
+    Result<Integer> deleteById(@RequestBody Object id);
 
-    @RequestMapping(value = "/count", method = RequestMethod.GET)
-    int count(T entity);
+    @GetMapping("/count")
+    Result<Integer> count(@RequestBody T entity);
 
-    @RequestMapping(value = "/sayHello", method = RequestMethod.GET)
-    String sayHello(String name);
+    @GetMapping("/sayHello")
+    Result<String> sayHello(@RequestParam("name") String name);
 
 }

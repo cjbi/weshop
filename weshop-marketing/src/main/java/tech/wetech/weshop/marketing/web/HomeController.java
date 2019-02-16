@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.marketing.api.HomeApi;
 import tech.wetech.weshop.marketing.dto.HomeIndexDTO;
 import tech.wetech.weshop.marketing.service.HomeService;
+import tech.wetech.weshop.utils.Result;
 
 @RestController
 @RequestMapping("/home")
@@ -15,7 +16,7 @@ public class HomeController implements HomeApi {
     private HomeService homeService;
 
     @Override
-    public HomeIndexDTO index() {
-        return homeService.index();
+    public Result<HomeIndexDTO> index() {
+        return Result.success(homeService.index());
     }
 }

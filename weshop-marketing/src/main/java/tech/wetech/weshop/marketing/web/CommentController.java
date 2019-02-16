@@ -10,6 +10,7 @@ import tech.wetech.weshop.marketing.dto.CommentResultDTO;
 import tech.wetech.weshop.marketing.po.Comment;
 import tech.wetech.weshop.marketing.query.CommentQuery;
 import tech.wetech.weshop.marketing.service.CommentService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class CommentController extends BaseApi<Comment> implements CommentApi {
     private CommentService commentService;
 
     @Override
-    public List<CommentResultDTO> queryList(CommentQuery commentQuery) {
-        return commentService.queryList(commentQuery);
+    public Result<List<CommentResultDTO>> queryList(CommentQuery commentQuery) {
+        return Result.success(commentService.queryList(commentQuery));
     }
 
     @Override
-    public CommentCountDTO countList(CommentQuery commentQuery) {
-        return commentService.countList(commentQuery);
+    public Result<CommentCountDTO> countList(CommentQuery commentQuery) {
+        return Result.success(commentService.countList(commentQuery));
     }
 }

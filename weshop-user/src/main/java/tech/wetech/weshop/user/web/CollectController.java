@@ -10,6 +10,7 @@ import tech.wetech.weshop.user.dto.CollectAddOrDeleteParamDTO;
 import tech.wetech.weshop.user.dto.CollectAddOrDeleteResultDTO;
 import tech.wetech.weshop.user.po.Collect;
 import tech.wetech.weshop.user.service.CollectService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class CollectController extends BaseApi<Collect> implements CollectApi {
     private CollectService collectService;
 
     @Override
-    public CollectAddOrDeleteResultDTO addOrDelete(CollectAddOrDeleteParamDTO collectAddOrDeleteParamDTO) {
-        return collectService.addOrDelete(collectAddOrDeleteParamDTO);
+    public Result<CollectAddOrDeleteResultDTO> addOrDelete(CollectAddOrDeleteParamDTO collectAddOrDeleteParamDTO) {
+        return Result.success(collectService.addOrDelete(collectAddOrDeleteParamDTO));
     }
 
     @Override
-    public List<GoodsCollectBO> queryGoodsCollectList() {
-        return collectService.queryGoodsCollectList();
+    public Result<List<GoodsCollectBO>> queryGoodsCollectList() {
+        return Result.success(collectService.queryGoodsCollectList());
     }
 }

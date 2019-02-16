@@ -7,6 +7,7 @@ import tech.wetech.weshop.api.BaseApi;
 import tech.wetech.weshop.goods.api.BrandApi;
 import tech.wetech.weshop.goods.po.Brand;
 import tech.wetech.weshop.goods.service.BrandService;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class BrandController extends BaseApi<Brand> implements BrandApi {
     private BrandService brandService;
 
     @Override
-    public List<Brand> queryList(Brand entity) {
-        return brandService.queryList(entity);
+    public Result<List<Brand>> queryList(Brand entity) {
+        return Result.success(brandService.queryList(entity));
     }
 
 

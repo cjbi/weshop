@@ -1,20 +1,21 @@
 package tech.wetech.weshop.user.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.user.dto.AddressDTO;
+import tech.wetech.weshop.user.fallback.AddressApiFallback;
 import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 
-@FeignClient(value = "weshop-user", path = "address")
+@FeignClient(value = "weshop-user", path = "address", fallback = AddressApiFallback.class)
 public interface AddressApi extends Api<Address> {
 
-    @RequestMapping(value = "/queryDetail", method = RequestMethod.GET)
-    AddressDTO queryDetail(Integer id);
+    @GetMapping("/queryDetail")
+    Result<AddressDTO> queryDetail(Integer id);
 
-    @RequestMapping(value = "/queryDetailList", method = RequestMethod.GET)
-    List<AddressDTO> queryDetailList();
+    @GetMapping("/queryDetailList")
+    Result<List<AddressDTO>> queryDetailList();
 }
