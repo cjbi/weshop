@@ -1,7 +1,6 @@
 package tech.wetech.weshop.goods.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.goods.dto.GoodsCategoryDTO;
@@ -16,22 +15,21 @@ import java.util.List;
 /**
  * @author cjbi@outlook.com
  */
-@RequestMapping("/goods")
-@FeignClient(value = "weshop-goods-api")
+@FeignClient(value = "weshop-goods", path = "goods")
 public interface GoodsApi extends Api<Goods> {
 
-    @GetMapping("/queryListByCategoryIdIn")
+    @RequestMapping(value = "/queryListByCategoryIdIn", method = RequestMethod.GET)
     List<Goods> queryListByCategoryIdIn(List<Integer> categoryIdList);
 
-    @GetMapping("/queryList2")
+    @RequestMapping(value = "/queryList2", method = RequestMethod.GET)
     GoodsResultDTO queryList(GoodsSearchQuery goodsSearchQuery);
 
-    @GetMapping("/queryGoodsDetail")
+    @RequestMapping(value = "/queryGoodsDetail", method = RequestMethod.GET)
     GoodsDetailDTO queryGoodsDetail(Integer goodsId);
 
-    @GetMapping("/queryRelatedGoods")
+    @RequestMapping(value = "/queryRelatedGoods", method = RequestMethod.GET)
     List<GoodsListDTO> queryRelatedGoods(Integer goodsId);
 
-    @GetMapping("/queryGoodsCategory")
+    @RequestMapping(value = "/queryGoodsCategory", method = RequestMethod.GET)
     GoodsCategoryDTO queryGoodsCategory(Integer categoryId);
 }

@@ -13,11 +13,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableSwagger2
 @ComponentScan("tech.wetech.weshop")
 @MapperScan(basePackages = "tech.wetech.weshop.goods.mapper")
-@EnableFeignClients(basePackages = {
-        "tech.wetech.weshop.user.api",
-        "tech.wetech.weshop.marketing.api",
-        "tech.wetech.weshop.order.api"
-})
+@EnableFeignClients("tech.wetech.weshop.*.api")
 public class WeshopGoodsApplication {
 
     public static void main(String[] args) {

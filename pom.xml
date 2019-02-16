@@ -23,8 +23,8 @@
 	</properties>
 
 	<modules>
-		<module>weshop-admin</module>
-		<module>weshop-wechat</module>
+        <!--<module>weshop-admin</module>
+        <module>weshop-wechat</module>-->
 		<module>weshop-example</module>
         <module>weshop-eureka-server</module>
         <module>weshop-framework</module>

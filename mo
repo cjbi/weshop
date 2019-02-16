@@ -1,9 +1,0 @@
-订单中心 weshop_cart weshop_order weshop_order_express weshop_order_goods weshop_shipper
-
-
-商品中心 weshop_attribute weshop_attribute_category weshop_brand weshop_category weshop_channel weshop_goods weshop_goods_attribute weshop_related_goods weshop_goods_issue weshop_goods_gallery weshop_goods_specification weshop_product weshop_specification
-
-
-用户中心 weshop_address weshop_admin weshop_collect weshop_footprint weshop_user weshop_user_coupon weshop_user_level weshop_region weshop_coupon
-营销中心 weshop_ad weshop_ad_position weshop_comment weshop_comment_picture  weshop_feedback  weshop_keywords  weshop_search_history weshop_topic weshop_topic_category
-公共服务 weshop_storage

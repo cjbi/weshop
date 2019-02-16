@@ -1,24 +1,21 @@
 package tech.wetech.weshop.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 public interface Api<T> {
 
-    @GetMapping("/queryAll")
+    @RequestMapping(value = "/queryAll", method = RequestMethod.GET)
     List<T> queryAll();
 
-    @GetMapping("/queryList")
+    @RequestMapping(value = "/queryList", method = RequestMethod.GET)
     List<T> queryList(T entity);
 
-    @GetMapping("/queryOne")
+    @RequestMapping(value = "/queryOne", method = RequestMethod.GET)
     T queryOne(T entity);
 
-    @GetMapping("/queryById")
+    @RequestMapping(value = "/queryById", method = RequestMethod.GET)
     T queryById(@RequestParam("id") Object id);
 
     @PostMapping("/create")
@@ -36,7 +33,10 @@ public interface Api<T> {
     @PostMapping("/deleteById")
     int deleteById(@RequestBody Object id);
 
-    @GetMapping("/count")
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
     int count(T entity);
+
+    @RequestMapping(value = "/sayHello", method = RequestMethod.GET)
+    String sayHello(String name);
 
 }

@@ -1,6 +1,7 @@
 package tech.wetech.weshop.goods.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.api.BaseApi;
 import tech.wetech.weshop.goods.api.GoodsApi;
@@ -14,7 +15,8 @@ import tech.wetech.weshop.goods.service.GoodsService;
 
 import java.util.List;
 
-@RestController("/goods")
+@RestController
+@RequestMapping("/goods")
 public class GoodsController extends BaseApi<Goods> implements GoodsApi {
 
     @Autowired

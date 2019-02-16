@@ -7,6 +7,7 @@ import tech.wetech.weshop.user.po.Address;
 import java.util.List;
 
 public class AddressApiFallback implements AddressApi {
+
     @Override
     public AddressDTO queryDetail(Integer id) {
         return null;
@@ -65,5 +66,10 @@ public class AddressApiFallback implements AddressApi {
     @Override
     public int count(Address entity) {
         return 0;
+    }
+
+    @Override
+    public String sayHello(String name) {
+        return null;
     }
 }

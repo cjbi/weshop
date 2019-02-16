@@ -59,4 +59,9 @@ public class BaseApi<T> implements Api<T> {
     public int count(T entity) {
         return service.count(entity);
     }
+
+    @Override
+    public String sayHello(String name) {
+        return "Hello " + name;
+    }
 }

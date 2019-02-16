@@ -1,14 +1,12 @@
 package tech.wetech.weshop.marketing.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tech.wetech.weshop.marketing.dto.HomeIndexDTO;
 
-@FeignClient("weshop-marketing")
-@RequestMapping("/home")
+@FeignClient(value = "weshop-marketing", path = "home")
 public interface HomeApi {
 
-    @GetMapping("/index")
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     HomeIndexDTO index();
 }

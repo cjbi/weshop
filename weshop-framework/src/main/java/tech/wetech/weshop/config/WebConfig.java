@@ -30,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
         return new RestTemplate();
     }
 
+
     @Bean
     public ServletRegistrationBean getServlet() {
         HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();

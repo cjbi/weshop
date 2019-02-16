@@ -1,8 +1,8 @@
 package tech.wetech.weshop.order.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.order.dto.OrderDetailDTO;
 import tech.wetech.weshop.order.dto.OrderListDTO;
@@ -12,8 +12,7 @@ import tech.wetech.weshop.order.query.OrderQuery;
 
 import java.util.List;
 
-@RequestMapping("/order")
-@FeignClient(value = "weshop-order")
+@FeignClient(value = "weshop-order", path = "order")
 public interface OrderApi extends Api<Order> {
 
     /**
@@ -22,7 +21,7 @@ public interface OrderApi extends Api<Order> {
      * @param orderQuery
      * @return
      */
-    @GetMapping("/queryOrderList")
+    @RequestMapping(value = "/queryOrderList", method = RequestMethod.GET)
     List<OrderListDTO> queryOrderList(OrderQuery orderQuery);
 
     /**
@@ -31,7 +30,7 @@ public interface OrderApi extends Api<Order> {
      * @param orderId
      * @return
      */
-    @GetMapping("/queryOrderDetail")
+    @RequestMapping(value = "/queryOrderDetail", method = RequestMethod.GET)
     OrderDetailDTO queryOrderDetail(Integer orderId);
 
     /**
@@ -40,6 +39,6 @@ public interface OrderApi extends Api<Order> {
      * @param orderSubmitParamDTO
      * @return
      */
-    @GetMapping("/submitOrder")
+    @RequestMapping(value = "/submitOrder", method = RequestMethod.GET)
     Order submitOrder(OrderSubmitParamDTO orderSubmitParamDTO);
 }
