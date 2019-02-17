@@ -100,6 +100,9 @@ public class OrderListDTO {
 
     private HandleOptionDTO handleOption;
 
+    public OrderListDTO() {
+    }
+
     public OrderListDTO(Order order) {
         this.id = order.getId();
         this.orderSN = order.getOrderSN();

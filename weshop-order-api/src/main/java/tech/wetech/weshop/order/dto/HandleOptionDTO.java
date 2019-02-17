@@ -49,6 +49,9 @@ public class HandleOptionDTO {
      */
     private boolean isReturn;
 
+    public HandleOptionDTO() {
+    }
+
     public HandleOptionDTO(Order order) {
         OrderStatusEnum orderStatus = order.getOrderStatus();
         PayStatusEnum payStatus = order.getPayStatus();
