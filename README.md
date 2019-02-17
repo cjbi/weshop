@@ -108,7 +108,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 
 > 购物车页
 
-![](docs/preview/orderlist.gif)
+![](docs/preview/orderlist.jpg)
 
 ### 本地部署
 
