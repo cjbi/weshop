@@ -112,8 +112,6 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 
 ### 本地部署
 
-![](docs/preview/eureka.jpg)
-
 ## 安装教程
 
 ### 本地部署
@@ -121,14 +119,14 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 1. 通过git下载源码
 2. 创建数据库weshop，数据库编码为UTF-8
 3. 执行docs/sql/data.sql文件，初始化数据
-3. 修改配置中心(weshop-config-server)的database.properties文件，更新MySQL账号和密码
-4. 运行Maven命令mvn install(注意：安装weshop-admin模块因为会运行npm install和npm build命令时间会比较长，当然也可以手动在weshop-admin模块执行npm命令)
-5. 安装weshop-admin-ui模块，运行mvn install和mvn build命令，运行命令前需要安装nodeJs。
-6. 运行weshop-eureka-server、weshop-config-server、weshop-api-gateway这几个基础服务。
-7. 运行weshop-user、weshop-goods、weshop-order、weshop-marketing这几个api服务。
-8. 运行weshop-wechat、wechat-admin这几个endpoint。
-9.  http://localhost:8027/index.html访问后台管理，http://localhost:8020/weshop/swagger-ui.html访问Swagger页面。
-10. 打开微信开发者工具，导入weshop-wechat-ui模块,点击编译即可，此时可以预览商城效果。
+4. 修改配置中心(weshop-config-server)的database.properties文件，更新MySQL账号和密码
+5. 运行Maven命令mvn install(注意：安装weshop-admin模块因为会运行npm install和npm build命令时间会比较长，当然也可以手动在weshop-admin模块执行npm命令)
+6. 安装weshop-admin-ui模块，运行mvn install和mvn build命令，运行命令前需要安装nodeJs。
+7. 运行weshop-eureka-server、weshop-config-server、weshop-api-gateway这几个基础服务。
+8. 运行weshop-user、weshop-goods、weshop-order、weshop-marketing这几个api服务。
+9. 运行weshop-wechat、wechat-admin这几个endpoint。
+10. http://localhost:8027/index.html访问后台管理，http://localhost:8020/weshop/swagger-ui.html访问Swagger页面。
+11. 打开微信开发者工具，导入weshop-wechat-ui模块,点击编译即可，此时可以预览商城效果。
 
 ### 配置开发环境
 
