@@ -10,7 +10,7 @@ weshop
 ├── weshop-eureka-server -- eureka注册中心[端口:8761]
 ├── weshop-config-server -- 配置中心[端口:7001]
 ├── weshop-api-gateway -- api网关[端口:8020]
-├── weshop-hystrix-dashboard -- 断路器监控面板
+├── weshop-hystrix-dashboard -- 断路器监控面板[端口:1301]
 ├── weshop-example -- 项目示例工程
 |    ├── weshop-example-api -- 远程服务api接口
 |    ├── zheng-example-provider -- 服务提供方[端口:9998]
@@ -93,7 +93,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 
 > 服务注册页面
 
-![](docs/preview/eureka.jpg)
+![](docs/preview/eureka.JPG)
 
 > swagger
 
@@ -109,7 +109,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 
 > 购物车页
 
-![](docs/preview/orderlist.jpg)
+![](docs/preview/orderlist.JPG)
 
 ### 本地部署
 
