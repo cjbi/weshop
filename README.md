@@ -129,6 +129,6 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 10. http://localhost:8027/index.html访问后台管理，http://localhost:8020/weshop/swagger-ui.html访问Swagger页面。
 11. 打开微信开发者工具，导入weshop-wechat-ui模块,点击编译即可，此时可以预览商城效果。
 
-### 配置开发环境
+### 生产部署
 
-待补充。。。
+最低部署要求  1C2G x3
