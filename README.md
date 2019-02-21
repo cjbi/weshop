@@ -6,15 +6,15 @@ Weshop是基于Spring Cloud(Greenwich)开发的小程序商城系统，提供整
 
 ```
 weshop
-├── weshop-frame -- 框架公共模块
+├── weshop-framework -- 框架公共模块
 ├── weshop-eureka-server -- eureka注册中心[端口:8761]
 ├── weshop-config-server -- 配置中心[端口:7001]
 ├── weshop-api-gateway -- api网关[端口:8020]
 ├── weshop-hystrix-dashboard -- 断路器监控面板[端口:1301]
 ├── weshop-example -- 项目示例工程
 |    ├── weshop-example-api -- 远程服务api接口
-|    ├── zheng-example-provider -- 服务提供方[端口:9998]
-|    ├── zheng-example-consumer -- 服务消费方[端口:9999]
+|    ├── weshop-example-provider -- 服务提供方[端口:9998]
+|    ├── weshop-example-consumer -- 服务消费方[端口:9999]
 ├── weshop-user-api -- 用户中心api
 ├── weshop-user -- 用户中心[端口:8021]
 ├── weshop-goods-api -- 商品中心api
@@ -111,8 +111,6 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 
 ![](docs/preview/orderlist.JPG)
 
-### 本地部署
-
 ## 安装教程
 
 ### 本地部署
@@ -132,3 +130,9 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 ### 生产部署
 
 最低部署要求  1C2G x3
+
+### 获取代码
+
+https://github.com/cjbi/weshop
+
+https://gitee.com/cjbi/weshop
