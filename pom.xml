@@ -75,6 +75,75 @@
                 <artifactId>weshop-framework</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
+
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>2.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.netflix.hystrix</groupId>
+				<artifactId>hystrix-metrics-event-stream</artifactId>
+				<version>1.5.18</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>1.1.10</version>
+			</dependency>
+			<!--mapper-->
+			<dependency>
+				<groupId>tk.mybatis</groupId>
+				<artifactId>mapper-spring-boot-starter</artifactId>
+				<version>2.1.5</version>
+			</dependency>
+			<!--pagehelper-->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>1.2.3</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.mybatis.spring.boot</groupId>
+						<artifactId>mybatis-spring-boot-starter</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>2.6.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.qcloud</groupId>
+				<artifactId>cos_api</artifactId>
+				<version>5.4.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.aliyun.oss</groupId>
+				<artifactId>aliyun-sdk-oss</artifactId>
+				<version>2.5.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.qiniu</groupId>
+				<artifactId>qiniu-java-sdk</artifactId>
+				<version>[7.2.0, 7.2.99]</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>20.0</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
