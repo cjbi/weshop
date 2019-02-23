@@ -6,21 +6,21 @@ package tech.wetech.weshop.enums;
 public enum ResultCodeEnum {
 
     OK("200", "处理成功"),
-    BAD_REQUEST("400", "请求参数有误"),
-    UNAUTHORIZED("401", "未授权"),
-    PARAMS_MISS("483", "缺少接口中必填参数"),
-    PARAM_ERROR("484", "参数非法"),
-    FAILED_DEL_OWN("485", "不能删除自己"),
-    FAILED_USER_ALREADY_EXIST("486", "该用户已存在"),
-    INTERNAL_SERVER_ERROR("500", "服务器内部错误"),
-    NOT_IMPLEMENTED("501", "业务异常"),
-    RECORD_NOT_EXIST("502", "记录不存在"),
-    REMOTE_SERVICE_ERROR("503", "远程服务调用失败"),
+    BAD_REQUEST("600", "请求参数有误"),
+    UNAUTHORIZED("601", "未授权"),
+    PARAMS_MISS("602", "缺少接口中必填参数"),
+    PARAM_ERROR("603", "参数非法"),
+    FAILED_DEL_OWN("604", "不能删除自己"),
+    FAILED_USER_ALREADY_EXIST("605", "该用户已存在"),
+    INTERNAL_SERVER_ERROR("606", "服务器内部错误"),
+    NOT_IMPLEMENTED("607", "业务异常"),
+    RECORD_NOT_EXIST("608", "记录不存在"),
+    REMOTE_SERVICE_ERROR("609", "远程服务调用失败"),
 
-    GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES("600", "商品已下架"),
-    UNDER_STOCK("601", "库存不足"),
-    PLEASE_SELECT_GOODS("602", "请选择商品"),
-    PLEASE_SELECT_SHIPPING_ADDRESS("603", "请选择收货地址");
+    GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES("610", "商品已下架"),
+    UNDER_STOCK("611", "库存不足"),
+    PLEASE_SELECT_GOODS("612", "请选择商品"),
+    PLEASE_SELECT_SHIPPING_ADDRESS("613", "请选择收货地址");
     private String code;
     private String msg;
 

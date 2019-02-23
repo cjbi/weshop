@@ -27,6 +27,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>tech.wetech</groupId>
+            <artifactId>weshop-framework</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

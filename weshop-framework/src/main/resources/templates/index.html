@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@environment.getProperty('spring.application.name')}">Weshop</title>
+</head>
+<body>
+<span th:text="${@environment.getProperty('spring.application.name')}"></span>
+<br>
+<a th:href="@{/swagger-ui.html}">访问Swagger</a>
+
+</body>
+</html>
