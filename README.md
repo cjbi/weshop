@@ -45,6 +45,7 @@ Thymeleaf | 模板引擎 | 3.0.9.RELEASE |  [https://www.thymeleaf.org/](https:/
 Logback | 日志组件 | 1.1.3 |  [https://logback.qos.ch](https://logback.qos.ch/)
 Druid | 数据库连接池 | 0.2.23 |  [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
 Hibernate Validator | 后端校验框架 | 5.4.2.Final | [http://hibernate.org/validator/](http://hibernate.org/validator/)
+RabbitMQ | 消息中间件 | 5.4.3 | [http://www.rabbitmq.com/](http://www.rabbitmq.com/)
 
 ### 前端技术
 
@@ -57,6 +58,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 
 - JDK1.8+
 - MySQL5.6+
+- RabbitMQ 3.6.10~
 - Maven3.0+
 
 ## 功能
@@ -118,14 +120,14 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 1. 通过git下载源码
 2. 创建数据库weshop，数据库编码为UTF-8
 3. 执行docs/sql/data.sql文件，初始化数据
-4. 修改配置中心(weshop-config-server)的database.properties文件，更新MySQL账号和密码
+4. 修改配置中心(weshop-config-server)的database.properties和common.properties文件，更新MySQL账号和密码，更新RabbitMQ配置
 5. 运行Maven命令mvn install(注意：安装weshop-admin模块因为会运行npm install和npm build命令时间会比较长，当然也可以手动在weshop-admin模块执行npm命令)
-6. 安装weshop-admin-ui模块，运行mvn install和mvn build命令，运行命令前需要安装nodeJs。
-7. 运行weshop-eureka-server、weshop-config-server、weshop-api-gateway这几个基础服务。
-8. 运行weshop-user、weshop-goods、weshop-order、weshop-marketing这几个api服务。
-9. 运行weshop-wechat、wechat-admin这几个endpoint。
-10. http://localhost:8027/index.html访问后台管理，http://localhost:8020/weshop/swagger-ui.html访问Swagger页面。
-11. 打开微信开发者工具，导入weshop-wechat-ui模块,点击编译即可，此时可以预览商城效果。
+6. 安装weshop-admin-ui模块，运行mvn install和mvn build命令，运行命令前需要安装nodeJs
+7. 运行weshop-eureka-server、weshop-config-server、weshop-api-gateway这几个基础服务
+8. 运行weshop-user、weshop-goods、weshop-order、weshop-marketing这几个api服务
+9. 运行weshop-wechat、wechat-admin这几个endpoint
+10. http://localhost:8027/index.html访问后台管理，http://localhost:8020/weshop/swagger-ui.html访问Swagger页面
+11. 打开微信开发者工具，导入weshop-wechat-ui模块,点击编译即可，此时可以预览商城效果
 
 ### 生产部署
 

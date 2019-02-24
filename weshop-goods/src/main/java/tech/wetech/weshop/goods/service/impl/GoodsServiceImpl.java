@@ -1,8 +1,9 @@
 package tech.wetech.weshop.goods.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 import tech.wetech.weshop.exception.BizException;
@@ -75,7 +76,10 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
     private RelatedGoodsMapper relatedGoodsMapper;
 
     @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    private AmqpTemplate amqpTemplate;
+
+    @Value("${message.queue.footprint}")
+    private String footprintQueue;
 
     @Override
     public GoodsResultDTO queryList(GoodsSearchQuery goodsSearchQuery) {
@@ -239,7 +243,7 @@ public class GoodsServiceImpl extends BaseService<Goods> implements GoodsService
         Footprint footprint = new Footprint()
                 .setUserId(Constants.CURRENT_USER_ID)
                 .setGoodsId(id);
-        applicationEventPublisher.publishEvent(footprint);
+        amqpTemplate.convertAndSend(footprintQueue, footprint);
         return goodsDetailDTO;
     }
 

@@ -1,10 +1,11 @@
 package tech.wetech.weshop.user.po;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "weshop_footprint")
-public class Footprint {
+public class Footprint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
