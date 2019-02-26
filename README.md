@@ -36,7 +36,9 @@ weshop
 ----|------|----|----
 Spring Boot | 应用框架 | 2.1.2.RELEASE | [https://projects.spring.io/spring-boot/](https://projects.spring.io/spring-boot/)
 spring-cloud-netflix | 微服务框架 | Greenwich.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
-spring-cloud-config | 配置中心 | 2.1.2.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
+spring-cloud-config | 分布式配置中心 | 2.1.2.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
+spring-cloud-sleuth | 分布式服务跟踪 | 2.1.2.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
+spring-cloud-stream | 分布式消息总线 | 2.1.2.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
 MyBatis | ORM框架 | 3.2.1 |  [http://www.mybatis.org/mybatis-3/zh/index.html](http://www.mybatis.org/mybatis-3/zh/index.html)
 Mapper | MyBatis 通用 Mapper4 | 4.0.0 |  [https://gitee.com/free/Mapper](https://gitee.com/free/Mapper)
 PageHelper | MyBatis 分页插件 | 5.1.2 |  [https://gitee.com/free/Mybatis_PageHelper](https://gitee.com/free/Mybatis_PageHelper)
@@ -59,8 +61,9 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 
 - JDK1.8+
 - MySQL5.6+
-- RabbitMQ 3.6.10~
+- RabbitMQ 3.6.x+
 - Maven3.0+
+- ZipKinServer 3.7.0+
 
 ## 功能
 
@@ -121,7 +124,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 1. 通过git下载源码
 2. 创建数据库weshop，数据库编码为UTF-8
 3. 执行docs/sql/data.sql文件，初始化数据
-4. 修改配置中心(weshop-config-server)的database.properties和common.properties文件，更新MySQL账号和密码，更新RabbitMQ配置
+4. 修改配置中心(weshop-config-server)的database.properties和common.properties文件，更新MySQL账号和密码，更新RabbitMQ配置，更新zipkinServer配置
 5. 运行Maven命令mvn install(注意：安装weshop-admin模块因为会运行npm install和npm build命令时间会比较长，当然也可以手动在weshop-admin模块执行npm命令)
 6. 安装weshop-admin-ui模块，运行mvn install和mvn build命令，运行命令前需要安装nodeJs
 7. 运行weshop-eureka-server、weshop-config-server、weshop-api-gateway这几个基础服务

@@ -28,6 +28,11 @@ public class WebConfig implements WebMvcConfigurer {
         return new RestTemplate();
     }
 
+    @Bean
+    public AlwaysSampler defaultSampler() {
+        return new AlwaysSampler();
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
