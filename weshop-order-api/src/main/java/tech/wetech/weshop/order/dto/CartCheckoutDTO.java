@@ -27,6 +27,9 @@ public class CartCheckoutDTO {
 
     private BigDecimal orderTotalPrice;
 
+    public CartCheckoutDTO() {
+    }
+
     public static class CheckedAddressVO {
 
         private Integer id;
@@ -56,6 +59,9 @@ public class CartCheckoutDTO {
         private String districtName;
 
         private String fullRegion;
+
+        public CheckedAddressVO() {
+        }
 
         public CheckedAddressVO(Address address) {
             this.id = address.getId();

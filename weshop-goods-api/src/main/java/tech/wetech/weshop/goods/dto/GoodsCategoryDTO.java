@@ -12,6 +12,9 @@ public class GoodsCategoryDTO {
 
     private List<Category> brotherCategory;
 
+    public GoodsCategoryDTO() {
+    }
+
     public GoodsCategoryDTO(Category currentCategory, Category parentCategory, List<Category> brotherCategory) {
         this.currentCategory = currentCategory;
         this.parentCategory = parentCategory;

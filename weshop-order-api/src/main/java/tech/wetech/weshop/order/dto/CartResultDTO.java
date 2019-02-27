@@ -11,6 +11,9 @@ public class CartResultDTO {
 
     private CartTotalVO cartTotal;
 
+    public CartResultDTO() {
+    }
+
     public CartResultDTO(List<Cart> cartList, CartTotalVO cartTotal) {
         this.cartList = cartList;
         this.cartTotal = cartTotal;

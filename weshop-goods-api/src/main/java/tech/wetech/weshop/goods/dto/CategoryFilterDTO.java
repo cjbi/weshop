@@ -10,6 +10,9 @@ public class CategoryFilterDTO {
 
     private Boolean checked;
 
+    public CategoryFilterDTO() {
+    }
+
     public CategoryFilterDTO(Integer id, String name, Boolean checked) {
         this.id = id;
         this.name = name;

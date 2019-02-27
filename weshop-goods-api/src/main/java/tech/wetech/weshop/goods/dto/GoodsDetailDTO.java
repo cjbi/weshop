@@ -27,6 +27,9 @@ public class GoodsDetailDTO {
 
     private boolean userHasCollect;
 
+    public GoodsDetailDTO() {
+    }
+
     public static class GoodsSpecificationVO {
 
         private Integer specificationId;

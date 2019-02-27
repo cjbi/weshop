@@ -4,6 +4,9 @@ public class CollectAddOrDeleteResultDTO {
 
     private HandleType type;
 
+    public CollectAddOrDeleteResultDTO() {
+    }
+
     public CollectAddOrDeleteResultDTO(HandleType type) {
         this.type = type;
     }

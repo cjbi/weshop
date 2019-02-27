@@ -32,6 +32,9 @@ public class AddressDTO {
 
     private String fullRegion;
 
+    public AddressDTO() {
+    }
+
     public AddressDTO(Address address) {
         this.id = address.getId();
         this.name = address.getName();

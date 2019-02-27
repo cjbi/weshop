@@ -25,6 +25,9 @@ public class CommentResultDTO {
 
     private List<String> picList;
 
+    public CommentResultDTO() {
+    }
+
     public CommentResultDTO(Comment comment) {
         this.id = comment.getId();
         try {
