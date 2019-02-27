@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 import tech.wetech.weshop.enums.ResultCodeEnum;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,7 +101,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> success(T obj) {
         return new Result()
                 //为null统一给前端{}
-                .setData(obj == null ? Collections.EMPTY_MAP : obj)
+                .setData(obj)
                 .setCode(ResultCodeEnum.OK.getCode())
                 .setMsg(ResultCodeEnum.OK.getMsg())
                 .setSuccess(true);
