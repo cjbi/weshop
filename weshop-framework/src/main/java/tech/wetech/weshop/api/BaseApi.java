@@ -3,7 +3,7 @@ package tech.wetech.weshop.api;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.WrapperPageQuery;
+import tech.wetech.weshop.query.PageQueryWrapper;
 import tech.wetech.weshop.service.IService;
 import tech.wetech.weshop.utils.Result;
 import tk.mybatis.mapper.code.Style;
@@ -27,9 +27,9 @@ public abstract class BaseApi<T> implements Api<T> {
     }
 
     @Override
-    public Result<List<T>> queryPageList(WrapperPageQuery<T> wrapperPageQuery) {
-        T data = wrapperPageQuery.getData();
-        PageQuery pageQuery = wrapperPageQuery.getPageQuery();
+    public Result<List<T>> queryPageList(PageQueryWrapper<T> pageQueryWrapper) {
+        T data = pageQueryWrapper.getData();
+        PageQuery pageQuery = pageQueryWrapper.getPageQuery();
         if (pageQuery.getOrderBy() != null) {
             pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
         }

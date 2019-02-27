@@ -9,7 +9,7 @@ import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 import tech.wetech.weshop.goods.po.Category;
 import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.WrapperPageQuery;
+import tech.wetech.weshop.query.PageQueryWrapper;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.web.BaseController;
 
@@ -29,7 +29,7 @@ public class AdminCategoryController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Category>> queryList(Category entity, PageQuery pageQuery) {
-        return categoryApi.queryPageList(new WrapperPageQuery<>(entity, pageQuery))
+        return categoryApi.queryPageList(new PageQueryWrapper<>(pageQuery, entity))
                 .addExtra("categoryLevel", Arrays.stream(CategoryLevelEnum.values()).collect(Collectors.toMap(c -> c, CategoryLevelEnum::getName)))
                 .addExtra("l1", categoryApi.queryCategoryByLevel(CategoryLevelEnum.L1).getData());
     }

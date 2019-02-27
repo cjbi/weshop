@@ -12,7 +12,7 @@ import tech.wetech.weshop.order.enums.OrderStatusEnum;
 import tech.wetech.weshop.order.enums.PayStatusEnum;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.WrapperPageQuery;
+import tech.wetech.weshop.query.PageQueryWrapper;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.web.BaseController;
 
@@ -34,7 +34,7 @@ public class AdminOrderController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Order>> queryList(Order entity, PageQuery pageQuery) {
-        return orderApi.queryPageList(new WrapperPageQuery(entity, pageQuery))
+        return orderApi.queryPageList(new PageQueryWrapper(pageQuery, entity))
                 .addExtra("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)))
                 .addExtra("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
     }

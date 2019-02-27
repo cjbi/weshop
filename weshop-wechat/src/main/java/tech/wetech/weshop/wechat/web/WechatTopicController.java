@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.marketing.api.TopicApi;
 import tech.wetech.weshop.marketing.po.Topic;
 import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.WrapperPageQuery;
+import tech.wetech.weshop.query.PageQueryWrapper;
 import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.web.BaseController;
 
@@ -22,6 +22,10 @@ public class WechatTopicController extends BaseController {
 
     @GetMapping("/related")
     public Result<List<Topic>> relatedTopic() {
-        return topicApi.queryPageList(new WrapperPageQuery<>(null, new PageQuery().setPageNum(1).setPageSize(4)));
+        return topicApi.queryPageList(new PageQueryWrapper<>(new PageQuery().setPageNum(1).setPageSize(4), null));
+    }
+
+    public Result<List<Topic>> list(PageQuery pageQuery, Topic topic) {
+        return topicApi.queryPageList(new PageQueryWrapper<>(pageQuery, topic));
     }
 }

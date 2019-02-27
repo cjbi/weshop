@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.WrapperPageQuery;
+import tech.wetech.weshop.query.PageQueryWrapper;
 import tech.wetech.weshop.user.api.UserApi;
 import tech.wetech.weshop.user.api.UserLevelApi;
 import tech.wetech.weshop.user.enums.GenderEnum;
@@ -33,7 +33,7 @@ public class AdminUserController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<User>> queryList(User entity, PageQuery pageQuery) {
-        return userApi.queryPageList(new WrapperPageQuery<>(entity, pageQuery))
+        return userApi.queryPageList(new PageQueryWrapper<>(pageQuery, entity))
                 .addExtra("userLevel", userLevelApi.queryAll().getData().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)))
                 .addExtra("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)));
     }

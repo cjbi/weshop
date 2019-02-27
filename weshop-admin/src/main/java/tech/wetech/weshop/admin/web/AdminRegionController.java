@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.WrapperPageQuery;
+import tech.wetech.weshop.query.PageQueryWrapper;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.enums.RegionTypeEnum;
 import tech.wetech.weshop.user.po.Region;
@@ -28,7 +28,7 @@ public class AdminRegionController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Region>> queryList(Region entity, PageQuery page) {
-        return regionApi.queryPageList(new WrapperPageQuery(entity, page))
+        return regionApi.queryPageList(new PageQueryWrapper(page, entity))
                 .addExtra("regionType", Arrays.stream(RegionTypeEnum.values()).collect(Collectors.toMap(e -> e, RegionTypeEnum::getName)));
     }
 }

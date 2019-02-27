@@ -2,7 +2,7 @@ package tech.wetech.weshop.fallback;
 
 import tech.wetech.weshop.api.Api;
 import tech.wetech.weshop.enums.ResultCodeEnum;
-import tech.wetech.weshop.query.WrapperPageQuery;
+import tech.wetech.weshop.query.PageQueryWrapper;
 import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public abstract class ApiFallback<T> implements Api<T> {
     }
 
     @Override
-    public Result<List<T>> queryPageList(WrapperPageQuery<T> wrapperPageQuery) {
+    public Result<List<T>> queryPageList(PageQueryWrapper<T> pageQueryWrapper) {
         return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
