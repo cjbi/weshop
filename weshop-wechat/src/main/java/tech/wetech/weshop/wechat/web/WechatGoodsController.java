@@ -37,7 +37,7 @@ public class WechatGoodsController extends BaseController {
     }
 
     @GetMapping("/related")
-    public Result<List<GoodsListDTO>> queryRelatedGoods(@NotNull Integer id) {
+    public Result<List<GoodsListDTO>> queryRelatedGoods(@NotNull @RequestParam("id") Integer id) {
         return goodsApi.queryRelatedGoods(id);
     }
 

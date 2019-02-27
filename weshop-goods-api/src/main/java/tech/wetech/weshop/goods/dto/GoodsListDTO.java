@@ -14,6 +14,9 @@ public class GoodsListDTO {
 
     private BigDecimal retailPrice;
 
+    public GoodsListDTO() {
+    }
+
     public GoodsListDTO(Goods goods) {
         this.id = goods.getId();
         this.name = goods.getName();
