@@ -25,6 +25,7 @@ public class WechatTopicController extends BaseController {
         return topicApi.queryPageList(new PageQueryWrapper<>(new PageQuery().setPageNum(1).setPageSize(4), null));
     }
 
+    @GetMapping("/list")
     public Result<List<Topic>> list(PageQuery pageQuery, Topic topic) {
         return topicApi.queryPageList(new PageQueryWrapper<>(pageQuery, topic));
     }

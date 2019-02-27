@@ -29,7 +29,7 @@ public interface CategoryApi extends Api<Category> {
     Result<List<Category>> queryCategoryByLevel(@RequestParam("categoryLevel") CategoryLevelEnum categoryLevel);
 
     @GetMapping("/index")
-    Result<CategoryIndexDTO> index(@RequestParam("cateogyId") Integer cateogyId);
+    Result<CategoryIndexDTO> index(@RequestParam(value = "cateogyId", required = false) Integer cateogyId);
 
     @GetMapping("/current")
     Result<CategoryDTO> current(@RequestParam("id") Integer id);
