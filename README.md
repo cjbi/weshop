@@ -16,18 +16,18 @@ weshop
 |    ├── weshop-example-provider -- 服务提供方[端口:9998]
 |    ├── weshop-example-consumer -- 服务消费方[端口:9999]
 ├── weshop-user-api -- 用户中心api
-├── weshop-user -- 用户中心[端口:8021]
+├── weshop-user -- 用户中心基础服务[端口:8021]
 ├── weshop-goods-api -- 商品中心api
-├── weshop-goods -- 商品中心[端口:8022]
+├── weshop-goods -- 商品中心基础服务[端口:8022]
 ├── weshop-marketing-api -- 营销中心api
-├── weshop-marketing -- 营销中心[端口:8023]
+├── weshop-marketing -- 营销中心基础服务[端口:8023]
 ├── weshop-order-api -- 订单中心api
-├── weshop-order -- 订单中心[端口:8024]
+├── weshop-order -- 订单中心基础服务[端口:8024]
 ├── weshop-storage-api -- 对象存储服务api
 ├── weshop-storage -- 对象存储服务[端口:8026]
-├── weshop-wechat -- 微信端endpoint[端口:8025]
+├── weshop-wechat -- 微信端聚合服务[端口:8025]
 ├── weshop-wechat-ui -- 微信小程序页面
-├── weshop-admin -- 管理平台endpoint[端口:8027]
+├── weshop-admin -- 管理平台聚合服务[端口:8027]
 ├── weshop-admin-ui -- 管理平台页面
 ```
 ### 后端技术
