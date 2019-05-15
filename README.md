@@ -30,6 +30,11 @@ weshop
 ├── weshop-admin -- 管理平台聚合服务[端口:8027]
 ├── weshop-admin-ui -- 管理平台页面
 ```
+
+> 模块划分
+
+![](docs/images/模块划分.png)
+
 ### 后端技术
 
 技术 | 名称 | 版本 | 官网
