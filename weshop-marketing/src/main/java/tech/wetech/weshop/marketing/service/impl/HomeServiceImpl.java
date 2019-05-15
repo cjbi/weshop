@@ -2,6 +2,7 @@ package tech.wetech.weshop.marketing.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.goods.api.BrandApi;
 import tech.wetech.weshop.goods.api.CategoryApi;
@@ -47,6 +48,7 @@ public class HomeServiceImpl implements HomeService {
     private CategoryApi categoryApi;
 
     @Override
+    @Cacheable("index")
     public HomeIndexDTO index() {
 
         List<Ad> bannerList = adMapper.select(new Ad().setAdPositionId((short) 1));

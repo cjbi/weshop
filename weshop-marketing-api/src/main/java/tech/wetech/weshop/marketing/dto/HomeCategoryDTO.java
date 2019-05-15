@@ -2,9 +2,10 @@ package tech.wetech.weshop.marketing.dto;
 
 import tech.wetech.weshop.goods.po.Goods;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HomeCategoryDTO {
+public class HomeCategoryDTO implements Serializable {
 
     private Integer id;
 

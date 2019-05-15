@@ -1,10 +1,11 @@
 package tech.wetech.weshop.marketing.po;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "weshop_ad")
-public class Ad {
+public class Ad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;

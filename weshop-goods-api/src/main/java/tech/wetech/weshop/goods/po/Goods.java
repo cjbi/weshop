@@ -1,11 +1,12 @@
 package tech.wetech.weshop.goods.po;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "weshop_goods")
-public class Goods {
+public class Goods implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

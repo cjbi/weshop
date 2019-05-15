@@ -1,9 +1,10 @@
 package tech.wetech.weshop.goods.po;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "weshop_channel")
-public class Channel {
+public class Channel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -41,9 +41,10 @@ weshop
 ----|------|----|----
 Spring Boot | 应用框架 | 2.1.2.RELEASE | [https://projects.spring.io/spring-boot/](https://projects.spring.io/spring-boot/)
 spring-cloud-netflix | 微服务框架 | Greenwich.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
-spring-cloud-config | 分布式配置中心 | 2.1.2.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
-spring-cloud-sleuth | 分布式服务跟踪 | 2.1.2.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
-spring-cloud-stream | 分布式消息总线 | 2.1.2.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
+spring-cloud-config | 分布式配置中心 | 2.1.4.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
+spring-cloud-sleuth | 分布式服务跟踪 | 2.1.4.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
+spring-cloud-stream | 分布式消息总线 | 2.1.4.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
+spring-data-redis | 缓存 | 2.1.4.RELEASE | [https://projects.spring.io/spring-cloud/](https://projects.spring.io/spring-boot/)
 MyBatis | ORM框架 | 3.2.1 |  [http://www.mybatis.org/mybatis-3/zh/index.html](http://www.mybatis.org/mybatis-3/zh/index.html)
 Mapper | MyBatis 通用 Mapper4 | 4.0.0 |  [https://gitee.com/free/Mapper](https://gitee.com/free/Mapper)
 PageHelper | MyBatis 分页插件 | 5.1.2 |  [https://gitee.com/free/Mybatis_PageHelper](https://gitee.com/free/Mybatis_PageHelper)
@@ -54,6 +55,7 @@ Logback | 日志组件 | 1.1.3 |  [https://logback.qos.ch](https://logback.qos.c
 Druid | 数据库连接池 | 0.2.23 |  [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
 Hibernate Validator | 后端校验框架 | 5.4.2.Final | [http://hibernate.org/validator/](http://hibernate.org/validator/)
 RabbitMQ | 消息中间件 | 5.4.3 | [http://www.rabbitmq.com/](http://www.rabbitmq.com/)
+Redis | 缓存 | 5.0.3 | [https://redis.io/](https://redis.io/)
 
 ### 前端技术
 
