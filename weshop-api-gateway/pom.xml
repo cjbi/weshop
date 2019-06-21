@@ -9,7 +9,6 @@
     </parent>
     <groupId>tech.wetech.weshop</groupId>
     <artifactId>weshop-api-gateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>weshop-api-gateway</name>
     <description>Demo project for Spring Boot</description>
 
