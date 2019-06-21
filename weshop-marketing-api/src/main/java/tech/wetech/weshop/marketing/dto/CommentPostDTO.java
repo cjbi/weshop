@@ -1,7 +1,7 @@
 package tech.wetech.weshop.marketing.dto;
 
+import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.marketing.po.Comment;
-import tech.wetech.weshop.utils.Constants;
 
 import javax.validation.constraints.NotNull;
 import java.util.Base64;

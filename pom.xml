@@ -32,7 +32,7 @@
         <module>weshop-eureka-server</module>
 		<module>weshop-config-server</module>
 		<module>weshop-api-gateway</module>
-        <module>weshop-framework</module>
+		<module>weshop-common</module>
 		<module>weshop-order-api</module>
 		<module>weshop-order</module>
 		<module>weshop-user-api</module>
@@ -74,7 +74,7 @@
             </dependency>
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
-                <artifactId>weshop-framework</artifactId>
+				<artifactId>weshop-common</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
 

@@ -3,14 +3,14 @@ package tech.wetech.weshop.order.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.api.BaseApi;
+import tech.wetech.weshop.common.api.BaseApi;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.CartApi;
 import tech.wetech.weshop.order.dto.CartCheckoutDTO;
 import tech.wetech.weshop.order.dto.CartParamDTO;
 import tech.wetech.weshop.order.dto.CartResultDTO;
 import tech.wetech.weshop.order.po.Cart;
 import tech.wetech.weshop.order.service.CartService;
-import tech.wetech.weshop.utils.Result;
 
 @RequestMapping("/cart")
 @RestController

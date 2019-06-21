@@ -3,11 +3,11 @@ package tech.wetech.weshop.goods.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.api.BaseApi;
+import tech.wetech.weshop.common.api.BaseApi;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
 import tech.wetech.weshop.goods.service.GoodsSpecificationService;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 

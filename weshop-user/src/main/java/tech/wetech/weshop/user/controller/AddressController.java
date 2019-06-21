@@ -3,12 +3,12 @@ package tech.wetech.weshop.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.api.BaseApi;
+import tech.wetech.weshop.common.api.BaseApi;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.dto.AddressDTO;
 import tech.wetech.weshop.user.po.Address;
 import tech.wetech.weshop.user.service.AddressService;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 

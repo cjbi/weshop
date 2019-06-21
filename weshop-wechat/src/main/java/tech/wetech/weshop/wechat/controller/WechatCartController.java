@@ -3,14 +3,14 @@ package tech.wetech.weshop.wechat.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.controller.BaseController;
+import tech.wetech.weshop.common.controller.BaseController;
+import tech.wetech.weshop.common.utils.Constants;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.CartApi;
 import tech.wetech.weshop.order.dto.CartCheckoutDTO;
 import tech.wetech.weshop.order.dto.CartParamDTO;
 import tech.wetech.weshop.order.dto.CartResultDTO;
 import tech.wetech.weshop.order.po.Cart;
-import tech.wetech.weshop.utils.Constants;
-import tech.wetech.weshop.utils.Result;
 import tech.wetech.weshop.wechat.vo.CartCheckedVO;
 
 import javax.validation.constraints.NotNull;

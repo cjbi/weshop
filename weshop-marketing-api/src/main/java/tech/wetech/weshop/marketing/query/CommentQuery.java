@@ -1,6 +1,6 @@
 package tech.wetech.weshop.marketing.query;
 
-import tech.wetech.weshop.query.PageQuery;
+import tech.wetech.weshop.common.query.PageQuery;
 
 import javax.validation.constraints.NotNull;
 

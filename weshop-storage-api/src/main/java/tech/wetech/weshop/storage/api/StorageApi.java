@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
-import tech.wetech.weshop.api.Api;
+import tech.wetech.weshop.common.api.Api;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.storage.po.Storage;
-import tech.wetech.weshop.utils.Result;
 
 import java.io.IOException;
 

@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.controller.BaseController;
+import tech.wetech.weshop.common.controller.BaseController;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsApi;
 import tech.wetech.weshop.goods.dto.GoodsCategoryDTO;
 import tech.wetech.weshop.goods.dto.GoodsDetailDTO;
@@ -15,7 +16,6 @@ import tech.wetech.weshop.goods.dto.GoodsResultDTO;
 import tech.wetech.weshop.goods.po.Goods;
 import tech.wetech.weshop.goods.query.GoodsSearchQuery;
 import tech.wetech.weshop.marketing.dto.BannerInfoDTO;
-import tech.wetech.weshop.utils.Result;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

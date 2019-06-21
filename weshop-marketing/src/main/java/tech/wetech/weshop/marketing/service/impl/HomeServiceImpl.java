@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.common.query.PageQuery;
+import tech.wetech.weshop.common.query.PageQueryWrapper;
 import tech.wetech.weshop.goods.api.BrandApi;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.api.ChannelApi;
@@ -19,8 +21,6 @@ import tech.wetech.weshop.marketing.mapper.TopicMapper;
 import tech.wetech.weshop.marketing.po.Ad;
 import tech.wetech.weshop.marketing.po.Topic;
 import tech.wetech.weshop.marketing.service.HomeService;
-import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.PageQueryWrapper;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -3,7 +3,8 @@ package tech.wetech.weshop.wechat.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.controller.BaseController;
+import tech.wetech.weshop.common.controller.BaseController;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.OrderApi;
 import tech.wetech.weshop.order.api.OrderExpressApi;
 import tech.wetech.weshop.order.dto.OrderDetailDTO;
@@ -12,7 +13,6 @@ import tech.wetech.weshop.order.dto.OrderSubmitParamDTO;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.po.OrderExpress;
 import tech.wetech.weshop.order.query.OrderQuery;
-import tech.wetech.weshop.utils.Result;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

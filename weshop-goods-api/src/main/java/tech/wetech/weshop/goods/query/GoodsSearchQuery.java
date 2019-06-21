@@ -1,6 +1,6 @@
 package tech.wetech.weshop.goods.query;
 
-import tech.wetech.weshop.query.PageQuery;
+import tech.wetech.weshop.common.query.PageQuery;
 
 public class GoodsSearchQuery extends PageQuery {
 

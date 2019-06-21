@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import tech.wetech.weshop.api.Api;
+import tech.wetech.weshop.common.api.Api;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.dto.OrderDetailDTO;
 import tech.wetech.weshop.order.dto.OrderListDTO;
 import tech.wetech.weshop.order.dto.OrderSubmitParamDTO;
 import tech.wetech.weshop.order.fallback.OrderApiFallback;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.query.OrderQuery;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 

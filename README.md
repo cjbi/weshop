@@ -6,7 +6,7 @@ Weshop是基于Spring Cloud(Greenwich)开发的小程序商城系统，提供整
 
 ```
 weshop
-├── weshop-framework -- 框架公共模块
+├── weshop-common -- 框架公共模块
 ├── weshop-eureka-server -- eureka注册中心[端口:8761]
 ├── weshop-config-server -- 配置中心[端口:7001]
 ├── weshop-api-gateway -- api网关[端口:8020]

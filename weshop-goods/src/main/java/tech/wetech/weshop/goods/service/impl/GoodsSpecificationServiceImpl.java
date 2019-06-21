@@ -2,10 +2,10 @@ package tech.wetech.weshop.goods.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.common.service.BaseService;
 import tech.wetech.weshop.goods.mapper.GoodsSpecificationMapper;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
 import tech.wetech.weshop.goods.service.GoodsSpecificationService;
-import tech.wetech.weshop.service.BaseService;
 
 import java.util.List;
 

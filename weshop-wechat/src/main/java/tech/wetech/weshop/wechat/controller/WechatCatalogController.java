@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.controller.BaseController;
+import tech.wetech.weshop.common.controller.BaseController;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.dto.CategoryDTO;
 import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
-import tech.wetech.weshop.utils.Result;
 
 import javax.validation.constraints.NotNull;
 

@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.controller.BaseController;
+import tech.wetech.weshop.common.controller.BaseController;
+import tech.wetech.weshop.common.utils.Constants;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.FootprintApi;
 import tech.wetech.weshop.user.bo.GoodsFootprintBO;
 import tech.wetech.weshop.user.po.Footprint;
-import tech.wetech.weshop.utils.Constants;
-import tech.wetech.weshop.utils.Result;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

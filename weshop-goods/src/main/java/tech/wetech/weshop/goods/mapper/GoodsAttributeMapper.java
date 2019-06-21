@@ -1,8 +1,8 @@
 package tech.wetech.weshop.goods.mapper;
 
+import tech.wetech.weshop.common.utils.MyMapper;
 import tech.wetech.weshop.goods.bo.GoodsAttributeBO;
 import tech.wetech.weshop.goods.po.GoodsAttribute;
-import tech.wetech.weshop.utils.MyMapper;
 
 import java.util.List;
 

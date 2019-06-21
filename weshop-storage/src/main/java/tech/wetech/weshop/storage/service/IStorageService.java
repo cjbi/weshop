@@ -1,7 +1,7 @@
 package tech.wetech.weshop.storage.service;
 
 import org.springframework.core.io.Resource;
-import tech.wetech.weshop.service.IService;
+import tech.wetech.weshop.common.service.IService;
 import tech.wetech.weshop.storage.IStorage;
 import tech.wetech.weshop.storage.po.Storage;
 

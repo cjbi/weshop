@@ -1,11 +1,11 @@
 package tech.wetech.weshop.user.fallback;
 
 import org.springframework.stereotype.Component;
-import tech.wetech.weshop.enums.ResultCodeEnum;
-import tech.wetech.weshop.fallback.ApiFallback;
+import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.fallback.ApiFallback;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.po.Region;
-import tech.wetech.weshop.utils.Result;
 
 @Component
 public class RegionApiFallback extends ApiFallback<Region> implements RegionApi {

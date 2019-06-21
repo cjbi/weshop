@@ -1,15 +1,15 @@
 package tech.wetech.weshop.order.fallback;
 
 import org.springframework.stereotype.Component;
-import tech.wetech.weshop.enums.ResultCodeEnum;
-import tech.wetech.weshop.fallback.ApiFallback;
+import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.fallback.ApiFallback;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.OrderApi;
 import tech.wetech.weshop.order.dto.OrderDetailDTO;
 import tech.wetech.weshop.order.dto.OrderListDTO;
 import tech.wetech.weshop.order.dto.OrderSubmitParamDTO;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.query.OrderQuery;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 

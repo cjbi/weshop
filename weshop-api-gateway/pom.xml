@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>tech.wetech.weshop</groupId>
-            <artifactId>weshop-framework</artifactId>
+            <artifactId>weshop-common</artifactId>
         </dependency>
     </dependencies>
 

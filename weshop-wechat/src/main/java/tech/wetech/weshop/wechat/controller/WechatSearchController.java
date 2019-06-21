@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.controller.BaseController;
+import tech.wetech.weshop.common.controller.BaseController;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.marketing.api.SearchApi;
 import tech.wetech.weshop.marketing.dto.SearchIndexDTO;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 

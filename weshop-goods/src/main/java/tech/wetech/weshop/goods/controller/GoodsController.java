@@ -3,7 +3,8 @@ package tech.wetech.weshop.goods.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.api.BaseApi;
+import tech.wetech.weshop.common.api.BaseApi;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsApi;
 import tech.wetech.weshop.goods.dto.GoodsCategoryDTO;
 import tech.wetech.weshop.goods.dto.GoodsDetailDTO;
@@ -12,7 +13,6 @@ import tech.wetech.weshop.goods.dto.GoodsResultDTO;
 import tech.wetech.weshop.goods.po.Goods;
 import tech.wetech.weshop.goods.query.GoodsSearchQuery;
 import tech.wetech.weshop.goods.service.GoodsService;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 

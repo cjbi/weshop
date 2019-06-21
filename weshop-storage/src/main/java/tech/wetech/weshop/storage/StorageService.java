@@ -2,11 +2,11 @@ package tech.wetech.weshop.storage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import tech.wetech.weshop.service.BaseService;
+import tech.wetech.weshop.common.service.BaseService;
+import tech.wetech.weshop.common.utils.CharUtil;
 import tech.wetech.weshop.storage.mapper.StorageMapper;
 import tech.wetech.weshop.storage.po.Storage;
 import tech.wetech.weshop.storage.service.IStorageService;
-import tech.wetech.weshop.utils.CharUtil;
 
 import java.io.InputStream;
 import java.nio.file.Path;

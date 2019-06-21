@@ -8,7 +8,7 @@
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="tech.wetech.weshop.utils.MyMapper"/>
+            <property name="mappers" value="tech.wetech.weshop.common.utils.MyMapper"/>
             <property name="caseSensitive" value="true"/>
             <property name="forceAnnotation" value="true"/>
             <property name="beginningDelimiter" value="`"/>

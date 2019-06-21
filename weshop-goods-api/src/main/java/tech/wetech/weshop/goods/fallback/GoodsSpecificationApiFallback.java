@@ -1,11 +1,11 @@
 package tech.wetech.weshop.goods.fallback;
 
 import org.springframework.stereotype.Component;
-import tech.wetech.weshop.enums.ResultCodeEnum;
-import tech.wetech.weshop.fallback.ApiFallback;
+import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.fallback.ApiFallback;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.List;
 

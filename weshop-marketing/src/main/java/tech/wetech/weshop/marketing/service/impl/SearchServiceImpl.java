@@ -3,13 +3,13 @@ package tech.wetech.weshop.marketing.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.marketing.dto.SearchIndexDTO;
 import tech.wetech.weshop.marketing.mapper.KeywordsMapper;
 import tech.wetech.weshop.marketing.mapper.SearchHistoryMapper;
 import tech.wetech.weshop.marketing.po.Keywords;
 import tech.wetech.weshop.marketing.po.SearchHistory;
 import tech.wetech.weshop.marketing.service.SearchService;
-import tech.wetech.weshop.utils.Constants;
 
 import java.util.List;
 import java.util.stream.Collectors;

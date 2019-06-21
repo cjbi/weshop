@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import tech.wetech.weshop.api.BaseApi;
+import tech.wetech.weshop.common.api.BaseApi;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.storage.api.StorageApi;
 import tech.wetech.weshop.storage.po.Storage;
 import tech.wetech.weshop.storage.service.IStorageService;
-import tech.wetech.weshop.utils.Result;
 
 import java.io.IOException;
 

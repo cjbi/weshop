@@ -1,10 +1,10 @@
 package tech.wetech.weshop.goods.service;
 
+import tech.wetech.weshop.common.service.IService;
 import tech.wetech.weshop.goods.dto.CategoryDTO;
 import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 import tech.wetech.weshop.goods.po.Category;
-import tech.wetech.weshop.service.IService;
 
 import java.util.List;
 

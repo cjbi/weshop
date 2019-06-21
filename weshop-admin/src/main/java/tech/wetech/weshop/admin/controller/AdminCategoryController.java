@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.controller.BaseController;
+import tech.wetech.weshop.common.controller.BaseController;
+import tech.wetech.weshop.common.query.PageQuery;
+import tech.wetech.weshop.common.query.PageQueryWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 import tech.wetech.weshop.goods.po.Category;
-import tech.wetech.weshop.query.PageQuery;
-import tech.wetech.weshop.query.PageQueryWrapper;
-import tech.wetech.weshop.utils.Result;
 
 import java.util.Arrays;
 import java.util.List;

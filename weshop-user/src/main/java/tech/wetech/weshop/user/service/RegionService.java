@@ -1,7 +1,6 @@
 package tech.wetech.weshop.user.service;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import tech.wetech.weshop.service.IService;
+import tech.wetech.weshop.common.service.IService;
 import tech.wetech.weshop.user.po.Region;
 
 /**

@@ -1,10 +1,10 @@
 package tech.wetech.weshop.marketing.fallback;
 
 import org.springframework.stereotype.Component;
-import tech.wetech.weshop.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.marketing.api.HomeApi;
 import tech.wetech.weshop.marketing.dto.HomeIndexDTO;
-import tech.wetech.weshop.utils.Result;
 
 @Component
 public class HomeApiFallback implements HomeApi {

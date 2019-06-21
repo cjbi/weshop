@@ -3,13 +3,13 @@ package tech.wetech.weshop.goods.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.common.service.BaseService;
 import tech.wetech.weshop.goods.dto.CategoryDTO;
 import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 import tech.wetech.weshop.goods.mapper.CategoryMapper;
 import tech.wetech.weshop.goods.po.Category;
 import tech.wetech.weshop.goods.service.CategoryService;
-import tech.wetech.weshop.service.BaseService;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
 

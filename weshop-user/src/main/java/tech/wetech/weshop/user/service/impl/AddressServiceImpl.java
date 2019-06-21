@@ -2,13 +2,13 @@ package tech.wetech.weshop.user.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.service.BaseService;
+import tech.wetech.weshop.common.service.BaseService;
+import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.user.dto.AddressDTO;
 import tech.wetech.weshop.user.mapper.AddressMapper;
 import tech.wetech.weshop.user.mapper.RegionMapper;
 import tech.wetech.weshop.user.po.Address;
 import tech.wetech.weshop.user.service.AddressService;
-import tech.wetech.weshop.utils.Constants;
 
 import java.util.LinkedList;
 import java.util.List;
