@@ -7,7 +7,7 @@
 
 	<packaging>pom</packaging>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>tech.wetech</groupId>
+	<groupId>tech.wetech.weshop</groupId>
 	<artifactId>weshop-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
@@ -30,6 +30,8 @@
 		<module>weshop-wechat-ui</module>
 		<module>weshop-example</module>
         <module>weshop-eureka-server</module>
+		<module>weshop-config-server</module>
+		<module>weshop-api-gateway</module>
         <module>weshop-framework</module>
 		<module>weshop-order-api</module>
 		<module>weshop-order</module>
@@ -46,32 +48,32 @@
 	<dependencyManagement>
 		<dependencies>
             <dependency>
-                <groupId>tech.wetech</groupId>
+                <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-order-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.wetech</groupId>
+                <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-user-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.wetech</groupId>
+                <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-marketing-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.wetech</groupId>
+                <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-goods-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.wetech</groupId>
+                <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-storage-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>tech.wetech</groupId>
+                <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-framework</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>weshop-parent</artifactId>
-        <groupId>tech.wetech</groupId>
+        <groupId>tech.wetech.weshop</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <packaging>pom</packaging>
