@@ -27,6 +27,13 @@ public class WechatTopicController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Topic>> list(PageQuery pageQuery, Topic topic) {
+        pageQuery.setCountSql(true);
         return topicApi.queryPageList(new PageQueryWrapper<>(pageQuery, topic));
     }
+
+    @GetMapping
+    public Result<Topic> query(Integer id) {
+        return topicApi.queryById(id);
+    }
+
 }
