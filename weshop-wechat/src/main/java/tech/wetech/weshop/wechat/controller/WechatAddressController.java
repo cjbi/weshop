@@ -10,7 +10,6 @@ import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.dto.AddressDTO;
 import tech.wetech.weshop.user.po.Address;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class WechatAddressController extends BaseController {
     }
 
     @GetMapping("/detail")
-    public Result<AddressDTO> queryDetail(@NotNull @RequestParam("/id") Integer id) {
+    public Result<AddressDTO> queryDetail(Integer id) {
         return addressApi.queryDetail(id);
     }
 
@@ -45,7 +44,7 @@ public class WechatAddressController extends BaseController {
     }
 
     @PostMapping("/delete")
-    public Result delete(@NotNull Object id) {
+    public Result delete(Object id) {
         addressApi.deleteById(id);
         return Result.success();
     }
