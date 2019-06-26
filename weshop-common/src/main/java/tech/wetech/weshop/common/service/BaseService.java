@@ -5,10 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.common.query.PageQuery;
+import tech.wetech.weshop.common.query.QueryWrapper;
+import tech.wetech.weshop.common.utils.MyMapper;
 import tk.mybatis.mapper.code.Style;
-import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
@@ -20,11 +23,7 @@ public abstract class BaseService<T> implements IService<T> {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    protected Mapper<T> mapper;
-
-    public Mapper<T> getMapper() {
-        return mapper;
-    }
+    protected MyMapper<T> mapper;
 
     @Override
     public List<T> queryAll() {
@@ -47,7 +46,7 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public List<T> queryPageList(T entity, PageQuery pageQuery) {
+    public List<T> queryListByPage(T entity, PageQuery pageQuery) {
         if (pageQuery.getOrderBy() != null) {
             pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
         }
@@ -56,8 +55,33 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
+    public List<T> queryListByQueryWrapper(QueryWrapper queryWrapper) {
+        //分页查询
+        if (queryWrapper.getPageQuery() != null) {
+            PageHelper.startPage(queryWrapper.getPageQuery());
+        }
+        if (queryWrapper.getCondition() != null) {
+            //Example查询
+            if (queryWrapper.getCondition() instanceof Example) {
+                return mapper.selectByExample(queryWrapper.getCondition());
+            }
+            //实体类查询
+            Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            if (queryWrapper.getCondition().getClass().equals(tClass)) {
+                return mapper.select((T) queryWrapper.getCondition());
+            }
+        }
+        return mapper.selectAll();
+    }
+
+    @Override
     public int create(T entity) {
         return mapper.insertSelective(entity);
+    }
+
+    @Override
+    public int createBatch(List<T> list) {
+        return mapper.insertList(list);
     }
 
     @Override

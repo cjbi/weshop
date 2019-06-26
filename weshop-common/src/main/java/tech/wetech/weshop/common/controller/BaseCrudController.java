@@ -28,8 +28,8 @@ public abstract class BaseCrudController<T> extends BaseController {
     @GetMapping("/list")
     @ApiOperation("分页查询数据")
     public Result queryList(T entity, PageQuery pageQuery) {
-        List<T> list = service.queryPageList(entity, pageQuery);
-        return Result.success(service.queryPageList(entity, pageQuery))
+        List<T> list = service.queryListByPage(entity, pageQuery);
+        return Result.success(service.queryListByPage(entity, pageQuery))
                 .addExtraIfTrue(pageQuery.isCountSql(), "total", ((Page) list).getTotal());
     }
 

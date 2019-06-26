@@ -2,6 +2,8 @@ package tech.wetech.weshop.common.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import tk.mybatis.mapper.code.Style;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.io.Serializable;
 
@@ -101,7 +103,11 @@ public class PageQuery implements Serializable {
     }
 
     public PageQuery setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
+        if (orderBy != null) {
+            this.orderBy = StringUtil.convertByStyle(orderBy, Style.camelhump);
+        } else {
+            this.orderBy = orderBy;
+        }
         return this;
     }
 

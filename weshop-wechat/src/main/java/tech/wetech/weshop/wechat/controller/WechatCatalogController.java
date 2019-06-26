@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
-import tech.wetech.weshop.goods.api.CategoryApi;
-import tech.wetech.weshop.goods.dto.CategoryDTO;
-import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
+import tech.wetech.weshop.wechat.service.WechatCatalogService;
+import tech.wetech.weshop.wechat.vo.CategoryIndexVO;
+import tech.wetech.weshop.wechat.vo.CategoryVO;
 
 import javax.validation.constraints.NotNull;
 
@@ -20,16 +20,16 @@ import javax.validation.constraints.NotNull;
 public class WechatCatalogController extends BaseController {
 
     @Autowired
-    private CategoryApi categoryApi;
+    private WechatCatalogService wechatCatalogService;
 
     @GetMapping("/index")
-    public Result<CategoryIndexDTO> index(Integer id) {
-        return categoryApi.index(id);
+    public Result<CategoryIndexVO> index(Integer id) {
+        return Result.success(wechatCatalogService.index(id));
     }
 
     @GetMapping("/current")
-    public Result<CategoryDTO> current(@NotNull @RequestParam("id") Integer id) {
-        return categoryApi.current(id);
+    public Result<CategoryVO> current(@NotNull @RequestParam("id") Integer id) {
+        return Result.success(wechatCatalogService.current(id));
     }
 
 }

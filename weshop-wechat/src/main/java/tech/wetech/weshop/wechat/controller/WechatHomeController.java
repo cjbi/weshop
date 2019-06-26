@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
-import tech.wetech.weshop.marketing.api.HomeApi;
-import tech.wetech.weshop.marketing.dto.HomeIndexDTO;
+import tech.wetech.weshop.wechat.service.WechatHomeService;
+import tech.wetech.weshop.wechat.vo.HomeIndexVO;
 
 /**
  * @author cjbi@outlook.com
@@ -17,12 +17,12 @@ import tech.wetech.weshop.marketing.dto.HomeIndexDTO;
 public class WechatHomeController extends BaseController {
 
     @Autowired
-    private HomeApi homeApi;
+    private WechatHomeService wechatHomeService;
 
 
     @GetMapping("/index")
-    public Result<HomeIndexDTO> index() {
-        return homeApi.index();
+    public Result<HomeIndexVO> index() {
+        return Result.success(wechatHomeService.index());
     }
 
 }

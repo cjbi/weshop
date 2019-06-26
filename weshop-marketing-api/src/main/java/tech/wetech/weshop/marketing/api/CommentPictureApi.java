@@ -5,6 +5,11 @@ import tech.wetech.weshop.common.api.Api;
 import tech.wetech.weshop.marketing.fallback.CommentPictureApiFallback;
 import tech.wetech.weshop.marketing.po.CommentPicture;
 
+import java.util.List;
+
 @FeignClient(value = "weshop-marketing", path = "commentPicture", fallback = CommentPictureApiFallback.class)
 public interface CommentPictureApi extends Api<CommentPicture> {
+
+    List<String> queryPicUrlByCommentId(Integer commentId);
+
 }

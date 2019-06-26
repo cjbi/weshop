@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.marketing.api.CommentApi;
-import tech.wetech.weshop.marketing.dto.CommentCountDTO;
-import tech.wetech.weshop.marketing.dto.CommentPostDTO;
-import tech.wetech.weshop.marketing.dto.CommentResultDTO;
 import tech.wetech.weshop.marketing.query.CommentQuery;
+import tech.wetech.weshop.wechat.service.WechatCommentService;
+import tech.wetech.weshop.wechat.vo.CommentCountVO;
+import tech.wetech.weshop.wechat.vo.CommentPostVO;
+import tech.wetech.weshop.wechat.vo.CommentResultVO;
 
 import java.util.List;
 
@@ -18,20 +19,23 @@ import java.util.List;
 public class WechatCommentController extends BaseController {
 
     @Autowired
+    private WechatCommentService wechatCommentService;
+
+    @Autowired
     private CommentApi commentApi;
 
     @GetMapping("/list")
-    public Result<List<CommentResultDTO>> queryList(@Validated CommentQuery commentQuery) {
-        return commentApi.queryList(commentQuery);
+    public Result<List<CommentResultVO>> queryList(@Validated CommentQuery commentQuery) {
+        return Result.success(wechatCommentService.queryList(commentQuery));
     }
 
     @GetMapping("/count")
-    public Result<CommentCountDTO> countList(@Validated CommentQuery commentQuery) {
-        return commentApi.countList(commentQuery);
+    public Result<CommentCountVO> countList(@Validated CommentQuery commentQuery) {
+        return Result.success(wechatCommentService.countList(commentQuery));
     }
 
     @PostMapping("post")
-    public Result postComment(@RequestBody @Validated CommentPostDTO commentPostDTO) {
+    public Result postComment(@RequestBody @Validated CommentPostVO commentPostDTO) {
         return commentApi.create(commentPostDTO.toPO());
     }
 

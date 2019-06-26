@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.query.PageQuery;
-import tech.wetech.weshop.common.query.PageQueryWrapper;
+import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
@@ -29,8 +29,8 @@ public class AdminCategoryController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Category>> queryList(Category entity, PageQuery pageQuery) {
-        return categoryApi.queryPageList(new PageQueryWrapper<>(pageQuery, entity))
+        return categoryApi.queryListByQueryWrapper(new QueryWrapper(pageQuery, entity))
                 .addExtra("categoryLevel", Arrays.stream(CategoryLevelEnum.values()).collect(Collectors.toMap(c -> c, CategoryLevelEnum::getName)))
-                .addExtra("l1", categoryApi.queryCategoryByLevel(CategoryLevelEnum.L1).getData());
+                .addExtra("l1", categoryApi.queryList(new Category().setLevel(CategoryLevelEnum.L1)).getData());
     }
 }

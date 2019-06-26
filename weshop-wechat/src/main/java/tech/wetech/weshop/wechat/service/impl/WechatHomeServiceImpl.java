@@ -1,0 +1,93 @@
+package tech.wetech.weshop.wechat.service.impl;
+
+import com.github.pagehelper.PageHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import tech.wetech.weshop.common.query.PageQuery;
+import tech.wetech.weshop.common.query.QueryWrapper;
+import tech.wetech.weshop.goods.api.BrandApi;
+import tech.wetech.weshop.goods.api.CategoryApi;
+import tech.wetech.weshop.goods.api.ChannelApi;
+import tech.wetech.weshop.goods.api.GoodsApi;
+import tech.wetech.weshop.goods.po.Brand;
+import tech.wetech.weshop.goods.po.Category;
+import tech.wetech.weshop.goods.po.Channel;
+import tech.wetech.weshop.goods.po.Goods;
+import tech.wetech.weshop.marketing.api.AdApi;
+import tech.wetech.weshop.marketing.api.TopicApi;
+import tech.wetech.weshop.marketing.po.Ad;
+import tech.wetech.weshop.marketing.po.Topic;
+import tech.wetech.weshop.wechat.service.WechatHomeService;
+import tech.wetech.weshop.wechat.vo.HomeCategoryVO;
+import tech.wetech.weshop.wechat.vo.HomeIndexVO;
+import tk.mybatis.mapper.weekend.Weekend;
+import tk.mybatis.mapper.weekend.WeekendCriteria;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class WechatHomeServiceImpl implements WechatHomeService {
+    @Autowired
+    private AdApi adApi;
+
+    @Autowired
+    private ChannelApi channelApi;
+
+    @Autowired
+    private GoodsApi goodsApi;
+
+    @Autowired
+    private BrandApi brandApi;
+
+    @Autowired
+    private TopicApi topicApi;
+
+    @Autowired
+    private CategoryApi categoryApi;
+
+    @Override
+//    @Cacheable("index")
+    public HomeIndexVO index() {
+
+        List<Ad> bannerList = adApi.queryList(new Ad().setAdPositionId((short) 1)).getData();
+
+        PageHelper.orderBy("sort_order asc");
+        List<Channel> channelList = channelApi.queryAll().getData();
+
+        List<Goods> newGoodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper(new PageQuery(1, 4), new Goods().setNewly(true))).getData();
+
+        PageHelper.startPage(1, 4);
+        List<Goods> hotGoodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper(new PageQuery(1, 4), new Goods().setHot(true))).getData();
+
+        PageHelper.orderBy("new_sort_order asc");
+        List<Brand> brandList = brandApi.queryList(new Brand().setNewly(true)).getData();
+
+        PageHelper.startPage(1, 3);
+        List<Topic> topicList = topicApi.queryAll().getData();
+
+        List<HomeCategoryVO> categoryList = new LinkedList<>();
+
+        categoryApi.queryList(
+                new Category().setParentId(0)
+        ).getData().forEach(c -> {
+
+            List<Integer> categoryIdList = categoryApi.queryList(new Category().setParentId(c.getId())).getData().stream()
+                    .map(Category::getId)
+                    .collect(Collectors.toList());
+
+            Weekend<Goods> example = Weekend.of(Goods.class);
+            WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
+            criteria.andIn(Goods::getCategoryId, categoryIdList);
+            List<Goods> goodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper().setCondition(example)).getData();
+            categoryList.add(new HomeCategoryVO(c.getId(), c.getName(), goodsList));
+        });
+
+        return new HomeIndexVO().setBannerList(bannerList)
+                .setChannelList(channelList)
+                .setNewGoodsList(newGoodsList)
+                .setHotGoodsList(hotGoodsList)
+                .setBrandList(brandList)
+                .setTopicList(topicList)
+                .setCategoryList(categoryList);
+    }
+}

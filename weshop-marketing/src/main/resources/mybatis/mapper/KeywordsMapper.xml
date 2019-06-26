@@ -15,6 +15,6 @@
         <result column="type" property="type" jdbcType="INTEGER"/>
     </resultMap>
     <select id="selectByKeywordLike" resultType="java.lang.String">
-        select keyword from weshop_keywords where keyword like #{keyword}
+        select keyword from weshop_keywords where keyword like concat('%',#{keyword},'%')
     </select>
 </mapper>

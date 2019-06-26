@@ -9,13 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsApi;
-import tech.wetech.weshop.goods.dto.GoodsCategoryDTO;
-import tech.wetech.weshop.goods.dto.GoodsDetailDTO;
-import tech.wetech.weshop.goods.dto.GoodsListDTO;
-import tech.wetech.weshop.goods.dto.GoodsResultDTO;
 import tech.wetech.weshop.goods.po.Goods;
 import tech.wetech.weshop.goods.query.GoodsSearchQuery;
-import tech.wetech.weshop.marketing.dto.BannerInfoDTO;
+import tech.wetech.weshop.wechat.service.WechatGoodsService;
+import tech.wetech.weshop.wechat.vo.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -29,6 +26,9 @@ import java.util.List;
 public class WechatGoodsController extends BaseController {
 
     @Autowired
+    private WechatGoodsService wechatGoodsService;
+
+    @Autowired
     private GoodsApi goodsApi;
 
     @GetMapping("/count")
@@ -37,8 +37,8 @@ public class WechatGoodsController extends BaseController {
     }
 
     @GetMapping("/related")
-    public Result<List<GoodsListDTO>> queryRelatedGoods(@NotNull @RequestParam("id") Integer id) {
-        return goodsApi.queryRelatedGoods(id);
+    public Result<List<GoodsListVO>> queryRelatedGoods(@NotNull @RequestParam("id") Integer id) {
+        return Result.success(wechatGoodsService.queryRelatedGoods(id));
     }
 
     /**
@@ -47,8 +47,8 @@ public class WechatGoodsController extends BaseController {
      * @return
      */
     @GetMapping("/new")
-    public Result<BannerInfoDTO> newGoods() {
-        BannerInfoDTO bannerInfo = new BannerInfoDTO();
+    public Result<BannerInfoVO> newGoods() {
+        BannerInfoVO bannerInfo = new BannerInfoVO();
         bannerInfo.setName("坚持初心，为你寻觅世间好物");
         bannerInfo.setImgUrl("http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png");
         return Result.success(bannerInfo);
@@ -60,26 +60,26 @@ public class WechatGoodsController extends BaseController {
      * @return
      */
     @GetMapping("/hot")
-    public Result<BannerInfoDTO> hotGoods() {
-        BannerInfoDTO bannerInfo = new BannerInfoDTO();
+    public Result<BannerInfoVO> hotGoods() {
+        BannerInfoVO bannerInfo = new BannerInfoVO();
         bannerInfo.setName("大家都在买的严选好物");
         bannerInfo.setImgUrl("http://yanxuan.nosdn.127.net/8976116db321744084774643a933c5ce.png");
         return Result.success(bannerInfo);
     }
 
     @GetMapping("/category")
-    public Result<GoodsCategoryDTO> queryGoodsCategory(@RequestParam("categoryId") @NotNull Integer categoryId) {
-        return goodsApi.queryGoodsCategory(categoryId);
+    public Result<GoodsCategoryVO> queryGoodsCategory(@RequestParam("categoryId") @NotNull Integer categoryId) {
+        return Result.success(wechatGoodsService.queryGoodsCategory(categoryId));
     }
 
     @GetMapping("/list")
-    public Result<GoodsResultDTO> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
-        return goodsApi.queryList(goodsSearchQuery);
+    public Result<GoodsResultVO> queryGoodsPageInfo(GoodsSearchQuery goodsSearchQuery) {
+        return Result.success(wechatGoodsService.queryList(goodsSearchQuery));
     }
 
     @GetMapping("/detail")
-    public Result<GoodsDetailDTO> queryGoodsDetail(@RequestParam("id") @NotNull Integer id) {
-        return goodsApi.queryGoodsDetail(id);
+    public Result<GoodsDetailVO> queryGoodsDetail(@RequestParam("id") @NotNull Integer id) {
+        return Result.success(wechatGoodsService.queryGoodsDetail(id));
     }
 
 

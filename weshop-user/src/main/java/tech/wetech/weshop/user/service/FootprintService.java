@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface FootprintService extends IService<Footprint> {
 
-    List<List<GoodsFootprintBO>> queryGoodsFootprintTimeLine();
+    List<GoodsFootprintBO> queryGoodsFootprintByUserId(Integer userId);
 
 }

@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.CartApi;
-import tech.wetech.weshop.order.dto.CartCheckoutDTO;
-import tech.wetech.weshop.order.dto.CartParamDTO;
-import tech.wetech.weshop.order.dto.CartResultDTO;
 import tech.wetech.weshop.order.po.Cart;
+import tech.wetech.weshop.wechat.service.WechatCartService;
 import tech.wetech.weshop.wechat.vo.CartCheckedVO;
+import tech.wetech.weshop.wechat.vo.CartCheckoutVO;
+import tech.wetech.weshop.wechat.vo.CartParamVO;
+import tech.wetech.weshop.wechat.vo.CartResultVO;
 
 import javax.validation.constraints.NotNull;
 
@@ -23,48 +23,50 @@ public class WechatCartController extends BaseController {
     @Autowired
     private CartApi cartApi;
 
+    @Autowired
+    private WechatCartService wechatCartService;
+
     @GetMapping("/index")
-    public Result<CartResultDTO> getCart() {
-        return cartApi.getCart();
+    public Result<CartResultVO> getCart() {
+        return Result.success(wechatCartService.getCart());
     }
 
-    @PostMapping("/add-to-cart")
-    public Result<CartResultDTO> addGoodsToCart(@RequestBody @Validated CartParamDTO cartParamDTO) {
-        cartApi.addGoodsToCart(cartParamDTO);
-        return cartApi.getCart();
+    @PostMapping("/add")
+    public Result<CartResultVO> addGoodsToCart(@RequestBody @Validated CartParamVO cartParamDTO) {
+        wechatCartService.addGoodsToCart(cartParamDTO);
+        return Result.success(wechatCartService.getCart());
     }
 
-    @PostMapping("/update-goods")
-    public Result<CartResultDTO> updateCartGoods(@RequestBody @Validated(CartParamDTO.CartUpdateChecks.class) CartParamDTO cartParamDTO) {
-        cartApi.updateGoods(cartParamDTO);
-        return cartApi.getCart();
+    @PostMapping("/update")
+    public Result<CartResultVO> updateCartGoods(@RequestBody @Validated(CartParamVO.CartUpdateChecks.class) CartParamVO cartParamDTO) {
+        wechatCartService.updateGoods(cartParamDTO);
+        return Result.success(wechatCartService.getCart());
     }
 
     @PostMapping("/delete")
-    public Result<CartResultDTO> deleteCartGoods(@NotNull Integer cartId) {
+    public Result<CartResultVO> deleteCartGoods(@NotNull Integer cartId) {
         cartApi.deleteById(cartId);
-        return cartApi.getCart();
+        return Result.success(wechatCartService.getCart());
     }
 
     @PostMapping("/checked")
-    public Result<CartResultDTO> checkedCartGoods(@RequestBody @Validated CartCheckedVO cartCheckedVO) {
+    public Result<CartResultVO> checkedCartGoods(@RequestBody @Validated CartCheckedVO cartCheckedVO) {
         cartApi.updateNotNull(new Cart()
                 .setId(cartCheckedVO.getCartId())
                 .setChecked(cartCheckedVO.getChecked()));
-        return cartApi.getCart();
+        return Result.success(wechatCartService.getCart());
     }
 
     @GetMapping("/goods-count")
     public Result<Integer> goodsCount() {
-        Integer count = cartApi.count(new Cart()
-                .setUserId(Constants.CURRENT_USER_ID)
-                .setSessionId(Constants.SESSION_ID)).getData();
-        return Result.success(count);
+        CartResultVO cart = wechatCartService.getCart();
+        CartResultVO.CartTotalVO cartTotal = cart.getCartTotal();
+        return Result.success(cartTotal.getGoodsCount());
     }
 
     @GetMapping("/checkout")
-    public Result<CartCheckoutDTO> checkoutCartGoods(Integer addressId, Integer couponId) {
-        return cartApi.checkoutCart(addressId, couponId);
+    public Result<CartCheckoutVO> checkoutCartGoods(Integer addressId, Integer couponId) {
+        return Result.success(wechatCartService.checkoutCart(addressId, couponId));
     }
 
 

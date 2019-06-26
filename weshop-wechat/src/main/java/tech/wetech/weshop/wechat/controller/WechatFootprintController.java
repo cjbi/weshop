@@ -12,6 +12,7 @@ import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.FootprintApi;
 import tech.wetech.weshop.user.bo.GoodsFootprintBO;
 import tech.wetech.weshop.user.po.Footprint;
+import tech.wetech.weshop.wechat.service.WechatFootprintService;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -24,9 +25,12 @@ public class WechatFootprintController extends BaseController {
     @Autowired
     private FootprintApi footprintApi;
 
+    @Autowired
+    private WechatFootprintService wechatFootprintService;
+
     @GetMapping("/list")
     public Result<List<List<GoodsFootprintBO>>> queryGoodsFootprintList() {
-        return footprintApi.queryGoodsFootprintTimeLine();
+        return Result.success(wechatFootprintService.queryGoodsFootprintTimeLine());
     }
 
     @PostMapping("/delete")

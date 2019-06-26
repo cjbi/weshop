@@ -2,7 +2,7 @@ package tech.wetech.weshop.common.fallback;
 
 import tech.wetech.weshop.common.api.Api;
 import tech.wetech.weshop.common.enums.ResultCodeEnum;
-import tech.wetech.weshop.common.query.PageQueryWrapper;
+import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Result;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public abstract class ApiFallback<T> implements Api<T> {
     }
 
     @Override
-    public Result<List<T>> queryPageList(PageQueryWrapper<T> pageQueryWrapper) {
+    public Result<List<T>> queryListByQueryWrapper(QueryWrapper pageQueryWrapper) {
         return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
@@ -36,6 +36,11 @@ public abstract class ApiFallback<T> implements Api<T> {
 
     @Override
     public Result<Integer> create(T entity) {
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
+    }
+
+    @Override
+    public Result<Integer> createBatch(List<T> list) {
         return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 

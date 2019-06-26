@@ -3,13 +3,13 @@ package tech.wetech.weshop.common.api;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.common.query.PageQuery;
-import tech.wetech.weshop.common.query.PageQueryWrapper;
+import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.service.IService;
 import tech.wetech.weshop.common.utils.Result;
-import tk.mybatis.mapper.code.Style;
-import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
+
+import static java.util.Optional.ofNullable;
 
 public abstract class BaseApi<T> implements Api<T> {
 
@@ -27,15 +27,12 @@ public abstract class BaseApi<T> implements Api<T> {
     }
 
     @Override
-    public Result<List<T>> queryPageList(PageQueryWrapper<T> pageQueryWrapper) {
-        T data = pageQueryWrapper.getData();
-        PageQuery pageQuery = pageQueryWrapper.getPageQuery();
-        if (pageQuery.getOrderBy() != null) {
-            pageQuery.setOrderBy(StringUtil.convertByStyle(pageQuery.getOrderBy(), Style.camelhump));
-        }
-        List<T> list = service.queryPageList(data, pageQuery);
+    public Result<List<T>> queryListByQueryWrapper(QueryWrapper pageQueryWrapper) {
+        List<T> list = service.queryListByQueryWrapper(pageQueryWrapper);
         return Result.success(list)
-                .addExtraIfTrue(pageQuery.isCountSql(), "total", ((Page) list).getTotal());
+                .addExtraIfTrue(ofNullable(pageQueryWrapper.getPageQuery())
+                        .map(PageQuery::isCountSql)
+                        .orElse(false), "total", ((Page) list).getTotal());
     }
 
     @Override
@@ -51,6 +48,11 @@ public abstract class BaseApi<T> implements Api<T> {
     @Override
     public Result<Integer> create(T entity) {
         return Result.success(service.create(entity));
+    }
+
+    @Override
+    public Result<Integer> createBatch(List<T> list) {
+        return Result.success(service.createBatch(list));
     }
 
     @Override

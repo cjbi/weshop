@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.CollectApi;
-import tech.wetech.weshop.user.dto.CollectAddOrDeleteParamDTO;
-import tech.wetech.weshop.user.dto.CollectAddOrDeleteResultDTO;
+import tech.wetech.weshop.wechat.service.WechatCollectService;
+import tech.wetech.weshop.wechat.vo.CollectAddOrDeleteParamVO;
+import tech.wetech.weshop.wechat.vo.CollectAddOrDeleteResultVO;
 
 @RestController
 @RequestMapping("/wechat/collect")
@@ -15,9 +16,12 @@ public class WechatCollectController extends BaseController {
     @Autowired
     private CollectApi collectApi;
 
+    @Autowired
+    private WechatCollectService wechatCollectService;
+
     @PostMapping("/add-or-delete")
-    public Result<CollectAddOrDeleteResultDTO> addOrDelete(@RequestBody CollectAddOrDeleteParamDTO collectAddOrDeleteParamDTO) {
-        return collectApi.addOrDelete(collectAddOrDeleteParamDTO);
+    public Result<CollectAddOrDeleteResultVO> addOrDelete(@RequestBody CollectAddOrDeleteParamVO collectAddOrDeleteParamDTO) {
+        return Result.success(wechatCollectService.addOrDelete(collectAddOrDeleteParamDTO));
     }
 
     @GetMapping("/list")

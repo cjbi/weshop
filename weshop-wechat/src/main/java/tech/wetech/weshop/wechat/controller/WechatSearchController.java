@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
-import tech.wetech.weshop.marketing.api.SearchApi;
-import tech.wetech.weshop.marketing.dto.SearchIndexDTO;
+import tech.wetech.weshop.wechat.service.WechatSearchService;
+import tech.wetech.weshop.wechat.vo.SearchIndexVO;
 
 import java.util.List;
 
@@ -17,22 +17,22 @@ import java.util.List;
 public class WechatSearchController extends BaseController {
 
     @Autowired
-    private SearchApi searchApi;
+    private WechatSearchService wechatSearchService;
 
     @GetMapping("/helper")
     public Result<List<String>> helper(String keyword) {
-        return searchApi.helper(keyword);
+        return Result.success(wechatSearchService.helper(keyword));
     }
 
     @PostMapping("/clear-history")
     public Result clearHistory() {
-        searchApi.clearHistory();
-        return searchApi.clearHistory();
+        wechatSearchService.clearHistory();
+        return Result.success();
     }
 
     @GetMapping("/index")
-    public Result<SearchIndexDTO> index() {
-        return searchApi.index();
+    public Result<SearchIndexVO> index() {
+        return Result.success(wechatSearchService.index());
     }
 
 }

@@ -7,8 +7,9 @@ import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.AddressApi;
-import tech.wetech.weshop.user.dto.AddressDTO;
 import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.wechat.service.WechatAddressService;
+import tech.wetech.weshop.wechat.vo.AddressVO;
 
 import java.util.List;
 
@@ -18,16 +19,19 @@ import java.util.List;
 public class WechatAddressController extends BaseController {
 
     @Autowired
+    private WechatAddressService addressService;
+
+    @Autowired
     private AddressApi addressApi;
 
     @GetMapping("/list")
-    public Result<List<AddressDTO>> queryList() {
-        return addressApi.queryDetailList();
+    public Result<List<AddressVO>> queryList() {
+        return Result.success(addressService.queryDetailList());
     }
 
     @GetMapping("/detail")
-    public Result<AddressDTO> queryDetail(Integer id) {
-        return addressApi.queryDetail(id);
+    public Result<AddressVO> queryDetail(Integer id) {
+        return Result.success(addressService.queryDetail(id));
     }
 
     @PostMapping("/create")

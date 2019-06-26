@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.query.PageQuery;
-import tech.wetech.weshop.common.query.PageQueryWrapper;
+import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.OrderApi;
-import tech.wetech.weshop.order.dto.OrderDetailDTO;
 import tech.wetech.weshop.order.enums.OrderStatusEnum;
 import tech.wetech.weshop.order.enums.PayStatusEnum;
 import tech.wetech.weshop.order.po.Order;
@@ -34,14 +33,14 @@ public class AdminOrderController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Order>> queryList(Order entity, PageQuery pageQuery) {
-        return orderApi.queryPageList(new PageQueryWrapper(pageQuery, entity))
+        return orderApi.queryListByQueryWrapper(new QueryWrapper(pageQuery, entity))
                 .addExtra("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)))
                 .addExtra("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
     }
 
     @GetMapping("/detail")
-    public Result<OrderDetailDTO> queryOrderDetail(@RequestParam("orderId") @NotNull Integer orderId) {
-        return orderApi.queryOrderDetail(orderId);
+    public Result queryOrderDetail(@RequestParam("orderId") @NotNull Integer orderId) {
+        return null;
     }
 
 }

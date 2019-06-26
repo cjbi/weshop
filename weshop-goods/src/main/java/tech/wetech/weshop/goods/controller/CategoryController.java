@@ -4,11 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
-import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.CategoryApi;
-import tech.wetech.weshop.goods.dto.CategoryDTO;
-import tech.wetech.weshop.goods.dto.CategoryIndexDTO;
-import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 import tech.wetech.weshop.goods.po.Category;
 import tech.wetech.weshop.goods.service.CategoryService;
 
@@ -22,17 +18,17 @@ public class CategoryController extends BaseApi<Category> implements CategoryApi
     private CategoryService categoryService;
 
     @Override
-    public Result<List<Category>> queryCategoryByLevel(CategoryLevelEnum categoryLevel) {
-        return Result.success(categoryService.queryCategoryByLevel(categoryLevel));
+    public List<Integer> queryIdsByParentId(Integer parentId) {
+        return categoryService.queryIdsByParentId(parentId);
     }
 
     @Override
-    public Result<CategoryIndexDTO> index(Integer cateogyId) {
-        return Result.success(categoryService.index(cateogyId));
+    public List<Integer> queryParentIdsByIdIn(List<Integer> ids) {
+        return categoryService.queryParentIdsByIdIn(ids);
     }
 
     @Override
-    public Result<CategoryDTO> current(Integer id) {
-        return Result.success(categoryService.current(id));
+    public List<Category> queryByIdIn(List<Integer> ids) {
+        return categoryService.queryByIdIn(ids);
     }
 }

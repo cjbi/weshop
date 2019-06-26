@@ -5,6 +5,6 @@ import tech.wetech.weshop.order.po.Cart;
 
 public interface CartMapper extends MyMapper<Cart> {
 
-    int incrementNumberById(Integer id);
+    int updateNumberById(Integer number, Integer id);
 
 }

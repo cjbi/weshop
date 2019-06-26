@@ -5,14 +5,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
-import tech.wetech.weshop.order.api.OrderApi;
 import tech.wetech.weshop.order.api.OrderExpressApi;
-import tech.wetech.weshop.order.dto.OrderDetailDTO;
-import tech.wetech.weshop.order.dto.OrderListDTO;
-import tech.wetech.weshop.order.dto.OrderSubmitParamDTO;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.po.OrderExpress;
 import tech.wetech.weshop.order.query.OrderQuery;
+import tech.wetech.weshop.wechat.service.WechatOrderService;
+import tech.wetech.weshop.wechat.vo.OrderDetailVO;
+import tech.wetech.weshop.wechat.vo.OrderListVO;
+import tech.wetech.weshop.wechat.vo.OrderSubmitParamVO;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -23,27 +23,27 @@ import java.util.List;
 public class WechatOrderController extends BaseController {
 
     @Autowired
-    private OrderApi orderApi;
+    private WechatOrderService wechatOrderService;
 
     @Autowired
     private OrderExpressApi orderExpressApi;
 
     @GetMapping({"/list"})
-    public Result<List<OrderListDTO>> queryOrderList(OrderQuery orderQuery) {
-        return orderApi.queryOrderList(orderQuery);
+    public Result<List<OrderListVO>> queryOrderList(OrderQuery orderQuery) {
+        return Result.success(wechatOrderService.queryOrderList(orderQuery));
     }
 
     @GetMapping("/detail")
-    public Result<OrderDetailDTO> queryOrderDetail(@NotNull Integer orderId) {
-        return orderApi.queryOrderDetail(orderId);
+    public Result<OrderDetailVO> queryOrderDetail(@NotNull Integer orderId) {
+        return Result.success(wechatOrderService.queryOrderDetail(orderId));
     }
 
     /**
      * @return
      */
     @PostMapping("/submit")
-    public Result<Order> submitOrder(@Validated @RequestBody OrderSubmitParamDTO orderSubmitParamDTO) {
-        return orderApi.submitOrder(orderSubmitParamDTO);
+    public Result<Order> submitOrder(@Validated @RequestBody OrderSubmitParamVO orderSubmitParamDTO) {
+        return Result.success(wechatOrderService.submitOrder(orderSubmitParamDTO));
     }
 
     /**

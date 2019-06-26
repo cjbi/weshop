@@ -5,12 +5,19 @@ import tech.wetech.weshop.common.enums.ResultCodeEnum;
 import tech.wetech.weshop.common.fallback.ApiFallback;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
+import tech.wetech.weshop.goods.bo.GoodsSpecificationBO;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class GoodsSpecificationApiFallback extends ApiFallback<GoodsSpecification> implements GoodsSpecificationApi {
+    @Override
+    public List<GoodsSpecificationBO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
+        return Collections.emptyList();
+    }
+
     @Override
     public Result<List<String>> queryValueByGoodsIdAndIdIn(Integer goodsId, List<Integer> goodsSpecificationIds) {
         return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
