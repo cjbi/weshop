@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
 import tech.wetech.weshop.goods.api.GoodsAttributeApi;
-import tech.wetech.weshop.goods.bo.GoodsAttributeBO;
+import tech.wetech.weshop.goods.dto.GoodsAttributeDTO;
 import tech.wetech.weshop.goods.po.GoodsAttribute;
 import tech.wetech.weshop.goods.service.GoodsAttributeService;
 
@@ -17,7 +17,7 @@ public class GoodsAttributeController extends BaseApi<GoodsAttribute> implements
     private GoodsAttributeService goodsAttributeService;
 
     @Override
-    public List<GoodsAttributeBO> queryGoodsDetailAttributeByGoodsId(Integer goodsId) {
+    public List<GoodsAttributeDTO> queryGoodsDetailAttributeByGoodsId(Integer goodsId) {
         return goodsAttributeService.queryGoodsDetailAttributeByGoodsId(goodsId);
     }
 }

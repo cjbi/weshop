@@ -11,7 +11,7 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <select id="selectGoodsFootprintByUserId" resultType="tech.wetech.weshop.user.bo.GoodsFootprintBO">
+    <select id="selectGoodsFootprintByUserId" resultType="tech.wetech.weshop.user.dto.GoodsFootprintDTO">
         SELECT
         f.goods_id,
         MAX(f.create_time) AS createTime,

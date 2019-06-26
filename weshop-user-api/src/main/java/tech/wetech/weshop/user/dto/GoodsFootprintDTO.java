@@ -1,9 +1,9 @@
-package tech.wetech.weshop.user.bo;
+package tech.wetech.weshop.user.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class GoodsFootprintBO {
+public class GoodsFootprintDTO {
 
     private Integer id;
 
@@ -25,7 +25,7 @@ public class GoodsFootprintBO {
         return id;
     }
 
-    public GoodsFootprintBO setId(Integer id) {
+    public GoodsFootprintDTO setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -34,7 +34,7 @@ public class GoodsFootprintBO {
         return userId;
     }
 
-    public GoodsFootprintBO setUserId(Integer userId) {
+    public GoodsFootprintDTO setUserId(Integer userId) {
         this.userId = userId;
         return this;
     }
@@ -43,7 +43,7 @@ public class GoodsFootprintBO {
         return goodsId;
     }
 
-    public GoodsFootprintBO setGoodsId(Integer goodsId) {
+    public GoodsFootprintDTO setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
         return this;
     }
@@ -52,7 +52,7 @@ public class GoodsFootprintBO {
         return createTime;
     }
 
-    public GoodsFootprintBO setCreateTime(LocalDate createTime) {
+    public GoodsFootprintDTO setCreateTime(LocalDate createTime) {
         this.createTime = createTime;
         return this;
     }
@@ -61,7 +61,7 @@ public class GoodsFootprintBO {
         return name;
     }
 
-    public GoodsFootprintBO setName(String name) {
+    public GoodsFootprintDTO setName(String name) {
         this.name = name;
         return this;
     }
@@ -70,7 +70,7 @@ public class GoodsFootprintBO {
         return listPicUrl;
     }
 
-    public GoodsFootprintBO setListPicUrl(String listPicUrl) {
+    public GoodsFootprintDTO setListPicUrl(String listPicUrl) {
         this.listPicUrl = listPicUrl;
         return this;
     }
@@ -79,7 +79,7 @@ public class GoodsFootprintBO {
         return goodsBrief;
     }
 
-    public GoodsFootprintBO setGoodsBrief(String goodsBrief) {
+    public GoodsFootprintDTO setGoodsBrief(String goodsBrief) {
         this.goodsBrief = goodsBrief;
         return this;
     }
@@ -88,7 +88,7 @@ public class GoodsFootprintBO {
         return retailPrice;
     }
 
-    public GoodsFootprintBO setRetailPrice(BigDecimal retailPrice) {
+    public GoodsFootprintDTO setRetailPrice(BigDecimal retailPrice) {
         this.retailPrice = retailPrice;
         return this;
     }

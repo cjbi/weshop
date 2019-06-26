@@ -10,7 +10,7 @@
         <result column="attribute_id" property="attributeId" jdbcType="INTEGER"/>
         <result column="value" property="value" jdbcType="LONGVARCHAR"/>
     </resultMap>
-    <select id="selectGoodsDetailAttributeByGoodsId" resultType="tech.wetech.weshop.goods.bo.GoodsAttributeBO">
+    <select id="selectGoodsDetailAttributeByGoodsId" resultType="tech.wetech.weshop.goods.dto.GoodsAttributeDTO">
         SELECT
         a.name, ga.value
         FROM

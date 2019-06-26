@@ -3,7 +3,7 @@ package tech.wetech.weshop.goods.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.service.BaseService;
-import tech.wetech.weshop.goods.bo.GoodsSpecificationBO;
+import tech.wetech.weshop.goods.dto.GoodsSpecificationDTO;
 import tech.wetech.weshop.goods.mapper.GoodsSpecificationMapper;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
 import tech.wetech.weshop.goods.service.GoodsSpecificationService;
@@ -17,7 +17,7 @@ public class GoodsSpecificationServiceImpl extends BaseService<GoodsSpecificatio
     private GoodsSpecificationMapper goodsSpecificationMapper;
 
     @Override
-    public List<GoodsSpecificationBO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
+    public List<GoodsSpecificationDTO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
         return goodsSpecificationMapper.selectGoodsDetailSpecificationByGoodsId(goodsId);
     }
 

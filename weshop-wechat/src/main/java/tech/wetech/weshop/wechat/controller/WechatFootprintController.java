@@ -10,7 +10,7 @@ import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.FootprintApi;
-import tech.wetech.weshop.user.bo.GoodsFootprintBO;
+import tech.wetech.weshop.user.dto.GoodsFootprintDTO;
 import tech.wetech.weshop.user.po.Footprint;
 import tech.wetech.weshop.wechat.service.WechatFootprintService;
 
@@ -29,7 +29,7 @@ public class WechatFootprintController extends BaseController {
     private WechatFootprintService wechatFootprintService;
 
     @GetMapping("/list")
-    public Result<List<List<GoodsFootprintBO>>> queryGoodsFootprintList() {
+    public Result<List<List<GoodsFootprintDTO>>> queryGoodsFootprintList() {
         return Result.success(wechatFootprintService.queryGoodsFootprintTimeLine());
     }
 

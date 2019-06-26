@@ -1,6 +1,6 @@
-package tech.wetech.weshop.goods.bo;
+package tech.wetech.weshop.goods.dto;
 
-public class GoodsAttributeBO {
+public class GoodsAttributeDTO {
 
     private String name;
 
@@ -10,7 +10,7 @@ public class GoodsAttributeBO {
         return name;
     }
 
-    public GoodsAttributeBO setName(String name) {
+    public GoodsAttributeDTO setName(String name) {
         this.name = name;
         return this;
     }
@@ -19,7 +19,7 @@ public class GoodsAttributeBO {
         return value;
     }
 
-    public GoodsAttributeBO setValue(String value) {
+    public GoodsAttributeDTO setValue(String value) {
         this.value = value;
         return this;
     }

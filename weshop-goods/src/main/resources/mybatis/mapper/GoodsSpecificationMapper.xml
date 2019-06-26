@@ -11,7 +11,7 @@
         <result column="value" property="value" jdbcType="VARCHAR"/>
         <result column="pic_url" property="picUrl" jdbcType="VARCHAR"/>
     </resultMap>
-    <select id="selectGoodsDetailSpecificationByGoodsId" resultType="tech.wetech.weshop.goods.bo.GoodsSpecificationBO">
+    <select id="selectGoodsDetailSpecificationByGoodsId" resultType="tech.wetech.weshop.goods.dto.GoodsSpecificationDTO">
         SELECT
         gs.*, s.name
         FROM

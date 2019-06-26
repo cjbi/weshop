@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.user.api.CollectApi;
-import tech.wetech.weshop.user.bo.GoodsCollectBO;
+import tech.wetech.weshop.user.dto.GoodsCollectDTO;
 import tech.wetech.weshop.user.po.Collect;
 import tech.wetech.weshop.wechat.service.WechatCollectService;
 import tech.wetech.weshop.wechat.vo.CollectAddOrDeleteParamVO;
@@ -41,7 +41,7 @@ public class WechatCollectServiceImpl implements WechatCollectService {
     }
 
     @Override
-    public List<GoodsCollectBO> queryGoodsCollectList() {
+    public List<GoodsCollectDTO> queryGoodsCollectList() {
         return collectApi.queryGoodsCollectList().getData();
     }
 }

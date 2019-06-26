@@ -1,7 +1,7 @@
 package tech.wetech.weshop.user.service;
 
 import tech.wetech.weshop.common.service.IService;
-import tech.wetech.weshop.user.bo.GoodsFootprintBO;
+import tech.wetech.weshop.user.dto.GoodsFootprintDTO;
 import tech.wetech.weshop.user.po.Footprint;
 
 import java.util.List;
@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface FootprintService extends IService<Footprint> {
 
-    List<GoodsFootprintBO> queryGoodsFootprintByUserId(Integer userId);
+    List<GoodsFootprintDTO> queryGoodsFootprintByUserId(Integer userId);
 
 }

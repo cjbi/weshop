@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
 import tech.wetech.weshop.user.api.FootprintApi;
-import tech.wetech.weshop.user.bo.GoodsFootprintBO;
+import tech.wetech.weshop.user.dto.GoodsFootprintDTO;
 import tech.wetech.weshop.user.po.Footprint;
 import tech.wetech.weshop.user.service.FootprintService;
 
@@ -19,7 +19,7 @@ public class FootprintController extends BaseApi<Footprint> implements Footprint
     private FootprintService footprintService;
 
     @Override
-    public List<GoodsFootprintBO> queryGoodsFootprintByUserId(Integer userId) {
+    public List<GoodsFootprintDTO> queryGoodsFootprintByUserId(Integer userId) {
         return footprintService.queryGoodsFootprintByUserId(userId);
     }
 }

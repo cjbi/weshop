@@ -11,8 +11,8 @@ import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Reflections;
 import tech.wetech.weshop.goods.api.*;
-import tech.wetech.weshop.goods.bo.GoodsAttributeBO;
-import tech.wetech.weshop.goods.bo.GoodsSpecificationBO;
+import tech.wetech.weshop.goods.dto.GoodsAttributeDTO;
+import tech.wetech.weshop.goods.dto.GoodsSpecificationDTO;
 import tech.wetech.weshop.goods.po.*;
 import tech.wetech.weshop.goods.query.GoodsSearchQuery;
 import tech.wetech.weshop.marketing.api.CommentApi;
@@ -156,10 +156,10 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
     private List<GoodsDetailVO.GoodsSpecificationVO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
         List<GoodsDetailVO.GoodsSpecificationVO> goodsSpecificationVOList = new LinkedList<>();
-        List<GoodsSpecificationBO> goodsSpecificationBOList = goodsSpecificationApi.queryGoodsDetailSpecificationByGoodsId(goodsId);
+        List<GoodsSpecificationDTO> goodsSpecificationBOList = goodsSpecificationApi.queryGoodsDetailSpecificationByGoodsId(goodsId);
 
         goodsSpecificationBOList.stream()
-                .collect(Collectors.toMap(GoodsSpecificationBO::getSpecificationId, g -> g, (g1, g2) -> g2))
+                .collect(Collectors.toMap(GoodsSpecificationDTO::getSpecificationId, g -> g, (g1, g2) -> g2))
                 .forEach((k, v) -> {
                     GoodsDetailVO.GoodsSpecificationVO goodsSpecificationVO = new GoodsDetailVO.GoodsSpecificationVO();
                     goodsSpecificationVO.setSpecificationId(k);
@@ -195,7 +195,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
         Goods goods = goodsApi.queryById(id).getData();
         List<GoodsGallery> goodsGalleryVOList = goodsGalleryApi.queryList(new GoodsGallery().setGoodsId(id)).getData();
-        List<GoodsAttributeBO> goodsAttributeVOList = goodsAttributeApi.queryGoodsDetailAttributeByGoodsId(id);
+        List<GoodsAttributeDTO> goodsAttributeVOList = goodsAttributeApi.queryGoodsDetailAttributeByGoodsId(id);
         List<GoodsIssue> goodsIssueList = goodsIssueApi.queryAll().getData();
         Brand brand = brandApi.queryById(goods.getBrandId()).getData();
 

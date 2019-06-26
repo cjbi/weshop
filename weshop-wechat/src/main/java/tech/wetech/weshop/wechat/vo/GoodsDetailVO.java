@@ -1,8 +1,8 @@
 package tech.wetech.weshop.wechat.vo;
 
 
-import tech.wetech.weshop.goods.bo.GoodsAttributeBO;
-import tech.wetech.weshop.goods.bo.GoodsSpecificationBO;
+import tech.wetech.weshop.goods.dto.GoodsAttributeDTO;
+import tech.wetech.weshop.goods.dto.GoodsSpecificationDTO;
 import tech.wetech.weshop.goods.po.*;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public class GoodsDetailVO {
 
     private Goods goods;
 
-    private List<GoodsAttributeBO> goodsAttributeList;
+    private List<GoodsAttributeDTO> goodsAttributeList;
 
     private Brand brand;
 
@@ -36,7 +36,7 @@ public class GoodsDetailVO {
 
         private String name;
 
-        private List<GoodsSpecificationBO> valueList;
+        private List<GoodsSpecificationDTO> valueList;
 
         public Integer getSpecificationId() {
             return specificationId;
@@ -56,11 +56,11 @@ public class GoodsDetailVO {
             return this;
         }
 
-        public List<GoodsSpecificationBO> getValueList() {
+        public List<GoodsSpecificationDTO> getValueList() {
             return valueList;
         }
 
-        public GoodsSpecificationVO setValueList(List<GoodsSpecificationBO> valueList) {
+        public GoodsSpecificationVO setValueList(List<GoodsSpecificationDTO> valueList) {
             this.valueList = valueList;
             return this;
         }
@@ -223,11 +223,11 @@ public class GoodsDetailVO {
         return this;
     }
 
-    public List<GoodsAttributeBO> getGoodsAttributeList() {
+    public List<GoodsAttributeDTO> getGoodsAttributeList() {
         return goodsAttributeList;
     }
 
-    public GoodsDetailVO setGoodsAttributeList(List<GoodsAttributeBO> goodsAttributeList) {
+    public GoodsDetailVO setGoodsAttributeList(List<GoodsAttributeDTO> goodsAttributeList) {
         this.goodsAttributeList = goodsAttributeList;
         return this;
     }

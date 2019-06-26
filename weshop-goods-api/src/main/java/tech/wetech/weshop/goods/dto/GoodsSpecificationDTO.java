@@ -1,6 +1,6 @@
-package tech.wetech.weshop.goods.bo;
+package tech.wetech.weshop.goods.dto;
 
-public class GoodsSpecificationBO {
+public class GoodsSpecificationDTO {
 
     private Integer id;
 
@@ -18,7 +18,7 @@ public class GoodsSpecificationBO {
         return id;
     }
 
-    public GoodsSpecificationBO setId(Integer id) {
+    public GoodsSpecificationDTO setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -27,7 +27,7 @@ public class GoodsSpecificationBO {
         return name;
     }
 
-    public GoodsSpecificationBO setName(String name) {
+    public GoodsSpecificationDTO setName(String name) {
         this.name = name;
         return this;
     }
@@ -36,7 +36,7 @@ public class GoodsSpecificationBO {
         return goodsId;
     }
 
-    public GoodsSpecificationBO setGoodsId(Integer goodsId) {
+    public GoodsSpecificationDTO setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
         return this;
     }
@@ -45,7 +45,7 @@ public class GoodsSpecificationBO {
         return specificationId;
     }
 
-    public GoodsSpecificationBO setSpecificationId(Integer specificationId) {
+    public GoodsSpecificationDTO setSpecificationId(Integer specificationId) {
         this.specificationId = specificationId;
         return this;
     }
@@ -54,7 +54,7 @@ public class GoodsSpecificationBO {
         return value;
     }
 
-    public GoodsSpecificationBO setValue(String value) {
+    public GoodsSpecificationDTO setValue(String value) {
         this.value = value;
         return this;
     }
@@ -63,7 +63,7 @@ public class GoodsSpecificationBO {
         return picUrl;
     }
 
-    public GoodsSpecificationBO setPicUrl(String picUrl) {
+    public GoodsSpecificationDTO setPicUrl(String picUrl) {
         this.picUrl = picUrl;
         return this;
     }

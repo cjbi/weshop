@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
-import tech.wetech.weshop.goods.bo.GoodsSpecificationBO;
+import tech.wetech.weshop.goods.dto.GoodsSpecificationDTO;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
 import tech.wetech.weshop.goods.service.GoodsSpecificationService;
 
@@ -20,7 +20,7 @@ public class GoodsSpecificationController extends BaseApi<GoodsSpecification> im
     private GoodsSpecificationService goodsSpecificationService;
 
     @Override
-    public List<GoodsSpecificationBO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
+    public List<GoodsSpecificationDTO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
         return goodsSpecificationService.queryGoodsDetailSpecificationByGoodsId(goodsId);
     }
 

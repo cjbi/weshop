@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.user.api.FootprintApi;
-import tech.wetech.weshop.user.bo.GoodsFootprintBO;
+import tech.wetech.weshop.user.dto.GoodsFootprintDTO;
 import tech.wetech.weshop.wechat.service.WechatFootprintService;
 
 import java.util.List;
@@ -18,8 +18,8 @@ public class WechatFootprintServiceImpl implements WechatFootprintService {
     private FootprintApi footprintApi;
 
     @Override
-    public List<List<GoodsFootprintBO>> queryGoodsFootprintTimeLine() {
-        List<GoodsFootprintBO> goodsFootprintList = footprintApi.queryGoodsFootprintByUserId(Constants.CURRENT_USER_ID);
+    public List<List<GoodsFootprintDTO>> queryGoodsFootprintTimeLine() {
+        List<GoodsFootprintDTO> goodsFootprintList = footprintApi.queryGoodsFootprintByUserId(Constants.CURRENT_USER_ID);
 
         return goodsFootprintList.stream()
                 .collect(Collectors.groupingBy(gf -> gf.getCreateTime()))

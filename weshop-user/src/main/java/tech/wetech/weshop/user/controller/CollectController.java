@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.CollectApi;
-import tech.wetech.weshop.user.bo.GoodsCollectBO;
+import tech.wetech.weshop.user.dto.GoodsCollectDTO;
 import tech.wetech.weshop.user.po.Collect;
 import tech.wetech.weshop.user.service.CollectService;
 
@@ -20,7 +20,7 @@ public class CollectController extends BaseApi<Collect> implements CollectApi {
     private CollectService collectService;
 
     @Override
-    public Result<List<GoodsCollectBO>> queryGoodsCollectList() {
+    public Result<List<GoodsCollectDTO>> queryGoodsCollectList() {
         return Result.success(collectService.queryGoodsCollectList());
     }
 }
