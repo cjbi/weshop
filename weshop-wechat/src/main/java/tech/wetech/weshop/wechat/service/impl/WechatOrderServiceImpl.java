@@ -2,6 +2,7 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultCodeEnum;
 import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.utils.Constants;
@@ -32,6 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class WechatOrderServiceImpl implements WechatOrderService {
 
     @Autowired

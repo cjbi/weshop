@@ -48,16 +48,11 @@ public class Reflections {
     }
 
     public static <A, B> String[] fnToFieldName(Fn<A, B>... fns) {
-        try {
-            String[] arr = new String[fns.length];
-            for (int i = 0; i < fns.length; i++) {
-                arr[i] = fnToFieldName(fns[i]);
-            }
-            return arr;
-        } catch (Exception e) {
-            e.printStackTrace();
+        String[] arr = new String[fns.length];
+        for (int i = 0; i < fns.length; i++) {
+            arr[i] = fnToFieldName(fns[i]);
         }
-        return null;
+        return arr;
     }
 
     public static <A, B> String fnToFieldName(Fn<A, B> fn) {
@@ -70,7 +65,7 @@ public class Reflections {
                 getter = getter.substring(2);
             }
             return Introspector.decapitalize(getter);
-        } catch (Exception e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
@@ -88,7 +83,7 @@ public class Reflections {
             String getter = serializedLambda.getImplMethodName();
             Method method = object.getClass().getMethod(getter);
             return (String) method.invoke(object);
-        } catch (Exception e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
@@ -99,7 +94,7 @@ public class Reflections {
             SerializedLambda serializedLambda = getSerializedLambda(fn);
             String implClass = serializedLambda.getImplClass();
             return Class.forName(implClass.replace("/", "."));
-        } catch (Exception e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;

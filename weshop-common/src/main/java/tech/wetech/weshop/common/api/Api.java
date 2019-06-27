@@ -18,7 +18,7 @@ public interface Api<T> {
     Result<List<T>> queryList(@RequestBody T entity);
 
     @PostMapping("/queryListByQueryWrapper")
-    Result<List<T>> queryListByQueryWrapper(QueryWrapper pageQueryWrapper);
+    Result<List<T>> queryListByQueryWrapper(@RequestBody QueryWrapper pageQueryWrapper);
 
     @PostMapping("/queryOne")
     Result<T> queryOne(@RequestBody T entity);
@@ -29,6 +29,7 @@ public interface Api<T> {
     @PostMapping("/create")
     Result<Integer> create(@RequestBody T entity);
 
+    @PostMapping("/createBatch")
     Result<Integer> createBatch(@RequestBody List<T> list);
 
     @PostMapping("/updateAll")

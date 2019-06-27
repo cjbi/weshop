@@ -6,6 +6,7 @@ import tech.wetech.weshop.marketing.api.CommentApi;
 import tech.wetech.weshop.marketing.po.Comment;
 import tech.wetech.weshop.marketing.query.CommentQuery;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -13,6 +14,6 @@ public class CommentApiFallback extends ApiFallback<Comment> implements CommentA
 
     @Override
     public List<Comment> queryIfRequirePictureList(CommentQuery commentQuery) {
-        return null;
+        return Collections.emptyList();
     }
 }

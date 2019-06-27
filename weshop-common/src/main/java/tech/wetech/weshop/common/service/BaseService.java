@@ -11,7 +11,6 @@ import tk.mybatis.mapper.code.Style;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
@@ -24,6 +23,7 @@ public abstract class BaseService<T> implements IService<T> {
 
     @Autowired
     protected MyMapper<T> mapper;
+
 
     @Override
     public List<T> queryAll() {
@@ -56,6 +56,7 @@ public abstract class BaseService<T> implements IService<T> {
 
     @Override
     public List<T> queryListByQueryWrapper(QueryWrapper queryWrapper) {
+        List<T> ts = mapper.selectBySql("select * from weshop_goods");
         //分页查询
         if (queryWrapper.getPageQuery() != null) {
             PageHelper.startPage(queryWrapper.getPageQuery());
@@ -66,10 +67,7 @@ public abstract class BaseService<T> implements IService<T> {
                 return mapper.selectByExample(queryWrapper.getCondition());
             }
             //实体类查询
-            Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            if (queryWrapper.getCondition().getClass().equals(tClass)) {
-                return mapper.select((T) queryWrapper.getCondition());
-            }
+            return mapper.select((T) queryWrapper.getCondition());
         }
         return mapper.selectAll();
     }

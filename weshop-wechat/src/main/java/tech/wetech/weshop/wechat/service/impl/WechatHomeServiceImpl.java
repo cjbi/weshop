@@ -1,7 +1,7 @@
 package tech.wetech.weshop.wechat.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.query.PageQuery;
 import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.goods.api.BrandApi;
@@ -26,6 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class WechatHomeServiceImpl implements WechatHomeService {
     @Autowired
     private AdApi adApi;
@@ -51,18 +52,14 @@ public class WechatHomeServiceImpl implements WechatHomeService {
 
         List<Ad> bannerList = adApi.queryList(new Ad().setAdPositionId((short) 1)).getData();
 
-        PageHelper.orderBy("sort_order asc");
-        List<Channel> channelList = channelApi.queryAll().getData();
+        List<Channel> channelList = channelApi.queryListByQueryWrapper(new QueryWrapper().setPageQuery(new PageQuery().setOrderBy("sort_order asc"))).getData();
 
         List<Goods> newGoodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper(new PageQuery(1, 4), new Goods().setNewly(true))).getData();
 
-        PageHelper.startPage(1, 4);
         List<Goods> hotGoodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper(new PageQuery(1, 4), new Goods().setHot(true))).getData();
 
-        PageHelper.orderBy("new_sort_order asc");
-        List<Brand> brandList = brandApi.queryList(new Brand().setNewly(true)).getData();
+        List<Brand> brandList = brandApi.queryListByQueryWrapper(new QueryWrapper().setCondition(new Brand().setNewly(true)).setPageQuery(new PageQuery().setOrderBy("new_sort_order asc"))).getData();
 
-        PageHelper.startPage(1, 3);
         List<Topic> topicList = topicApi.queryAll().getData();
 
         List<HomeCategoryVO> categoryList = new LinkedList<>();
