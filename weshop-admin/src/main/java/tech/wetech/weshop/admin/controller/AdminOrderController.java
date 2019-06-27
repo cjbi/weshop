@@ -33,7 +33,7 @@ public class AdminOrderController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Order>> queryList(Order entity, PageQuery pageQuery) {
-        return orderApi.queryListByQueryWrapper(new QueryWrapper(pageQuery, entity))
+        return orderApi.queryByCriteria(null)
                 .addExtra("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)))
                 .addExtra("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
     }

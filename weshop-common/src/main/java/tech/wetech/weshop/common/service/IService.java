@@ -2,6 +2,7 @@ package tech.wetech.weshop.common.service;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.query.PageQuery;
 import tech.wetech.weshop.common.query.QueryWrapper;
 
@@ -21,23 +22,25 @@ public interface IService<T> {
 
     List<T> queryListByPage(T entity, PageQuery pageQuery);
 
-    List<T> queryListByQueryWrapper(QueryWrapper queryWrapper);
+    List<T> queryByCriteria(Criteria<T, Object> criteria);
+
+    int countByCriteria(Criteria<T, Object> criteria);
 
     T queryOne(T entity);
 
-    T queryById(@RequestParam("id") Object id);
+    T queryById(Object id);
 
-    int create(@RequestBody T entity);
+    int create(T entity);
 
-    int createBatch(@RequestBody List<T> list);
+    int createBatch(List<T> list);
 
-    int updateAll(@RequestBody T entity);
+    int updateAll(T entity);
 
-    int updateNotNull(@RequestBody T entity);
+    int updateNotNull(T entity);
 
-    int delete(@RequestBody T entity);
+    int delete(T entity);
 
-    int deleteById(@RequestBody Object id);
+    int deleteById(Object id);
 
     int count(T entity);
 

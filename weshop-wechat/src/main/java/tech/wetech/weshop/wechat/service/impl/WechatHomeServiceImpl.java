@@ -2,6 +2,7 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.query.PageQuery;
 import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.goods.api.BrandApi;
@@ -52,13 +53,20 @@ public class WechatHomeServiceImpl implements WechatHomeService {
 
         List<Ad> bannerList = adApi.queryList(new Ad().setAdPositionId((short) 1)).getData();
 
-        List<Channel> channelList = channelApi.queryListByQueryWrapper(new QueryWrapper().setPageQuery(new PageQuery().setOrderBy("sort_order asc"))).getData();
 
-        List<Goods> newGoodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper(new PageQuery(1, 4), new Goods().setNewly(true))).getData();
+        channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder, Criteria.SortOrder.ASC));
 
-        List<Goods> hotGoodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper(new PageQuery(1, 4), new Goods().setHot(true))).getData();
+        List<Channel> channelList = channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder, Criteria.SortOrder.ASC)).getData();
 
-        List<Brand> brandList = brandApi.queryListByQueryWrapper(new QueryWrapper().setCondition(new Brand().setNewly(true)).setPageQuery(new PageQuery().setOrderBy("new_sort_order asc"))).getData();
+        Criteria.of(Goods.class).page(1,4).andEqualTo(Goods::getNewly,true);
+
+        List<Goods> newGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).page(1,4).andEqualTo(Goods::getNewly,true)).getData();
+
+
+
+        List<Goods> hotGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).page(1,4).andEqualTo(Goods::getHot,true)).getData();
+
+        List<Brand> brandList = brandApi.queryByCriteria(Criteria.of(Brand.class).andEqualTo(Brand::getNewly,true).sort(Brand::getNewSortOrder, Criteria.SortOrder.ASC)).getData();
 
         List<Topic> topicList = topicApi.queryAll().getData();
 
@@ -72,10 +80,7 @@ public class WechatHomeServiceImpl implements WechatHomeService {
                     .map(Category::getId)
                     .collect(Collectors.toList());
 
-            Weekend<Goods> example = Weekend.of(Goods.class);
-            WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
-            criteria.andIn(Goods::getCategoryId, categoryIdList);
-            List<Goods> goodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper().setCondition(example)).getData();
+            List<Goods> goodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).andIn(Goods::getCategoryId, categoryIdList)).getData();
             categoryList.add(new HomeCategoryVO(c.getId(), c.getName(), goodsList));
         });
 

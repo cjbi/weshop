@@ -18,13 +18,11 @@ public interface Api<T> {
     @PostMapping(value = "/queryList")
     Result<List<T>> queryList(@RequestBody T entity);
 
-    @PostMapping("/queryListByQueryWrapper")
-    Result<List<T>> queryListByQueryWrapper(@RequestBody QueryWrapper pageQueryWrapper);
+    @PostMapping("/queryByCriteria")
+    Result<List<T>> queryByCriteria(@RequestBody Criteria<T, Object> criteria);
 
-    @PostMapping("queryByCriteria")
-    Result<List<T>> queryByCriteria(@RequestBody Criteria criteria);
-
-
+    @PostMapping("/countByCriteria")
+    Result<Integer> countByCriteria(@RequestBody Criteria<T, Object> criteria);
 
     @PostMapping("/queryOne")
     Result<T> queryOne(@RequestBody T entity);

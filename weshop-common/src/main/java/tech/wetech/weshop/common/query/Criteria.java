@@ -8,6 +8,7 @@ import tk.mybatis.mapper.code.Style;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,16 +17,16 @@ import java.util.stream.Collectors;
 /**
  * 需要结合jpa注解一起使用
  *
- * @author cjbi
+ * @author cjbi@outlook.com
  */
-public class Criteria<A, B> {
+public class Criteria<A, B> implements Serializable {
 
     private Statement statement;
 
     //缓存
     private static final Map<Class<?>, EntityTable> entityTableCache = new ConcurrentHashMap<>();
 
-    static class Statement<A> {
+    public static class Statement<A> {
 
         //类名
         private Class<A> clazz;
@@ -37,10 +38,10 @@ public class Criteria<A, B> {
         private List<Criterion> criterions;
 
         //第几页
-        private Integer pageNum;
+        private int pageNum;
 
         //数量
-        private Integer pageSize;
+        private int pageSize;
 
         //排序字段
         private String sortName;
@@ -48,18 +49,89 @@ public class Criteria<A, B> {
         //顺序
         private SortOrder sortOrder;
 
+        public Class<A> getClazz() {
+            return clazz;
+        }
+
+        public void setClazz(Class<A> clazz) {
+            this.clazz = clazz;
+        }
+
+        public List<String> getFields() {
+            return fields;
+        }
+
+        public void setFields(List<String> fields) {
+            this.fields = fields;
+        }
+
+        public List<Criterion> getCriterions() {
+            return criterions;
+        }
+
+        public void setCriterions(List<Criterion> criterions) {
+            this.criterions = criterions;
+        }
+
+        public int getPageNum() {
+            return pageNum;
+        }
+
+        public void setPageNum(int pageNum) {
+            this.pageNum = pageNum;
+        }
+
+        public int getPageSize() {
+            return pageSize;
+        }
+
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public String getSortName() {
+            return sortName;
+        }
+
+        public void setSortName(String sortName) {
+            this.sortName = sortName;
+        }
+
+        public SortOrder getSortOrder() {
+            return sortOrder;
+        }
+
+        public void setSortOrder(SortOrder sortOrder) {
+            this.sortOrder = sortOrder;
+        }
     }
 
-    static class EntityTable {
+    public static class EntityTable {
         private String tableName;
         private Map<String, String> fieldsMap;
+
+        public String getTableName() {
+            return tableName;
+        }
+
+        public void setTableName(String tableName) {
+            this.tableName = tableName;
+        }
+
+        public Map<String, String> getFieldsMap() {
+            return fieldsMap;
+        }
+
+        public void setFieldsMap(Map<String, String> fieldsMap) {
+            this.fieldsMap = fieldsMap;
+        }
     }
 
-    enum SortOrder {
+    public enum SortOrder {
         ASC, DESC
     }
 
-    static class Criterion {
+    public static class Criterion {
         private String property;
         private Object value;
         private Object secondValue;
@@ -67,8 +139,11 @@ public class Criteria<A, B> {
         private String andOr;
         private ValueType valueType;
 
-        enum ValueType {
+        public enum ValueType {
             noValue, singleValue, betweenValue, listValue
+        }
+
+        public Criterion() {
         }
 
         public Criterion(String property, String condition, String andOr) {
@@ -101,16 +176,52 @@ public class Criteria<A, B> {
             this.valueType = ValueType.betweenValue;
         }
 
-        public Object[] getValues() {
-            if (value != null) {
-                if (secondValue != null) {
-                    return new Object[]{value, secondValue};
-                } else {
-                    return new Object[]{value};
-                }
-            } else {
-                return new Object[]{};
-            }
+        public String getProperty() {
+            return property;
+        }
+
+        public void setProperty(String property) {
+            this.property = property;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(Object value) {
+            this.value = value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public void setSecondValue(Object secondValue) {
+            this.secondValue = secondValue;
+        }
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public void setCondition(String condition) {
+            this.condition = condition;
+        }
+
+        public String getAndOr() {
+            return andOr;
+        }
+
+        public void setAndOr(String andOr) {
+            this.andOr = andOr;
+        }
+
+        public ValueType getValueType() {
+            return valueType;
+        }
+
+        public void setValueType(ValueType valueType) {
+            this.valueType = valueType;
         }
     }
 
@@ -143,11 +254,13 @@ public class Criteria<A, B> {
         }
     }
 
+    public Criteria() {
+    }
+
     private Criteria(Class entityClass) {
         statement = new Statement();
         statement.criterions = new LinkedList();
         statement.clazz = entityClass;
-        cacheEntityTable(entityClass);
     }
 
     public static <A, B> Criteria<A, B> of(Class<A> entityClass) {
@@ -306,13 +419,25 @@ public class Criteria<A, B> {
         return this;
     }
 
-    public String getSql() {
+    public String buildSql() {
+        //缓存实体表
+        cacheEntityTable(statement.clazz);
         StringBuilder sql = new StringBuilder("");
         sql.append(SqlHelper.selectColumns(statement));
         sql.append(SqlHelper.fromTable(statement));
         sql.append(SqlHelper.whereClause(statement));
         sql.append(SqlHelper.orderByClause(statement));
         sql.append(SqlHelper.limit(statement));
+        return sql.toString();
+    }
+
+    public String buildCountSql() {
+        //缓存实体表
+        cacheEntityTable(statement.clazz);
+        StringBuilder sql = new StringBuilder("");
+        sql.append(SqlHelper.selectCount(statement));
+        sql.append(SqlHelper.fromTable(statement));
+        sql.append(SqlHelper.whereClause(statement));
         return sql.toString();
     }
 
@@ -325,11 +450,15 @@ public class Criteria<A, B> {
                 for (Object fieldStr : statement.fields) {
                     columns.add(entityTable.fieldsMap.get(fieldStr));
                 }
-                return " select " + columns.stream().collect(Collectors.joining(","));
+                return "select " + columns.stream().collect(Collectors.joining(","));
             } else {
                 Map<String, String> fieldsMap = entityTable.fieldsMap;
-                return " select " + fieldsMap.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.joining(","));
+                return "select " + fieldsMap.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.joining(","));
             }
+        }
+
+        public static String selectCount(Statement statement) {
+            return "select count(*)";
         }
 
         public static String fromTable(Statement statement) {
@@ -403,32 +532,43 @@ public class Criteria<A, B> {
         }
 
         public static String limit(Statement statement) {
-            Integer offset = statement.pageSize;
-            if (statement.pageNum > 0) {
-                Integer limit = (statement.pageNum - 1) * statement.pageSize;
-                return " limit " + limit + "," + offset;
+            if (statement.pageSize > 0) {
+                Integer offset = statement.pageSize;
+                if (statement.pageNum > 0) {
+                    Integer limit = (statement.pageNum - 1) * statement.pageSize;
+                    return " limit " + limit + "," + offset;
+                }
+                return " limit " + offset;
             }
-            return " limit " + offset;
+            return "";
         }
 
     }
 
+    public Statement getStatement() {
+        return statement;
+    }
+
+    public void setStatement(Statement statement) {
+        this.statement = statement;
+    }
+
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 100; i++) {
-            Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
-                    .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
-                    .page(3, 10)
-                    .sort(GoodsTest::getId, SortOrder.ASC)
-                    .andIsNotNull(GoodsTest::getAppExclusivePrice)
-                    .andEqualTo(GoodsTest::getCounterPrice, "222")
-                    .andEqualTo(GoodsTest::getBrandId, 333)
-                    .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
-                    .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
-                    .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc","ddd"))
-                    .sort(GoodsTest::getBrandId, SortOrder.DESC);
-            System.out.println(JsonUtil.getInstance().obj2json(criteria));
-        }
+        Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
+                .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
+                .page(3, 10)
+                .sort(GoodsTest::getId, SortOrder.ASC)
+                .andIsNotNull(GoodsTest::getAppExclusivePrice)
+                .andEqualTo(GoodsTest::getCounterPrice, "222")
+                .andEqualTo(GoodsTest::getBrandId, 333)
+                .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
+                .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
+                .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc", "ddd"))
+                .sort(GoodsTest::getBrandId, SortOrder.DESC);
+//        System.out.println(JsonUtil.getInstance().obj2json(criteria));
+        System.out.println(criteria.buildSql());
+        System.out.println(criteria.buildCountSql());
         System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }
 }

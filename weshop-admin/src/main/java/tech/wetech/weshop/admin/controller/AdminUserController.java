@@ -33,7 +33,7 @@ public class AdminUserController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<User>> queryList(User entity, PageQuery pageQuery) {
-        return userApi.queryListByQueryWrapper(new QueryWrapper(pageQuery, entity))
+        return userApi.queryByCriteria(null)
                 .addExtra("userLevel", userLevelApi.queryAll().getData().stream().collect(Collectors.toMap(UserLevel::getId, UserLevel::getName)))
                 .addExtra("gender", Arrays.stream(GenderEnum.values()).collect(Collectors.toMap(e -> e, GenderEnum::getName)));
     }

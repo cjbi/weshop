@@ -169,7 +169,7 @@ Page({
     },
     getCheckedProductItem: function (key) {
         return this.data.productList.filter(function (v) {
-            if (v.goods_specification_ids == key) {
+            if (v.goodsSpecificationIds == key) {
                 return true;
             } else {
                 return false;

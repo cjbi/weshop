@@ -4,11 +4,10 @@ import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.query.PageQuery;
-import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.MyMapper;
 import tk.mybatis.mapper.code.Style;
-import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 public abstract class BaseService<T> implements IService<T> {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     protected MyMapper<T> mapper;
@@ -55,21 +54,13 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public List<T> queryListByQueryWrapper(QueryWrapper queryWrapper) {
-        List<T> ts = mapper.selectBySql("select * from weshop_goods");
-        //分页查询
-        if (queryWrapper.getPageQuery() != null) {
-            PageHelper.startPage(queryWrapper.getPageQuery());
-        }
-        if (queryWrapper.getCondition() != null) {
-            //Example查询
-            if (queryWrapper.getCondition() instanceof Example) {
-                return mapper.selectByExample(queryWrapper.getCondition());
-            }
-            //实体类查询
-            return mapper.select((T) queryWrapper.getCondition());
-        }
-        return mapper.selectAll();
+    public List<T> queryByCriteria(Criteria<T, Object> criteria) {
+        return mapper.selectBySql(criteria.buildSql());
+    }
+
+    @Override
+    public int countByCriteria(Criteria<T, Object> criteria) {
+        return mapper.countBySql(criteria.buildCountSql());
     }
 
     @Override

@@ -1,6 +1,6 @@
-const ApiRootUrl = 'http://192.168.2.204:8360/';
+const ApiRootUrl = 'http://10.0.16.138:8020/weshop-wechat/wechat/';
 
-const BaseUrl = 'http://localhost:8025/wechat/';
+const BaseUrl = 'http://10.0.16.138:8020/weshop-wechat/wechat/';
 module.exports = {
     IndexUrl: BaseUrl + 'home/index', //首页数据接口
     CatalogList: BaseUrl + 'catalog/index',  //分类目录全部分类数据接口

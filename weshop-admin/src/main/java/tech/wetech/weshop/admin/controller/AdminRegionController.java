@@ -28,7 +28,7 @@ public class AdminRegionController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Region>> queryList(Region entity, PageQuery page) {
-        return regionApi.queryListByQueryWrapper(new QueryWrapper(page, entity))
+        return regionApi.queryByCriteria(null)
                 .addExtra("regionType", Arrays.stream(RegionTypeEnum.values()).collect(Collectors.toMap(e -> e, RegionTypeEnum::getName)));
     }
 }

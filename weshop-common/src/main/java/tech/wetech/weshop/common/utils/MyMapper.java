@@ -17,4 +17,7 @@ public interface MyMapper<T> extends Mapper<T>, MySqlMapper<T> {
     //FIXME 特别注意，该接口不能被扫描到，否则会出错
     @Select("${sql}")
     List<T> selectBySql(@Param("sql") String sql);
+
+    @Select("${sql}")
+    Integer countBySql(@Param("sql") String countSql);
 }

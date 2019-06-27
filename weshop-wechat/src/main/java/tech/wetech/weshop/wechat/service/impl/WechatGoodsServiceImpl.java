@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultCodeEnum;
 import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Reflections;
@@ -83,13 +84,13 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
     @Override
     public GoodsResultVO queryList(GoodsSearchQuery goodsSearchQuery) {
-        Weekend<Goods> example = Weekend.of(Goods.class);
-        WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
         //没传分类id就查全部
+        Criteria<Goods, Object> criteria = Criteria.of(Goods.class);
         if (goodsSearchQuery.getCategoryId() == null) {
             goodsSearchQuery.setCategoryId(0);
         }
         if (goodsSearchQuery.getBrandId() != null) {
+
             criteria.andEqualTo(Goods::getBrandId, goodsSearchQuery.getBrandId());
         }
         if (goodsSearchQuery.getKeyword() != null) {
@@ -101,9 +102,8 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         if (goodsSearchQuery.getHot() != null) {
             criteria.andEqualTo(Goods::getHot, goodsSearchQuery.getHot());
         }
-        example.selectProperties(Reflections.fnToFieldName(
-                Goods::getCategoryId));
-        List<Integer> categoryIds = goodsApi.queryListByQueryWrapper(new QueryWrapper().setCondition(example)).getData().stream()
+        criteria.fields(Goods::getCategoryId);
+        List<Integer> categoryIds = goodsApi.queryByCriteria(criteria).getData().stream()
                 .map(Goods::getCategoryId)
                 .collect(Collectors.toList());
 
@@ -133,24 +133,32 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
             String orderBy = null;
             switch (goodsSearchQuery.getSort()) {
                 case "price":
-                    orderBy = "retail_price";
+//                    orderBy = "retail_price";
+                    if ("desc".equals(goodsSearchQuery.getOrder())) {
+                        criteria.sort(Goods::getRetailPrice, Criteria.SortOrder.DESC);
+                    } else {
+                        criteria.sort(Goods::getRetailPrice, Criteria.SortOrder.ASC);
+                    }
+                    break;
                 default:
                     orderBy = "id";
+                    if ("desc".equals(goodsSearchQuery.getOrder())) {
+                        criteria.sort(Goods::getId, Criteria.SortOrder.DESC);
+                    } else {
+                        criteria.sort(Goods::getId, Criteria.SortOrder.ASC);
+                    }
             }
-            if (goodsSearchQuery.getOrder() != null) {
-                orderBy += " " + goodsSearchQuery.getOrder();
-            }
-            example.setOrderByClause(orderBy);
         } else {
             //默认按照添加时间排序
-            example.setOrderByClause("id desc");
+            criteria.sort(Goods::getId, Criteria.SortOrder.DESC);
         }
-        example.selectProperties(Reflections.fnToFieldName(
+        criteria.fields(
                 Goods::getId,
                 Goods::getName,
                 Goods::getListPicUrl,
-                Goods::getRetailPrice));
-        List<Goods> goodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper(goodsSearchQuery, example)).getData();
+                Goods::getRetailPrice);
+
+        List<Goods> goodsList = goodsApi.queryByCriteria(criteria).getData();
         return new GoodsResultVO(goodsList, categoryFilter);
     }
 
@@ -177,16 +185,12 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
     @Override
     public List<Goods> queryListByCategoryIdIn(List<Integer> categoryIdList) {
-        PageHelper.startPage(1, 7);
-        Weekend<Goods> goodsWeekend = Weekend.of(Goods.class);
-        goodsWeekend.selectProperties(Reflections.fnToFieldName(
-                Goods::getId,
-                Goods::getName,
-                Goods::getListPicUrl,
-                Goods::getRetailPrice));
-        WeekendCriteria<Goods, Object> criteria = goodsWeekend.weekendCriteria();
-        criteria.andIn(Goods::getCategoryId, categoryIdList);
-        return goodsApi.queryListByQueryWrapper(new QueryWrapper().setCondition(goodsWeekend)).getData();
+
+        Criteria<Goods, Object> criteria = Criteria.of(Goods.class)
+                .fields(Goods::getId, Goods::getName, Goods::getListPicUrl, Goods::getRetailPrice)
+                .andIn(Goods::getCategoryId, categoryIdList)
+                .page(1, 7);
+        return goodsApi.queryByCriteria(criteria).getData();
     }
 
     @Override
@@ -254,21 +258,16 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         if (relatedGoodsList.isEmpty()) {
             //查找同分类下的商品
             Goods goods = goodsApi.queryById(goodsId).getData();
-            PageHelper.startPage(1, 8);
-            goodsList = goodsApi.queryList(new Goods().setCategoryId(goods.getCategoryId())).getData().stream()
+
+            goodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).andEqualTo(Goods::getCategoryId, goods.getCategoryId()).page(1, 8)).getData().stream()
                     .map(GoodsListVO::new)
                     .collect(Collectors.toList());
         } else {
             List<Integer> goodsIdList = relatedGoodsList.stream()
                     .map(RelatedGoods::getGoodsId)
                     .collect(Collectors.toList());
-            PageHelper.startPage(1, 8);
 
-            Weekend<Goods> example = Weekend.of(Goods.class);
-            WeekendCriteria<Goods, Object> criteria = example.weekendCriteria();
-            criteria.andIn(Goods::getId, goodsIdList);
-
-            goodsList = goodsApi.queryListByQueryWrapper(new QueryWrapper().setCondition(example)).getData().stream()
+            goodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).andIn(Goods::getId, goodsIdList).page(1, 8)).getData().stream()
                     .map(GoodsListVO::new)
                     .collect(Collectors.toList());
         }

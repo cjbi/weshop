@@ -1,9 +1,7 @@
 package tech.wetech.weshop.common.api;
 
-import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.service.IService;
 import tech.wetech.weshop.common.utils.Result;
 
@@ -25,19 +23,13 @@ public abstract class BaseApi<T> implements Api<T> {
     }
 
     @Override
-    @Deprecated
-    public Result<List<T>> queryListByQueryWrapper(QueryWrapper pageQueryWrapper) {
-        List<T> list = service.queryListByQueryWrapper(pageQueryWrapper);
-
-        if (list instanceof Page) {
-            return Result.success(list).addExtra("total", ((Page) list).getTotal());
-        }
-        return Result.success(list);
+    public Result<List<T>> queryByCriteria(Criteria<T, Object> criteria) {
+        return Result.success(service.queryByCriteria(criteria));
     }
 
     @Override
-    public Result<List<T>> queryByCriteria(Criteria criteria) {
-        return null;
+    public Result<Integer> countByCriteria(Criteria<T, Object> criteria) {
+        return Result.success(service.countByCriteria(criteria));
     }
 
     @Override
