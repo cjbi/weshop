@@ -1,6 +1,7 @@
 package tech.wetech.weshop.common.query;
 
 import tech.wetech.weshop.common.utils.Fn;
+import tech.wetech.weshop.common.utils.JsonUtil;
 import tech.wetech.weshop.common.utils.Reflections;
 import tech.wetech.weshop.common.utils.StringUtil;
 import tk.mybatis.mapper.code.Style;
@@ -52,8 +53,6 @@ public class Criteria<A, B> {
     static class EntityTable {
         private String tableName;
         private Map<String, String> fieldsMap;
-        private Class<?> entityClass;
-
     }
 
     enum SortOrder {
@@ -137,7 +136,6 @@ public class Criteria<A, B> {
             }
 
             EntityTable entityTable = new EntityTable();
-            entityTable.entityClass = entityClass;
             entityTable.tableName = table.name();
             entityTable.fieldsMap = fieldsMap;
 
@@ -335,10 +333,16 @@ public class Criteria<A, B> {
         }
 
         public static String fromTable(Statement statement) {
-            Table annotation = (Table) statement.clazz.getAnnotation(Table.class);
-            return " from " + annotation.name();
+            EntityTable entityTable = entityTableCache.get(statement.clazz);
+            return " from " + entityTable.tableName;
         }
 
+        /**
+         * 条件语句
+         *
+         * @param statement
+         * @return
+         */
         public static String whereClause(Statement statement) {
             EntityTable entityTable = entityTableCache.get(statement.clazz);
             List<Criterion> criterions = statement.criterions;
@@ -375,7 +379,7 @@ public class Criteria<A, B> {
                         StringBuilder listItem = new StringBuilder();
                         for (Object o : iterable) {
                             if (!(o instanceof Number)) {
-                                o = "'" + criterion.value + "'";
+                                o = "'" + o + "'";
                             }
                             listItem.append(o).append(",");
                         }
@@ -420,8 +424,10 @@ public class Criteria<A, B> {
                     .andEqualTo(GoodsTest::getCounterPrice, "222")
                     .andEqualTo(GoodsTest::getBrandId, 333)
                     .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
+                    .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
+                    .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc","ddd"))
                     .sort(GoodsTest::getBrandId, SortOrder.DESC);
-            System.out.println(criteria.getSql());
+            System.out.println(JsonUtil.getInstance().obj2json(criteria));
         }
         System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }
