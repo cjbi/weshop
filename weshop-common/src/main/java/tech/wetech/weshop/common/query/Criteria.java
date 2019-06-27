@@ -32,7 +32,7 @@ public class Criteria<A, B> implements Serializable {
         private Class<A> clazz;
 
         //字段
-        private List<String> fields;
+        private String[] fields;
 
         //条件
         private List<Criterion> criterions;
@@ -44,10 +44,9 @@ public class Criteria<A, B> implements Serializable {
         private int pageSize;
 
         //排序字段
-        private String sortName;
+        private String[] sortNames;
 
-        //顺序
-        private SortOrder sortOrder;
+        private String sortOrder;
 
         public Class<A> getClazz() {
             return clazz;
@@ -57,11 +56,11 @@ public class Criteria<A, B> implements Serializable {
             this.clazz = clazz;
         }
 
-        public List<String> getFields() {
+        public String[] getFields() {
             return fields;
         }
 
-        public void setFields(List<String> fields) {
+        public void setFields(String[] fields) {
             this.fields = fields;
         }
 
@@ -89,19 +88,19 @@ public class Criteria<A, B> implements Serializable {
             this.pageSize = pageSize;
         }
 
-        public String getSortName() {
-            return sortName;
+        public String[] getSortNames() {
+            return sortNames;
         }
 
-        public void setSortName(String sortName) {
-            this.sortName = sortName;
+        public void setSortNames(String[] sortNames) {
+            this.sortNames = sortNames;
         }
 
-        public SortOrder getSortOrder() {
+        public String getSortOrder() {
             return sortOrder;
         }
 
-        public void setSortOrder(SortOrder sortOrder) {
+        public void setSortOrder(String sortOrder) {
             this.sortOrder = sortOrder;
         }
     }
@@ -125,10 +124,6 @@ public class Criteria<A, B> implements Serializable {
         public void setFieldsMap(Map<String, String> fieldsMap) {
             this.fieldsMap = fieldsMap;
         }
-    }
-
-    public enum SortOrder {
-        ASC, DESC
     }
 
     public static class Criterion {
@@ -273,14 +268,19 @@ public class Criteria<A, B> implements Serializable {
         return this;
     }
 
-    public Criteria<A, B> sort(Fn<A, B> fn, SortOrder sortOrder) {
-        this.statement.sortName = Reflections.fnToFieldName(fn);
-        this.statement.sortOrder = sortOrder;
+    public Criteria<A, B> sort(Fn<A, B>... fns) {
+        this.statement.sortNames = Reflections.fnToFieldName(fns);
+        return this;
+    }
+
+    public Criteria<A, B> sortDesc(Fn<A, B>... fns) {
+        this.statement.sortNames = Reflections.fnToFieldName(fns);
+        this.statement.sortOrder = "desc";
         return this;
     }
 
     public Criteria<A, B> fields(Fn<A, B>... fns) {
-        this.statement.fields = Arrays.asList(Reflections.fnToFieldName(fns));
+        this.statement.fields = Reflections.fnToFieldName(fns);
         return this;
     }
 
@@ -444,16 +444,19 @@ public class Criteria<A, B> implements Serializable {
     public static class SqlHelper {
 
         public static String selectColumns(Statement statement) {
+            StringBuilder selectColumns = new StringBuilder("select ");
             EntityTable entityTable = entityTableCache.get(statement.clazz);
-            if (statement.fields != null && statement.fields.size() > 0) {
+            if (statement.fields != null && statement.fields.length > 0) {
                 List<String> columns = new ArrayList();
                 for (Object fieldStr : statement.fields) {
                     columns.add(entityTable.fieldsMap.get(fieldStr));
                 }
-                return "select " + columns.stream().collect(Collectors.joining(","));
+                return selectColumns.append(String.join(",", columns)).toString();
             } else {
                 Map<String, String> fieldsMap = entityTable.fieldsMap;
-                return "select " + fieldsMap.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.joining(","));
+                return selectColumns.append(fieldsMap.entrySet().stream()
+                        .map(Map.Entry::getValue)
+                        .collect(Collectors.joining(","))).toString();
             }
         }
 
@@ -477,7 +480,6 @@ public class Criteria<A, B> implements Serializable {
             List<Criterion> criterions = statement.criterions;
             StringBuilder whereClause = new StringBuilder();
             if (criterions.size() > 0) {
-
                 for (int i = 0; i < criterions.size(); i++) {
                     Criterion criterion = criterions.get(i);
                     if (i == 0) {
@@ -523,12 +525,24 @@ public class Criteria<A, B> implements Serializable {
         }
 
         public static String orderByClause(Statement statement) {
-            EntityTable entityTable = entityTableCache.get(statement.clazz);
-            String sortName = statement.sortName;
-            if (sortName == null) {
+            if (statement.sortNames == null) {
                 return "";
             }
-            return " order by " + entityTable.fieldsMap.get(sortName) + " " + statement.sortOrder;
+            EntityTable entityTable = entityTableCache.get(statement.clazz);
+            StringBuilder orderByClause = new StringBuilder();
+            for (int i = 0; i < statement.sortNames.length; i++) {
+                if (i == 0) {
+                    orderByClause.append(" order by ");
+                }
+                orderByClause.append(entityTable.fieldsMap.get(statement.sortNames[i])).append(",");
+            }
+            if (orderByClause.length() > 0) {
+                orderByClause.deleteCharAt(orderByClause.length() - 1);
+            }
+            if (statement.sortOrder != null) {
+                orderByClause.append(" " + statement.sortOrder);
+            }
+            return orderByClause.toString();
         }
 
         public static String limit(Statement statement) {
@@ -556,19 +570,18 @@ public class Criteria<A, B> implements Serializable {
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
         Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
-                .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
+//                .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
                 .page(3, 10)
-                .sort(GoodsTest::getId, SortOrder.ASC)
                 .andIsNotNull(GoodsTest::getAppExclusivePrice)
                 .andEqualTo(GoodsTest::getCounterPrice, "222")
                 .andEqualTo(GoodsTest::getBrandId, 333)
                 .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
                 .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
                 .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc", "ddd"))
-                .sort(GoodsTest::getBrandId, SortOrder.DESC);
+                .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
 //        System.out.println(JsonUtil.getInstance().obj2json(criteria));
         System.out.println(criteria.buildSql());
-        System.out.println(criteria.buildCountSql());
+//        System.out.println(criteria.buildCountSql());
         System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }
 }

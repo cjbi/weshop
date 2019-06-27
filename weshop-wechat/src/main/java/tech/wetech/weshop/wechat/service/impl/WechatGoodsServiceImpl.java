@@ -135,22 +135,22 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
                 case "price":
 //                    orderBy = "retail_price";
                     if ("desc".equals(goodsSearchQuery.getOrder())) {
-                        criteria.sort(Goods::getRetailPrice, Criteria.SortOrder.DESC);
+                        criteria.sortDesc(Goods::getRetailPrice);
                     } else {
-                        criteria.sort(Goods::getRetailPrice, Criteria.SortOrder.ASC);
+                        criteria.sort(Goods::getRetailPrice);
                     }
                     break;
                 default:
                     orderBy = "id";
                     if ("desc".equals(goodsSearchQuery.getOrder())) {
-                        criteria.sort(Goods::getId, Criteria.SortOrder.DESC);
+                        criteria.sortDesc(Goods::getId);
                     } else {
-                        criteria.sort(Goods::getId, Criteria.SortOrder.ASC);
+                        criteria.sort(Goods::getId);
                     }
             }
         } else {
             //默认按照添加时间排序
-            criteria.sort(Goods::getId, Criteria.SortOrder.DESC);
+            criteria.sortDesc(Goods::getId);
         }
         criteria.fields(
                 Goods::getId,

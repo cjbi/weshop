@@ -54,19 +54,17 @@ public class WechatHomeServiceImpl implements WechatHomeService {
         List<Ad> bannerList = adApi.queryList(new Ad().setAdPositionId((short) 1)).getData();
 
 
-        channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder, Criteria.SortOrder.ASC));
+        channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder));
 
-        List<Channel> channelList = channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder, Criteria.SortOrder.ASC)).getData();
+        List<Channel> channelList = channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder)).getData();
 
         Criteria.of(Goods.class).page(1,4).andEqualTo(Goods::getNewly,true);
 
         List<Goods> newGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).page(1,4).andEqualTo(Goods::getNewly,true)).getData();
 
-
-
         List<Goods> hotGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).page(1,4).andEqualTo(Goods::getHot,true)).getData();
 
-        List<Brand> brandList = brandApi.queryByCriteria(Criteria.of(Brand.class).andEqualTo(Brand::getNewly,true).sort(Brand::getNewSortOrder, Criteria.SortOrder.ASC)).getData();
+        List<Brand> brandList = brandApi.queryByCriteria(Criteria.of(Brand.class).andEqualTo(Brand::getNewly,true).sort(Brand::getNewSortOrder)).getData();
 
         List<Topic> topicList = topicApi.queryAll().getData();
 
