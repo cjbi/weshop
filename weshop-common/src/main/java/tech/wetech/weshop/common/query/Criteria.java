@@ -490,16 +490,16 @@ public class Criteria<A, B> implements Serializable {
                         whereClause.append(entityTable.fieldsMap.get(criterion.property) + " " + criterion.condition);
                     }
                     if (criterion.valueType == Criterion.ValueType.singleValue) {
-                        if (!(criterion.value instanceof Number)) {
+                        if (!(criterion.value instanceof Number || criterion.value instanceof Boolean)) {
                             criterion.value = "'".concat(criterion.value.toString()).concat("'");
                         }
                         whereClause.append(entityTable.fieldsMap.get(criterion.property) + " " + criterion.condition + " " + criterion.value);
                     }
                     if (criterion.valueType == Criterion.ValueType.betweenValue) {
-                        if (!(criterion.value instanceof Number)) {
+                        if (!(criterion.value instanceof Number || criterion.value instanceof Boolean)) {
                             criterion.value = "'".concat(criterion.value.toString()).concat("'");
                         }
-                        if (!(criterion.secondValue instanceof Number)) {
+                        if (!(criterion.secondValue instanceof Number || criterion.value instanceof Boolean)) {
                             criterion.secondValue = "'".concat(criterion.secondValue.toString()).concat("'");
                         }
                         whereClause.append(entityTable.fieldsMap.get(criterion.property) + " " + criterion.condition + " " + criterion.value + " AND " + criterion.secondValue);
@@ -508,7 +508,7 @@ public class Criteria<A, B> implements Serializable {
                         Iterable iterable = (Iterable) criterion.value;
                         StringBuilder listItem = new StringBuilder();
                         for (Object o : iterable) {
-                            if (!(o instanceof Number)) {
+                            if (!(o instanceof Number || criterion.value instanceof Boolean)) {
                                 o = "'".concat(o.toString()).concat("'");
                             }
                             listItem.append(o).append(",");

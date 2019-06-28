@@ -494,11 +494,11 @@ CREATE TABLE `weshop_channel` (
 -- Records of weshop_channel
 -- ----------------------------
 BEGIN;
-INSERT INTO `weshop_channel` VALUES (1, '居家', '/pages/category/category?id=1005000', 'http://ac-3yr0g9cz.clouddn.com/c031ea3cf575f885cd1c.png', 1);
-INSERT INTO `weshop_channel` VALUES (2, '餐厨', '/pages/category/category?id=1005001', 'http://ac-3yr0g9cz.clouddn.com/4fbe8913819b017ebe1b.png', 2);
-INSERT INTO `weshop_channel` VALUES (3, '配件', '/pages/category/category?id=1008000', 'http://ac-3yr0g9cz.clouddn.com/e8070853e6c6f5627713.png', 3);
-INSERT INTO `weshop_channel` VALUES (4, '服装', '/pages/category/category?id=1005002', 'http://ac-3yr0g9cz.clouddn.com/4fa3c0c72964901c5a45.png', 4);
-INSERT INTO `weshop_channel` VALUES (5, '志趣', '/pages/category/category?id=1019000', 'http://ac-3yr0g9cz.clouddn.com/da8716daa0ede53a9bb8.png', 5);
+INSERT INTO `weshop_channel` VALUES (1, '居家', '/pages/category/category?id=1005000', 'http://yanxuan.nosdn.127.net/a45c2c262a476fea0b9fc684fed91ef5.png', 1);
+INSERT INTO `weshop_channel` VALUES (2, '餐厨', '/pages/category/category?id=1005001', 'http://yanxuan.nosdn.127.net/ad8b00d084cb7d0958998edb5fee9c0a.png', 2);
+INSERT INTO `weshop_channel` VALUES (3, '配件', '/pages/category/category?id=1008000', 'http://yanxuan.nosdn.127.net/11abb11c4cfdee59abfb6d16caca4c6a.png', 3);
+INSERT INTO `weshop_channel` VALUES (4, '服装', '/pages/category/category?id=1005002', 'http://yanxuan.nosdn.127.net/28a685c96f91584e7e4876f1397767db.png', 4);
+INSERT INTO `weshop_channel` VALUES (5, '志趣', '/pages/category/category?id=1019000', 'http://yanxuan.nosdn.127.net/7093cfecb9dde1dd3eaf459623df4071.png', 5);
 COMMIT;
 
 -- ----------------------------
