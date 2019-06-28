@@ -1,18 +1,21 @@
 package tech.wetech.weshop.wechat.vo;
 
+import javax.validation.constraints.NotNull;
+
 public class CartCheckedVO {
 
-    private Integer cartId;
+    @NotNull
+    private String productIds;
 
+    @NotNull
     private Boolean checked;
 
-    public Integer getCartId() {
-        return cartId;
+    public String getProductIds() {
+        return productIds;
     }
 
-    public CartCheckedVO setCartId(Integer cartId) {
-        this.cartId = cartId;
-        return this;
+    public void setProductIds(String productIds) {
+        this.productIds = productIds;
     }
 
     public Boolean getChecked() {

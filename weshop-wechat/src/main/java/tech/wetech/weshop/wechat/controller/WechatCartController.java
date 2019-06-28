@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.CartApi;
-import tech.wetech.weshop.order.po.Cart;
 import tech.wetech.weshop.wechat.service.WechatCartService;
 import tech.wetech.weshop.wechat.vo.CartCheckedVO;
 import tech.wetech.weshop.wechat.vo.CartCheckoutVO;
@@ -51,9 +50,7 @@ public class WechatCartController extends BaseController {
 
     @PostMapping("/checked")
     public Result<CartResultVO> checkedCartGoods(@RequestBody @Validated CartCheckedVO cartCheckedVO) {
-        cartApi.updateNotNull(new Cart()
-                .setId(cartCheckedVO.getCartId())
-                .setChecked(cartCheckedVO.getChecked()));
+        wechatCartService.checkedCartGoods(cartCheckedVO);
         return Result.success(wechatCartService.getCart());
     }
 

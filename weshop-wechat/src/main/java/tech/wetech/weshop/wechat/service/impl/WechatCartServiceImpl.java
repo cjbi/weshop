@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.wetech.weshop.common.enums.ResultCodeEnum;
 import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.goods.api.GoodsApi;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
@@ -19,6 +20,7 @@ import tech.wetech.weshop.user.api.UserCouponApi;
 import tech.wetech.weshop.user.po.Address;
 import tech.wetech.weshop.user.po.UserCoupon;
 import tech.wetech.weshop.wechat.service.WechatCartService;
+import tech.wetech.weshop.wechat.vo.CartCheckedVO;
 import tech.wetech.weshop.wechat.vo.CartCheckoutVO;
 import tech.wetech.weshop.wechat.vo.CartParamVO;
 import tech.wetech.weshop.wechat.vo.CartResultVO;
@@ -72,8 +74,7 @@ public class WechatCartServiceImpl implements WechatCartService {
                 checkedGoodsCount += cart.getNumber();
                 //checkedGoodsAmount = checkedGoodsAmount + retailPrice * number
                 checkedGoodsAmount = checkedGoodsAmount.add(
-                        cart.getRetailPrice().multiply(new BigDecimal(cart.getNumber())))
-                ;
+                        cart.getRetailPrice().multiply(new BigDecimal(cart.getNumber())));
             }
         }
 
@@ -83,6 +84,15 @@ public class WechatCartServiceImpl implements WechatCartService {
                 .setCheckedGoodsAmount(checkedGoodsAmount);
 
         return new CartResultVO(cartList, cartTotalVO);
+    }
+
+    @Override
+    public void checkedCartGoods(CartCheckedVO cartCheckedVO) {
+        List<Integer> productIds = Arrays.stream(cartCheckedVO.getProductIds().split(",")).map(Integer::valueOf).collect(Collectors.toList());
+
+        cartApi.queryByCriteria(Criteria.of(Cart.class).fields(Cart::getId).andIn(Cart::getProductId, productIds)).getData().stream()
+                .map(Cart::getId)
+                .forEach(cartId -> cartApi.updateNotNull(new Cart().setChecked(cartCheckedVO.getChecked()).setId(cartId)));
     }
 
     @Override
