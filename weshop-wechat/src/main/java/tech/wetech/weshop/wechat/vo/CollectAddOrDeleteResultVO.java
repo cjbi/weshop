@@ -2,25 +2,20 @@ package tech.wetech.weshop.wechat.vo;
 
 public class CollectAddOrDeleteResultVO {
 
-    private HandleType type;
+    private boolean userHasCollect;
 
     public CollectAddOrDeleteResultVO() {
     }
 
-    public CollectAddOrDeleteResultVO(HandleType type) {
-        this.type = type;
+    public CollectAddOrDeleteResultVO(boolean userHasCollect) {
+        this.userHasCollect = userHasCollect;
     }
 
-    public enum HandleType {
-        add, delete
+    public boolean isUserHasCollect() {
+        return userHasCollect;
     }
 
-    public HandleType getType() {
-        return type;
-    }
-
-    public CollectAddOrDeleteResultVO setType(HandleType type) {
-        this.type = type;
-        return this;
+    public void setUserHasCollect(boolean userHasCollect) {
+        this.userHasCollect = userHasCollect;
     }
 }

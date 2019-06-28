@@ -2,6 +2,7 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.user.api.CollectApi;
 import tech.wetech.weshop.user.dto.GoodsCollectDTO;
@@ -19,25 +20,26 @@ public class WechatCollectServiceImpl implements WechatCollectService {
     private CollectApi collectApi;
 
     @Override
-    public CollectAddOrDeleteResultVO addOrDelete(CollectAddOrDeleteParamVO collectAddOrDeleteParamDTO) {
-        Collect collect = collectApi.queryOne(new Collect() {{
-            setTypeId(collectAddOrDeleteParamDTO.getTypeId());
-            setValueId(collectAddOrDeleteParamDTO.getValueId());
-            setUserId(Constants.CURRENT_USER_ID);
-        }}).getData();
-        CollectAddOrDeleteResultVO.HandleType type = CollectAddOrDeleteResultVO.HandleType.add;
+    public CollectAddOrDeleteResultVO addOrDelete(CollectAddOrDeleteParamVO dto) {
+        List<Collect> data = collectApi.queryByCriteria(
+                Criteria.of(Collect.class).andEqualTo(Collect::getTypeId, dto.getTypeId())
+                        .andEqualTo(Collect::getValueId, dto.getValueId())
+                        .andEqualTo(Collect::getUserId, Constants.CURRENT_USER_ID)).getData();
         //添加收藏
-        if (collect == null) {
-            collectApi.create(new Collect() {{
-                setTypeId(collectAddOrDeleteParamDTO.getTypeId());
-                setValueId(collectAddOrDeleteParamDTO.getValueId());
-                setUserId(Constants.CURRENT_USER_ID);
-            }});
+        if (data.size() == 0) {
+            collectApi.create(new Collect()
+                    .setTypeId(dto.getTypeId())
+                    .setValueId(dto.getValueId())
+                    .setUserId(Constants.CURRENT_USER_ID));
+            return new CollectAddOrDeleteResultVO(true);
         } else {
-            collectApi.deleteById(collect.getId());
-            type = CollectAddOrDeleteResultVO.HandleType.delete;
+            collectApi.delete(new Collect()
+                    .setTypeId(dto.getTypeId())
+                    .setValueId(dto.getValueId())
+                    .setUserId(Constants.CURRENT_USER_ID));
+            return new CollectAddOrDeleteResultVO(false);
         }
-        return new CollectAddOrDeleteResultVO(type);
+
     }
 
     @Override

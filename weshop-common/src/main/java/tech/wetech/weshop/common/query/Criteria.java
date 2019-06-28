@@ -3,7 +3,6 @@ package tech.wetech.weshop.common.query;
 import tech.wetech.weshop.common.utils.Fn;
 import tech.wetech.weshop.common.utils.Reflections;
 import tech.wetech.weshop.common.utils.StringUtil;
-import tk.mybatis.mapper.code.Style;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -224,9 +223,9 @@ public class Criteria<A, B> implements Serializable {
      *
      * @param entityClass
      */
-    private void cacheEntityTable(Class entityClass) {
+    private void cacheEntityTable(Class<A> entityClass) {
         if (!entityTableCache.containsKey(entityClass)) {
-            Table table = (Table) entityClass.getAnnotation(Table.class);
+            Table table = entityClass.getAnnotation(Table.class);
             Map<String, String> fieldsMap = new LinkedHashMap<>();
             Field[] declaredFields = entityClass.getDeclaredFields();
 
@@ -235,7 +234,7 @@ public class Criteria<A, B> implements Serializable {
                     Column column = declaredField.getAnnotation(Column.class);
                     fieldsMap.put(declaredField.getName(), column.name());
                 } else {
-                    String s = StringUtil.convertByStyle(declaredField.getName(), Style.camelhump);
+                    String s = StringUtil.convertByStyle(declaredField.getName(), StringUtil.Style.camelhump);
                     fieldsMap.put(declaredField.getName(), s);
                 }
             }
@@ -418,8 +417,12 @@ public class Criteria<A, B> implements Serializable {
         return this;
     }
 
+    /**
+     * 构建普通sql
+     *
+     * @return
+     */
     public String buildSql() {
-        //缓存实体表
         cacheEntityTable(statement.clazz);
         StringBuilder sql = new StringBuilder("");
         sql.append(SqlHelper.selectColumns(statement));
@@ -430,8 +433,12 @@ public class Criteria<A, B> implements Serializable {
         return sql.toString();
     }
 
+    /**
+     * 构建统计的sql
+     *
+     * @return
+     */
     public String buildCountSql() {
-        //缓存实体表
         cacheEntityTable(statement.clazz);
         StringBuilder sql = new StringBuilder("");
         sql.append(SqlHelper.selectCount(statement));
@@ -570,7 +577,7 @@ public class Criteria<A, B> implements Serializable {
         long time = System.currentTimeMillis();
         for (int i = 0; i < 10000; i++) {
             Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
-//                .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
+                    .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
                     .page(3, 10)
                     .andIsNotNull(GoodsTest::getAppExclusivePrice)
                     .andEqualTo(GoodsTest::getCounterPrice, "222")

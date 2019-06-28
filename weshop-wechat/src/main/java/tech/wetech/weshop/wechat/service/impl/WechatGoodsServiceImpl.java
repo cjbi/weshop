@@ -199,10 +199,9 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         Brand brand = brandApi.queryById(goods.getBrandId()).getData();
 
         //商品评价
-        int commentCount = commentApi.count(new Comment().setValueId(id).setTypeId((byte) 0)).getData();
-        commentApi.queryByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0).page(1, 1)).getData().get(0);
-        Comment hotComment = commentApi.queryByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0).page(1, 1)).getData().get(0);
-        if (hotComment != null) {
+        int commentCount = commentApi.countByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0)).getData();
+        if (commentCount > 0) {
+            Comment hotComment = commentApi.queryByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0).page(1, 1)).getData().get(0);
             GoodsDetailVO.CommentVO.CommentDataVO commentData = new GoodsDetailVO.CommentVO.CommentDataVO();
             String content = new String(Base64.getDecoder().decode(hotComment.getContent()));
             User user = userApi.queryById(hotComment.getUserId()).getData();
@@ -218,7 +217,6 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
             goodsDetailDTO.setComment(new GoodsDetailVO.CommentVO(commentCount, commentData));
         }
 
-
         List<GoodsDetailVO.GoodsSpecificationVO> goodsSpecificationVOList = this.queryGoodsDetailSpecificationByGoodsId(id);
         List<Product> productList = productApi.queryList(new Product().setGoodsId(id)).getData();
 
@@ -232,8 +230,9 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         goodsDetailDTO.setProductList(productList);
 
         //用户是否收藏
-        Collect userCollect = collectApi.queryByCriteria(Criteria.of(Collect.class).andEqualTo(Collect::getUserId, Constants.CURRENT_USER_ID).andEqualTo(Collect::getValueId, id).page(1, 1)).getData().get(0);
-        goodsDetailDTO.setUserHasCollect(userCollect == null ? false : true);
+        List<Collect> userCollect = collectApi.queryByCriteria(Criteria.of(Collect.class).andEqualTo(Collect::getUserId, Constants.CURRENT_USER_ID).andEqualTo(Collect::getValueId, id).page(1, 1)).getData();
+
+        goodsDetailDTO.setUserHasCollect(userCollect.size() > 0 ? true : false);
 
         //记录用户足迹 此处使用异步处理
         Footprint footprint = new Footprint()
