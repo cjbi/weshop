@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.query.PageQuery;
-import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.marketing.api.TopicApi;
 import tech.wetech.weshop.marketing.po.Topic;
@@ -28,9 +27,10 @@ public class WechatTopicController extends BaseController {
 
     @GetMapping("/list")
     public Result<List<Topic>> list(PageQuery pageQuery, Topic topic) {
-        pageQuery.setCountSql(true);
-        //FIXME 此处需要查分页数和条件查询
-        return topicApi.queryByCriteria(Criteria.of(Topic.class).page(pageQuery.getPageNum(),pageQuery.getPageSize()));
+        //FIXME 此处需要条件查询
+        Criteria<Topic, Object> criteria = Criteria.of(Topic.class).page(pageQuery.getPageNum(), pageQuery.getPageSize());
+        return topicApi.queryByCriteria(criteria)
+                .addExtra("total", topicApi.countByCriteria(criteria));
     }
 
     @GetMapping

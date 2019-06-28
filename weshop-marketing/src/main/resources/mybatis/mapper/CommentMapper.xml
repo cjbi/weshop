@@ -31,5 +31,24 @@
             WHERE
             comment_id = wc.id)
         </if>
+        limit ${offset},${limit}
+    </select>
+    <select id="countIfRequirePictureList" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        weshop_comment wc
+        where
+        type_id=#{typeId}
+        and value_id=#{valueId}
+        <if test="requirePicture">
+            AND wc.id IN (
+            SELECT
+            DISTINCT comment_id
+            FROM
+            weshop_comment_picture
+            WHERE
+            comment_id = wc.id)
+        </if>
     </select>
 </mapper>

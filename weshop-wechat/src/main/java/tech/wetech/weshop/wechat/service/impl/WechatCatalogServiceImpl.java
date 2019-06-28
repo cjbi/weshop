@@ -1,8 +1,8 @@
 package tech.wetech.weshop.wechat.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.enums.CategoryLevelEnum;
 import tech.wetech.weshop.goods.po.Category;
@@ -27,8 +27,7 @@ public class WechatCatalogServiceImpl implements WechatCatalogService {
     @Override
     public CategoryIndexVO index(Integer categoryId) {
         List<CategoryVO> categoryList = new LinkedList<>();
-        PageHelper.startPage(1, 10);
-        categoryApi.queryList(new Category().setParentId(0)).getData().forEach(c -> {
+        categoryApi.queryByCriteria(Criteria.of(Category.class).andEqualTo(Category::getParentId, 0).page(1, 10)).getData().forEach(c -> {
             CategoryVO categoryDTO = new CategoryVO(c);
             List<Category> subCategoryList = categoryApi.queryList(new Category().setParentId(c.getId())).getData();
             categoryDTO.setSubCategoryList(subCategoryList);

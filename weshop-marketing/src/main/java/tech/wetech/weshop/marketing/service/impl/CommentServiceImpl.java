@@ -21,6 +21,13 @@ public class CommentServiceImpl extends BaseService<Comment> implements CommentS
 
     @Override
     public List<Comment> queryIfRequirePictureList(CommentQuery commentQuery) {
-        return commentMapper.selectIfRequirePictureList(commentQuery);
+        int limit = commentQuery.getPageSize();
+        int offset = (commentQuery.getPageNum() - 1) * limit;
+        return commentMapper.selectIfRequirePictureList(commentQuery, offset, limit);
+    }
+
+    @Override
+    public Integer countIfRequirePictureList(CommentQuery commentQuery) {
+        return commentMapper.countIfRequirePictureList(commentQuery);
     }
 }

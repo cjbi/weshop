@@ -1,10 +1,10 @@
 package tech.wetech.weshop.wechat.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultCodeEnum;
 import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.IdGenerator;
 import tech.wetech.weshop.order.api.CartApi;
@@ -56,8 +56,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
 
     @Override
     public List<OrderListVO> queryOrderList(OrderQuery orderQuery) {
-        PageHelper.startPage(orderQuery);
-        List<Order> orderList = orderApi.queryList(new Order().setUserId(Constants.CURRENT_USER_ID)).getData();
+        List<Order> orderList = orderApi.queryByCriteria(Criteria.of(Order.class).andEqualTo(Order::getUserId, Constants.CURRENT_USER_ID).page(orderQuery.getPageNum(), orderQuery.getPageSize())).getData();
         List<OrderListVO> orderVOList = new LinkedList<>();
         for (Order order : orderList) {
             OrderListVO orderVO = new OrderListVO(order)

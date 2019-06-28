@@ -1,6 +1,5 @@
 package tech.wetech.weshop.wechat.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.marketing.api.CommentApi;
@@ -30,7 +29,6 @@ public class WechatCommentServiceImpl implements WechatCommentService {
 
     @Override
     public List<CommentResultVO> queryList(CommentQuery commentQuery) {
-        PageHelper.startPage(commentQuery).setCount(false);
         List<CommentResultVO> commentResultList = commentApi.queryIfRequirePictureList(commentQuery).stream()
                 .map(CommentResultVO::new)
                 .collect(Collectors.toList());
@@ -44,12 +42,8 @@ public class WechatCommentServiceImpl implements WechatCommentService {
 
     @Override
     public CommentCountVO countList(CommentQuery commentQuery) {
-        long hasPicCount = PageHelper.startPage(commentQuery)
-                .setCount(true)
-                .doCount(() -> commentApi.queryIfRequirePictureList(commentQuery.setRequirePicture(true)));
-        long allCount = PageHelper.startPage(commentQuery)
-                .setCount(true)
-                .doCount(() -> commentApi.queryIfRequirePictureList(commentQuery.setRequirePicture(false)));
+        Integer hasPicCount = commentApi.countIfRequirePictureList(commentQuery.setRequirePicture(true)).getData();
+        Integer allCount = commentApi.countIfRequirePictureList(commentQuery.setRequirePicture(false)).getData();
         return new CommentCountVO(allCount, hasPicCount);
     }
 }

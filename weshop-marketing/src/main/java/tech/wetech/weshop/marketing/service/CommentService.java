@@ -13,4 +13,5 @@ public interface CommentService extends IService<Comment> {
 
     List<Comment> queryIfRequirePictureList(CommentQuery commentQuery);
 
+    Integer countIfRequirePictureList(CommentQuery commentQuery);
 }

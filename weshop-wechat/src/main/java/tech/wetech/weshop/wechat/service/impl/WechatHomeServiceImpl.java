@@ -1,10 +1,9 @@
 package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.query.PageQuery;
-import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.goods.api.BrandApi;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.api.ChannelApi;
@@ -20,8 +19,6 @@ import tech.wetech.weshop.marketing.po.Topic;
 import tech.wetech.weshop.wechat.service.WechatHomeService;
 import tech.wetech.weshop.wechat.vo.HomeCategoryVO;
 import tech.wetech.weshop.wechat.vo.HomeIndexVO;
-import tk.mybatis.mapper.weekend.Weekend;
-import tk.mybatis.mapper.weekend.WeekendCriteria;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,11 +45,10 @@ public class WechatHomeServiceImpl implements WechatHomeService {
     private CategoryApi categoryApi;
 
     @Override
-//    @Cacheable("index")
+    @Cacheable("index")
     public HomeIndexVO index() {
 
         List<Ad> bannerList = adApi.queryList(new Ad().setAdPositionId((short) 1)).getData();
-
 
         channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder));
 

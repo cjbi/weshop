@@ -1,6 +1,5 @@
 package tech.wetech.weshop.common.controller;
 
-import com.github.pagehelper.Page;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import tech.wetech.weshop.common.query.PageQuery;
 import tech.wetech.weshop.common.service.IService;
 import tech.wetech.weshop.common.utils.Result;
 
@@ -26,11 +24,10 @@ public abstract class BaseCrudController<T> extends BaseController {
     protected IService<T> service;
 
     @GetMapping("/list")
-    @ApiOperation("分页查询数据")
-    public Result queryList(T entity, PageQuery pageQuery) {
-        List<T> list = service.queryListByPage(entity, pageQuery);
-        return Result.success(service.queryListByPage(entity, pageQuery))
-                .addExtraIfTrue(pageQuery.isCountSql(), "total", ((Page) list).getTotal());
+    @ApiOperation("查询数据")
+    public Result queryList(T entity) {
+        List<T> list = service.queryList(entity);
+        return Result.success(list);
     }
 
     @GetMapping

@@ -13,5 +13,8 @@ public interface CommentMapper extends MyMapper<Comment> {
      *
      * @return
      */
-    List<Comment> selectIfRequirePictureList(CommentQuery commentQuery);
+    List<Comment> selectIfRequirePictureList(CommentQuery commentQuery, int offset, int limit);
+
+    Integer countIfRequirePictureList(CommentQuery commentQuery);
+
 }

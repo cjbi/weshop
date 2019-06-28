@@ -1,7 +1,6 @@
 package tech.wetech.weshop.common.query;
 
 import tech.wetech.weshop.common.utils.Fn;
-import tech.wetech.weshop.common.utils.JsonUtil;
 import tech.wetech.weshop.common.utils.Reflections;
 import tech.wetech.weshop.common.utils.StringUtil;
 import tk.mybatis.mapper.code.Style;
@@ -492,16 +491,16 @@ public class Criteria<A, B> implements Serializable {
                     }
                     if (criterion.valueType == Criterion.ValueType.singleValue) {
                         if (!(criterion.value instanceof Number)) {
-                            criterion.value = "'" + criterion.value + "'";
+                            criterion.value = "'".concat(criterion.value.toString()).concat("'");
                         }
                         whereClause.append(entityTable.fieldsMap.get(criterion.property) + " " + criterion.condition + " " + criterion.value);
                     }
                     if (criterion.valueType == Criterion.ValueType.betweenValue) {
                         if (!(criterion.value instanceof Number)) {
-                            criterion.value = "'" + criterion.value + "'";
+                            criterion.value = "'".concat(criterion.value.toString()).concat("'");
                         }
                         if (!(criterion.secondValue instanceof Number)) {
-                            criterion.secondValue = "'" + criterion.secondValue + "'";
+                            criterion.secondValue = "'".concat(criterion.secondValue.toString()).concat("'");
                         }
                         whereClause.append(entityTable.fieldsMap.get(criterion.property) + " " + criterion.condition + " " + criterion.value + " AND " + criterion.secondValue);
                     }
@@ -510,7 +509,7 @@ public class Criteria<A, B> implements Serializable {
                         StringBuilder listItem = new StringBuilder();
                         for (Object o : iterable) {
                             if (!(o instanceof Number)) {
-                                o = "'" + o + "'";
+                                o = "'".concat(o.toString()).concat("'");
                             }
                             listItem.append(o).append(",");
                         }
@@ -569,19 +568,21 @@ public class Criteria<A, B> implements Serializable {
 
     public static void main(String[] args) {
         long time = System.currentTimeMillis();
-        Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
+        for (int i = 0; i < 10000; i++) {
+            Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
 //                .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
-                .page(3, 10)
-                .andIsNotNull(GoodsTest::getAppExclusivePrice)
-                .andEqualTo(GoodsTest::getCounterPrice, "222")
-                .andEqualTo(GoodsTest::getBrandId, 333)
-                .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
-                .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
-                .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc", "ddd"))
-                .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
+                    .page(3, 10)
+                    .andIsNotNull(GoodsTest::getAppExclusivePrice)
+                    .andEqualTo(GoodsTest::getCounterPrice, "222")
+                    .andEqualTo(GoodsTest::getBrandId, 333)
+                    .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
+                    .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
+                    .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc", "ddd"))
+                    .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
 //        System.out.println(JsonUtil.getInstance().obj2json(criteria));
-        System.out.println(criteria.buildSql());
-//        System.out.println(criteria.buildCountSql());
+            System.out.println(criteria.buildSql());
+//            System.out.println(criteria.buildCountSql());
+        }
         System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }
 }

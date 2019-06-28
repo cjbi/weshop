@@ -1,10 +1,6 @@
 package tech.wetech.weshop.common.service;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.query.PageQuery;
-import tech.wetech.weshop.common.query.QueryWrapper;
 
 import java.util.List;
 
@@ -19,8 +15,6 @@ public interface IService<T> {
     List<T> queryAll();
 
     List<T> queryList(T entity);
-
-    List<T> queryListByPage(T entity, PageQuery pageQuery);
 
     List<T> queryByCriteria(Criteria<T, Object> criteria);
 

@@ -1,6 +1,5 @@
 package tech.wetech.weshop.wechat.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,9 +7,7 @@ import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultCodeEnum;
 import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Constants;
-import tech.wetech.weshop.common.utils.Reflections;
 import tech.wetech.weshop.goods.api.*;
 import tech.wetech.weshop.goods.dto.GoodsAttributeDTO;
 import tech.wetech.weshop.goods.dto.GoodsSpecificationDTO;
@@ -27,8 +24,6 @@ import tech.wetech.weshop.user.po.Footprint;
 import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatGoodsService;
 import tech.wetech.weshop.wechat.vo.*;
-import tk.mybatis.mapper.weekend.Weekend;
-import tk.mybatis.mapper.weekend.WeekendCriteria;
 
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -205,8 +200,8 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
         //商品评价
         int commentCount = commentApi.count(new Comment().setValueId(id).setTypeId((byte) 0)).getData();
-        PageHelper.startPage(1, 1);
-        Comment hotComment = commentApi.queryOne(new Comment().setValueId(id).setTypeId((byte) 0)).getData();
+        commentApi.queryByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0).page(1, 1)).getData().get(0);
+        Comment hotComment = commentApi.queryByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0).page(1, 1)).getData().get(0);
         if (hotComment != null) {
             GoodsDetailVO.CommentVO.CommentDataVO commentData = new GoodsDetailVO.CommentVO.CommentDataVO();
             String content = new String(Base64.getDecoder().decode(hotComment.getContent()));
@@ -237,8 +232,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         goodsDetailDTO.setProductList(productList);
 
         //用户是否收藏
-        PageHelper.startPage(1, 1);
-        Collect userCollect = collectApi.queryOne(new Collect().setUserId(Constants.CURRENT_USER_ID).setValueId(id)).getData();
+        Collect userCollect = collectApi.queryByCriteria(Criteria.of(Collect.class).andEqualTo(Collect::getUserId, Constants.CURRENT_USER_ID).andEqualTo(Collect::getValueId, id).page(1, 1)).getData().get(0);
         goodsDetailDTO.setUserHasCollect(userCollect == null ? false : true);
 
         //记录用户足迹 此处使用异步处理
