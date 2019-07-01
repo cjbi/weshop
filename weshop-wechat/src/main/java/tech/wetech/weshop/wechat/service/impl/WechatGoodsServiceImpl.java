@@ -106,11 +106,11 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
             return GoodsResultVO.EMPTY_GOODS_RESULT;
         }
         //查询二级分类的parentIds
-        List<Integer> parentIds = categoryApi.queryParentIdsByIdIn(categoryIds);
+        List<Integer> parentIds = categoryApi.queryParentIdsByIdIn(categoryIds).getData();
         //一级分类
         List<CategoryFilterVO> categoryFilter = new LinkedList<CategoryFilterVO>() {{
             add(new CategoryFilterVO(0, "全部", false));
-            addAll(categoryApi.queryByIdIn(parentIds).stream()
+            addAll(categoryApi.queryByIdIn(parentIds).getData().stream()
                     .map(CategoryFilterVO::new)
                     .collect(Collectors.toList()));
         }};
@@ -121,7 +121,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
             //根据一级分类ID查询二级分类ID
             List<Integer> idList = new LinkedList<>();
             idList.add(goodsSearchQuery.getCategoryId());
-            idList.addAll(Optional.ofNullable(categoryApi.queryIdsByParentId(goodsSearchQuery.getCategoryId())).orElse(Collections.EMPTY_LIST));
+            idList.addAll(Optional.ofNullable(categoryApi.queryIdsByParentId(goodsSearchQuery.getCategoryId()).getData()).orElse(Collections.EMPTY_LIST));
             criteria.andIn(Goods::getCategoryId, idList);
         }
         if (goodsSearchQuery.getSort() != null) {
@@ -159,7 +159,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
     private List<GoodsDetailVO.GoodsSpecificationVO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
         List<GoodsDetailVO.GoodsSpecificationVO> goodsSpecificationVOList = new LinkedList<>();
-        List<GoodsSpecificationDTO> goodsSpecificationBOList = goodsSpecificationApi.queryGoodsDetailSpecificationByGoodsId(goodsId);
+        List<GoodsSpecificationDTO> goodsSpecificationBOList = goodsSpecificationApi.queryGoodsDetailSpecificationByGoodsId(goodsId).getData();
 
         goodsSpecificationBOList.stream()
                 .collect(Collectors.toMap(GoodsSpecificationDTO::getSpecificationId, g -> g, (g1, g2) -> g2))
@@ -194,14 +194,14 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
         Goods goods = goodsApi.queryById(id).getData();
         List<GoodsGallery> goodsGalleryVOList = goodsGalleryApi.queryList(new GoodsGallery().setGoodsId(id)).getData();
-        List<GoodsAttributeDTO> goodsAttributeVOList = goodsAttributeApi.queryGoodsDetailAttributeByGoodsId(id);
+        List<GoodsAttributeDTO> goodsAttributeVOList = goodsAttributeApi.queryGoodsDetailAttributeByGoodsId(id).getData();
         List<GoodsIssue> goodsIssueList = goodsIssueApi.queryAll().getData();
         Brand brand = brandApi.queryById(goods.getBrandId()).getData();
 
         //商品评价
         int commentCount = commentApi.countByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0)).getData();
         if (commentCount > 0) {
-            Comment hotComment = commentApi.queryByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0).page(1, 1)).getData().get(0);
+            Comment hotComment = commentApi.queryOneByCriteria(Criteria.of(Comment.class).andEqualTo(Comment::getValueId, id).andEqualTo(Comment::getTypeId, 0).page(1, 1)).getData();
             GoodsDetailVO.CommentVO.CommentDataVO commentData = new GoodsDetailVO.CommentVO.CommentDataVO();
             String content = new String(Base64.getDecoder().decode(hotComment.getContent()));
             User user = userApi.queryById(hotComment.getUserId()).getData();

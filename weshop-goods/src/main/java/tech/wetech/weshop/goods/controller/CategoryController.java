@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.po.Category;
 import tech.wetech.weshop.goods.service.CategoryService;
@@ -18,17 +19,17 @@ public class CategoryController extends BaseApi<Category> implements CategoryApi
     private CategoryService categoryService;
 
     @Override
-    public List<Integer> queryIdsByParentId(Integer parentId) {
-        return categoryService.queryIdsByParentId(parentId);
+    public Result<List<Integer>> queryIdsByParentId(Integer parentId) {
+        return Result.success(categoryService.queryIdsByParentId(parentId));
     }
 
     @Override
-    public List<Integer> queryParentIdsByIdIn(List<Integer> ids) {
-        return categoryService.queryParentIdsByIdIn(ids);
+    public Result<List<Integer>> queryParentIdsByIdIn(List<Integer> ids) {
+        return Result.success(categoryService.queryParentIdsByIdIn(ids));
     }
 
     @Override
-    public List<Category> queryByIdIn(List<Integer> ids) {
-        return categoryService.queryByIdIn(ids);
+    public Result<List<Category>> queryByIdIn(List<Integer> ids) {
+        return Result.success(categoryService.queryByIdIn(ids));
     }
 }

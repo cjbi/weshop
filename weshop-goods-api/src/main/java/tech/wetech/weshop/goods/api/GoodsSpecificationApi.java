@@ -15,7 +15,7 @@ import java.util.List;
 public interface GoodsSpecificationApi extends Api<GoodsSpecification> {
 
     @GetMapping("/queryGoodsDetailSpecificationByGoodsId")
-    List<GoodsSpecificationDTO> queryGoodsDetailSpecificationByGoodsId(@RequestParam("goodsId") Integer goodsId);
+    Result<List<GoodsSpecificationDTO>> queryGoodsDetailSpecificationByGoodsId(@RequestParam("goodsId") Integer goodsId);
 
     @GetMapping("/queryValueByGoodsIdAndIdIn")
     Result<List<String>> queryValueByGoodsIdAndIdIn(@RequestParam("goodsId") Integer goodsId, @RequestParam("goodsSpecificationIds") List<Integer> goodsSpecificationIds);

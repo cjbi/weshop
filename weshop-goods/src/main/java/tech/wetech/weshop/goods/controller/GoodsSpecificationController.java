@@ -20,8 +20,8 @@ public class GoodsSpecificationController extends BaseApi<GoodsSpecification> im
     private GoodsSpecificationService goodsSpecificationService;
 
     @Override
-    public List<GoodsSpecificationDTO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
-        return goodsSpecificationService.queryGoodsDetailSpecificationByGoodsId(goodsId);
+    public Result<List<GoodsSpecificationDTO>> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
+        return Result.success(goodsSpecificationService.queryGoodsDetailSpecificationByGoodsId(goodsId));
     }
 
     @Override

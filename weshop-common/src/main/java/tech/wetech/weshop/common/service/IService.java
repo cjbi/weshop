@@ -18,6 +18,8 @@ public interface IService<T> {
 
     List<T> queryByCriteria(Criteria<T, Object> criteria);
 
+    T queryOneByCriteria(Criteria<T, Object> criteria);
+
     int countByCriteria(Criteria<T, Object> criteria);
 
     T queryOne(T entity);

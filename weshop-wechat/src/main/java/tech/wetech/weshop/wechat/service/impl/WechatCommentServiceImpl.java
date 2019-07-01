@@ -29,11 +29,11 @@ public class WechatCommentServiceImpl implements WechatCommentService {
 
     @Override
     public List<CommentResultVO> queryList(CommentQuery commentQuery) {
-        List<CommentResultVO> commentResultList = commentApi.queryIfRequirePictureList(commentQuery).stream()
+        List<CommentResultVO> commentResultList = commentApi.queryIfRequirePictureList(commentQuery).getData().stream()
                 .map(CommentResultVO::new)
                 .collect(Collectors.toList());
         for (CommentResultVO commentResultDTO : commentResultList) {
-            commentResultDTO.setPicList(commentPictureApi.queryPicUrlByCommentId(commentResultDTO.getId()));
+            commentResultDTO.setPicList(commentPictureApi.queryPicUrlByCommentId(commentResultDTO.getId()).getData());
             User user = Optional.ofNullable(userApi.queryById(commentResultDTO.getUserId()).getData()).orElseGet(() -> new User());
             commentResultDTO.setUserInfo(new CommentResultVO.UserInfoVO(user));
         }

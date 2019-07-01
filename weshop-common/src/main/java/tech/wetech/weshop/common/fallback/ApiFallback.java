@@ -3,7 +3,6 @@ package tech.wetech.weshop.common.fallback;
 import tech.wetech.weshop.common.api.Api;
 import tech.wetech.weshop.common.enums.ResultCodeEnum;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Result;
 
 import java.util.List;
@@ -22,6 +21,11 @@ public abstract class ApiFallback<T> implements Api<T> {
 
     @Override
     public Result<List<T>> queryByCriteria(Criteria<T, Object> criteria) {
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
+    }
+
+    @Override
+    public Result<T> queryOneByCriteria(Criteria<T, Object> criteria) {
         return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 

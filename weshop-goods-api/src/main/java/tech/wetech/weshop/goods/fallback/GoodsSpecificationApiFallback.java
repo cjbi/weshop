@@ -8,14 +8,13 @@ import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
 import tech.wetech.weshop.goods.dto.GoodsSpecificationDTO;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
 
-import java.util.Collections;
 import java.util.List;
 
 @Component
 public class GoodsSpecificationApiFallback extends ApiFallback<GoodsSpecification> implements GoodsSpecificationApi {
     @Override
-    public List<GoodsSpecificationDTO> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
-        return Collections.emptyList();
+    public Result<List<GoodsSpecificationDTO>> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
+        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
     }
 
     @Override

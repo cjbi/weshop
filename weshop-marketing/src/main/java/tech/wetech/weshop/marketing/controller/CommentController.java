@@ -20,8 +20,8 @@ public class CommentController extends BaseApi<Comment> implements CommentApi {
     private CommentService commentService;
 
     @Override
-    public List<Comment> queryIfRequirePictureList(CommentQuery commentQuery) {
-        return commentService.queryIfRequirePictureList(commentQuery);
+    public Result<List<Comment>> queryIfRequirePictureList(CommentQuery commentQuery) {
+        return Result.success(commentService.queryIfRequirePictureList(commentQuery));
     }
 
     @Override

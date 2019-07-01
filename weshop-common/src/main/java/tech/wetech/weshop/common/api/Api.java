@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.query.QueryWrapper;
 import tech.wetech.weshop.common.utils.Result;
 
 import java.util.List;
@@ -20,6 +19,9 @@ public interface Api<T> {
 
     @PostMapping("/queryByCriteria")
     Result<List<T>> queryByCriteria(@RequestBody Criteria<T, Object> criteria);
+
+    @PostMapping("/queryOneByCriteria")
+    Result<T> queryOneByCriteria(@RequestBody Criteria<T, Object> criteria);
 
     @PostMapping("/countByCriteria")
     Result<Integer> countByCriteria(@RequestBody Criteria<T, Object> criteria);

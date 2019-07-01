@@ -554,7 +554,7 @@ public class Criteria<A, B> implements Serializable {
         public static String limit(Statement statement) {
             if (statement.pageSize > 0) {
                 Integer offset = statement.pageSize;
-                if (statement.pageNum > 0) {
+                if (statement.pageNum > 1) {
                     Integer limit = (statement.pageNum - 1) * statement.pageSize;
                     return " limit " + limit + "," + offset;
                 }
@@ -578,7 +578,7 @@ public class Criteria<A, B> implements Serializable {
         for (int i = 0; i < 10000; i++) {
             Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
                     .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
-                    .page(3, 10)
+                    .page(1, 10)
                     .andIsNotNull(GoodsTest::getAppExclusivePrice)
                     .andEqualTo(GoodsTest::getCounterPrice, "222")
                     .andEqualTo(GoodsTest::getBrandId, 333)
@@ -588,7 +588,7 @@ public class Criteria<A, B> implements Serializable {
                     .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
 //        System.out.println(JsonUtil.getInstance().obj2json(criteria));
             System.out.println(criteria.buildSql());
-//            System.out.println(criteria.buildCountSql());
+            System.out.println(criteria.buildCountSql());
         }
         System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }

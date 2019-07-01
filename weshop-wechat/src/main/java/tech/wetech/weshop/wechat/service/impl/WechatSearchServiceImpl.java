@@ -25,7 +25,7 @@ public class WechatSearchServiceImpl implements WechatSearchService {
 
     @Override
     public List<String> helper(String keyword) {
-        return keywordsApi.queryByKeyword(keyword);
+        return keywordsApi.queryByKeyword(keyword).getData();
     }
 
     @Override

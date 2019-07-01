@@ -46,6 +46,15 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
+    public T queryOneByCriteria(Criteria<T, Object> criteria) {
+        List<T> ts = mapper.selectBySql(criteria.buildSql());
+        if (ts.size() == 0) {
+            return null;
+        }
+        return ts.get(0);
+    }
+
+    @Override
     public int countByCriteria(Criteria<T, Object> criteria) {
         return mapper.countBySql(criteria.buildCountSql());
     }

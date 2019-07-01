@@ -28,6 +28,11 @@ public abstract class BaseApi<T> implements Api<T> {
     }
 
     @Override
+    public Result<T> queryOneByCriteria(Criteria<T, Object> criteria) {
+        return Result.success(service.queryOneByCriteria(criteria));
+    }
+
+    @Override
     public Result<Integer> countByCriteria(Criteria<T, Object> criteria) {
         return Result.success(service.countByCriteria(criteria));
     }

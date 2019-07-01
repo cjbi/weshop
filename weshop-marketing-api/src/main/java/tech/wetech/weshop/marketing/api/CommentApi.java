@@ -15,7 +15,7 @@ import java.util.List;
 public interface CommentApi extends Api<Comment> {
 
     @GetMapping("/queryIfRequirePictureList")
-    List<Comment> queryIfRequirePictureList(@RequestBody CommentQuery commentQuery);
+    Result<List<Comment>> queryIfRequirePictureList(@RequestBody CommentQuery commentQuery);
 
     @GetMapping("/countIfRequirePictureList")
     Result<Integer> countIfRequirePictureList(@RequestBody CommentQuery commentQuery);

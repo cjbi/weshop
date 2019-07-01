@@ -19,7 +19,7 @@ public class WechatFootprintServiceImpl implements WechatFootprintService {
 
     @Override
     public List<List<GoodsFootprintDTO>> queryGoodsFootprintTimeLine() {
-        List<GoodsFootprintDTO> goodsFootprintList = footprintApi.queryGoodsFootprintByUserId(Constants.CURRENT_USER_ID);
+        List<GoodsFootprintDTO> goodsFootprintList = footprintApi.queryGoodsFootprintByUserId(Constants.CURRENT_USER_ID).getData();
 
         return goodsFootprintList.stream()
                 .collect(Collectors.groupingBy(gf -> gf.getCreateTime()))
