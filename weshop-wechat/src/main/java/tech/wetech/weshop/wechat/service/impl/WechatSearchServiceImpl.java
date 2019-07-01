@@ -36,7 +36,7 @@ public class WechatSearchServiceImpl implements WechatSearchService {
     @Override
     public SearchIndexVO index() {
         // 取出输入框默认的关键词
-        Keywords defaultKeyword = keywordsApi.queryByCriteria(Criteria.of(Keywords.class).andEqualTo(Keywords::getIsDefault, true).page(1, 1)).getData().get(0);
+        Keywords defaultKeyword = keywordsApi.queryOneByCriteria(Criteria.of(Keywords.class).andEqualTo(Keywords::getIsDefault, true).page(1, 1)).getData();
         // 取出热闹关键词
         List<Keywords> hotKeywordList = keywordsApi.queryByCriteria(Criteria.of(Keywords.class).andEqualTo(Keywords::getHot, true).page(1, 10)).getData();
 
