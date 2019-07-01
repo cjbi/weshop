@@ -1,7 +1,7 @@
 package tech.wetech.weshop.goods.fallback;
 
 import org.springframework.stereotype.Component;
-import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.fallback.ApiFallback;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
@@ -14,11 +14,11 @@ import java.util.List;
 public class GoodsSpecificationApiFallback extends ApiFallback<GoodsSpecification> implements GoodsSpecificationApi {
     @Override
     public Result<List<GoodsSpecificationDTO>> queryGoodsDetailSpecificationByGoodsId(Integer goodsId) {
-        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
+        return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<List<String>> queryValueByGoodsIdAndIdIn(Integer goodsId, List<Integer> goodsSpecificationIds) {
-        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
+        return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
     }
 }

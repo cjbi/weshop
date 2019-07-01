@@ -3,7 +3,7 @@ package tech.wetech.weshop.wechat.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.utils.Constants;
@@ -101,7 +101,7 @@ public class WechatCartServiceImpl implements WechatCartService {
         Goods goods = goodsApi.queryById(cartParamDTO.getGoodsId()).getData();
         if (goods == null || goods.getDelete()) {
             //商品已下架
-            throw new BizException(ResultCodeEnum.GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES);
+            throw new BizException(ResultStatus.GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES);
         }
         Product product = productApi.queryOne(new Product()
                 .setGoodsId(cartParamDTO.getGoodsId())
@@ -109,7 +109,7 @@ public class WechatCartServiceImpl implements WechatCartService {
         ).getData();
         if (product == null || product.getGoodsNumber() < cartParamDTO.getNumber()) {
             //库存不足
-            throw new BizException(ResultCodeEnum.UNDER_STOCK);
+            throw new BizException(ResultStatus.UNDER_STOCK);
         }
         Cart cart = cartApi.queryOne(new Cart()
                 .setGoodsId(cartParamDTO.getGoodsId())
@@ -148,7 +148,7 @@ public class WechatCartServiceImpl implements WechatCartService {
         } else {
             // 如果已经存在购物车中，则数量增加
             if (product.getGoodsNumber() < (cartParamDTO.getNumber() + cart.getNumber())) {
-                throw new BizException(ResultCodeEnum.UNDER_STOCK);
+                throw new BizException(ResultStatus.UNDER_STOCK);
             }
             cartApi.updateNotNull(new Cart().setNumber(cartParamDTO.getNumber().shortValue()).setId(cart.getId()));
         }
@@ -165,7 +165,7 @@ public class WechatCartServiceImpl implements WechatCartService {
         ).getData();
         if (product == null || product.getGoodsNumber() < cartParamDTO.getNumber()) {
             //库存不足
-            throw new BizException(ResultCodeEnum.UNDER_STOCK);
+            throw new BizException(ResultStatus.UNDER_STOCK);
         }
         // 判断是否已经存在product_id购物车商品
         Cart cart = cartApi.queryById(cartParamDTO.getId()).getData();
@@ -216,7 +216,7 @@ public class WechatCartServiceImpl implements WechatCartService {
             Integer newNumber = cartParamDTO.getNumber() + newCartInfo.getNumber();
             if (product == null || product.getGoodsNumber() < newNumber) {
                 //库存不足
-                throw new BizException(ResultCodeEnum.UNDER_STOCK);
+                throw new BizException(ResultStatus.UNDER_STOCK);
             }
             cartApi.deleteById(newCartInfo.getId());
             Cart cartData = new Cart()

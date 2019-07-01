@@ -1,7 +1,7 @@
 package tech.wetech.weshop.marketing.fallback;
 
 import org.springframework.stereotype.Component;
-import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.fallback.ApiFallback;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.marketing.api.CommentApi;
@@ -15,11 +15,11 @@ public class CommentApiFallback extends ApiFallback<Comment> implements CommentA
 
     @Override
     public Result<List<Comment>> queryIfRequirePictureList(CommentQuery commentQuery) {
-        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
+        return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
     }
 
     @Override
     public Result<Integer> countIfRequirePictureList(CommentQuery commentQuery) {
-        return Result.failure(ResultCodeEnum.REMOTE_SERVICE_ERROR);
+        return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
     }
 }

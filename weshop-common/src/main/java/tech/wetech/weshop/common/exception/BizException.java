@@ -1,34 +1,21 @@
 package tech.wetech.weshop.common.exception;
 
-import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultStatus;
 
 public class BizException extends RuntimeException {
 
-    private String code;
+    ResultStatus status;
 
-    private String msg;
-
-    public BizException(ResultCodeEnum resultCodeEnum) {
-        super(resultCodeEnum.getMsg());
-        this.code = resultCodeEnum.getCode();
-        this.msg = resultCodeEnum.getMsg();
+    public BizException(ResultStatus status) {
+        super(status.getMsg());
+        this.status = status;
     }
 
-    public String getCode() {
-        return code;
+    public ResultStatus getStatus() {
+        return status;
     }
 
-    public BizException setCode(String code) {
-        this.code = code;
-        return this;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public BizException setMsg(String msg) {
-        this.msg = msg;
-        return this;
+    public void setStatus(ResultStatus status) {
+        this.status = status;
     }
 }

@@ -28,7 +28,7 @@ Page({
             if (res.success) {
                 that.setData({
                     newGoodsList: res.data.newGoodsList,
-                    hotGoodsList: res.data.hotGoodsList,
+                    hotGoods: res.data.hotGoodsList,
                     topicList: res.data.topicList,
                     brandList: res.data.brandList,
                     floorGoods: res.data.categoryList,

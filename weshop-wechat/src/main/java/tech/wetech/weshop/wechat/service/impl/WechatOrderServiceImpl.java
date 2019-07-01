@@ -2,7 +2,7 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.utils.Constants;
@@ -71,7 +71,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
     @Override
     public OrderDetailVO queryOrderDetail(Integer orderId) {
         Order order = Optional.ofNullable(orderApi.queryById(orderId).getData())
-                .orElseThrow(() -> new BizException(ResultCodeEnum.RECORD_NOT_EXIST));
+                .orElseThrow(() -> new BizException(ResultStatus.RECORD_NOT_EXIST));
 
         OrderDetailVO.OrderInfoVO orderInfoVO = new OrderDetailVO.OrderInfoVO(order)
                 .setOrderExpress(orderExpressApi.queryOne(new OrderExpress().setOrderId(orderId)).getData());
@@ -96,7 +96,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
     public Order submitOrder(OrderSubmitParamVO orderSubmitParamDTO) {
         Address checkedAddress = addressApi.queryById(orderSubmitParamDTO.getAddressId()).getData();
         if (checkedAddress == null) {
-            throw new BizException(ResultCodeEnum.PLEASE_SELECT_SHIPPING_ADDRESS);
+            throw new BizException(ResultStatus.PLEASE_SELECT_SHIPPING_ADDRESS);
         }
 
         //获取要购买的商品
@@ -107,7 +107,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
                         .setChecked(true)
         ).getData();
         if (checkedGoodsList.isEmpty()) {
-            throw new BizException(ResultCodeEnum.PLEASE_SELECT_SHIPPING_ADDRESS);
+            throw new BizException(ResultStatus.PLEASE_SELECT_SHIPPING_ADDRESS);
         }
 
         //统计商品总价

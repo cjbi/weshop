@@ -10,7 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.utils.Result;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +25,13 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler({Throwable.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> handleThrowable(HttpServletRequest request, Throwable e) {
-        LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
-        return Result.failure(ResultCodeEnum.INTERNAL_SERVER_ERROR)
+        LOG.error("execute methond exception error.url is {}", request.getRequestURI(), e);
+        return Result.failure(ResultStatus.INTERNAL_SERVER_ERROR)
                 .addExtra("stackTrace", e.getStackTrace())
                 .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
     }
@@ -45,10 +45,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler({BizException.class})
     public Result handleBizException(HttpServletRequest request, BizException e) {
-        LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
-        return Result.failure(ResultCodeEnum.PARAM_ERROR)
-                .addExtra("stackTrace", e.getStackTrace())
-                .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
+        LOG.warn("execute methond exception error.url is {}", request.getRequestURI(), e);
+        return Result.failure(e.getStatus());
     }
 
     /**
@@ -64,14 +62,12 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, ConstraintViolationException.class})
     public Result handleJSR303Exception(HttpServletRequest request, Exception e) {
-        LOGGER.error("execute methond exception error.url is {}", request.getRequestURI(), e);
+        LOG.warn("execute methond exception error.url is {}", request.getRequestURI(), e);
         BindingResult br = null;
         Result result = new Result()
                 .setSuccess(false)
-                .setCode(ResultCodeEnum.PARAM_ERROR.getCode())
-                .setMsg(ResultCodeEnum.PARAM_ERROR.getMsg())
-                .addExtra("stackTrace", e.getStackTrace())
-                .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
+                .setCode(ResultStatus.PARAM_ERROR.getCode())
+                .setMsg(ResultStatus.PARAM_ERROR.getMsg());
 
         if (e instanceof BindException) {
             br = ((BindException) e).getBindingResult();

@@ -1,7 +1,7 @@
 package tech.wetech.weshop.common.utils;
 
 import io.swagger.annotations.ApiModelProperty;
-import tech.wetech.weshop.common.enums.ResultCodeEnum;
+import tech.wetech.weshop.common.enums.ResultStatus;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -91,19 +91,18 @@ public class Result<T> implements Serializable {
         return Result.success(null);
     }
 
-    public static Result failure(ResultCodeEnum resultCodeEnum) {
+    public static Result failure(ResultStatus resultStatus) {
         return new Result()
                 .setSuccess(false)
-                .setCode(resultCodeEnum.getCode())
-                .setMsg(resultCodeEnum.getMsg());
+                .setCode(resultStatus.getCode())
+                .setMsg(resultStatus.getMsg());
     }
 
     public static <T> Result<T> success(T obj) {
         return new Result()
-                //为null统一给前端{}
                 .setData(obj)
-                .setCode(ResultCodeEnum.OK.getCode())
-                .setMsg(ResultCodeEnum.OK.getMsg())
+                .setCode(ResultStatus.OK.getCode())
+                .setMsg(ResultStatus.OK.getMsg())
                 .setSuccess(true);
     }
 

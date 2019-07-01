@@ -3,7 +3,7 @@ package tech.wetech.weshop.common.enums;
 /**
  * @author cjbi@outlook.com
  */
-public enum ResultCodeEnum {
+public enum ResultStatus {
 
     OK("200", "处理成功"),
     BAD_REQUEST("600", "请求参数有误"),
@@ -24,7 +24,7 @@ public enum ResultCodeEnum {
     private String code;
     private String msg;
 
-    ResultCodeEnum(String code, String msg) {
+    ResultStatus(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }

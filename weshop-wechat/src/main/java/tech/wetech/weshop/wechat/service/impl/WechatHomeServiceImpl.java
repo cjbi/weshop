@@ -47,15 +47,15 @@ public class WechatHomeServiceImpl implements WechatHomeService {
 //    @Cacheable("index")
     public HomeIndexVO index() {
 
-        List<Ad> bannerList = adApi.queryByCriteria(Criteria.of(Ad.class).andEqualTo(Ad::getAdPositionId, 1)).getData();
+        List<Ad> bannerList = adApi.queryByCriteria(Criteria.of(Ad.class).fields(Ad::getId, Ad::getLink, Ad::getImageUrl).andEqualTo(Ad::getAdPositionId, 1)).getData();
 
-        List<Channel> channelList = channelApi.queryByCriteria(Criteria.of(Channel.class).sort(Channel::getSortOrder)).getData();
+        List<Channel> channelList = channelApi.queryByCriteria(Criteria.of(Channel.class).fields(Channel::getId, Channel::getIconUrl, Channel::getName).sort(Channel::getSortOrder)).getData();
 
-        List<Goods> newGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).page(1, 4).andEqualTo(Goods::getNewly, true)).getData();
+        List<Goods> newGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).fields(Goods::getId, Goods::getListPicUrl, Goods::getName, Goods::getRetailPrice).page(1, 4).andEqualTo(Goods::getNewly, true)).getData();
 
-        List<Goods> hotGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).page(1, 4).andEqualTo(Goods::getHot, true)).getData();
+        List<Goods> hotGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).fields(Goods::getId, Goods::getListPicUrl, Goods::getName, Goods::getGoodsBrief, Goods::getRetailPrice).page(1, 4).andEqualTo(Goods::getHot, true)).getData();
 
-        List<Brand> brandList = brandApi.queryByCriteria(Criteria.of(Brand.class).andEqualTo(Brand::getNewly, 1).sort(Brand::getNewSortOrder)).getData();
+        List<Brand> brandList = brandApi.queryByCriteria(Criteria.of(Brand.class).fields(Brand::getId, Brand::getNewPicUrl, Brand::getName, Brand::getFloorPrice).andEqualTo(Brand::getNewly, 1).sort(Brand::getNewSortOrder)).getData();
 
         List<Topic> topicList = topicApi.queryByCriteria(Criteria.of(Topic.class).fields(Topic::getId, Topic::getScenePicUrl, Topic::getTitle, Topic::getPriceInfo, Topic::getSubtitle).page(1, 10)).getData();
 
