@@ -6,6 +6,7 @@ import tech.wetech.weshop.common.enums.ResultStatus;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * @author cjbi@outlook.com
@@ -104,6 +105,14 @@ public class Result<T> implements Serializable {
                 .setCode(ResultStatus.OK.getCode())
                 .setMsg(ResultStatus.OK.getMsg())
                 .setSuccess(true);
+    }
+
+    public <X extends Throwable> T orElseThrow(Supplier<? extends X> s) throws X {
+        if (this.isSuccess()) {
+            return this.getData();
+        } else {
+            throw s.get();
+        }
     }
 
 }

@@ -157,15 +157,18 @@ public class WechatOrderServiceImpl implements WechatOrderService {
         //订单状态：提交订单
         orderInfo.setOrderStatus(OrderStatusEnum.SUBMIT_ORDER);
         //支付状态：待付款
-        orderInfo.setPayStatus(PayStatusEnum.PENDING_REFUND);
+        orderInfo.setPayStatus(PayStatusEnum.PENDING_PAYMENT);
 
-        orderApi.create(orderInfo);
+        orderApi.create(orderInfo).orElseThrow(() -> new BizException(ResultStatus.CREATE_ORDER_ERROR));
+
+
+        Order order = orderApi.queryOneByCriteria(Criteria.of(Order.class).andEqualTo(Order::getOrderSN, orderInfo.getOrderSN())).orElseThrow(() -> new BizException(ResultStatus.CREATE_ORDER_ERROR));
 
         //统计商品总价
         List<OrderGoods> orderGoodsList = new LinkedList<>();
         for (Cart goodsItem : checkedGoodsList) {
             OrderGoods orderGoods = new OrderGoods();
-            orderGoods.setOrderId(orderInfo.getId());
+            orderGoods.setOrderId(order.getId());
             orderGoods.setGoodsId(goodsItem.getGoodsId());
             orderGoods.setGoodsSn(goodsItem.getGoodsSn());
             orderGoods.setProductId(goodsItem.getProductId());
@@ -176,18 +179,18 @@ public class WechatOrderServiceImpl implements WechatOrderService {
             orderGoods.setNumber(goodsItem.getNumber());
             orderGoods.setGoodsSpecificationNameValue(goodsItem.getGoodsSpecificationNameValue());
             orderGoods.setGoodsSpecificationIds(goodsItem.getGoodsSpecificationIds());
-
+            orderGoods.setReal(true);
             orderGoodsList.add(orderGoods);
         }
-        orderGoodsApi.createBatch(orderGoodsList);
+        orderGoodsApi.createBatch(orderGoodsList).orElseThrow(() -> new BizException(ResultStatus.CREATE_ORDER_ERROR));
 
-        //清空购物车已购买商品
-//        cartApi.delete(new Cart()
-//                .setUserId(Constants.CURRENT_USER_ID)
-//                .setSessionId(Constants.SESSION_ID)
-//                .setChecked(true)
-//        );
+//        清空购物车已购买商品
+        cartApi.delete(new Cart()
+                .setUserId(Constants.CURRENT_USER_ID)
+                .setSessionId(Constants.SESSION_ID)
+                .setChecked(true)
+        );
 
-        return new OrderSubmitResultVO(orderApi.queryOne(orderInfo).getData());
+        return new OrderSubmitResultVO(order);
     }
 }

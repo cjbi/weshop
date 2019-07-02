@@ -20,7 +20,11 @@ public enum ResultStatus {
     GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES("610", "商品已下架"),
     UNDER_STOCK("611", "库存不足"),
     PLEASE_SELECT_GOODS("612", "请选择商品"),
-    PLEASE_SELECT_SHIPPING_ADDRESS("613", "请选择收货地址");
+    PLEASE_SELECT_SHIPPING_ADDRESS("613", "请选择收货地址"),
+
+    CREATE_ORDER_ERROR("614", "创建订单失败"),
+    ;
+
     private String code;
     private String msg;
 

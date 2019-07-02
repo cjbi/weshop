@@ -4796,7 +4796,7 @@ COMMIT;
 DROP TABLE IF EXISTS `weshop_order`;
 CREATE TABLE `weshop_order` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `order_sn` varchar(20) NOT NULL DEFAULT '',
+  `order_sn` varchar(60) NOT NULL DEFAULT '',
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `order_status` smallint(6) unsigned NOT NULL DEFAULT '0',
   `shipping_status` smallint(6) unsigned NOT NULL DEFAULT '0',
