@@ -1,13 +1,12 @@
 package tech.wetech.weshop.wechat.service;
 
-import tech.wetech.weshop.wechat.vo.CartCheckedVO;
-import tech.wetech.weshop.wechat.vo.CartCheckoutVO;
-import tech.wetech.weshop.wechat.vo.CartParamVO;
-import tech.wetech.weshop.wechat.vo.CartResultVO;
+import tech.wetech.weshop.wechat.vo.*;
 
 public interface WechatCartService {
 
     CartResultVO getCart();
+
+    void deleteCartGoods(CartGoodsDeleteVO deleteVO);
 
     void checkedCartGoods(CartCheckedVO cartCheckedVO);
 

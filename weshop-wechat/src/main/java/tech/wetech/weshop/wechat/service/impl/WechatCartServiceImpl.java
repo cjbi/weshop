@@ -20,10 +20,7 @@ import tech.wetech.weshop.user.api.UserCouponApi;
 import tech.wetech.weshop.user.po.Address;
 import tech.wetech.weshop.user.po.UserCoupon;
 import tech.wetech.weshop.wechat.service.WechatCartService;
-import tech.wetech.weshop.wechat.vo.CartCheckedVO;
-import tech.wetech.weshop.wechat.vo.CartCheckoutVO;
-import tech.wetech.weshop.wechat.vo.CartParamVO;
-import tech.wetech.weshop.wechat.vo.CartResultVO;
+import tech.wetech.weshop.wechat.vo.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -87,9 +84,16 @@ public class WechatCartServiceImpl implements WechatCartService {
     }
 
     @Override
+    public void deleteCartGoods(CartGoodsDeleteVO deleteVO) {
+        List<Integer> productIds = Arrays.stream(deleteVO.getProductIds().split(",")).map(Integer::valueOf).collect(Collectors.toList());
+        cartApi.queryByCriteria(Criteria.of(Cart.class).fields(Cart::getId).andIn(Cart::getProductId, productIds)).getData().stream()
+                .map(Cart::getId)
+                .forEach(cartId -> cartApi.deleteById(cartId));
+    }
+
+    @Override
     public void checkedCartGoods(CartCheckedVO cartCheckedVO) {
         List<Integer> productIds = Arrays.stream(cartCheckedVO.getProductIds().split(",")).map(Integer::valueOf).collect(Collectors.toList());
-
         cartApi.queryByCriteria(Criteria.of(Cart.class).fields(Cart::getId).andIn(Cart::getProductId, productIds)).getData().stream()
                 .map(Cart::getId)
                 .forEach(cartId -> cartApi.updateNotNull(new Cart().setChecked(cartCheckedVO.getChecked()).setId(cartId)));

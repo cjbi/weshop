@@ -1,10 +1,10 @@
 package tech.wetech.weshop.wechat.service;
 
-import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.query.OrderQuery;
 import tech.wetech.weshop.wechat.vo.OrderDetailVO;
 import tech.wetech.weshop.wechat.vo.OrderListVO;
 import tech.wetech.weshop.wechat.vo.OrderSubmitParamVO;
+import tech.wetech.weshop.wechat.vo.OrderSubmitResultVO;
 
 import java.util.List;
 
@@ -32,6 +32,6 @@ public interface WechatOrderService {
      * @param orderSubmitParamDTO
      * @return
      */
-    Order submitOrder(OrderSubmitParamVO orderSubmitParamDTO);
+    OrderSubmitResultVO submitOrder(OrderSubmitParamVO orderSubmitParamDTO);
 
 }

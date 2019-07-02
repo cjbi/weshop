@@ -5,22 +5,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
-import tech.wetech.weshop.order.api.CartApi;
 import tech.wetech.weshop.wechat.service.WechatCartService;
-import tech.wetech.weshop.wechat.vo.CartCheckedVO;
-import tech.wetech.weshop.wechat.vo.CartCheckoutVO;
-import tech.wetech.weshop.wechat.vo.CartParamVO;
-import tech.wetech.weshop.wechat.vo.CartResultVO;
-
-import javax.validation.constraints.NotNull;
+import tech.wetech.weshop.wechat.vo.*;
 
 @RestController
 @RequestMapping("/wechat/cart")
-@Validated
 public class WechatCartController extends BaseController {
-
-    @Autowired
-    private CartApi cartApi;
 
     @Autowired
     private WechatCartService wechatCartService;
@@ -43,8 +33,8 @@ public class WechatCartController extends BaseController {
     }
 
     @PostMapping("/delete")
-    public Result<CartResultVO> deleteCartGoods(@NotNull Integer cartId) {
-        cartApi.deleteById(cartId);
+    public Result<CartResultVO> deleteCartGoods(@RequestBody @Validated CartGoodsDeleteVO cartGoodsDeleteVO) {
+        wechatCartService.deleteCartGoods(cartGoodsDeleteVO);
         return Result.success(wechatCartService.getCart());
     }
 

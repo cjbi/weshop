@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.OrderExpressApi;
-import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.order.po.OrderExpress;
 import tech.wetech.weshop.order.query.OrderQuery;
 import tech.wetech.weshop.wechat.service.WechatOrderService;
 import tech.wetech.weshop.wechat.vo.OrderDetailVO;
 import tech.wetech.weshop.wechat.vo.OrderListVO;
 import tech.wetech.weshop.wechat.vo.OrderSubmitParamVO;
+import tech.wetech.weshop.wechat.vo.OrderSubmitResultVO;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -42,7 +42,7 @@ public class WechatOrderController extends BaseController {
      * @return
      */
     @PostMapping("/submit")
-    public Result<Order> submitOrder(@Validated @RequestBody OrderSubmitParamVO orderSubmitParamDTO) {
+    public Result<OrderSubmitResultVO> submitOrder(@Validated @RequestBody OrderSubmitParamVO orderSubmitParamDTO) {
         return Result.success(wechatOrderService.submitOrder(orderSubmitParamDTO));
     }
 

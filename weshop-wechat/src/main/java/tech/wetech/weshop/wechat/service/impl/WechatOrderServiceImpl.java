@@ -22,10 +22,7 @@ import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.po.Address;
 import tech.wetech.weshop.wechat.service.WechatOrderService;
-import tech.wetech.weshop.wechat.vo.HandleOptionVO;
-import tech.wetech.weshop.wechat.vo.OrderDetailVO;
-import tech.wetech.weshop.wechat.vo.OrderListVO;
-import tech.wetech.weshop.wechat.vo.OrderSubmitParamVO;
+import tech.wetech.weshop.wechat.vo.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -93,7 +90,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
     }
 
     @Override
-    public Order submitOrder(OrderSubmitParamVO orderSubmitParamDTO) {
+    public OrderSubmitResultVO submitOrder(OrderSubmitParamVO orderSubmitParamDTO) {
         Address checkedAddress = addressApi.queryById(orderSubmitParamDTO.getAddressId()).getData();
         if (checkedAddress == null) {
             throw new BizException(ResultStatus.PLEASE_SELECT_SHIPPING_ADDRESS);
@@ -107,7 +104,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
                         .setChecked(true)
         ).getData();
         if (checkedGoodsList.isEmpty()) {
-            throw new BizException(ResultStatus.PLEASE_SELECT_SHIPPING_ADDRESS);
+            throw new BizException(ResultStatus.PLEASE_SELECT_GOODS);
         }
 
         //统计商品总价
@@ -185,11 +182,12 @@ public class WechatOrderServiceImpl implements WechatOrderService {
         orderGoodsApi.createBatch(orderGoodsList);
 
         //清空购物车已购买商品
-        cartApi.delete(new Cart()
-                .setUserId(Constants.CURRENT_USER_ID)
-                .setSessionId(Constants.SESSION_ID)
-                .setChecked(true)
-        );
-        return orderInfo;
+//        cartApi.delete(new Cart()
+//                .setUserId(Constants.CURRENT_USER_ID)
+//                .setSessionId(Constants.SESSION_ID)
+//                .setChecked(true)
+//        );
+
+        return new OrderSubmitResultVO(orderApi.queryOne(orderInfo).getData());
     }
 }

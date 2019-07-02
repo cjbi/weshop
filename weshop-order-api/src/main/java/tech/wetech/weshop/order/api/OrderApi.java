@@ -5,6 +5,6 @@ import tech.wetech.weshop.common.api.Api;
 import tech.wetech.weshop.order.fallback.OrderApiFallback;
 import tech.wetech.weshop.order.po.Order;
 
-@FeignClient(value = "weshop-order", path = "order", fallback = OrderApiFallback.class)
+@FeignClient(value = "weshop-order", path = "order", fallbackFactory = OrderApiFallback.class)
 public interface OrderApi extends Api<Order> {
 }
