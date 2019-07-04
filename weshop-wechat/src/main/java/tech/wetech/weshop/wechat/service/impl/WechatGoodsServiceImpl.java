@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.*;
 import tech.wetech.weshop.goods.dto.GoodsAttributeDTO;
@@ -23,6 +22,7 @@ import tech.wetech.weshop.user.po.Collect;
 import tech.wetech.weshop.user.po.Footprint;
 import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatGoodsService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 import tech.wetech.weshop.wechat.vo.*;
 
 import java.time.format.DateTimeFormatter;
@@ -189,6 +189,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
     @Override
     public GoodsDetailVO queryGoodsDetail(Integer id) {
+        User userInfo = JwtHelper.getUserInfo();
         GoodsDetailVO goodsDetailDTO = new GoodsDetailVO();
 
         Goods goods = ofNullable(goodsApi.queryById(id)).map(Result::getData).orElseThrow(() -> new BizException(ResultStatus.RECORD_NOT_EXIST));
@@ -230,13 +231,13 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         goodsDetailDTO.setProductList(productList);
 
         //用户是否收藏
-        List<Collect> userCollect = collectApi.queryByCriteria(Criteria.of(Collect.class).andEqualTo(Collect::getUserId, Constants.CURRENT_USER_ID).andEqualTo(Collect::getValueId, id).page(1, 1)).getData();
+        List<Collect> userCollect = collectApi.queryByCriteria(Criteria.of(Collect.class).andEqualTo(Collect::getUserId, userInfo.getId()).andEqualTo(Collect::getValueId, id).page(1, 1)).getData();
 
         goodsDetailDTO.setUserHasCollect(userCollect.size() > 0 ? true : false);
 
         //记录用户足迹 此处使用异步处理
         Footprint footprint = new Footprint()
-                .setUserId(Constants.CURRENT_USER_ID)
+                .setUserId(userInfo.getId())
                 .setGoodsId(id);
         amqpTemplate.convertAndSend("weshop.topic.footprint", footprint);
         return goodsDetailDTO;

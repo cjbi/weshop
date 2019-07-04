@@ -1,12 +1,12 @@
 package tech.wetech.weshop.wechat.service.impl;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.goods.api.GoodsApi;
 import tech.wetech.weshop.goods.api.GoodsSpecificationApi;
 import tech.wetech.weshop.goods.api.ProductApi;
@@ -18,8 +18,10 @@ import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.api.UserCouponApi;
 import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.user.po.UserCoupon;
 import tech.wetech.weshop.wechat.service.WechatCartService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 import tech.wetech.weshop.wechat.vo.*;
 
 import java.math.BigDecimal;
@@ -54,7 +56,9 @@ public class WechatCartServiceImpl implements WechatCartService {
 
     @Override
     public CartResultVO getCart() {
-        List<Cart> cartList = cartApi.queryList(new Cart().setUserId(Constants.CURRENT_USER_ID).setSessionId(Constants.SESSION_ID)).getData();
+        User userInfo = JwtHelper.getUserInfo();
+        Claims currentClaims = JwtHelper.getCurrentClaims();
+        List<Cart> cartList = cartApi.queryList(new Cart().setUserId(userInfo.getId()).setSessionId(currentClaims.getId())).getData();
         CartResultVO.CartTotalVO cartTotalVO = new CartResultVO.CartTotalVO();
 
         Integer goodsCount = 0;
@@ -102,6 +106,8 @@ public class WechatCartServiceImpl implements WechatCartService {
     @Override
     @Transactional
     public void addGoodsToCart(CartParamVO cartParamDTO) {
+        User userInfo = JwtHelper.getUserInfo();
+        Claims currentClaims = JwtHelper.getCurrentClaims();
         Goods goods = goodsApi.queryById(cartParamDTO.getGoodsId()).getData();
         if (goods == null || goods.getDelete()) {
             //商品已下架
@@ -138,8 +144,8 @@ public class WechatCartServiceImpl implements WechatCartService {
                     .setGoodsName(goods.getName())
                     .setListPicUrl(goods.getListPicUrl())
                     .setNumber(cartParamDTO.getNumber().shortValue())
-                    .setSessionId("1")
-                    .setUserId(1)
+                    .setSessionId(currentClaims.getId())
+                    .setUserId(userInfo.getId())
                     .setRetailPrice(product.getRetailPrice())
                     .setMarketPrice(product.getRetailPrice())
                     .setGoodsSpecificationNameValue(
@@ -162,6 +168,8 @@ public class WechatCartServiceImpl implements WechatCartService {
     @Override
     @Transactional
     public void updateGoods(CartParamVO cartParamDTO) {
+        User userInfo = JwtHelper.getUserInfo();
+        Claims currentClaims = JwtHelper.getCurrentClaims();
         // 取得规格的信息,判断规格库存
         Product product = productApi.queryOne(new Product()
                 .setGoodsId(cartParamDTO.getGoodsId())
@@ -183,8 +191,8 @@ public class WechatCartServiceImpl implements WechatCartService {
         }
         Cart newCartInfo = cartApi.queryOne(
                 new Cart()
-                        .setUserId(Constants.CURRENT_USER_ID)
-                        .setSessionId(Constants.SESSION_ID)
+                        .setUserId(userInfo.getId())
+                        .setSessionId(currentClaims.getId())
                         .setGoodsId(cartParamDTO.getGoodsId())
                         .setProductId(cartParamDTO.getProductId())
         ).getData();
@@ -240,13 +248,14 @@ public class WechatCartServiceImpl implements WechatCartService {
 
     @Override
     public CartCheckoutVO checkoutCart(Integer addressId, Integer couponId) {
+        User userInfo = JwtHelper.getUserInfo();
         CartCheckoutVO cartCheckoutDTO = new CartCheckoutVO();
         //选择收货地址
         Address checkedAddress = null;
         if (addressId != null) {
             checkedAddress = addressApi.queryOne(new Address()
-                    .setId(Constants.ADDRESS_ID)
-                    .setUserId(Constants.CURRENT_USER_ID)
+                    .setId(addressId)
+                    .setUserId(userInfo.getId())
             ).getData();
         } else {
             checkedAddress = addressApi.queryOne(new Address().setUserId(1).setIsDefault(true)).getData();
@@ -279,7 +288,7 @@ public class WechatCartServiceImpl implements WechatCartService {
 
         // 获取可用的优惠券信息
         List<UserCoupon> userCouponList = userCouponApi.queryList(new UserCoupon() {{
-            setUserId(Constants.CURRENT_USER_ID);
+            setUserId(userInfo.getId());
         }}).getData();
         BigDecimal couponPrice = BigDecimal.ZERO;
 

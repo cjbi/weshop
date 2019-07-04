@@ -14,7 +14,7 @@ import java.util.List;
 public class CollectApiFallback extends ApiFallback<Collect> implements CollectApi {
 
     @Override
-    public Result<List<GoodsCollectDTO>> queryGoodsCollectList() {
+    public Result<List<GoodsCollectDTO>> queryGoodsCollectList(Integer userId) {
         return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
     }
 }

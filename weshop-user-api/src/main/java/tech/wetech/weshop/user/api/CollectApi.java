@@ -14,5 +14,5 @@ import java.util.List;
 public interface CollectApi extends Api<Collect> {
 
     @GetMapping("/queryGoodsCollectList")
-    Result<List<GoodsCollectDTO>> queryGoodsCollectList();
+    Result<List<GoodsCollectDTO>> queryGoodsCollectList(Integer userId);
 }

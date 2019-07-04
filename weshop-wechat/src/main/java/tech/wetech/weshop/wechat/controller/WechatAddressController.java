@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatAddressService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 import tech.wetech.weshop.wechat.vo.AddressVO;
 
 import java.util.List;
@@ -36,13 +37,15 @@ public class WechatAddressController extends BaseController {
 
     @PostMapping("/create")
     public Result create(@Validated @RequestBody Address entity) {
-        entity.setUserId(Constants.CURRENT_USER_ID);
+        User userInfo = JwtHelper.getUserInfo();
+        entity.setUserId(userInfo.getId());
         return addressApi.create(entity);
     }
 
     @PostMapping("/update")
     public Result update(@Validated @RequestBody Address entity) {
-        entity.setUserId(Constants.CURRENT_USER_ID);
+        User userInfo = JwtHelper.getUserInfo();
+        entity.setUserId(userInfo.getId());
         addressApi.updateNotNull(entity);
         return Result.success();
     }

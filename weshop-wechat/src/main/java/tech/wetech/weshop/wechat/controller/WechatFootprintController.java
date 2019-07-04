@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.FootprintApi;
 import tech.wetech.weshop.user.dto.GoodsFootprintDTO;
 import tech.wetech.weshop.user.po.Footprint;
+import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatFootprintService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -35,7 +36,8 @@ public class WechatFootprintController extends BaseController {
 
     @PostMapping("/delete")
     public Result deleteGoodsFootprint(@NotNull Integer goodsId) {
-        return footprintApi.delete(new Footprint().setGoodsId(goodsId).setUserId(Constants.CURRENT_USER_ID));
+        User userInfo = JwtHelper.getUserInfo();
+        return footprintApi.delete(new Footprint().setGoodsId(goodsId).setUserId(userInfo.getId()));
     }
 
 }

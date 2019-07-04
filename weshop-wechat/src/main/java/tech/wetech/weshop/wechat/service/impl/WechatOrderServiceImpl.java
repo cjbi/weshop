@@ -1,11 +1,11 @@
 package tech.wetech.weshop.wechat.service.impl;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.query.Criteria;
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.common.utils.IdGenerator;
 import tech.wetech.weshop.order.api.CartApi;
 import tech.wetech.weshop.order.api.OrderApi;
@@ -21,7 +21,9 @@ import tech.wetech.weshop.order.query.OrderQuery;
 import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatOrderService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 import tech.wetech.weshop.wechat.vo.*;
 
 import java.math.BigDecimal;
@@ -53,7 +55,8 @@ public class WechatOrderServiceImpl implements WechatOrderService {
 
     @Override
     public List<OrderListVO> queryOrderList(OrderQuery orderQuery) {
-        List<Order> orderList = orderApi.queryByCriteria(Criteria.of(Order.class).andEqualTo(Order::getUserId, Constants.CURRENT_USER_ID).page(orderQuery.getPageNum(), orderQuery.getPageSize())).getData();
+        User userInfo = JwtHelper.getUserInfo();
+        List<Order> orderList = orderApi.queryByCriteria(Criteria.of(Order.class).andEqualTo(Order::getUserId, userInfo.getId()).page(orderQuery.getPageNum(), orderQuery.getPageSize())).getData();
         List<OrderListVO> orderVOList = new LinkedList<>();
         for (Order order : orderList) {
             OrderListVO orderVO = new OrderListVO(order)
@@ -91,6 +94,8 @@ public class WechatOrderServiceImpl implements WechatOrderService {
 
     @Override
     public OrderSubmitResultVO submitOrder(OrderSubmitParamVO orderSubmitParamDTO) {
+        User userInfo = JwtHelper.getUserInfo();
+        Claims currentClaims = JwtHelper.getCurrentClaims();
         Address checkedAddress = addressApi.queryById(orderSubmitParamDTO.getAddressId()).getData();
         if (checkedAddress == null) {
             throw new BizException(ResultStatus.PLEASE_SELECT_SHIPPING_ADDRESS);
@@ -99,8 +104,8 @@ public class WechatOrderServiceImpl implements WechatOrderService {
         //获取要购买的商品
         List<Cart> checkedGoodsList = cartApi.queryList(
                 new Cart()
-                        .setUserId(Constants.CURRENT_USER_ID)
-                        .setSessionId(Constants.SESSION_ID)
+                        .setUserId(userInfo.getId())
+                        .setSessionId(currentClaims.getId())
                         .setChecked(true)
         ).getData();
         if (checkedGoodsList.isEmpty()) {
@@ -132,7 +137,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
 
         Order orderInfo = new Order();
         orderInfo.setOrderSN(IdGenerator.INSTANCE.nextId());
-        orderInfo.setUserId(Constants.CURRENT_USER_ID);
+        orderInfo.setUserId(userInfo.getId());
 
         //收货地址和运费
         orderInfo.setConsignee(checkedAddress.getName());
@@ -186,8 +191,8 @@ public class WechatOrderServiceImpl implements WechatOrderService {
 
 //        清空购物车已购买商品
         cartApi.delete(new Cart()
-                .setUserId(Constants.CURRENT_USER_ID)
-                .setSessionId(Constants.SESSION_ID)
+                .setUserId(userInfo.getId())
+                .setSessionId(currentClaims.getId())
                 .setChecked(true)
         );
 

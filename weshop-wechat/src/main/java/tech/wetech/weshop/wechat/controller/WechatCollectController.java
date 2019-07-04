@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.CollectApi;
+import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatCollectService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 import tech.wetech.weshop.wechat.vo.CollectAddOrDeleteParamVO;
 import tech.wetech.weshop.wechat.vo.CollectAddOrDeleteResultVO;
 
@@ -26,7 +28,8 @@ public class WechatCollectController extends BaseController {
 
     @GetMapping("/list")
     public Result queryList(Integer typeId) {
-        return collectApi.queryGoodsCollectList();
+        User userInfo = JwtHelper.getUserInfo();
+        return collectApi.queryGoodsCollectList(userInfo.getId());
     }
 
 }

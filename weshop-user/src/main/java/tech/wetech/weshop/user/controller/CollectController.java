@@ -20,7 +20,7 @@ public class CollectController extends BaseApi<Collect> implements CollectApi {
     private CollectService collectService;
 
     @Override
-    public Result<List<GoodsCollectDTO>> queryGoodsCollectList() {
-        return Result.success(collectService.queryGoodsCollectList());
+    public Result<List<GoodsCollectDTO>> queryGoodsCollectList(Integer userId) {
+        return Result.success(collectService.queryGoodsCollectList(userId));
     }
 }

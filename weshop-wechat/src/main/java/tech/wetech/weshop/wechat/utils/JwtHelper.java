@@ -5,6 +5,8 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.codec.binary.Base64;
+import tech.wetech.weshop.common.enums.ResultStatus;
+import tech.wetech.weshop.common.exception.BizException;
 import tech.wetech.weshop.common.utils.JsonUtils;
 import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.constants.WechatConstants;
@@ -42,10 +44,10 @@ public class JwtHelper {
 
     public static User getUserInfo() {
         String subject = ofNullable(currentClaims.get()).map(Claims::getSubject).orElse(null);
-        if (subject != null) {
-            return JsonUtils.getInstance().json2obj(subject, User.class);
+        if (subject == null) {
+            throw new BizException(ResultStatus.WECHAT_LOGIN_ERROR);
         }
-        return null;
+        return JsonUtils.getInstance().json2obj(subject, User.class);
     }
 
     /**

@@ -1,7 +1,8 @@
 package tech.wetech.weshop.wechat.vo;
 
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.marketing.po.Comment;
+import tech.wetech.weshop.user.po.User;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 
 import javax.validation.constraints.NotNull;
 import java.util.Base64;
@@ -24,11 +25,12 @@ public class CommentPostVO {
     private Integer userId;
 
     public Comment toPO() {
+        User user = JwtHelper.getUserInfo();
         Comment comment = new Comment();
         comment.setTypeId(typeId);
         comment.setValueId(valueId);
         comment.setContent(Base64.getEncoder().encodeToString(content.getBytes()));
-        comment.setUserId(Constants.CURRENT_USER_ID);
+        comment.setUserId(user.getId());
         return comment;
     }
 

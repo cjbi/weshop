@@ -2,11 +2,12 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.common.utils.Constants;
 import tech.wetech.weshop.user.api.AddressApi;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.po.Address;
+import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatAddressService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 import tech.wetech.weshop.wechat.vo.AddressVO;
 
 import java.util.LinkedList;
@@ -46,7 +47,8 @@ public class WechatAddressServiceImpl implements WechatAddressService {
 
     @Override
     public List<AddressVO> queryDetailList() {
-        List<Address> addressList = addressApi.queryList(new Address().setUserId(Constants.CURRENT_USER_ID)).getData();
+        User userInfo = JwtHelper.getUserInfo();
+        List<Address> addressList = addressApi.queryList(new Address().setUserId(userInfo.getId())).getData();
         LinkedList<AddressVO> addressDTOList = new LinkedList<>();
         for (Address address : addressList) {
             AddressVO addressDTO = new AddressVO(address)

@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface CollectService extends IService<Collect> {
 
-    List<GoodsCollectDTO> queryGoodsCollectList();
+    List<GoodsCollectDTO> queryGoodsCollectList(Integer userId);
 
 }
