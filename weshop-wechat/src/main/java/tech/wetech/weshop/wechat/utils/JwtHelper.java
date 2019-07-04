@@ -78,7 +78,7 @@ public class JwtHelper {
      * @return
      * @throws Exception
      */
-    public static String createJWT(String id, String subject, long ttlMillis) throws Exception {
+    public static String createJWT(String id, String subject, long ttlMillis) {
         //指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         //生成JWT的时间

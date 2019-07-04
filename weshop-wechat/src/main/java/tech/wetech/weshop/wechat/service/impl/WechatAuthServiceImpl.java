@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.utils.EnumUtils;
+import tech.wetech.weshop.common.utils.JsonUtils;
 import tech.wetech.weshop.common.utils.WebUtil;
 import tech.wetech.weshop.user.api.UserApi;
 import tech.wetech.weshop.user.enums.GenderEnum;
 import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.config.WxMaConfiguration;
+import tech.wetech.weshop.wechat.constants.WechatConstants;
 import tech.wetech.weshop.wechat.service.WechatAuthService;
+import tech.wetech.weshop.wechat.utils.JwtHelper;
 import tech.wetech.weshop.wechat.vo.LoginAuthParamVO;
 import tech.wetech.weshop.wechat.vo.LoginAuthResultVO;
 
@@ -56,6 +59,8 @@ public class WechatAuthServiceImpl implements WechatAuthService {
         newUser.setLastLoginIp(WebUtil.getInstance().getIpAddress());
         //更新登陆信息
         userApi.updateNotNull(newUser);
-        return new LoginAuthResultVO("token", newUser);
+        //生成token
+        String token = JwtHelper.createJWT("wechat", JsonUtils.getInstance().obj2json(newUser), WechatConstants.JWT_TTL);
+        return new LoginAuthResultVO(token, newUser);
     }
 }
