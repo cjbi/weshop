@@ -2,7 +2,6 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.exception.BizException;
@@ -76,9 +75,6 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
 
     @Autowired
     private AmqpTemplate amqpTemplate;
-
-    @Value("${message.queue.footprint}")
-    private String footprintQueue;
 
     @Override
     public GoodsResultVO queryList(GoodsSearchQuery goodsSearchQuery) {
@@ -242,7 +238,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         Footprint footprint = new Footprint()
                 .setUserId(Constants.CURRENT_USER_ID)
                 .setGoodsId(id);
-        amqpTemplate.convertAndSend(footprintQueue, footprint);
+        amqpTemplate.convertAndSend("weshop.topic.footprint", footprint);
         return goodsDetailDTO;
     }
 

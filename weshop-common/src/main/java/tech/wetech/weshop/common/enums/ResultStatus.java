@@ -23,6 +23,9 @@ public enum ResultStatus {
     PLEASE_SELECT_SHIPPING_ADDRESS("613", "请选择收货地址"),
 
     CREATE_ORDER_ERROR("614", "创建订单失败"),
+    WECHAT_SERVICE_ERROR("615", "微信服务调用失败"),
+    WECHAT_LOGIN_ERROR("616", "请先登陆"),
+    INVALID_TOKEN_ERROR("617", "无效的Token"),
     ;
 
     private String code;

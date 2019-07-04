@@ -7,10 +7,6 @@ package tech.wetech.weshop.common.utils;
  */
 public class Constants {
 
-    public static final int DEFAULT_PAGE_NUM = 1;
-
-    public static final int DEFAULT_PAGE_SIZE = 10;
-
     public static final int CURRENT_USER_ID = 1;
 
     public static final String SESSION_ID = "1";

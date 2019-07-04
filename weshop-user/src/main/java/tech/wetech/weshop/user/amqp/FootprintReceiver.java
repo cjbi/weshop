@@ -15,7 +15,7 @@ import tech.wetech.weshop.user.service.FootprintService;
  * @author cjbi@outlook.com
  */
 @Component
-@RabbitListener(queues = "${message.queue.footprint}")
+@RabbitListener(queues = "weshop.topic.footprint")
 public class FootprintReceiver {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

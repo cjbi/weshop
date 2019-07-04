@@ -1,8 +1,9 @@
 package tech.wetech.weshop.common.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -10,7 +11,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
-@Configuration
 @EnableConfigurationProperties(WeshopProperties.class)
 public class WeshopAutoConfiguration {
 
@@ -21,6 +21,8 @@ public class WeshopAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = "weshop.swagger", value = {"title", "basePackage", "description"})
     public Docket createRestApi() {
         WeshopProperties.Swagger swagger = properties.getSwagger();
         return new Docket(DocumentationType.SWAGGER_2)

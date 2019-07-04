@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.wetech.weshop</groupId>
     <artifactId>weshop-parent</artifactId>
-    <version>${weshop.version}</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,7 +19,6 @@
     </parent>
 
     <properties>
-        <weshop.version>1.0.0-SNAPSHOT</weshop.version>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
     </properties>
@@ -51,32 +50,32 @@
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-order-api</artifactId>
-                <version>${weshop.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-user-api</artifactId>
-                <version>${weshop.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-marketing-api</artifactId>
-                <version>${weshop.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-goods-api</artifactId>
-                <version>${weshop.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-storage-api</artifactId>
-                <version>${weshop.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-common</artifactId>
-                <version>${weshop.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -129,6 +128,19 @@
                 <artifactId>qiniu-java-sdk</artifactId>
                 <version>[7.2.0, 7.2.99]</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java</artifactId>
+                <version>3.4.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>3.4.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>

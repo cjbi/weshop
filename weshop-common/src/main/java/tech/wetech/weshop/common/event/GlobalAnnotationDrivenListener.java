@@ -12,10 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class GlobalAnnotationDrivenListener {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @EventListener
     public void handleApplicationStarted(ApplicationStartedEvent ase) {
-        logger.info("Handling application {} started event.", ase);
+        log.info("Handling application {} started event.", ase);
+        log.info(ase.getApplicationContext().getApplicationName() + "启动成功...");
     }
 }

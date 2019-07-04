@@ -3,6 +3,8 @@ package tech.wetech.weshop.common.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import javax.validation.constraints.NotNull;
+
 @ConfigurationProperties(prefix = "weshop")
 public class WeshopProperties {
 
@@ -18,7 +20,8 @@ public class WeshopProperties {
     }
 
     public static class Swagger {
-        private String basePackage = "tech.wetech.weshop.web";
+        @NotNull
+        private String basePackage;
         @Value("${spring.application.name}")
         private String title;
         private String description = "WESHOP | 又一个小程序商城应用";

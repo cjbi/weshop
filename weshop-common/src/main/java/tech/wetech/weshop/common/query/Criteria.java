@@ -2,7 +2,7 @@ package tech.wetech.weshop.common.query;
 
 import tech.wetech.weshop.common.utils.Fn;
 import tech.wetech.weshop.common.utils.Reflections;
-import tech.wetech.weshop.common.utils.StringUtil;
+import tech.wetech.weshop.common.utils.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -234,7 +234,7 @@ public class Criteria<A, B> implements Serializable {
                     Column column = declaredField.getAnnotation(Column.class);
                     fieldsMap.put(declaredField.getName(), column.name());
                 } else {
-                    String s = StringUtil.convertByStyle(declaredField.getName(), StringUtil.Style.camelhump);
+                    String s = StringUtils.convertByStyle(declaredField.getName(), StringUtils.Style.camelhump);
                     fieldsMap.put(declaredField.getName(), s);
                 }
             }
@@ -586,7 +586,7 @@ public class Criteria<A, B> implements Serializable {
                     .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
                     .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc", "ddd"))
                     .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
-//        System.out.println(JsonUtil.getInstance().obj2json(criteria));
+//        System.out.println(JsonUtils.getInstance().obj2json(criteria));
             System.out.println(criteria.buildSql());
             System.out.println(criteria.buildCountSql());
         }

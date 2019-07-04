@@ -99,6 +99,13 @@ public class Result<T> implements Serializable {
                 .setMsg(resultStatus.getMsg());
     }
 
+    public static Result failure(String code, String msg) {
+        return new Result()
+                .setSuccess(false)
+                .setCode(code)
+                .setMsg(msg);
+    }
+
     public static <T> Result<T> success(T obj) {
         return new Result()
                 .setData(obj)
