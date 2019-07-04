@@ -15,6 +15,7 @@ public class WechatWebConfig implements WebMvcConfigurer {
                 .excludePathPatterns(//配置不需要登陆的接口
                         "/",
                         "/csrf",
+                        "/error",
                         "/favicon.ico",
                         "/swagger-resources/**",
                         "/webjars/**",
@@ -27,7 +28,7 @@ public class WechatWebConfig implements WebMvcConfigurer {
                         "/wechat/search/**",
                         "/wechat/topic/**",
                         "/wechat/auth/loginByWeixin",
-                        "/wechat/auth/{userId}/token"
+                        "/wechat/dev/{userId}/token"
 
                 );
     }

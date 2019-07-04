@@ -22,7 +22,7 @@ public class WeshopAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "weshop.swagger", value = {"title", "basePackage", "description"})
+    @ConditionalOnProperty(prefix = "weshop.swagger", name = {"title", "basePackage", "description"})
     public Docket createRestApi() {
         WeshopProperties.Swagger swagger = properties.getSwagger();
         return new Docket(DocumentationType.SWAGGER_2)
