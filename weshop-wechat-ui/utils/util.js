@@ -36,7 +36,7 @@ function request(url, data = {}, method = "GET") {
 
                 if (res.statusCode == 200) {
 
-                    if (res.data.errno == 401) {
+                    if (res.data.code == 616) {
                         //需要登录后才可以操作
 
                         let code = null;
@@ -126,7 +126,7 @@ function getUserInfo() {
         wx.getUserInfo({
             withCredentials: true,
             success: function (res) {
-                if (res.detail.errMsg === 'getUserInfo:ok') {
+                if (res.errMsg === 'getUserInfo:ok') {
                     resolve(res);
                 } else {
                     reject(res)

@@ -68,7 +68,7 @@ Page({
             }, 'POST');
         }).then((res) => {
             console.log(res)
-            if (res.errno !== 0) {
+            if (res.success == false) {
                 wx.showToast({
                     title: '微信登录失败',
                 })

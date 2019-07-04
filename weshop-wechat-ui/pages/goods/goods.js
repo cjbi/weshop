@@ -228,7 +228,7 @@ Page({
             .then(function (res) {
                 let _res = res;
                 if (_res.success) {
-                    if (_res.data.type == 'add') {
+                    if (_res.data.userHasCollect == true) {
                         that.setData({
                             'collectBackImage': that.data.hasCollectImage
                         });

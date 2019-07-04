@@ -6,7 +6,7 @@ module.exports = {
     CatalogList: BaseUrl + 'catalog/index',  //分类目录全部分类数据接口
     CatalogCurrent: BaseUrl + 'catalog/current',  //分类目录当前分类数据接口
 
-    AuthLoginByWeixin: ApiRootUrl + 'auth/loginByWeixin', //微信登录
+  AuthLoginByWeixin: BaseUrl + 'auth/loginByWeixin', //微信登录
 
     GoodsCount: BaseUrl + 'goods/count',  //统计商品总数
     GoodsList: BaseUrl + 'goods/list',  //获得商品列表

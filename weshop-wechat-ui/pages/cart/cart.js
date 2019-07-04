@@ -70,7 +70,7 @@ Page({
         if (!this.data.isEditCart) {
             util.request(api.CartChecked, {
                 productIds: that.data.cartGoods[itemIndex].productId,
-                isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1
+                checked: that.data.cartGoods[itemIndex].checked ? 0 : 1
             }, 'POST').then(function (res) {
                 if (res.success) {
                     console.log(res.data);
@@ -120,7 +120,7 @@ Page({
             });
             util.request(api.CartChecked, {
                 productIds: productIds.join(','),
-                isChecked: that.isCheckedAll() ? 0 : 1
+                checked: that.isCheckedAll() ? 0 : 1
             }, 'POST').then(function (res) {
                 if (res.success) {
                     console.log(res.data);
