@@ -35,8 +35,8 @@ public class WechatAddressController extends BaseController {
         return Result.success(addressService.queryDetail(id));
     }
 
-    @PostMapping("/create")
-    public Result create(@Validated @RequestBody Address entity) {
+    @PostMapping("/save")
+    public Result save(@Validated @RequestBody Address entity) {
         User userInfo = JwtHelper.getUserInfo();
         entity.setUserId(userInfo.getId());
         return addressApi.create(entity);
@@ -51,8 +51,8 @@ public class WechatAddressController extends BaseController {
     }
 
     @PostMapping("/delete")
-    public Result delete(Object id) {
-        addressApi.deleteById(id);
+    public Result delete(@Validated @RequestBody Address entity) {
+        addressApi.deleteById(entity.getId());
         return Result.success();
     }
 }

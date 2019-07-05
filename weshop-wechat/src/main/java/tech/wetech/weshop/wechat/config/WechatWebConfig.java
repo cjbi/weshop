@@ -27,7 +27,7 @@ public class WechatWebConfig implements WebMvcConfigurer {
                         "/wechat/home/**",
                         "/wechat/search/**",
                         "/wechat/topic/**",
-                        "/wechat/auth/loginByWeixin",
+                        "/wechat/auth/login",
                         "/wechat/dev/{userId}/token"
 
                 );

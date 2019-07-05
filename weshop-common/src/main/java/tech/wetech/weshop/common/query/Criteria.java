@@ -588,7 +588,9 @@ public class Criteria<A, B> implements Serializable {
                     .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
 //        System.out.println(JsonUtils.getInstance().obj2json(criteria));
             System.out.println(criteria.buildSql());
+            //print:select id,attribute_category,create_time,list_pic_url from weshop_goods where app_exclusive_price is not null and counter_price = '222' and brand_id = 333 or goods_number between 1 AND 1000 or id in (111,222,333) or list_pic_url not in ('aaa','bbb','ccc','ddd') order by brand_id,create_time desc limit 10
             System.out.println(criteria.buildCountSql());
+            //print:select count(*) from weshop_goods where app_exclusive_price is not null and counter_price = ''222'' and brand_id = 333 or goods_number between 1 AND 1000 or id in (111,222,333) or list_pic_url not in ('aaa','bbb','ccc','ddd')
         }
         System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }

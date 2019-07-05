@@ -49,7 +49,7 @@ public class WechatHomeServiceImpl implements WechatHomeService {
 
         List<Ad> bannerList = adApi.queryByCriteria(Criteria.of(Ad.class).fields(Ad::getId, Ad::getLink, Ad::getImageUrl).andEqualTo(Ad::getAdPositionId, 1)).getData();
 
-        List<Channel> channelList = channelApi.queryByCriteria(Criteria.of(Channel.class).fields(Channel::getId, Channel::getIconUrl, Channel::getName).sort(Channel::getSortOrder)).getData();
+        List<Channel> channelList = channelApi.queryByCriteria(Criteria.of(Channel.class).fields(Channel::getId, Channel::getIconUrl, Channel::getName, Channel::getUrl).sort(Channel::getSortOrder)).getData();
 
         List<Goods> newGoodsList = goodsApi.queryByCriteria(Criteria.of(Goods.class).fields(Goods::getId, Goods::getListPicUrl, Goods::getName, Goods::getRetailPrice).page(1, 4).andEqualTo(Goods::getNewly, true)).getData();
 
