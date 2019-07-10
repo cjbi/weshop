@@ -2,7 +2,7 @@ package tech.wetech.weshop.common.fallback;
 
 import tech.wetech.weshop.common.api.Api;
 import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.query.Criteria;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.Result;
 
 import java.util.List;

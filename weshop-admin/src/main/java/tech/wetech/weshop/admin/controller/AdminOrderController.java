@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.query.PageQuery;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.order.api.OrderApi;
 import tech.wetech.weshop.order.enums.OrderStatusEnum;
@@ -31,8 +31,8 @@ public class AdminOrderController extends BaseController {
     private OrderApi orderApi;
 
     @GetMapping("/list")
-    public Result<List<Order>> queryList(Order entity, PageQuery pageQuery) {
-        return orderApi.queryByCriteria(null)
+    public Result<List<Order>> queryList() {
+        return orderApi.queryByCriteria(Criteria.of(Order.class))
                 .addExtra("orderStatus", Arrays.stream(OrderStatusEnum.values()).collect(Collectors.toMap(o -> o, OrderStatusEnum::getName)))
                 .addExtra("payStatus", Arrays.stream(PayStatusEnum.values()).collect(Collectors.toMap(p -> p, PayStatusEnum::getName)));
     }

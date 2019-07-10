@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultStatus;
 import tech.wetech.weshop.common.exception.BizException;
-import tech.wetech.weshop.common.query.Criteria;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.IdGenerator;
 import tech.wetech.weshop.order.api.CartApi;
 import tech.wetech.weshop.order.api.OrderApi;

@@ -47,7 +47,7 @@ public class JwtHelper {
         if (subject == null) {
             throw new BizException(ResultStatus.WECHAT_LOGIN_ERROR);
         }
-        return JsonUtils.getInstance().json2obj(subject, User.class);
+        return JsonUtils.toObject(subject, User.class);
     }
 
     /**

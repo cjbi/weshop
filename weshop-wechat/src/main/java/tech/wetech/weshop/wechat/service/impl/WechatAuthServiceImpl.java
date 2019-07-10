@@ -6,7 +6,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.common.query.Criteria;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.EnumUtils;
 import tech.wetech.weshop.common.utils.JsonUtils;
 import tech.wetech.weshop.common.utils.WebUtil;
@@ -60,7 +60,7 @@ public class WechatAuthServiceImpl implements WechatAuthService {
         //更新登陆信息
         userApi.updateNotNull(newUser);
         //生成token
-        String token = JwtHelper.createJWT("wechat", JsonUtils.getInstance().obj2json(newUser), WechatConstants.JWT_TTL);
+        String token = JwtHelper.createJWT("wechat", JsonUtils.toJson(newUser), WechatConstants.JWT_TTL);
         return new LoginAuthResultVO(token, newUser);
     }
 }

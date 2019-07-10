@@ -1,6 +1,6 @@
 package tech.wetech.weshop.common.service;
 
-import tech.wetech.weshop.common.query.Criteria;
+import tech.wetech.weshop.common.utils.Criteria;
 
 import java.util.List;
 

@@ -32,7 +32,7 @@ public class WeshopDeveloperController {
     public Result<String> getTokenByUserId(@NotBlank String userId) {
         User user = userApi.queryById(userId).getData();
         //生成token
-        String token = JwtHelper.createJWT("wechat", JsonUtils.getInstance().obj2json(user), WechatConstants.JWT_TTL);
+        String token = JwtHelper.createJWT("wechat", JsonUtils.toJson(user), WechatConstants.JWT_TTL);
         return Result.success(token);
     }
 

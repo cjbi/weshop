@@ -1,8 +1,4 @@
-package tech.wetech.weshop.common.query;
-
-import tech.wetech.weshop.common.utils.Fn;
-import tech.wetech.weshop.common.utils.Reflections;
-import tech.wetech.weshop.common.utils.StringUtils;
+package tech.wetech.weshop.common.utils;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -571,27 +567,5 @@ public class Criteria<A, B> implements Serializable {
 
     public void setStatement(Statement statement) {
         this.statement = statement;
-    }
-
-    public static void main(String[] args) {
-        long time = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
-                    .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
-                    .page(1, 10)
-                    .andIsNotNull(GoodsTest::getAppExclusivePrice)
-                    .andEqualTo(GoodsTest::getCounterPrice, "222")
-                    .andEqualTo(GoodsTest::getBrandId, 333)
-                    .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
-                    .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
-                    .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc", "ddd"))
-                    .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
-//        System.out.println(JsonUtils.getInstance().obj2json(criteria));
-            System.out.println(criteria.buildSql());
-            //print:select id,attribute_category,create_time,list_pic_url from weshop_goods where app_exclusive_price is not null and counter_price = '222' and brand_id = 333 or goods_number between 1 AND 1000 or id in (111,222,333) or list_pic_url not in ('aaa','bbb','ccc','ddd') order by brand_id,create_time desc limit 10
-            System.out.println(criteria.buildCountSql());
-            //print:select count(*) from weshop_goods where app_exclusive_price is not null and counter_price = ''222'' and brand_id = 333 or goods_number between 1 AND 1000 or id in (111,222,333) or list_pic_url not in ('aaa','bbb','ccc','ddd')
-        }
-        System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }
 }

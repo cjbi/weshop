@@ -2,7 +2,7 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.common.query.Criteria;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.goods.api.BrandApi;
 import tech.wetech.weshop.goods.api.CategoryApi;
 import tech.wetech.weshop.goods.api.ChannelApi;
