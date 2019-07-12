@@ -11,4 +11,9 @@ public class WechatConstants {
      * 有效期7天
      */
     public static final long JWT_TTL = 7L * 24L * 60L * 60L * 1000L;
+
+    /**
+     * Token的名字
+     */
+    public static final String JWT_KEY_NAME = "X-Weshop-Token";
 }

@@ -27,7 +27,7 @@ public class JwtHelper {
     /**
      * 登陆信息
      */
-    private static ThreadLocal<Claims> currentClaims = new ThreadLocal<>();
+    private static final ThreadLocal<Claims> currentClaims = new ThreadLocal<>();
 
     /**
      * 获得传输的信息
