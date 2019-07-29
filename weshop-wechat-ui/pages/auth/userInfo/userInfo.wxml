@@ -1,0 +1,11 @@
+<view wx:if="{{canIUse}}">
+  <view class='headView'>
+    <view class='headImageView'>
+      <image class='headImage' src='/pages/imageSource/IMG_3456.png' mode='scaleToFill'></image>
+    </view>
+    <view class='titleText'>申请获取以下权限</view>
+    <view class='contentText'>获得你的公开信息(昵称,头像,手机等)</view>
+    <button class='authBtn' type='primary' open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>授权登录</button>
+  </view>
+</view>
+<view wx:else>请升级微信版本</view>
