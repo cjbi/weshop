@@ -1,8 +1,8 @@
 package tech.wetech.weshop.common.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import tech.wetech.weshop.common.query.Criteria;
 import tech.wetech.weshop.common.service.IService;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.Result;
 
 import java.util.List;

@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.exception.BizException;
-import tech.wetech.weshop.common.query.Criteria;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.marketing.api.KeywordsApi;
 import tech.wetech.weshop.marketing.api.SearchHistoryApi;
 import tech.wetech.weshop.marketing.po.Keywords;

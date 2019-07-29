@@ -1,8 +1,4 @@
-package tech.wetech.weshop.common.query;
-
-import tech.wetech.weshop.common.utils.Fn;
-import tech.wetech.weshop.common.utils.Reflections;
-import tech.wetech.weshop.common.utils.StringUtils;
+package tech.wetech.weshop.common.utils;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -571,25 +567,5 @@ public class Criteria<A, B> implements Serializable {
 
     public void setStatement(Statement statement) {
         this.statement = statement;
-    }
-
-    public static void main(String[] args) {
-        long time = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            Criteria<GoodsTest, Object> criteria = Criteria.of(GoodsTest.class)
-                    .fields(GoodsTest::getId, GoodsTest::getAttributeCategory, GoodsTest::getCreateTime, GoodsTest::getListPicUrl)
-                    .page(1, 10)
-                    .andIsNotNull(GoodsTest::getAppExclusivePrice)
-                    .andEqualTo(GoodsTest::getCounterPrice, "222")
-                    .andEqualTo(GoodsTest::getBrandId, 333)
-                    .orBetween(GoodsTest::getGoodsNumber, 1, 1000)
-                    .orIn(GoodsTest::getId, Arrays.asList(111, 222, 333))
-                    .orNotIn(GoodsTest::getListPicUrl, Arrays.asList("aaa", "bbb", "ccc", "ddd"))
-                    .sortDesc(GoodsTest::getBrandId, GoodsTest::getCreateTime);
-//        System.out.println(JsonUtils.getInstance().obj2json(criteria));
-            System.out.println(criteria.buildSql());
-            System.out.println(criteria.buildCountSql());
-        }
-        System.out.println("耗时:" + (System.currentTimeMillis() - time) + "ms");
     }
 }

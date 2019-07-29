@@ -27,7 +27,7 @@ public class JwtHelper {
     /**
      * 登陆信息
      */
-    private static ThreadLocal<Claims> currentClaims = new ThreadLocal<>();
+    private static final ThreadLocal<Claims> currentClaims = new ThreadLocal<>();
 
     /**
      * 获得传输的信息
@@ -47,7 +47,7 @@ public class JwtHelper {
         if (subject == null) {
             throw new BizException(ResultStatus.WECHAT_LOGIN_ERROR);
         }
-        return JsonUtils.getInstance().json2obj(subject, User.class);
+        return JsonUtils.toObject(subject, User.class);
     }
 
     /**

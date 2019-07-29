@@ -1,5 +1,8 @@
 package tech.wetech.weshop.wechat.vo;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class LoginAuthParamVO {
 
     /**
@@ -7,7 +10,9 @@ public class LoginAuthParamVO {
      * userInfo : {"errMsg":"getUserInfo:ok","rawData":"{\"nickName\":\"cjbi\",\"gender\":1,\"language\":\"zh_CN\",\"city\":\"ÄÏŸ©\",\"province\":\"œ­ËÕ\",\"country\":\"ÖÐ¹ú\",\"avatarUrl\":\"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJFogiawUASWXKKia93Xk2AicZHTfyvYn8ZaX8fgNwFGg8u2u0Ckpx3ibs2rdyYtqhkafHFGqDcyy7WvQ/132\"}","signature":"9cb0b69b1c6b8a0205f9ca07ca33e0ea7e5d7875","encryptedData":"EQNOWKhOI/U9HnFTewCl63dN3LZ/aN66or2OOt+BZzt4yCx23ZE3dwlEURr7q7keBTlfeRW+EtcKchd5wR/jtEkZF8PHTa0c0T98dJG8091cYOdCL3bq8stBgSze7LeEy2Txh6N+rZWcTATwZCuPiuMUuYj4kXihNw0c41hnk03rIWONA5ZHJyZx2cF5zMBnCcOfLdc+aMLpNdDqw0ciTsj/J+uLmsIPFvy/ErgZE2KvcTeh7zadFyyVN6S0lYv78klOP/gY4yzEnisZI0ddpXhVwW4lcYG6fIdw7RzUBKxUdg8LgS8/8Pz3ptnmXLQOnanpd60leymFHVajbz/GaK8AFDvFgJydDuCnoY71SSD+wbVweTPgoyaSj471reGt2m2UYdpJ6OlfRudq3kW59ZHri3njQV6vQyKowRVddAPbYNqqcbjJZTw7hcTkchjpKVKZ0yvv9ZRZhpYGR7kyDWh40NpP8P8sJrCFKqyDPC0=","iv":"WCEkelsb2aENLNNdtNlePw==","userInfo":{"nickName":"cjbi","gender":1,"language":"zh_CN","city":"ÄÏŸ©","province":"œ­ËÕ","country":"ÖÐ¹ú","avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJFogiawUASWXKKia93Xk2AicZHTfyvYn8ZaX8fgNwFGg8u2u0Ckpx3ibs2rdyYtqhkafHFGqDcyy7WvQ/132"}}
      */
 
+    @NotBlank
     private String code;
+    @NotNull
     private UserInfoX userInfo;
 
     public String getCode() {

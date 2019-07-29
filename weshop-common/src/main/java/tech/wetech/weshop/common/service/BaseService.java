@@ -3,7 +3,7 @@ package tech.wetech.weshop.common.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import tech.wetech.weshop.common.query.Criteria;
+import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.MyMapper;
 
 import java.util.List;

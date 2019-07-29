@@ -1,10 +1,10 @@
 package tech.wetech.weshop.marketing.query;
 
-import tech.wetech.weshop.common.query.PageQuery;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 
-public class CommentQuery extends PageQuery {
+public class CommentQuery {
 
     @NotNull
     private Integer typeId;
@@ -13,6 +13,17 @@ public class CommentQuery extends PageQuery {
     private Integer valueId;
 
     private boolean requirePicture;
+
+    /**
+     * 页码，从1开始
+     */
+    @ApiModelProperty("页码，从1开始")
+    private int pageNum;
+    /**
+     * 页面大小
+     */
+    @ApiModelProperty("页面大小")
+    private int pageSize;
 
     public Integer getTypeId() {
         return typeId;
@@ -39,5 +50,21 @@ public class CommentQuery extends PageQuery {
     public CommentQuery setRequirePicture(boolean requirePicture) {
         this.requirePicture = requirePicture;
         return this;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

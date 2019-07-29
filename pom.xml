@@ -174,7 +174,7 @@
         <profile>
             <id>env-dev</id>
             <properties>
-                <spring.cloud.config.profile>dev</spring.cloud.config.profile>
+                <env>dev</env>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
