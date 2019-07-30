@@ -43,10 +43,17 @@
         <module>weshop-marketing</module>
         <module>weshop-storage</module>
         <module>weshop-storage-api</module>
+      <module>weshop-pay</module>
+      <module>weshop-pay-api</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+          <dependency>
+            <groupId>tech.wetech.weshop</groupId>
+            <artifactId>weshop-pay-api</artifactId>
+            <version>${project.version}</version>
+          </dependency>
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-order-api</artifactId>
@@ -134,7 +141,12 @@
                 <artifactId>wx-java</artifactId>
                 <version>3.4.0</version>
             </dependency>
-
+          <!--wx_pay-->
+          <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-pay</artifactId>
+            <version>3.4.0</version>
+          </dependency>
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-miniapp</artifactId>

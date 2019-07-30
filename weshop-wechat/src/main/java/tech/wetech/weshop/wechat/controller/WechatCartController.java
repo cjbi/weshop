@@ -5,13 +5,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Result;
-import tech.wetech.weshop.wechat.annotations.AuthLogin;
 import tech.wetech.weshop.wechat.service.WechatCartService;
 import tech.wetech.weshop.wechat.vo.*;
 
 @RestController
 @RequestMapping("/wechat/cart")
-@AuthLogin
 public class WechatCartController extends BaseController {
 
     @Autowired

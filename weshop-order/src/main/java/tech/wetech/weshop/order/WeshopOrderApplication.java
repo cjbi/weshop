@@ -1,9 +1,9 @@
 package tech.wetech.weshop.order;
 
 import org.springframework.boot.SpringApplication;
-import tech.wetech.weshop.common.annotations.WeshopDataSourceSpringCloudApplication;
+import tech.wetech.weshop.common.annotations.WeshopDalSpringCloudApplication;
 
-@WeshopDataSourceSpringCloudApplication
+@WeshopDalSpringCloudApplication
 public class WeshopOrderApplication {
 
     public static void main(String[] args) {

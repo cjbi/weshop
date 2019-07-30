@@ -1,12 +1,12 @@
 package tech.wetech.weshop.admin;
 
 import org.springframework.boot.SpringApplication;
-import tech.wetech.weshop.common.annotations.WeshopPortalSpringCloudApplication;
+import tech.wetech.weshop.common.annotations.WeshopSpringCloudApplication;
 
 /**
  * @author cjbi@outlook.com
  */
-@WeshopPortalSpringCloudApplication
+@WeshopSpringCloudApplication
 public class WeshopAdminApplication {
 
     public static void main(String[] args) {
