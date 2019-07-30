@@ -1,106 +1,67 @@
+var util = require('../../../utils/util.js');
 var api = require('../../../config/api.js');
 var app = getApp();
+var backUrl = '/pages/index/index';
+var backParams = {};
 Page({
-    data: {
-        username: '',
-        password: '',
-        code: '',
-        loginErrorCount: 0
-    },
-    onLoad: function (options) {
-        // 页面初始化 options为页面跳转所带来的参数
-        // 页面渲染完成
+  data: {
 
-    },
-    onReady: function () {
+  },
+  onLoad: function(options) {
+    //返回的页面
+    backUrl = options.backUrl;
+    //返回的参数
+    let obj = JSON.parse(options.backParamJson);
+    backParams = Object.keys(obj).map(function (key) {
+      return encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]);
+    }).join("&");
+    // 页面初始化 options为页面跳转所带来的参数
+    // 页面渲染完成
 
-    },
-    onShow: function () {
-        // 页面显示
-    },
-    onHide: function () {
-        // 页面隐藏
+  },
+  onReady: function() {
 
-    },
-    onUnload: function () {
-        // 页面关闭
+  },
+  onShow: function() {
+    // 页面显示
+  },
+  onHide: function() {
+    // 页面隐藏
 
-    },
-    startLogin: function () {
-        var that = this;
+  },
+  onUnload: function() {
+    // 页面关闭
 
-        if (that.data.password.length < 1 || that.data.username.length < 1) {
-            wx.showModal({
-                title: '错误信息',
-                content: '请输入用户名和密码',
-                showCancel: false
-            });
-            return false;
+  },
+  //js核心代码：其中利用backtype来确认授权登录后跳转回那个页面
+  bindGetUserInfo: function(e) {
+
+    return util.login().then((res) => {
+      //登录远程服务器
+      util.request(api.AuthLoginByWeixin, {
+        code: res,
+        userInfo: e.detail.userInfo
+      }, 'POST').then(res => {
+
+        if (res.code == 200) {
+          //存储用户信息
+          wx.setStorageSync('userInfo', JSON.stringify(res.data.userInfo));
+          wx.setStorageSync('token', res.data.token);
+          //返回上一页面
+          wx.redirectTo({
+            url: backUrl + '?' + backParams,
+          })
         }
-
-        wx.request({
-            url: api.ApiRootUrl + 'auth/login',
-            data: {
-                username: that.data.username,
-                password: that.data.password
-            },
-            method: 'POST',
-            header: {
-                'content-type': 'application/json'
-            },
-            success: function (res) {
-                if (res.data.code == 200) {
-                    that.setData({
-                        'loginErrorCount': 0
-                    });
-                    wx.setStorage({
-                        key: "token",
-                        data: res.data.data.token,
-                        success: function () {
-                            wx.switchTab({
-                                url: '/pages/ucenter/index/index'
-                            });
-                        }
-                    });
-                }
-            }
-        });
-    },
-    bindUsernameInput: function (e) {
-
-        this.setData({
-            username: e.detail.value
-        });
-    },
-    bindPasswordInput: function (e) {
-
-        this.setData({
-            password: e.detail.value
-        });
-    },
-    bindCodeInput: function (e) {
-
-        this.setData({
-            code: e.detail.value
-        });
-    },
-    clearInput: function (e) {
-        switch (e.currentTarget.id) {
-            case 'clear-username':
-                this.setData({
-                    username: ''
-                });
-                break;
-            case 'clear-password':
-                this.setData({
-                    password: ''
-                });
-                break;
-            case 'clear-code':
-                this.setData({
-                    code: ''
-                });
-                break;
-        }
+      })
+    });
+  },
+  navigateBack: function(e) {
+    if(getCurrentPages().length>1) {
+      wx.navigateBack({});
+    } else {
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
     }
+  },
 })

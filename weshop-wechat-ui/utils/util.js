@@ -33,34 +33,16 @@ function request(url, data = {}, method = "GET") {
             },
             success: function (res) {
                 console.log("success");
-
                 if (res.statusCode == 200) {
-
                     if (res.data.code == 616) {
-                        //需要登录后才可以操作
-
-                        let code = null;
-                        return login().then((res) => {
-                            code = res.code;
-                            return getUserInfo();
-                        }).then((userInfo) => {
-                            //登录远程服务器
-                            request(api.AuthLoginByWeixin, {code: code, userInfo: userInfo}, 'POST').then(res => {
-                                if (res.errno === 0) {
-                                    //存储用户信息
-                                    wx.setStorageSync('userInfo', res.data.userInfo);
-                                    wx.setStorageSync('token', res.data.token);
-
-                                    resolve(res);
-                                } else {
-                                    reject(res);
-                                }
-                            }).catch((err) => {
-                                reject(err);
-                            });
-                        }).catch((err) => {
-                            reject(err);
-                        })
+                     //需要登录后才可以操作
+                      var pages = getCurrentPages() //获取加载的页面
+                      var currentPage = pages[pages.length - 1] //获取当前页面的对象
+                      var url = currentPage.route //当前页面url
+                      var options = currentPage.options; //如果要获取url中所带的参数可以查看options
+                      wx.redirectTo({
+                        url: '/pages/auth/login/login?backUrl=/' + url+'&backParamJson=' + JSON.stringify(options)
+                      }); 
                     } else {
                         resolve(res.data);
                     }
@@ -122,21 +104,25 @@ function login() {
 }
 
 function getUserInfo() {
-    return new Promise(function (resolve, reject) {
-        wx.getUserInfo({
-            withCredentials: true,
-            success: function (res) {
-                if (res.errMsg === 'getUserInfo:ok') {
-                    resolve(res);
-                } else {
-                    reject(res)
-                }
-            },
-            fail: function (err) {
-                reject(err);
-            }
-        })
-    });
+  wx.redirectTo({
+    url: '/pages/auth/login/login?backurl=pages/index/index'
+  });
+  return;
+    // return new Promise(function (resolve, reject) {
+    //     wx.getUserInfo({
+    //         withCredentials: true,
+    //         success: function (res) {
+    //             if (res.errMsg === 'getUserInfo:ok') {
+    //                 resolve(res);
+    //             } else {
+    //                 reject(res)
+    //             }
+    //         },
+    //         fail: function (err) {
+    //             reject(err);
+    //         }
+    //     })
+    // });
 }
 
 function redirect(url) {
