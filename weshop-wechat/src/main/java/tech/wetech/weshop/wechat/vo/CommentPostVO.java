@@ -1,6 +1,6 @@
 package tech.wetech.weshop.wechat.vo;
 
-import tech.wetech.weshop.marketing.po.Comment;
+import tech.wetech.weshop.user.po.Comment;
 import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.utils.JwtHelper;
 

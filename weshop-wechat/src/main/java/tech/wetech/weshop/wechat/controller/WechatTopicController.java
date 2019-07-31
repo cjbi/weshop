@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.Result;
-import tech.wetech.weshop.marketing.api.TopicApi;
-import tech.wetech.weshop.marketing.po.Topic;
+import tech.wetech.weshop.user.api.TopicApi;
+import tech.wetech.weshop.user.po.Topic;
 
 import java.util.List;
 

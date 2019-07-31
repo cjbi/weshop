@@ -1,6 +1,6 @@
 package tech.wetech.weshop.wechat.service;
 
-import tech.wetech.weshop.marketing.query.CommentQuery;
+import tech.wetech.weshop.user.query.CommentQuery;
 import tech.wetech.weshop.wechat.vo.CommentCountVO;
 import tech.wetech.weshop.wechat.vo.CommentResultVO;
 

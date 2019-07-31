@@ -25,10 +25,6 @@
         </dependency>
         <dependency>
             <groupId>tech.wetech.weshop</groupId>
-            <artifactId>weshop-marketing-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>tech.wetech.weshop</groupId>
             <artifactId>weshop-goods-api</artifactId>
         </dependency>
     </dependencies>

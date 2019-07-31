@@ -1,6 +1,6 @@
 package tech.wetech.weshop.wechat.vo;
 
-import tech.wetech.weshop.marketing.po.Keywords;
+import tech.wetech.weshop.user.po.Keywords;
 
 import java.util.List;
 

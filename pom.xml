@@ -39,8 +39,6 @@
         <module>weshop-user</module>
         <module>weshop-goods-api</module>
         <module>weshop-goods</module>
-        <module>weshop-marketing-api</module>
-        <module>weshop-marketing</module>
         <module>weshop-storage</module>
         <module>weshop-storage-api</module>
       <module>weshop-pay</module>
@@ -62,11 +60,6 @@
             <dependency>
                 <groupId>tech.wetech.weshop</groupId>
                 <artifactId>weshop-user-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>tech.wetech.weshop</groupId>
-                <artifactId>weshop-marketing-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

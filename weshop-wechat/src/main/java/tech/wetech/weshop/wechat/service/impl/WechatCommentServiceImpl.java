@@ -2,11 +2,11 @@ package tech.wetech.weshop.wechat.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.marketing.api.CommentApi;
-import tech.wetech.weshop.marketing.api.CommentPictureApi;
-import tech.wetech.weshop.marketing.query.CommentQuery;
+import tech.wetech.weshop.user.api.CommentApi;
+import tech.wetech.weshop.user.api.CommentPictureApi;
 import tech.wetech.weshop.user.api.UserApi;
 import tech.wetech.weshop.user.po.User;
+import tech.wetech.weshop.user.query.CommentQuery;
 import tech.wetech.weshop.wechat.service.WechatCommentService;
 import tech.wetech.weshop.wechat.vo.CommentCountVO;
 import tech.wetech.weshop.wechat.vo.CommentResultVO;

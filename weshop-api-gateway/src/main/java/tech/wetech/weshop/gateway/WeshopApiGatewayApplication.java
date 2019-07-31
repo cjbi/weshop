@@ -37,7 +37,7 @@ public class WeshopApiGatewayApplication {
             List resources = new ArrayList<>();
             resources.add(swaggerResource("weshop-user", "/weshop-user/v2/api-docs", "1.0"));
             resources.add(swaggerResource("weshop-goods", "/weshop-goods/v2/api-docs", "1.0"));
-            resources.add(swaggerResource("weshop-marketing", "/weshop-marketing/v2/api-docs", "1.0"));
+          resources.add(swaggerResource("weshop-user", "/weshop-user/v2/api-docs", "1.0"));
             resources.add(swaggerResource("weshop-order", "/weshop-order/v2/api-docs", "1.0"));
             resources.add(swaggerResource("weshop-wechat", "/weshop-wechat/v2/api-docs", "1.0"));
             resources.add(swaggerResource("weshop-admin", "/weshop-admin/v2/api-docs", "1.0"));

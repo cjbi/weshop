@@ -3,8 +3,8 @@ package tech.wetech.weshop.wechat.vo;
 import tech.wetech.weshop.goods.po.Brand;
 import tech.wetech.weshop.goods.po.Channel;
 import tech.wetech.weshop.goods.po.Goods;
-import tech.wetech.weshop.marketing.po.Ad;
-import tech.wetech.weshop.marketing.po.Topic;
+import tech.wetech.weshop.user.po.Ad;
+import tech.wetech.weshop.user.po.Topic;
 
 import java.io.Serializable;
 import java.util.List;

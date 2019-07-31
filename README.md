@@ -1,6 +1,6 @@
 WESHOP |  基于微服务的小程序商城系统
 ---
-Weshop是基于Spring Cloud(Greenwich)开发的小程序商城系统，提供整套公共微服务服务模块，包含用户中心、商品中心、订单中心、营销中心、支付中心五大基础服务模块，微信端、管理平台两大聚合服务模块，支持服务治理、监控和追踪等功能。
+Weshop是基于Spring Cloud(Greenwich)开发的小程序商城系统，提供整套公共微服务服务模块，包含用户中心、商品中心、订单中心、支付中心四大基础服务模块，微信端、管理平台两大聚合服务模块，支持服务治理、监控和追踪等功能。
 
 ## 组织结构
 
@@ -19,8 +19,6 @@ weshop
 ├── weshop-user -- 用户中心基础服务[端口:8021]
 ├── weshop-goods-api -- 商品中心api
 ├── weshop-goods -- 商品中心基础服务[端口:8022]
-├── weshop-marketing-api -- 营销中心api
-├── weshop-marketing -- 营销中心基础服务[端口:8023]
 ├── weshop-order-api -- 订单中心api
 ├── weshop-order -- 订单中心基础服务[端口:8024]
 ├── weshop-storage-api -- 对象存储服务api
@@ -148,7 +146,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 5. 运行Maven命令mvn install(注意：安装weshop-admin模块因为会运行npm install和npm build命令时间会比较长，当然也可以手动在weshop-admin模块执行npm命令)
 6. 安装weshop-admin-ui模块，运行mvn install和mvn build命令，运行命令前需要安装nodeJs
 7. 运行weshop-eureka-server、weshop-config-server、weshop-api-gateway这几个基础服务
-8. 运行weshop-user、weshop-goods、weshop-order、weshop-marketing这几个api服务
+8. 运行weshop-user、weshop-goods、weshop-order、weshop-pay这几个api服务
 9. 运行weshop-wechat、wechat-admin这几个endpoint
 10. http://localhost:8027/index.html访问后台管理，http://localhost:8020/weshop/swagger-ui.html访问Swagger页面
 11. 打开微信开发者工具，导入weshop-wechat-ui模块,点击编译即可，此时可以预览商城效果
