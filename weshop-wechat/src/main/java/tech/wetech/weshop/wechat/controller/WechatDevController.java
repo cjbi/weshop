@@ -17,25 +17,28 @@ import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.constants.WechatConstants;
 import tech.wetech.weshop.wechat.utils.JwtHelper;
 
+/**
+ * @author cjbi
+ */
 @Api(tags = "开发人员测试接口，包括获取Token等，只在dev环境可见")
 @RestController
 @RequestMapping("/wechat/dev")
 @ConditionalOnProperty(name = "spring.cloud.config.profile", havingValue = "dev")
-public class WeshopDeveloperController {
+public class WechatDevController {
 
-    @Autowired
-    private UserApi userApi;
+  @Autowired
+  private UserApi userApi;
 
-    @PostMapping("{userId}/token")
-    @ApiOperation("【慎用】根据id获取Token用于测试")
-    public Result<String> getTokenByUserId(@PathVariable("userId") String userId) {
-        User user = userApi.queryById(userId).getData();
-        if (user == null) {
-            throw new BizException(ResultStatus.RECORD_NOT_EXIST);
-        }
-        //生成token
-        String token = JwtHelper.createJWT("wechat", JsonUtils.toJson(user), WechatConstants.JWT_TTL);
-        return Result.success(token);
+  @PostMapping("{userId}/token")
+  @ApiOperation("【慎用】根据id获取Token用于测试")
+  public Result<String> getTokenByUserId(@PathVariable("userId") String userId) {
+    User user = userApi.queryById(userId).getData();
+    if (user == null) {
+      throw new BizException(ResultStatus.RECORD_NOT_EXIST);
     }
+    //生成token
+    String token = JwtHelper.createJWT("wechat", JsonUtils.toJson(user), WechatConstants.JWT_TTL);
+    return Result.success(token);
+  }
 
 }

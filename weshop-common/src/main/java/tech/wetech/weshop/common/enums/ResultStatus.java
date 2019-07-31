@@ -26,6 +26,9 @@ public enum ResultStatus {
     WECHAT_SERVICE_ERROR("615", "微信服务调用失败"),
     WECHAT_LOGIN_ERROR("616", "请先登陆"),
     INVALID_TOKEN_ERROR("617", "无效的Token"),
+  ORDER_CANCELED("618", "订单已取消"),
+  ORDER_PAID("619", "订单已支付，请不要重复操作"),
+  WECHAT_PAY_FAIL("620", "微信支付失败"),
     ;
 
     private String code;

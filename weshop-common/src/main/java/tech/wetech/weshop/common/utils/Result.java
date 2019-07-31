@@ -122,4 +122,9 @@ public class Result<T> implements Serializable {
         }
     }
 
+  public T orElseGetData(Supplier<? extends T> other) {
+    return this.getData() != null ? this.getData() : other.get();
+  }
+
+
 }
