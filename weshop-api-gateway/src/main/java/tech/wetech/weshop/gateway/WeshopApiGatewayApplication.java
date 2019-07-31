@@ -40,6 +40,7 @@ public class WeshopApiGatewayApplication {
           resources.add(swaggerResource("weshop-goods", "/weshop-goods/v2/api-docs", "1.0"));
           resources.add(swaggerResource("weshop-user", "/weshop-user/v2/api-docs", "1.0"));
           resources.add(swaggerResource("weshop-order", "/weshop-order/v2/api-docs", "1.0"));
+          resources.add(swaggerResource("weshop-pay", "/weshop-pay/v2/api-docs", "1.0"));
             return resources;
         }
 
