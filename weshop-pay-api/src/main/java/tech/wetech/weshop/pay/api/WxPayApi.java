@@ -6,6 +6,7 @@ import com.github.binarywang.wxpay.bean.notify.WxPayRefundNotifyResult;
 import com.github.binarywang.wxpay.bean.notify.WxScanPayNotifyResult;
 import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.*;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.util.Date;
 
 @FeignClient(value = "weshop-user", path = "user", fallback = WxPayApiFallback.class)
+@Api(tags = "微信支付API")
 public interface WxPayApi {
 
   /**
@@ -138,7 +140,7 @@ public interface WxPayApi {
 
   @ApiOperation(value = "扫码支付回调通知处理")
   @PostMapping("/notify/scanpay")
-  Result<WxScanPayNotifyResult> parseScanPayNotifyResult(String xmlData);
+  Result<WxScanPayNotifyResult> parseScanPayNotifyResult(@RequestParam("xmlData") String xmlData);
 
   /**
    * 发送微信红包给个人用户
@@ -185,7 +187,9 @@ public interface WxPayApi {
    * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
    * @return 生成的二维码的字节数组
    */
-  Result<byte[]> createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength);
+  @ApiOperation("生成的二维码的字节数组")
+  @PostMapping("/createScanPayQrcodeMode1")
+  Result<byte[]> createScanPayQrcodeMode1(@RequestParam("productId") String productId, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
 
   /**
    * <pre>
@@ -199,7 +203,9 @@ public interface WxPayApi {
    * @param productId 产品Id
    * @return 生成的二维码URL连接
    */
-  Result<String> createScanPayQrcodeMode1(String productId);
+  @ApiOperation("生成的二维码URL连接")
+  @PostMapping("/createScanPayQrcodeMode1")
+  Result<String> createScanPayQrcodeMode1(@RequestParam("productId") String productId);
 
   /**
    * <pre>
@@ -214,7 +220,9 @@ public interface WxPayApi {
    * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
    * @return 生成的二维码的字节数组
    */
-  Result<byte[]> createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength);
+  @ApiOperation("生成的二维码的字节数组")
+  @PostMapping("/createScanPayQrcodeMode2")
+  Result<byte[]> createScanPayQrcodeMode2(@RequestParam("codeUrl") String codeUrl, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
 
   /**
    * <pre>
@@ -257,7 +265,7 @@ public interface WxPayApi {
 
   @ApiOperation(value = "下载对账单")
   @PostMapping("/downloadBill")
-  Result<WxPayBillResult> downloadBill(WxPayDownloadBillRequest wxPayDownloadBillRequest);
+  Result<WxPayBillResult> downloadBill(@RequestBody WxPayDownloadBillRequest wxPayDownloadBillRequest);
 
   /**
    * <pre>
@@ -309,6 +317,6 @@ public interface WxPayApi {
 
   @ApiOperation(value = "拉取订单评价数据")
   @PostMapping("/queryComment")
-  Result<String> queryComment(Date beginDate, Date endDate, Integer offset, Integer limit);
+  Result<String> queryComment(@RequestParam("beginDate") Date beginDate, @RequestParam("endDate") Date endDate, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
 }

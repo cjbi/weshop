@@ -1,5 +1,6 @@
 package tech.wetech.weshop.wechat.service.impl;
 
+import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import org.slf4j.Logger;
@@ -72,6 +73,13 @@ public class WechatPayServiceImpl implements WechatPayService {
       throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
     }
     return result.getData();
+  }
+
+  @Override
+  public String notify(String xml) {
+    WxPayOrderNotifyResult wxPayOrderNotifyResult = wxPayApi.parseOrderNotifyResult(xml).getData();
+
+    return null;
   }
 
 }

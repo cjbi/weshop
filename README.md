@@ -8,7 +8,7 @@ Weshop是基于Spring Cloud(Greenwich)开发的小程序商城系统，提供整
 weshop
 ├── weshop-common -- 框架公共模块
 ├── weshop-eureka-server -- eureka注册中心[端口:8761]
-├── weshop-config-server -- 配置中心[端口:7001]
+├── weshop-config-server -- 配置中心
 ├── weshop-api-gateway -- api网关[端口:8020]
 ├── weshop-hystrix-dashboard -- 断路器监控面板[端口:1301]
 ├── weshop-example -- 项目示例工程
@@ -16,19 +16,19 @@ weshop
 |    ├── weshop-example-provider -- 服务提供方[端口:9998]
 |    ├── weshop-example-consumer -- 服务消费方[端口:9999]
 ├── weshop-user-api -- 用户中心api
-├── weshop-user -- 用户中心基础服务[端口:8021]
+├── weshop-user -- 用户中心基础服务
 ├── weshop-goods-api -- 商品中心api
-├── weshop-goods -- 商品中心基础服务[端口:8022]
+├── weshop-goods -- 商品中心基础服务
 ├── weshop-order-api -- 订单中心api
-├── weshop-order -- 订单中心基础服务[端口:8024]
+├── weshop-order -- 订单中心基础服务
 ├── weshop-storage-api -- 对象存储服务api
-├── weshop-storage -- 对象存储服务[端口:8026]
-├── weshop-wechat -- 微信端聚合服务[端口:8025]
+├── weshop-storage -- 对象存储服务
+├── weshop-wechat -- 微信端聚合服务
 ├── weshop-wechat-ui -- 微信小程序页面
-├── weshop-admin -- 管理平台聚合服务[端口:8027]
+├── weshop-admin -- 管理平台聚合服务
 ├── weshop-admin-ui -- 管理平台页面
 ├── weshop-pay-api -- 支付中心api
-├── weshop-pay -- 支付中心基础服务[端口:8028]
+├── weshop-pay -- 支付中心基础服务
 ```
 
 > 模块划分

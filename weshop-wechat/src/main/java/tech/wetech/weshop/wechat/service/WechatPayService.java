@@ -12,4 +12,6 @@ public interface WechatPayService {
    */
   WxPayMpOrderResult prepay(Integer orderId);
 
+  String notify(String xml);
+
 }
