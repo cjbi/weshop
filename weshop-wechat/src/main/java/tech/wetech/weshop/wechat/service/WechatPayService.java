@@ -12,6 +12,12 @@ public interface WechatPayService {
    */
   WxPayMpOrderResult prepay(Integer orderId);
 
+  /**
+   * 微信支付成功的通知
+   *
+   * @param xml 微信回调的参数
+   * @return
+   */
   String notify(String xml);
 
 }

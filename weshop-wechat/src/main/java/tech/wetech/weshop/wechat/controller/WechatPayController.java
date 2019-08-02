@@ -1,6 +1,7 @@
 package tech.wetech.weshop.wechat.controller;
 
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class WechatPayController {
    * @return
    */
   @PostMapping("/notify")
+  @ApiOperation("当支付成功后微信会回调这个地址，在这里你可以做一些事，比如修改订单状态什么的。")
   public String notify(String xml) {
     return null;
   }

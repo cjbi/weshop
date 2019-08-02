@@ -15,11 +15,13 @@ import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.common.utils.StringUtils;
 import tech.wetech.weshop.common.utils.WebUtil;
 import tech.wetech.weshop.order.api.OrderApi;
+import tech.wetech.weshop.order.enums.OrderStatusEnum;
 import tech.wetech.weshop.order.enums.PayStatusEnum;
 import tech.wetech.weshop.order.po.Order;
 import tech.wetech.weshop.pay.api.WxPayApi;
 import tech.wetech.weshop.user.api.UserApi;
 import tech.wetech.weshop.user.po.User;
+import tech.wetech.weshop.wechat.constants.WechatConstants;
 import tech.wetech.weshop.wechat.service.WechatPayService;
 
 import java.math.BigDecimal;
@@ -77,9 +79,22 @@ public class WechatPayServiceImpl implements WechatPayService {
 
   @Override
   public String notify(String xml) {
-    WxPayOrderNotifyResult wxPayOrderNotifyResult = wxPayApi.parseOrderNotifyResult(xml).getData();
+    Result<WxPayOrderNotifyResult> result = wxPayApi.parseOrderNotifyResult(xml);
+    if (!result.isSuccess()) {
+      return WechatConstants.XML_PAY_ORDER_FAIL;
+    }
+    String orderSN = result.orElseGetData(() -> new WxPayOrderNotifyResult()).getOutTradeNo();
 
-    return null;
+    Order order = orderApi.queryOneByCriteria(Criteria.of(Order.class).andEqualTo(Order::getOrderSN, orderSN)).getData();
+    if (order == null) {
+      return WechatConstants.XML_PAY_ORDER_NOT_FOUND;
+    }
+    //订单状态仓库配送，支付状态变为已付款
+    Result<Integer> updateResult = orderApi.updateNotNull(order.setOrderStatus(OrderStatusEnum.WAREHOUSE_DISTRIBUTION).setPayStatus(PayStatusEnum.PAID));
+    if (updateResult.getData() != 1) {
+      return WechatConstants.XML_PAY_ORDER_NOT_FOUND;
+    }
+    return WechatConstants.XML_PAY_ORDER_OK;
   }
 
 }
