@@ -56,6 +56,7 @@ Druid | 数据库连接池 | 0.2.23 |  [https://github.com/alibaba/druid](https:
 Hibernate Validator | 后端校验框架 | 5.4.2.Final | [http://hibernate.org/validator/](http://hibernate.org/validator/)
 RabbitMQ | 消息中间件 | 5.4.3 | [http://www.rabbitmq.com/](http://www.rabbitmq.com/)
 Redis | 缓存 | 5.0.3 | [https://redis.io/](https://redis.io/)
+Zipkin | 缓存 | 2.12.0 | [https://zipkin.io/](https://zipkin.io/)
 
 ### 前端技术
 
@@ -107,7 +108,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 - [x]  生成海报功能的实现
 - [x]  评论消息通知功能的实现
 - [x]  专题、标签相关功能的实现
-- [x]  后台管理功能实现（文章管理、评论管理等-基本完成了)
+- []  后台管理功能实现
 
 ### 在线演示
 
