@@ -204,7 +204,7 @@ public interface WxPayApi {
    * @return 生成的二维码URL连接
    */
   @ApiOperation("生成的二维码URL连接")
-  @PostMapping("/createScanPayQrcodeMode1")
+	@PostMapping("/createScanPayQrcodeMode12")
   Result<String> createScanPayQrcodeMode1(@RequestParam("productId") String productId);
 
   /**
@@ -221,8 +221,8 @@ public interface WxPayApi {
    * @return 生成的二维码的字节数组
    */
   @ApiOperation("生成的二维码的字节数组")
-  @PostMapping("/createScanPayQrcodeMode2")
-  Result<byte[]> createScanPayQrcodeMode2(@RequestParam("codeUrl") String codeUrl, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
+	@PostMapping("/createScanPayQrcodeMode3")
+	Result<byte[]> createScanPayQrcodeModel(@RequestParam("codeUrl") String codeUrl, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
 
   /**
    * <pre>

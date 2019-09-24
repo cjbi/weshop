@@ -2,11 +2,11 @@ package tech.wetech.weshop.common.exception;
 
 import tech.wetech.weshop.common.enums.ResultStatus;
 
-public class BizException extends RuntimeException {
+public class WeshopException extends RuntimeException {
 
     ResultStatus status;
 
-    public BizException(ResultStatus status) {
+	public WeshopException(ResultStatus status) {
         super(status.getMsg());
         this.status = status;
     }

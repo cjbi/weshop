@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.exception.WeshopException;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.pay.api.WxPayApi;
 
@@ -47,7 +47,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.queryOrder(transactionId, outTradeNo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -57,7 +57,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.queryOrder(wxPayOrderQueryRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -67,7 +67,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.closeOrder(outTradeNo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -77,7 +77,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.closeOrder(wxPayOrderCloseRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -87,7 +87,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.unifiedOrder(request));
     } catch (WxPayException e) {
       LOG.error("调用微信统一下单接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -98,7 +98,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.createOrder(request));
     } catch (WxPayException e) {
       LOG.error("调用统一下单接口，并组装生成支付所需参数对象失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -108,7 +108,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.refund(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -118,7 +118,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.refundQuery(transactionId, outTradeNo, outRefundNo, refundId));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -128,7 +128,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.refundQuery(wxPayRefundQueryRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -138,7 +138,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.parseOrderNotifyResult(xmlData));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -148,7 +148,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.parseRefundNotifyResult(xmlData));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -158,7 +158,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.parseScanPayNotifyResult(xmlData));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -168,7 +168,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.sendRedpack(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -178,7 +178,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.queryRedpack(mchBillNo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -193,7 +193,7 @@ public class WxPayController implements WxPayApi {
   }
 
   @Override
-  public Result<byte[]> createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
+	public Result<byte[]> createScanPayQrcodeModel(String codeUrl, File logoFile, Integer sideLength) {
     return Result.success(wxService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength));
   }
 
@@ -204,7 +204,7 @@ public class WxPayController implements WxPayApi {
       return Result.success();
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -214,7 +214,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.downloadBill(billDate, billType, tarType, deviceInfo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -224,7 +224,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.downloadBill(wxPayDownloadBillRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -234,7 +234,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.micropay(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -244,7 +244,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.reverseOrder(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -254,7 +254,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.getSandboxSignKey());
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -264,7 +264,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.sendCoupon(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -274,7 +274,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.queryCouponStock(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -284,7 +284,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.queryCouponInfo(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
@@ -294,7 +294,7 @@ public class WxPayController implements WxPayApi {
       return Result.success(wxService.queryComment(beginDate, endDate, offset, limit));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
   }
 

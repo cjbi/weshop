@@ -4,7 +4,7 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.exception.WeshopException;
 import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.api.*;
@@ -188,7 +188,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
         User userInfo = JwtHelper.getUserInfo();
         GoodsDetailVO goodsDetailDTO = new GoodsDetailVO();
 
-        Goods goods = ofNullable(goodsApi.queryById(id)).map(Result::getData).orElseThrow(() -> new BizException(ResultStatus.RECORD_NOT_EXIST));
+			Goods goods = ofNullable(goodsApi.queryById(id)).map(Result::getData).orElseThrow(() -> new WeshopException(ResultStatus.RECORD_NOT_EXIST));
 
         List<GoodsGallery> goodsGalleryVOList = goodsGalleryApi.queryList(new GoodsGallery().setGoodsId(id)).getData();
         List<GoodsAttributeDTO> goodsAttributeVOList = goodsAttributeApi.queryGoodsDetailAttributeByGoodsId(id).getData();
@@ -268,7 +268,7 @@ public class WechatGoodsServiceImpl implements WechatGoodsService {
     public GoodsCategoryVO queryGoodsCategory(Integer categoryId) {
         Category currentCategory = ofNullable(categoryApi.queryById(categoryId))
                 .map(Result::getData)
-                .orElseThrow(() -> new BizException(ResultStatus.RECORD_NOT_EXIST));
+					.orElseThrow(() -> new WeshopException(ResultStatus.RECORD_NOT_EXIST));
         Category parentCategory = categoryApi.queryById(currentCategory.getParentId()).getData();
         List<Category> brotherCategory = categoryApi.queryList(new Category().setParentId(currentCategory.getParentId())).getData();
         return new GoodsCategoryVO(currentCategory, parentCategory, brotherCategory);

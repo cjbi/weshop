@@ -97,7 +97,7 @@ public class WxPayApiFallback implements WxPayApi {
   }
 
   @Override
-  public Result<byte[]> createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
+	public Result<byte[]> createScanPayQrcodeModel(String codeUrl, File logoFile, Integer sideLength) {
     return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
   }
 

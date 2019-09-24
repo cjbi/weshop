@@ -6,7 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.codec.binary.Base64;
 import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.exception.WeshopException;
 import tech.wetech.weshop.common.utils.JsonUtils;
 import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.constants.WechatConstants;
@@ -45,7 +45,7 @@ public class JwtHelper {
     public static User getUserInfo() {
         String subject = ofNullable(currentClaims.get()).map(Claims::getSubject).orElse(null);
         if (subject == null) {
-            throw new BizException(ResultStatus.WECHAT_LOGIN_ERROR);
+					throw new WeshopException(ResultStatus.WECHAT_LOGIN_ERROR);
         }
         return JsonUtils.toObject(subject, User.class);
     }
@@ -133,23 +133,23 @@ public class JwtHelper {
         return claims;
     }
 
-    public static void main(String[] args) throws Exception {
-        String ab = JwtHelper.createJWT("999999999", "{ \"id\":999999999,\"userId\": 999999999,\"username\": \"开发人员测试账号\",\"source\":\"dr_admin\"}", -1);
-        System.out.println(ab);
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI5OTk5OTk5OTkiLCJzdWIiOiJ7IFwiaWRcIjo5OTk5OTk5OTksXCJ1c2VySWRcIjogOTk5OTk5OTk5LFwidXNlcm5hbWVcIjogXCLlvIDlj5HkurrlkZjmtYvor5XotKblj7dcIixcInNvdXJjZVwiOlwiZHJfYWRtaW5cIn0iLCJpYXQiOjE1MzA1MDAwNjIsImp0aSI6Ijk5OTk5OTk5OSJ9.4eViEHgXyDHmvxXsxIYJouz_fOCIAwT4jTfdp-R-HSs";
-        //注意：如果jwExpiredJwtException。
-        Claims c = JwtHelper.parseJWT(token);
-        //jwt
-        System.out.println(c.getId());
-        //Mon Feb 05 20:50:49 CST 2018
-        System.out.println(c.getIssuedAt());
-        //{ "id":999999999,"userId": 999999999,"username": "开发人员测试账号","source":"dr_admin"}
-        System.out.println(c.getSubject());
-        //null
-        System.out.println(c.getIssuer());
-        //DSSFAWDWADAS...
-        System.out.println(c.get("uid", String.class));
-
-    }
+//    public static void main(String[] args) throws Exception {
+//        String ab = JwtHelper.createJWT("999999999", "{ \"id\":999999999,\"userId\": 999999999,\"username\": \"开发人员测试账号\",\"source\":\"dr_admin\"}", -1);
+//        System.out.println(ab);
+//        String token = "eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI5OTk5OTk5OTkiLCJzdWIiOiJ7IFwiaWRcIjo5OTk5OTk5OTksXCJ1c2VySWRcIjogOTk5OTk5OTk5LFwidXNlcm5hbWVcIjogXCLlvIDlj5HkurrlkZjmtYvor5XotKblj7dcIixcInNvdXJjZVwiOlwiZHJfYWRtaW5cIn0iLCJpYXQiOjE1MzA1MDAwNjIsImp0aSI6Ijk5OTk5OTk5OSJ9.4eViEHgXyDHmvxXsxIYJouz_fOCIAwT4jTfdp-R-HSs";
+//        //注意：如果jwExpiredJwtException。
+//        Claims c = JwtHelper.parseJWT(token);
+//        //jwt
+//        System.out.println(c.getId());
+//        //Mon Feb 05 20:50:49 CST 2018
+//        System.out.println(c.getIssuedAt());
+//        //{ "id":999999999,"userId": 999999999,"username": "开发人员测试账号","source":"dr_admin"}
+//        System.out.println(c.getSubject());
+//        //null
+//        System.out.println(c.getIssuer());
+//        //DSSFAWDWADAS...
+//        System.out.println(c.get("uid", String.class));
+//
+//    }
 
 }

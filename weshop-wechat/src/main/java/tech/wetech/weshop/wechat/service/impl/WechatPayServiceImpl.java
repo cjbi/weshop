@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.exception.WeshopException;
 import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.common.utils.StringUtils;
@@ -51,16 +51,16 @@ public class WechatPayServiceImpl implements WechatPayService {
     Order order = orderApi.queryById(orderId).getData();
     if (order == null) {
       //订单已取消
-      throw new BizException(ResultStatus.ORDER_CANCELED);
+			throw new WeshopException(ResultStatus.ORDER_CANCELED);
     }
     if (order.getPayStatus() == PayStatusEnum.PAID) {
-      throw new BizException(ResultStatus.ORDER_PAID);
+			throw new WeshopException(ResultStatus.ORDER_PAID);
     }
     String wechatOpenId = userApi.queryOneByCriteria(Criteria.of(User.class).fields(User::getWechatOpenId).andEqualTo(User::getId, order.getUserId()))
       .orElseGetData(() -> new User()).getWechatOpenId();
     //不存在openid，说明不是微信下的单
     if (StringUtils.isBlank(wechatOpenId)) {
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
     //统一下单
     WxPayUnifiedOrderRequest wxPayUnifiedOrderRequest = WxPayUnifiedOrderRequest.newBuilder()
@@ -72,7 +72,7 @@ public class WechatPayServiceImpl implements WechatPayService {
       .build();
     Result<WxPayMpOrderResult> result = wxPayApi.createOrder(wxPayUnifiedOrderRequest);
     if (!result.isSuccess()) {
-      throw new BizException(ResultStatus.WECHAT_PAY_FAIL);
+			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
     }
     return result.getData();
   }

@@ -43,8 +43,8 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler({BizException.class})
-    public Result handleBizException(HttpServletRequest request, BizException e) {
+		@ExceptionHandler({WeshopException.class})
+		public Result handleBizException(HttpServletRequest request, WeshopException e) {
         LOG.warn("execute method exception error.url is {}", request.getRequestURI(), e);
         return Result.failure(e.getStatus());
     }

@@ -1,9 +1,6 @@
 package tech.wetech.weshop.gateway;
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,7 +19,6 @@ import java.util.List;
 @EnableSwagger2
 @ComponentScan("tech.wetech.weshop")
 @SpringCloudApplication
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DruidDataSourceAutoConfigure.class})
 public class WeshopApiGatewayApplication {
 
     public static void main(String[] args) {

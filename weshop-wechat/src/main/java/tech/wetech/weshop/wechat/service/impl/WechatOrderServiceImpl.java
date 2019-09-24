@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.exception.WeshopException;
 import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.common.utils.IdGenerator;
 import tech.wetech.weshop.order.api.CartApi;
@@ -71,7 +71,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
     @Override
     public OrderDetailVO queryOrderDetail(Integer orderId) {
         Order order = Optional.ofNullable(orderApi.queryById(orderId).getData())
-                .orElseThrow(() -> new BizException(ResultStatus.RECORD_NOT_EXIST));
+					.orElseThrow(() -> new WeshopException(ResultStatus.RECORD_NOT_EXIST));
 
         OrderDetailVO.OrderInfoVO orderInfoVO = new OrderDetailVO.OrderInfoVO(order)
                 .setOrderExpress(orderExpressApi.queryOne(new OrderExpress().setOrderId(orderId)).getData());
@@ -98,7 +98,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
         Claims currentClaims = JwtHelper.getCurrentClaims();
         Address checkedAddress = addressApi.queryById(orderSubmitParamDTO.getAddressId()).getData();
         if (checkedAddress == null) {
-            throw new BizException(ResultStatus.PLEASE_SELECT_SHIPPING_ADDRESS);
+					throw new WeshopException(ResultStatus.PLEASE_SELECT_SHIPPING_ADDRESS);
         }
 
         //获取要购买的商品
@@ -109,7 +109,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
                         .setChecked(true)
         ).getData();
         if (checkedGoodsList.isEmpty()) {
-            throw new BizException(ResultStatus.PLEASE_SELECT_GOODS);
+					throw new WeshopException(ResultStatus.PLEASE_SELECT_GOODS);
         }
 
         //统计商品总价
@@ -164,10 +164,10 @@ public class WechatOrderServiceImpl implements WechatOrderService {
         //支付状态：待付款
         orderInfo.setPayStatus(PayStatusEnum.PENDING_PAYMENT);
 
-        orderApi.create(orderInfo).orElseThrow(() -> new BizException(ResultStatus.CREATE_ORDER_ERROR));
+			orderApi.create(orderInfo).orElseThrow(() -> new WeshopException(ResultStatus.CREATE_ORDER_ERROR));
 
 
-        Order order = orderApi.queryOneByCriteria(Criteria.of(Order.class).andEqualTo(Order::getOrderSN, orderInfo.getOrderSN())).orElseThrow(() -> new BizException(ResultStatus.CREATE_ORDER_ERROR));
+			Order order = orderApi.queryOneByCriteria(Criteria.of(Order.class).andEqualTo(Order::getOrderSN, orderInfo.getOrderSN())).orElseThrow(() -> new WeshopException(ResultStatus.CREATE_ORDER_ERROR));
 
         //统计商品总价
         List<OrderGoods> orderGoodsList = new LinkedList<>();
@@ -187,7 +187,7 @@ public class WechatOrderServiceImpl implements WechatOrderService {
             orderGoods.setReal(true);
             orderGoodsList.add(orderGoods);
         }
-        orderGoodsApi.createBatch(orderGoodsList).orElseThrow(() -> new BizException(ResultStatus.CREATE_ORDER_ERROR));
+			orderGoodsApi.createBatch(orderGoodsList).orElseThrow(() -> new WeshopException(ResultStatus.CREATE_ORDER_ERROR));
 
 //        清空购物车已购买商品
         cartApi.delete(new Cart()

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wetech.weshop.common.exception.BizException;
+import tech.wetech.weshop.common.exception.WeshopException;
 import tech.wetech.weshop.common.utils.Criteria;
 import tech.wetech.weshop.user.api.KeywordsApi;
 import tech.wetech.weshop.user.api.SearchHistoryApi;
@@ -53,7 +53,7 @@ public class WechatSearchServiceImpl implements WechatSearchService {
             historyKeywordList = searchHistoryApi.queryByCriteria(Criteria.of(SearchHistory.class).andEqualTo(SearchHistory::getUserId, userInfo.getId()).page(1, 10)).getData().stream()
                     .map(SearchHistory::getKeyword)
                     .collect(Collectors.toList());
-        } catch (BizException e) {
+				} catch (WeshopException e) {
             log.info("用户未登陆，不查询热闹关键词");
         }
         return new SearchIndexVO()
