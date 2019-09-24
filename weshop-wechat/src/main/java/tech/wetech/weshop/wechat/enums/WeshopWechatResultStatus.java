@@ -3,6 +3,7 @@ package tech.wetech.weshop.wechat.enums;
 import tech.wetech.weshop.common.utils.ResultStatus;
 
 public enum WeshopWechatResultStatus implements ResultStatus {
+
     GOODS_HAVE_BEEN_TAKEN_OFF_THE_SHELVES("610", "商品已下架"),
     UNDER_STOCK("611", "库存不足"),
     PLEASE_SELECT_GOODS("612", "请选择商品"),
