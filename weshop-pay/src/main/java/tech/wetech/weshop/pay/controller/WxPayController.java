@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.exception.WeshopException;
-import tech.wetech.weshop.common.utils.Result;
+import tech.wetech.weshop.common.utils.ResultWrapper;
 import tech.wetech.weshop.pay.api.WxPayApi;
+import tech.wetech.weshop.pay.enums.WechatPayResultStatus;
+import tech.wetech.weshop.pay.exception.WeshopPayException;
 
 import java.io.File;
 import java.util.Date;
@@ -42,259 +42,259 @@ public class WxPayController implements WxPayApi {
   }
 
   @Override
-  public Result<WxPayOrderQueryResult> queryOrder(String transactionId, String outTradeNo) {
+  public ResultWrapper<WxPayOrderQueryResult> queryOrder(String transactionId, String outTradeNo) {
     try {
-      return Result.success(wxService.queryOrder(transactionId, outTradeNo));
+        return ResultWrapper.success(wxService.queryOrder(transactionId, outTradeNo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayOrderQueryResult> queryOrder(WxPayOrderQueryRequest wxPayOrderQueryRequest) {
+  public ResultWrapper<WxPayOrderQueryResult> queryOrder(WxPayOrderQueryRequest wxPayOrderQueryRequest) {
     try {
-      return Result.success(wxService.queryOrder(wxPayOrderQueryRequest));
+        return ResultWrapper.success(wxService.queryOrder(wxPayOrderQueryRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayOrderCloseResult> closeOrder(String outTradeNo) {
+  public ResultWrapper<WxPayOrderCloseResult> closeOrder(String outTradeNo) {
     try {
-      return Result.success(wxService.closeOrder(outTradeNo));
+        return ResultWrapper.success(wxService.closeOrder(outTradeNo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayOrderCloseResult> closeOrder(WxPayOrderCloseRequest wxPayOrderCloseRequest) {
+  public ResultWrapper<WxPayOrderCloseResult> closeOrder(WxPayOrderCloseRequest wxPayOrderCloseRequest) {
     try {
-      return Result.success(wxService.closeOrder(wxPayOrderCloseRequest));
+        return ResultWrapper.success(wxService.closeOrder(wxPayOrderCloseRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayUnifiedOrderResult> unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request) {
+  public ResultWrapper<WxPayUnifiedOrderResult> unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request) {
     try {
-      return Result.success(wxService.unifiedOrder(request));
+        return ResultWrapper.success(wxService.unifiedOrder(request));
     } catch (WxPayException e) {
       LOG.error("调用微信统一下单接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
 
   @Override
-  public <T> Result<T> createOrder(WxPayUnifiedOrderRequest request) {
+  public <T> ResultWrapper<T> createOrder(WxPayUnifiedOrderRequest request) {
     try {
-      return Result.success(wxService.createOrder(request));
+        return ResultWrapper.success(wxService.createOrder(request));
     } catch (WxPayException e) {
       LOG.error("调用统一下单接口，并组装生成支付所需参数对象失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayRefundResult> refund(WxPayRefundRequest request) {
+  public ResultWrapper<WxPayRefundResult> refund(WxPayRefundRequest request) {
     try {
-      return Result.success(wxService.refund(request));
+        return ResultWrapper.success(wxService.refund(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayRefundQueryResult> refundQuery(String transactionId, String outTradeNo, String outRefundNo, String refundId) {
+  public ResultWrapper<WxPayRefundQueryResult> refundQuery(String transactionId, String outTradeNo, String outRefundNo, String refundId) {
     try {
-      return Result.success(wxService.refundQuery(transactionId, outTradeNo, outRefundNo, refundId));
+        return ResultWrapper.success(wxService.refundQuery(transactionId, outTradeNo, outRefundNo, refundId));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayRefundQueryResult> refundQuery(WxPayRefundQueryRequest wxPayRefundQueryRequest) {
+  public ResultWrapper<WxPayRefundQueryResult> refundQuery(WxPayRefundQueryRequest wxPayRefundQueryRequest) {
     try {
-      return Result.success(wxService.refundQuery(wxPayRefundQueryRequest));
+        return ResultWrapper.success(wxService.refundQuery(wxPayRefundQueryRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayOrderNotifyResult> parseOrderNotifyResult(String xmlData) {
+  public ResultWrapper<WxPayOrderNotifyResult> parseOrderNotifyResult(String xmlData) {
     try {
-      return Result.success(wxService.parseOrderNotifyResult(xmlData));
+        return ResultWrapper.success(wxService.parseOrderNotifyResult(xmlData));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayRefundNotifyResult> parseRefundNotifyResult(String xmlData) {
+  public ResultWrapper<WxPayRefundNotifyResult> parseRefundNotifyResult(String xmlData) {
     try {
-      return Result.success(wxService.parseRefundNotifyResult(xmlData));
+        return ResultWrapper.success(wxService.parseRefundNotifyResult(xmlData));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxScanPayNotifyResult> parseScanPayNotifyResult(String xmlData) {
+  public ResultWrapper<WxScanPayNotifyResult> parseScanPayNotifyResult(String xmlData) {
     try {
-      return Result.success(wxService.parseScanPayNotifyResult(xmlData));
+        return ResultWrapper.success(wxService.parseScanPayNotifyResult(xmlData));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPaySendRedpackResult> sendRedpack(WxPaySendRedpackRequest request) {
+  public ResultWrapper<WxPaySendRedpackResult> sendRedpack(WxPaySendRedpackRequest request) {
     try {
-      return Result.success(wxService.sendRedpack(request));
+        return ResultWrapper.success(wxService.sendRedpack(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayRedpackQueryResult> queryRedpack(String mchBillNo) {
+  public ResultWrapper<WxPayRedpackQueryResult> queryRedpack(String mchBillNo) {
     try {
-      return Result.success(wxService.queryRedpack(mchBillNo));
+        return ResultWrapper.success(wxService.queryRedpack(mchBillNo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<byte[]> createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
-    return Result.success(wxService.createScanPayQrcodeMode1(productId, logoFile, sideLength));
+  public ResultWrapper<byte[]> createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
+      return ResultWrapper.success(wxService.createScanPayQrcodeMode1(productId, logoFile, sideLength));
   }
 
   @Override
-  public Result<String> createScanPayQrcodeMode1(String productId) {
-    return Result.success(wxService.createScanPayQrcodeMode1(productId));
+  public ResultWrapper<String> createScanPayQrcodeMode1(String productId) {
+      return ResultWrapper.success(wxService.createScanPayQrcodeMode1(productId));
   }
 
   @Override
-	public Result<byte[]> createScanPayQrcodeModel(String codeUrl, File logoFile, Integer sideLength) {
-    return Result.success(wxService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength));
+  public ResultWrapper<byte[]> createScanPayQrcodeModel(String codeUrl, File logoFile, Integer sideLength) {
+      return ResultWrapper.success(wxService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength));
   }
 
   @Override
-  public Result report(WxPayReportRequest request) {
+  public ResultWrapper report(WxPayReportRequest request) {
     try {
       wxService.report(request);
-      return Result.success();
+        return ResultWrapper.success();
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayBillResult> downloadBill(String billDate, String billType, String tarType, String deviceInfo) {
+  public ResultWrapper<WxPayBillResult> downloadBill(String billDate, String billType, String tarType, String deviceInfo) {
     try {
-      return Result.success(wxService.downloadBill(billDate, billType, tarType, deviceInfo));
+        return ResultWrapper.success(wxService.downloadBill(billDate, billType, tarType, deviceInfo));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayBillResult> downloadBill(WxPayDownloadBillRequest wxPayDownloadBillRequest) {
+  public ResultWrapper<WxPayBillResult> downloadBill(WxPayDownloadBillRequest wxPayDownloadBillRequest) {
     try {
-      return Result.success(wxService.downloadBill(wxPayDownloadBillRequest));
+        return ResultWrapper.success(wxService.downloadBill(wxPayDownloadBillRequest));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayMicropayResult> micropay(WxPayMicropayRequest request) {
+  public ResultWrapper<WxPayMicropayResult> micropay(WxPayMicropayRequest request) {
     try {
-      return Result.success(wxService.micropay(request));
+        return ResultWrapper.success(wxService.micropay(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayOrderReverseResult> reverseOrder(WxPayOrderReverseRequest request) {
+  public ResultWrapper<WxPayOrderReverseResult> reverseOrder(WxPayOrderReverseRequest request) {
     try {
-      return Result.success(wxService.reverseOrder(request));
+        return ResultWrapper.success(wxService.reverseOrder(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<String> getSandboxSignKey() {
+  public ResultWrapper<String> getSandboxSignKey() {
     try {
-      return Result.success(wxService.getSandboxSignKey());
+        return ResultWrapper.success(wxService.getSandboxSignKey());
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayCouponSendResult> sendCoupon(WxPayCouponSendRequest request) {
+  public ResultWrapper<WxPayCouponSendResult> sendCoupon(WxPayCouponSendRequest request) {
     try {
-      return Result.success(wxService.sendCoupon(request));
+        return ResultWrapper.success(wxService.sendCoupon(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayCouponStockQueryResult> queryCouponStock(WxPayCouponStockQueryRequest request) {
+  public ResultWrapper<WxPayCouponStockQueryResult> queryCouponStock(WxPayCouponStockQueryRequest request) {
     try {
-      return Result.success(wxService.queryCouponStock(request));
+        return ResultWrapper.success(wxService.queryCouponStock(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<WxPayCouponInfoQueryResult> queryCouponInfo(WxPayCouponInfoQueryRequest request) {
+  public ResultWrapper<WxPayCouponInfoQueryResult> queryCouponInfo(WxPayCouponInfoQueryRequest request) {
     try {
-      return Result.success(wxService.queryCouponInfo(request));
+        return ResultWrapper.success(wxService.queryCouponInfo(request));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 
   @Override
-  public Result<String> queryComment(Date beginDate, Date endDate, Integer offset, Integer limit) {
+  public ResultWrapper<String> queryComment(Date beginDate, Date endDate, Integer offset, Integer limit) {
     try {
-      return Result.success(wxService.queryComment(beginDate, endDate, offset, limit));
+        return ResultWrapper.success(wxService.queryComment(beginDate, endDate, offset, limit));
     } catch (WxPayException e) {
       LOG.error("调用微信支付接口失败：{}", e.getMessage(), e);
-			throw new WeshopException(ResultStatus.WECHAT_PAY_FAIL);
+        throw new WeshopPayException(WechatPayResultStatus.WECHAT_PAY_FAIL);
     }
   }
 

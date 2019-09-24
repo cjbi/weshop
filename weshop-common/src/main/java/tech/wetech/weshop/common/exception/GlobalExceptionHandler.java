@@ -10,8 +10,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.utils.Result;
+import tech.wetech.weshop.common.enums.CommonResultStatus;
+import tech.wetech.weshop.common.utils.ResultWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
@@ -29,11 +29,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({Throwable.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result<Object> handleThrowable(HttpServletRequest request, Throwable e) {
+    public ResultWrapper<Object> handleThrowable(HttpServletRequest request, Throwable e) {
         LOG.error("execute method exception error.url is {}", request.getRequestURI(), e);
-        return Result.failure(ResultStatus.INTERNAL_SERVER_ERROR)
-                .addExtra("stackTrace", e.getStackTrace())
-                .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
+        return ResultWrapper.failure(CommonResultStatus.INTERNAL_SERVER_ERROR)
+            .addExtra("stackTrace", e.getStackTrace())
+            .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
     }
 
     /**
@@ -43,10 +43,10 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-		@ExceptionHandler({WeshopException.class})
-		public Result handleBizException(HttpServletRequest request, WeshopException e) {
+    @ExceptionHandler({WeshopException.class})
+    public ResultWrapper handleBizException(HttpServletRequest request, WeshopException e) {
         LOG.warn("execute method exception error.url is {}", request.getRequestURI(), e);
-        return Result.failure(e.getStatus());
+        return ResultWrapper.failure(e.getStatus());
     }
 
     /**
@@ -61,13 +61,13 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, ConstraintViolationException.class})
-    public Result handleJSR303Exception(HttpServletRequest request, Exception e) {
+    public ResultWrapper handleJSR303Exception(HttpServletRequest request, Exception e) {
         LOG.warn("execute method exception error.url is {}", request.getRequestURI(), e);
         BindingResult br = null;
-        Result result = new Result()
-                .setSuccess(false)
-                .setCode(ResultStatus.PARAM_ERROR.getCode())
-                .setMsg(ResultStatus.PARAM_ERROR.getMsg());
+        ResultWrapper result = new ResultWrapper()
+            .setSuccess(false)
+            .setCode(CommonResultStatus.PARAM_ERROR.getCode())
+            .setMsg(CommonResultStatus.PARAM_ERROR.getMsg());
 
         if (e instanceof BindException) {
             br = ((BindException) e).getBindingResult();
@@ -77,21 +77,21 @@ public class GlobalExceptionHandler {
         }
         if (br != null) {
             return result.setData(
-                    br.getFieldErrors().stream()
-                            .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (oldValue, newValue) -> oldValue.concat(",").concat(newValue)))
+                br.getFieldErrors().stream()
+                    .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (oldValue, newValue) -> oldValue.concat("; ").concat(newValue)))
             ).setMsg(
-                    br.getFieldErrors().stream()
-                            .map(f -> f.getField().concat(f.getDefaultMessage()))
-                            .collect(Collectors.joining(","))
+                br.getFieldErrors().stream()
+                    .map(FieldError::getDefaultMessage)
+                    .collect(Collectors.joining("; "))
             );
         }
         if (e instanceof ConstraintViolationException) {
             Set<ConstraintViolation<?>> constraintViolations = ((ConstraintViolationException) e).getConstraintViolations();
             return result
-                    .setData(
-                            constraintViolations.stream().collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage))
-                    )
-                    .setMsg(e.getMessage());
+                .setData(
+                    constraintViolations.stream().collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage))
+                )
+                .setMsg(e.getMessage());
         }
         return result;
     }

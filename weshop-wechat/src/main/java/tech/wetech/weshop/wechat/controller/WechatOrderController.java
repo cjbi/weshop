@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.Result;
+import tech.wetech.weshop.common.utils.ResultWrapper;
 import tech.wetech.weshop.order.api.OrderExpressApi;
 import tech.wetech.weshop.order.po.OrderExpress;
 import tech.wetech.weshop.order.query.OrderQuery;
@@ -29,21 +29,21 @@ public class WechatOrderController extends BaseController {
     private OrderExpressApi orderExpressApi;
 
     @GetMapping({"/list"})
-    public Result<List<OrderListVO>> queryOrderList(OrderQuery orderQuery) {
-        return Result.success(wechatOrderService.queryOrderList(orderQuery));
+    public ResultWrapper<List<OrderListVO>> queryOrderList(OrderQuery orderQuery) {
+        return ResultWrapper.success(wechatOrderService.queryOrderList(orderQuery));
     }
 
     @GetMapping("/detail")
-    public Result<OrderDetailVO> queryOrderDetail(@NotNull Integer orderId) {
-        return Result.success(wechatOrderService.queryOrderDetail(orderId));
+    public ResultWrapper<OrderDetailVO> queryOrderDetail(@NotNull Integer orderId) {
+        return ResultWrapper.success(wechatOrderService.queryOrderDetail(orderId));
     }
 
     /**
      * @return
      */
     @PostMapping("/submit")
-    public Result<OrderSubmitResultVO> submitOrder(@Validated @RequestBody OrderSubmitParamVO orderSubmitParamDTO) {
-        return Result.success(wechatOrderService.submitOrder(orderSubmitParamDTO));
+    public ResultWrapper<OrderSubmitResultVO> submitOrder(@Validated @RequestBody OrderSubmitParamVO orderSubmitParamDTO) {
+        return ResultWrapper.success(wechatOrderService.submitOrder(orderSubmitParamDTO));
     }
 
     /**
@@ -53,7 +53,7 @@ public class WechatOrderController extends BaseController {
      * @return
      */
     @GetMapping("/express")
-    public Result<OrderExpress> queryLatestExpressInfo(@NotNull Integer orderId) {
+    public ResultWrapper<OrderExpress> queryLatestExpressInfo(@NotNull Integer orderId) {
         return orderExpressApi.queryOne(new OrderExpress().setOrderId(orderId));
     }
 

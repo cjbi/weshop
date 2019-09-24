@@ -1,13 +1,14 @@
 package tech.wetech.weshop.common.exception;
 
-import tech.wetech.weshop.common.enums.ResultStatus;
+import tech.wetech.weshop.common.utils.ResultStatus;
 
 public class WeshopException extends RuntimeException {
 
     ResultStatus status;
 
 	public WeshopException(ResultStatus status) {
-        super(status.getMsg());
+        //不生成栈追踪信息
+        super(status.getMsg(), null, false, false);
         this.status = status;
     }
 

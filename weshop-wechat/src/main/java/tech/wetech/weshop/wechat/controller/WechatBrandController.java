@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.Result;
+import tech.wetech.weshop.common.utils.ResultWrapper;
 import tech.wetech.weshop.goods.api.BrandApi;
 import tech.wetech.weshop.goods.po.Brand;
 
@@ -17,7 +17,7 @@ public class WechatBrandController extends BaseController {
     private BrandApi brandApi;
 
     @GetMapping
-    public Result<Brand> query(Integer id) {
+    public ResultWrapper<Brand> query(Integer id) {
         return brandApi.queryById(id);
     }
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
-import tech.wetech.weshop.common.utils.Result;
+import tech.wetech.weshop.common.utils.ResultWrapper;
 import tech.wetech.weshop.user.api.CommentApi;
 import tech.wetech.weshop.user.po.Comment;
 import tech.wetech.weshop.user.query.CommentQuery;
@@ -20,12 +20,12 @@ public class CommentController extends BaseApi<Comment> implements CommentApi {
     private CommentService commentService;
 
     @Override
-    public Result<List<Comment>> queryIfRequirePictureList(CommentQuery commentQuery) {
-        return Result.success(commentService.queryIfRequirePictureList(commentQuery));
+    public ResultWrapper<List<Comment>> queryIfRequirePictureList(CommentQuery commentQuery) {
+        return ResultWrapper.success(commentService.queryIfRequirePictureList(commentQuery));
     }
 
     @Override
-    public Result<Integer> countIfRequirePictureList(CommentQuery commentQuery) {
-        return Result.success(commentService.countIfRequirePictureList(commentQuery));
+    public ResultWrapper<Integer> countIfRequirePictureList(CommentQuery commentQuery) {
+        return ResultWrapper.success(commentService.countIfRequirePictureList(commentQuery));
     }
 }

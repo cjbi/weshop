@@ -3,7 +3,7 @@ package tech.wetech.weshop.wechat.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.Result;
+import tech.wetech.weshop.common.utils.ResultWrapper;
 import tech.wetech.weshop.user.api.CollectApi;
 import tech.wetech.weshop.user.po.User;
 import tech.wetech.weshop.wechat.service.WechatCollectService;
@@ -22,12 +22,12 @@ public class WechatCollectController extends BaseController {
     private WechatCollectService wechatCollectService;
 
     @PostMapping("/add-or-delete")
-    public Result<CollectAddOrDeleteResultVO> addOrDelete(@RequestBody CollectAddOrDeleteParamVO collectAddOrDeleteParamDTO) {
-        return Result.success(wechatCollectService.addOrDelete(collectAddOrDeleteParamDTO));
+    public ResultWrapper<CollectAddOrDeleteResultVO> addOrDelete(@RequestBody CollectAddOrDeleteParamVO collectAddOrDeleteParamDTO) {
+        return ResultWrapper.success(wechatCollectService.addOrDelete(collectAddOrDeleteParamDTO));
     }
 
     @GetMapping("/list")
-    public Result queryList(Integer typeId) {
+    public ResultWrapper queryList(Integer typeId) {
         User userInfo = JwtHelper.getUserInfo();
         return collectApi.queryGoodsCollectList(userInfo.getId());
     }

@@ -7,8 +7,8 @@ import com.github.binarywang.wxpay.bean.notify.WxScanPayNotifyResult;
 import com.github.binarywang.wxpay.bean.request.*;
 import com.github.binarywang.wxpay.bean.result.*;
 import org.springframework.stereotype.Component;
-import tech.wetech.weshop.common.enums.ResultStatus;
-import tech.wetech.weshop.common.utils.Result;
+import tech.wetech.weshop.common.enums.CommonResultStatus;
+import tech.wetech.weshop.common.utils.ResultWrapper;
 import tech.wetech.weshop.pay.api.WxPayApi;
 
 import java.io.File;
@@ -17,137 +17,137 @@ import java.util.Date;
 @Component
 public class WxPayApiFallback implements WxPayApi {
   @Override
-  public Result<WxPayOrderQueryResult> queryOrder(String transactionId, String outTradeNo) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayOrderQueryResult> queryOrder(String transactionId, String outTradeNo) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayOrderQueryResult> queryOrder(WxPayOrderQueryRequest wxPayOrderQueryRequest) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayOrderQueryResult> queryOrder(WxPayOrderQueryRequest wxPayOrderQueryRequest) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayOrderCloseResult> closeOrder(String outTradeNo) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayOrderCloseResult> closeOrder(String outTradeNo) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayOrderCloseResult> closeOrder(WxPayOrderCloseRequest wxPayOrderCloseRequest) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayOrderCloseResult> closeOrder(WxPayOrderCloseRequest wxPayOrderCloseRequest) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayUnifiedOrderResult> unifiedOrder(WxPayUnifiedOrderRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayUnifiedOrderResult> unifiedOrder(WxPayUnifiedOrderRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public <T> Result<T> createOrder(WxPayUnifiedOrderRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public <T> ResultWrapper<T> createOrder(WxPayUnifiedOrderRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayRefundResult> refund(WxPayRefundRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayRefundResult> refund(WxPayRefundRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayRefundQueryResult> refundQuery(String transactionId, String outTradeNo, String outRefundNo, String refundId) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayRefundQueryResult> refundQuery(String transactionId, String outTradeNo, String outRefundNo, String refundId) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayRefundQueryResult> refundQuery(WxPayRefundQueryRequest wxPayRefundQueryRequest) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayRefundQueryResult> refundQuery(WxPayRefundQueryRequest wxPayRefundQueryRequest) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayOrderNotifyResult> parseOrderNotifyResult(String xmlData) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayOrderNotifyResult> parseOrderNotifyResult(String xmlData) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayRefundNotifyResult> parseRefundNotifyResult(String xmlData) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayRefundNotifyResult> parseRefundNotifyResult(String xmlData) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxScanPayNotifyResult> parseScanPayNotifyResult(String xmlData) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxScanPayNotifyResult> parseScanPayNotifyResult(String xmlData) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPaySendRedpackResult> sendRedpack(WxPaySendRedpackRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPaySendRedpackResult> sendRedpack(WxPaySendRedpackRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayRedpackQueryResult> queryRedpack(String mchBillNo) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayRedpackQueryResult> queryRedpack(String mchBillNo) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<byte[]> createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<byte[]> createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<String> createScanPayQrcodeMode1(String productId) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<String> createScanPayQrcodeMode1(String productId) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-	public Result<byte[]> createScanPayQrcodeModel(String codeUrl, File logoFile, Integer sideLength) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<byte[]> createScanPayQrcodeModel(String codeUrl, File logoFile, Integer sideLength) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result report(WxPayReportRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper report(WxPayReportRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayBillResult> downloadBill(String billDate, String billType, String tarType, String deviceInfo) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayBillResult> downloadBill(String billDate, String billType, String tarType, String deviceInfo) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayBillResult> downloadBill(WxPayDownloadBillRequest wxPayDownloadBillRequest) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayBillResult> downloadBill(WxPayDownloadBillRequest wxPayDownloadBillRequest) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayMicropayResult> micropay(WxPayMicropayRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayMicropayResult> micropay(WxPayMicropayRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayOrderReverseResult> reverseOrder(WxPayOrderReverseRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayOrderReverseResult> reverseOrder(WxPayOrderReverseRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<String> getSandboxSignKey() {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<String> getSandboxSignKey() {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayCouponSendResult> sendCoupon(WxPayCouponSendRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayCouponSendResult> sendCoupon(WxPayCouponSendRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayCouponStockQueryResult> queryCouponStock(WxPayCouponStockQueryRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayCouponStockQueryResult> queryCouponStock(WxPayCouponStockQueryRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<WxPayCouponInfoQueryResult> queryCouponInfo(WxPayCouponInfoQueryRequest request) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<WxPayCouponInfoQueryResult> queryCouponInfo(WxPayCouponInfoQueryRequest request) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 
   @Override
-  public Result<String> queryComment(Date beginDate, Date endDate, Integer offset, Integer limit) {
-    return Result.failure(ResultStatus.REMOTE_SERVICE_ERROR);
+  public ResultWrapper<String> queryComment(Date beginDate, Date endDate, Integer offset, Integer limit) {
+      return ResultWrapper.failure(CommonResultStatus.REMOTE_SERVICE_ERROR);
   }
 }

@@ -148,6 +148,11 @@
                 <artifactId>weixin-java-miniapp</artifactId>
                 <version>3.4.0</version>
             </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <optional>true</optional>
+            </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
