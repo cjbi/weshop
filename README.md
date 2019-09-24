@@ -150,6 +150,11 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 10. http://localhost:8027/index.html访问后台管理，http://localhost:8020/weshop/swagger-ui.html访问Swagger页面
 11. 打开微信开发者工具，导入weshop-wechat-ui模块,点击编译即可，此时可以预览商城效果
 
+使用脚本启动: 
+1. 执行命令 `mvn clean package -P env-prd` 生成target文件夹包含项目所有jar包和执行脚本
+2. 设置权限 `chmod +x -R target/`
+3. 启动: `startup.sh` 停止: `shutdown.sh`
+
 ### 生产部署
 
 最低部署要求  1C2G x3
@@ -159,3 +164,9 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 https://github.com/cjbi/weshop
 
 https://gitee.com/cjbi/weshop
+
+## 许可证
+
+Weshop 使用 MIT 许可证发布，用户可以自由使用、复制、修改、合并、出版发行、散布、再授权及贩售 Weshop 及其副本。
+
+[查看许可证](LICENSE "LICENSE")
