@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tech.wetech.weshop.goods.mapper.AttributeCategoryMapper">
-    <resultMap id="BaseResultMap" type="tech.wetech.weshop.goods.po.AttributeCategory">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="enabled" property="enabled" jdbcType="BIT"/>
-    </resultMap>
+	<resultMap id="BaseResultMap" type="tech.wetech.weshop.goods.po.AttributeCategory">
+		<!--
+      WARNING - @mbg.generated
+    -->
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="enabled" property="enabled" jdbcType="BIT"/>
+	</resultMap>
 </mapper>

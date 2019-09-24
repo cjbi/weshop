@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tech.wetech.weshop.user.mapper.CommentMapper">
-  <resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.Comment">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="type_id" property="typeId" jdbcType="TINYINT"/>
-        <result column="value_id" property="valueId" jdbcType="INTEGER"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="status" property="status" jdbcType="TINYINT"/>
-        <result column="user_id" property="userId" jdbcType="INTEGER"/>
-        <result column="new_content" property="newContent" jdbcType="VARCHAR"/>
-    </resultMap>
-  <select id="selectIfRequirePictureList" resultMap="BaseResultMap" parameterType="tech.wetech.weshop.user.query.CommentQuery">
-        SELECT
-        id,type_id,value_id,content,create_time,status,user_id,new_content
-        FROM
-        weshop_comment wc
-        where
-        type_id=#{typeId}
-        and value_id=#{valueId}
-        <if test="requirePicture">
-            AND wc.id IN (
-            SELECT
-            DISTINCT comment_id
-            FROM
-            weshop_comment_picture
-            WHERE
-            comment_id = wc.id)
-        </if>
-        limit ${offset},${limit}
-    </select>
-    <select id="countIfRequirePictureList" resultType="java.lang.Integer">
-        SELECT
-        count(*)
-        FROM
-        weshop_comment wc
-        where
-        type_id=#{typeId}
-        and value_id=#{valueId}
-        <if test="requirePicture">
-            AND wc.id IN (
-            SELECT
-            DISTINCT comment_id
-            FROM
-            weshop_comment_picture
-            WHERE
-            comment_id = wc.id)
-        </if>
-    </select>
+	<resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.Comment">
+		<!--
+      WARNING - @mbg.generated
+    -->
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="type_id" property="typeId" jdbcType="TINYINT"/>
+		<result column="value_id" property="valueId" jdbcType="INTEGER"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="status" property="status" jdbcType="TINYINT"/>
+		<result column="user_id" property="userId" jdbcType="INTEGER"/>
+		<result column="new_content" property="newContent" jdbcType="VARCHAR"/>
+	</resultMap>
+	<select id="selectIfRequirePictureList" resultMap="BaseResultMap" parameterType="tech.wetech.weshop.user.query.CommentQuery">
+		SELECT
+		id,type_id,value_id,content,create_time,status,user_id,new_content
+		FROM
+		weshop_comment wc
+		where
+		type_id=#{typeId}
+		and value_id=#{valueId}
+		<if test="requirePicture">
+			AND wc.id IN (
+			SELECT
+			DISTINCT comment_id
+			FROM
+			weshop_comment_picture
+			WHERE
+			comment_id = wc.id)
+		</if>
+		limit ${offset},${limit}
+	</select>
+	<select id="countIfRequirePictureList" resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM
+		weshop_comment wc
+		where
+		type_id=#{typeId}
+		and value_id=#{valueId}
+		<if test="requirePicture">
+			AND wc.id IN (
+			SELECT
+			DISTINCT comment_id
+			FROM
+			weshop_comment_picture
+			WHERE
+			comment_id = wc.id)
+		</if>
+	</select>
 </mapper>

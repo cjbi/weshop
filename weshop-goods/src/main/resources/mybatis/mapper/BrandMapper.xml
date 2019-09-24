@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tech.wetech.weshop.goods.mapper.BrandMapper">
-    <resultMap id="BaseResultMap" type="tech.wetech.weshop.goods.po.Brand">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR"/>
-        <result column="simple_desc" property="simpleDesc" jdbcType="VARCHAR"/>
-        <result column="pic_url" property="picUrl" jdbcType="VARCHAR"/>
-        <result column="sort_order" property="sortOrder" jdbcType="TINYINT"/>
-        <result column="is_show" property="show" jdbcType="BIT"/>
-        <result column="floor_price" property="floorPrice" jdbcType="DECIMAL"/>
-        <result column="app_list_pic_url" property="appListPicUrl" jdbcType="VARCHAR"/>
-        <result column="is_new" property="newly" jdbcType="BIT"/>
-        <result column="new_pic_url" property="newPicUrl" jdbcType="VARCHAR"/>
-        <result column="new_sort_order" property="newSortOrder" jdbcType="TINYINT"/>
-    </resultMap>
+	<resultMap id="BaseResultMap" type="tech.wetech.weshop.goods.po.Brand">
+		<!--
+      WARNING - @mbg.generated
+    -->
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR"/>
+		<result column="simple_desc" property="simpleDesc" jdbcType="VARCHAR"/>
+		<result column="pic_url" property="picUrl" jdbcType="VARCHAR"/>
+		<result column="sort_order" property="sortOrder" jdbcType="TINYINT"/>
+		<result column="is_show" property="show" jdbcType="BIT"/>
+		<result column="floor_price" property="floorPrice" jdbcType="DECIMAL"/>
+		<result column="app_list_pic_url" property="appListPicUrl" jdbcType="VARCHAR"/>
+		<result column="is_new" property="newly" jdbcType="BIT"/>
+		<result column="new_pic_url" property="newPicUrl" jdbcType="VARCHAR"/>
+		<result column="new_sort_order" property="newSortOrder" jdbcType="TINYINT"/>
+	</resultMap>
 </mapper>

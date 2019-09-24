@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tech.wetech.weshop.user.mapper.AdMapper">
-  <resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.Ad">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <id column="id" property="id" jdbcType="SMALLINT"/>
-        <result column="ad_position_id" property="adPositionId" jdbcType="SMALLINT"/>
-        <result column="media_type" property="mediaType" jdbcType="TINYINT"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="link" property="link" jdbcType="VARCHAR"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
-        <result column="enabled" property="enabled" jdbcType="TINYINT"/>
-        <result column="image_url" property="imageUrl" jdbcType="LONGVARCHAR"/>
-    </resultMap>
+	<resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.Ad">
+		<!--
+      WARNING - @mbg.generated
+    -->
+		<id column="id" property="id" jdbcType="SMALLINT"/>
+		<result column="ad_position_id" property="adPositionId" jdbcType="SMALLINT"/>
+		<result column="media_type" property="mediaType" jdbcType="TINYINT"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="link" property="link" jdbcType="VARCHAR"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+		<result column="enabled" property="enabled" jdbcType="TINYINT"/>
+		<result column="image_url" property="imageUrl" jdbcType="LONGVARCHAR"/>
+	</resultMap>
 </mapper>
