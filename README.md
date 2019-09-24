@@ -153,6 +153,7 @@ Ant Design Pro | 开箱即用的中台前端/设计解决方案 | 2.1.0 |  [http
 使用脚本启动: 
 1. 执行命令 `mvn clean package -P env-prd` 生成target文件夹包含项目所有jar包和执行脚本
 2. 设置权限 `chmod +x -R target/`
+4. 切换到target目录 `cd target/`
 3. 启动: `startup.sh` 停止: `shutdown.sh`
 
 ### 生产部署
