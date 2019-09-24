@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tech.wetech.weshop.user.mapper.SearchHistoryMapper">
-	<resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.SearchHistory">
-		<!--
+    <resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.SearchHistory">
+        <!--
       WARNING - @mbg.generated
     -->
-		<id column="id" jdbcType="INTEGER" property="id"/>
-		<result column="keyword" jdbcType="CHAR" property="keyword"/>
-		<result column="`from`" jdbcType="VARCHAR" property="from"/>
-		<result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-		<result column="user_id" jdbcType="VARCHAR" property="userId"/>
-	</resultMap>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="keyword" jdbcType="CHAR" property="keyword"/>
+        <result column="`from`" jdbcType="VARCHAR" property="from"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    </resultMap>
 </mapper>

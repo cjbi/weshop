@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tech.wetech.weshop.goods.mapper.GoodsMapper">
-	<resultMap id="BaseResultMap" type="tech.wetech.weshop.goods.po.Goods">
-		<!--
+    <resultMap id="BaseResultMap" type="tech.wetech.weshop.goods.po.Goods">
+        <!--
       WARNING - @mbg.generated
     -->
-		<id column="id" property="id" jdbcType="INTEGER"/>
-		<result column="category_id" property="categoryId" jdbcType="INTEGER"/>
-		<result column="goods_sn" property="goodsSn" jdbcType="VARCHAR"/>
-		<result column="name" property="name" jdbcType="VARCHAR"/>
-		<result column="brand_id" property="brandId" jdbcType="INTEGER"/>
-		<result column="goods_number" property="goodsNumber" jdbcType="INTEGER"/>
-		<result column="keywords" property="keywords" jdbcType="VARCHAR"/>
-		<result column="goods_brief" property="goodsBrief" jdbcType="VARCHAR"/>
-		<result column="is_on_sale" property="onSale" jdbcType="BIT"/>
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-		<result column="sort_order" property="sortOrder" jdbcType="SMALLINT"/>
-		<result column="is_delete" property="delete" jdbcType="BIT"/>
-		<result column="attribute_category" property="attributeCategory" jdbcType="INTEGER"/>
-		<result column="counter_price" property="counterPrice" jdbcType="DECIMAL"/>
-		<result column="extra_price" property="extraPrice" jdbcType="DECIMAL"/>
-		<result column="is_new" property="newly" jdbcType="BIT"/>
-		<result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR"/>
-		<result column="primary_pic_url" property="primaryPicUrl" jdbcType="VARCHAR"/>
-		<result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR"/>
-		<result column="retail_price" property="retailPrice" jdbcType="DECIMAL"/>
-		<result column="sell_volume" property="sellVolume" jdbcType="INTEGER"/>
-		<result column="primary_product_id" property="primaryProductId" jdbcType="INTEGER"/>
-		<result column="unit_price" property="unitPrice" jdbcType="DECIMAL"/>
-		<result column="promotion_desc" property="promotionDesc" jdbcType="VARCHAR"/>
-		<result column="promotion_tag" property="promotionTag" jdbcType="VARCHAR"/>
-		<result column="app_exclusive_price" property="appExclusivePrice" jdbcType="DECIMAL"/>
-		<result column="is_app_exclusive" property="appExclusive" jdbcType="BIT"/>
-		<result column="is_limited" property="limited" jdbcType="BIT"/>
-		<result column="is_hot" property="hot" jdbcType="BIT"/>
-		<result column="goods_desc" property="goodsDesc" jdbcType="LONGVARCHAR"/>
-	</resultMap>
-	<select id="selectByIdIn" resultMap="BaseResultMap">
-		select * from weshop_goods
-		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-			#{item}
-		</foreach>
-	</select>
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="brand_id" property="brandId" jdbcType="INTEGER"/>
+        <result column="goods_number" property="goodsNumber" jdbcType="INTEGER"/>
+        <result column="keywords" property="keywords" jdbcType="VARCHAR"/>
+        <result column="goods_brief" property="goodsBrief" jdbcType="VARCHAR"/>
+        <result column="is_on_sale" property="onSale" jdbcType="BIT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="sort_order" property="sortOrder" jdbcType="SMALLINT"/>
+        <result column="is_delete" property="delete" jdbcType="BIT"/>
+        <result column="attribute_category" property="attributeCategory" jdbcType="INTEGER"/>
+        <result column="counter_price" property="counterPrice" jdbcType="DECIMAL"/>
+        <result column="extra_price" property="extraPrice" jdbcType="DECIMAL"/>
+        <result column="is_new" property="newly" jdbcType="BIT"/>
+        <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR"/>
+        <result column="primary_pic_url" property="primaryPicUrl" jdbcType="VARCHAR"/>
+        <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR"/>
+        <result column="retail_price" property="retailPrice" jdbcType="DECIMAL"/>
+        <result column="sell_volume" property="sellVolume" jdbcType="INTEGER"/>
+        <result column="primary_product_id" property="primaryProductId" jdbcType="INTEGER"/>
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL"/>
+        <result column="promotion_desc" property="promotionDesc" jdbcType="VARCHAR"/>
+        <result column="promotion_tag" property="promotionTag" jdbcType="VARCHAR"/>
+        <result column="app_exclusive_price" property="appExclusivePrice" jdbcType="DECIMAL"/>
+        <result column="is_app_exclusive" property="appExclusive" jdbcType="BIT"/>
+        <result column="is_limited" property="limited" jdbcType="BIT"/>
+        <result column="is_hot" property="hot" jdbcType="BIT"/>
+        <result column="goods_desc" property="goodsDesc" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <select id="selectByIdIn" resultMap="BaseResultMap">
+        select * from weshop_goods
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

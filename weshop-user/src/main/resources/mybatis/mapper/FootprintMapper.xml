@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="tech.wetech.weshop.user.mapper.FootprintMapper">
-	<resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.Footprint">
-		<!--
+    <resultMap id="BaseResultMap" type="tech.wetech.weshop.user.po.Footprint">
+        <!--
       WARNING - @mbg.generated
     -->
-		<id column="id" property="id" jdbcType="INTEGER"/>
-		<result column="user_id" property="userId" jdbcType="INTEGER"/>
-		<result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-	</resultMap>
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
 
-	<select id="selectGoodsFootprintByUserId" resultType="tech.wetech.weshop.user.dto.GoodsFootprintDTO">
+    <select id="selectGoodsFootprintByUserId" resultType="tech.wetech.weshop.user.dto.GoodsFootprintDTO">
         SELECT
         f.goods_id,
         MAX(f.create_time) AS createTime,
