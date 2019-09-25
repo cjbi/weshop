@@ -4,10 +4,6 @@
 export env=@env@
 
 # jar包名称
-# 注册中心jar包名称
-export eureka_server_jar_name=weshop-eureka-server-@project.version@.jar
-# 配置中心jar包名称
-export config_server_jar_name=weshop-config-server-@project.version@.jar
 # 用户中心jar包名称
 export user_jar_name=weshop-user-@project.version@.jar
 # 商品中心jar包名称
@@ -84,12 +80,6 @@ then
 fi
 
 # 启动Weshop服务
-echo "正在启动注册中心,请等待5s..."
-nohup java -jar $eureka_server_jar_name >/dev/null 2>&1 &
-sleep 5s
-echo "正在启动配置中心,请等待10s..."
-nohup java -jar $config_server_jar_name >/dev/null 2>&1 &
-sleep 10s
 echo "正在启动用户中心服务..."
 nohup java -jar -Dspring.profiles.active=$env $user_jar_name >/dev/null 2>&1 &
 echo "正在启动订单中心服务..."
@@ -101,4 +91,4 @@ nohup java -jar -Dspring.profiles.active=$env $pay_jar_name >/dev/null 2>&1 &
 echo "正在启动微信端服务..."
 nohup java -jar -Dspring.profiles.active=$env $wechat_jar_name >/dev/null 2>&1 &
 echo "正在启动网关服务..."
-nohup java -jar -Dspring.profiles.active=$env $api_gateway_jar_name >/dev/null 2>&1 &
+nohup java -jar $api_gateway_jar_name >/dev/null 2>&1 &

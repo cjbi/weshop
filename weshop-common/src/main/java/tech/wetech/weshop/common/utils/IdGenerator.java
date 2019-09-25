@@ -1,9 +1,11 @@
 package tech.wetech.weshop.common.utils;
 
-import org.apache.commons.lang.time.DateFormatUtils;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /***
  * 对于订购业务而言，虽然可以记录订单的创建时间，但是一般都需要带有显示的时间戳属性。因此，一个long型已无法满足实际的需求，将输出修改为String类型，前17位用于存储yyyyMMddHHMMssSSS格式的时间，后面用于记录所在集群，节点，以及自增量。
@@ -55,9 +57,7 @@ public enum IdGenerator {
 
 
         long suffix = (datacenterId << datacenterIdShift) | (workerId << workerIdShift) | sequence;
-
-        String datePrefix = DateFormatUtils.format(timestamp, "yyyyMMddHHMMssSSS");
-
+        String datePrefix = DateTimeFormatter.ofPattern("yyyyMMddHHMMssSSS").format(LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()));
         return datePrefix + suffix;
     }
 
