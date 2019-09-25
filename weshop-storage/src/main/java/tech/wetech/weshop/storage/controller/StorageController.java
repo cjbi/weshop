@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import tech.wetech.weshop.common.api.BaseApi;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.storage.api.StorageApi;
 import tech.wetech.weshop.storage.po.Storage;
 import tech.wetech.weshop.storage.service.IStorageService;
@@ -29,10 +29,10 @@ public class StorageController extends BaseApi<Storage> implements StorageApi {
     private IStorageService storageService;
 
     @Override
-    public ResultWrapper<String> upload(MultipartFile file) throws IOException {
+    public Result<String> upload(MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), originalFilename);
-        return ResultWrapper.success(url);
+        return Result.success(url);
     }
 
     @Override

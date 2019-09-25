@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.api.BaseApi;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.CommentPictureApi;
 import tech.wetech.weshop.user.po.CommentPicture;
 import tech.wetech.weshop.user.service.CommentPictureService;
@@ -19,7 +19,7 @@ public class CommentPictureController extends BaseApi<CommentPicture> implements
     private CommentPictureService commentPictureService;
 
     @Override
-    public ResultWrapper<List<String>> queryPicUrlByCommentId(Integer commentId) {
-        return ResultWrapper.success(commentPictureService.queryPicUrlByCommentId(commentId));
+    public Result<List<String>> queryPicUrlByCommentId(Integer commentId) {
+        return Result.success(commentPictureService.queryPicUrlByCommentId(commentId));
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.wetech.weshop.common.utils.Criteria;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.common.utils.StringUtils;
 import tech.wetech.weshop.common.utils.WebUtil;
 import tech.wetech.weshop.order.api.OrderApi;
@@ -70,7 +70,7 @@ public class WechatPayServiceImpl implements WechatPayService {
       .totalFee(order.getActualPrice().multiply(new BigDecimal(100)).intValue())//订单总金额，单位为分
       .spbillCreateIp(WebUtil.getInstance().getIpAddress())
       .build();
-      ResultWrapper<WxPayMpOrderResult> result = wxPayApi.createOrder(wxPayUnifiedOrderRequest);
+      Result<WxPayMpOrderResult> result = wxPayApi.createOrder(wxPayUnifiedOrderRequest);
     if (!result.isSuccess()) {
         throw new WeshopWechatException(WeshopWechatResultStatus.WECHAT_PAY_FAIL);
     }
@@ -79,7 +79,7 @@ public class WechatPayServiceImpl implements WechatPayService {
 
   @Override
   public String notify(String xml) {
-      ResultWrapper<WxPayOrderNotifyResult> result = wxPayApi.parseOrderNotifyResult(xml);
+      Result<WxPayOrderNotifyResult> result = wxPayApi.parseOrderNotifyResult(xml);
     if (!result.isSuccess()) {
       return WechatConstants.XML_PAY_ORDER_FAIL;
     }
@@ -90,7 +90,7 @@ public class WechatPayServiceImpl implements WechatPayService {
       return WechatConstants.XML_PAY_ORDER_NOT_FOUND;
     }
     //订单状态仓库配送，支付状态变为已付款
-      ResultWrapper<Integer> updateResult = orderApi.updateNotNull(order.setOrderStatus(OrderStatusEnum.WAREHOUSE_DISTRIBUTION).setPayStatus(PayStatusEnum.PAID));
+      Result<Integer> updateResult = orderApi.updateNotNull(order.setOrderStatus(OrderStatusEnum.WAREHOUSE_DISTRIBUTION).setPayStatus(PayStatusEnum.PAID));
     if (updateResult.getData() != 1) {
       return WechatConstants.XML_PAY_ORDER_NOT_FOUND;
     }

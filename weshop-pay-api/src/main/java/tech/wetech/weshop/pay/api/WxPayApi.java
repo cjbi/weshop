@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.pay.fallback.WxPayApiFallback;
 
 import java.io.File;
@@ -37,12 +37,12 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "查询订单")
   @GetMapping("/queryOrder")
-  ResultWrapper<WxPayOrderQueryResult> queryOrder(@RequestParam(required = false) String transactionId,
-                                                  @RequestParam(required = false) String outTradeNo);
+  Result<WxPayOrderQueryResult> queryOrder(@RequestParam(required = false) String transactionId,
+                                           @RequestParam(required = false) String outTradeNo);
 
   @ApiOperation(value = "查询订单")
   @PostMapping("/queryOrder")
-  ResultWrapper<WxPayOrderQueryResult> queryOrder(@RequestBody WxPayOrderQueryRequest wxPayOrderQueryRequest);
+  Result<WxPayOrderQueryResult> queryOrder(@RequestBody WxPayOrderQueryRequest wxPayOrderQueryRequest);
 
   /**
    * <pre>
@@ -60,11 +60,11 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "关闭订单")
   @GetMapping("/closeOrder/{outTradeNo}")
-  ResultWrapper<WxPayOrderCloseResult> closeOrder(@PathVariable String outTradeNo);
+  Result<WxPayOrderCloseResult> closeOrder(@PathVariable String outTradeNo);
 
   @ApiOperation(value = "关闭订单")
   @PostMapping("/closeOrder")
-  ResultWrapper<WxPayOrderCloseResult> closeOrder(@RequestBody WxPayOrderCloseRequest wxPayOrderCloseRequest);
+  Result<WxPayOrderCloseResult> closeOrder(@RequestBody WxPayOrderCloseRequest wxPayOrderCloseRequest);
 
   /**
    * 统一下单(详见https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1)
@@ -75,7 +75,7 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "原生的统一下单接口")
   @PostMapping("/unifiedOrder")
-  ResultWrapper<WxPayUnifiedOrderResult> unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request);
+  Result<WxPayUnifiedOrderResult> unifiedOrder(@RequestBody WxPayUnifiedOrderRequest request);
 
   /**
    * 调用统一下单接口，并组装生成支付所需参数对象.
@@ -86,7 +86,7 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "统一下单，并组装所需支付参数")
   @PostMapping("/createOrder")
-  <T> ResultWrapper<T> createOrder(@RequestBody WxPayUnifiedOrderRequest request);
+  <T> Result<T> createOrder(@RequestBody WxPayUnifiedOrderRequest request);
 
   /**
    * <pre>
@@ -100,7 +100,7 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "退款")
   @PostMapping("/refund")
-  ResultWrapper<WxPayRefundResult> refund(@RequestBody WxPayRefundRequest request);
+  Result<WxPayRefundResult> refund(@RequestBody WxPayRefundRequest request);
 
   /**
    * <pre>
@@ -121,26 +121,26 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "退款查询")
   @GetMapping("/refundQuery")
-  ResultWrapper<WxPayRefundQueryResult> refundQuery(@RequestParam(required = false) String transactionId,
-                                                    @RequestParam(required = false) String outTradeNo,
-                                                    @RequestParam(required = false) String outRefundNo,
-                                                    @RequestParam(required = false) String refundId);
+  Result<WxPayRefundQueryResult> refundQuery(@RequestParam(required = false) String transactionId,
+                                             @RequestParam(required = false) String outTradeNo,
+                                             @RequestParam(required = false) String outRefundNo,
+                                             @RequestParam(required = false) String refundId);
 
   @ApiOperation(value = "退款查询")
   @PostMapping("/refundQuery")
-  ResultWrapper<WxPayRefundQueryResult> refundQuery(@RequestBody WxPayRefundQueryRequest wxPayRefundQueryRequest);
+  Result<WxPayRefundQueryResult> refundQuery(@RequestBody WxPayRefundQueryRequest wxPayRefundQueryRequest);
 
   @ApiOperation(value = "支付回调通知处理")
   @PostMapping("/notify/order")
-  ResultWrapper<WxPayOrderNotifyResult> parseOrderNotifyResult(@RequestBody String xmlData);
+  Result<WxPayOrderNotifyResult> parseOrderNotifyResult(@RequestBody String xmlData);
 
   @ApiOperation(value = "退款回调通知处理")
   @PostMapping("/notify/refund")
-  ResultWrapper<WxPayRefundNotifyResult> parseRefundNotifyResult(@RequestBody String xmlData);
+  Result<WxPayRefundNotifyResult> parseRefundNotifyResult(@RequestBody String xmlData);
 
   @ApiOperation(value = "扫码支付回调通知处理")
   @PostMapping("/notify/scanpay")
-  ResultWrapper<WxScanPayNotifyResult> parseScanPayNotifyResult(@RequestParam("xmlData") String xmlData);
+  Result<WxScanPayNotifyResult> parseScanPayNotifyResult(@RequestParam("xmlData") String xmlData);
 
   /**
    * 发送微信红包给个人用户
@@ -156,7 +156,7 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "发送红包")
   @PostMapping("/sendRedpack")
-  ResultWrapper<WxPaySendRedpackResult> sendRedpack(@RequestBody WxPaySendRedpackRequest request);
+  Result<WxPaySendRedpackResult> sendRedpack(@RequestBody WxPaySendRedpackRequest request);
 
   /**
    * <pre>
@@ -171,7 +171,7 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "查询红包")
   @GetMapping("/queryRedpack/{mchBillNo}")
-  ResultWrapper<WxPayRedpackQueryResult> queryRedpack(@PathVariable String mchBillNo);
+  Result<WxPayRedpackQueryResult> queryRedpack(@PathVariable String mchBillNo);
 
   /**
    * <pre>
@@ -189,7 +189,7 @@ public interface WxPayApi {
    */
   @ApiOperation("生成的二维码的字节数组")
   @PostMapping("/createScanPayQrcodeMode1")
-  ResultWrapper<byte[]> createScanPayQrcodeMode1(@RequestParam("productId") String productId, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
+  Result<byte[]> createScanPayQrcodeMode1(@RequestParam("productId") String productId, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
 
   /**
    * <pre>
@@ -205,7 +205,7 @@ public interface WxPayApi {
    */
   @ApiOperation("生成的二维码URL连接")
 	@PostMapping("/createScanPayQrcodeMode12")
-  ResultWrapper<String> createScanPayQrcodeMode1(@RequestParam("productId") String productId);
+  Result<String> createScanPayQrcodeMode1(@RequestParam("productId") String productId);
 
   /**
    * <pre>
@@ -222,7 +222,7 @@ public interface WxPayApi {
    */
   @ApiOperation("生成的二维码的字节数组")
 	@PostMapping("/createScanPayQrcodeMode3")
-  ResultWrapper<byte[]> createScanPayQrcodeModel(@RequestParam("codeUrl") String codeUrl, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
+  Result<byte[]> createScanPayQrcodeModel(@RequestParam("codeUrl") String codeUrl, @RequestParam("logoFile") File logoFile, @RequestParam("sideLength") Integer sideLength);
 
   /**
    * <pre>
@@ -237,7 +237,7 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "提交交易保障数据")
   @PostMapping("/report")
-  ResultWrapper report(@RequestBody WxPayReportRequest request);
+  Result report(@RequestBody WxPayReportRequest request);
 
   /**
    * <pre>
@@ -260,12 +260,12 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "下载对账单")
   @GetMapping("/downloadBill/{billDate}/{billType}/{tarType}/{deviceInfo}")
-  ResultWrapper<WxPayBillResult> downloadBill(@PathVariable String billDate, @PathVariable String billType,
-                                              @PathVariable String tarType, @PathVariable String deviceInfo);
+  Result<WxPayBillResult> downloadBill(@PathVariable String billDate, @PathVariable String billType,
+                                       @PathVariable String tarType, @PathVariable String deviceInfo);
 
   @ApiOperation(value = "下载对账单")
   @PostMapping("/downloadBill")
-  ResultWrapper<WxPayBillResult> downloadBill(@RequestBody WxPayDownloadBillRequest wxPayDownloadBillRequest);
+  Result<WxPayBillResult> downloadBill(@RequestBody WxPayDownloadBillRequest wxPayDownloadBillRequest);
 
   /**
    * <pre>
@@ -281,7 +281,7 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "提交刷卡支付")
   @PostMapping("/micropay")
-  ResultWrapper<WxPayMicropayResult> micropay(@RequestBody WxPayMicropayRequest request);
+  Result<WxPayMicropayResult> micropay(@RequestBody WxPayMicropayRequest request);
 
   /**
    * <pre>
@@ -297,26 +297,26 @@ public interface WxPayApi {
    */
   @ApiOperation(value = "撤销订单")
   @PostMapping("/reverseOrder")
-  ResultWrapper<WxPayOrderReverseResult> reverseOrder(@RequestBody WxPayOrderReverseRequest request);
+  Result<WxPayOrderReverseResult> reverseOrder(@RequestBody WxPayOrderReverseRequest request);
 
   @ApiOperation(value = "获取沙箱环境签名key")
   @GetMapping("/getSandboxSignKey")
-  ResultWrapper<String> getSandboxSignKey();
+  Result<String> getSandboxSignKey();
 
   @ApiOperation(value = "发放代金券")
   @PostMapping("/sendCoupon")
-  ResultWrapper<WxPayCouponSendResult> sendCoupon(@RequestBody WxPayCouponSendRequest request);
+  Result<WxPayCouponSendResult> sendCoupon(@RequestBody WxPayCouponSendRequest request);
 
   @ApiOperation(value = "查询代金券批次")
   @PostMapping("/queryCouponStock")
-  ResultWrapper<WxPayCouponStockQueryResult> queryCouponStock(@RequestBody WxPayCouponStockQueryRequest request);
+  Result<WxPayCouponStockQueryResult> queryCouponStock(@RequestBody WxPayCouponStockQueryRequest request);
 
   @ApiOperation(value = "查询代金券信息")
   @PostMapping("/queryCouponInfo")
-  ResultWrapper<WxPayCouponInfoQueryResult> queryCouponInfo(@RequestBody WxPayCouponInfoQueryRequest request);
+  Result<WxPayCouponInfoQueryResult> queryCouponInfo(@RequestBody WxPayCouponInfoQueryRequest request);
 
   @ApiOperation(value = "拉取订单评价数据")
   @PostMapping("/queryComment")
-  ResultWrapper<String> queryComment(@RequestParam("beginDate") Date beginDate, @RequestParam("endDate") Date endDate, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
+  Result<String> queryComment(@RequestParam("beginDate") Date beginDate, @RequestParam("endDate") Date endDate, @RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit);
 
 }

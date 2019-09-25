@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 /**
  * @author cjbi@outlook.com
  */
-public class ResultWrapper<T> implements Serializable {
+public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,16 +30,16 @@ public class ResultWrapper<T> implements Serializable {
     @ApiModelProperty("额外数据")
     private Map<String, Object> extra;
 
-    private static final ResultWrapper EMPTY_SUCCESS_RESULT = ResultWrapper.success(null);
+    private static final Result EMPTY_SUCCESS_RESULT = Result.success(null);
 
-    public ResultWrapper<T> addExtraIfTrue(boolean bool, String key, Object value) {
+    public Result<T> addExtraIfTrue(boolean bool, String key, Object value) {
         if (bool) {
             addExtra(key, value);
         }
         return this;
     }
 
-    public ResultWrapper<T> addExtra(String key, Object value) {
+    public Result<T> addExtra(String key, Object value) {
         extra = extra == null ? new HashMap<>(16) : extra;
         extra.put(key, value);
         return this;
@@ -49,7 +49,7 @@ public class ResultWrapper<T> implements Serializable {
         return success;
     }
 
-    public ResultWrapper<T> setSuccess(boolean success) {
+    public Result<T> setSuccess(boolean success) {
         this.success = success;
         return this;
     }
@@ -58,7 +58,7 @@ public class ResultWrapper<T> implements Serializable {
         return code;
     }
 
-    public ResultWrapper<T> setCode(String code) {
+    public Result<T> setCode(String code) {
         this.code = code;
         return this;
     }
@@ -67,7 +67,7 @@ public class ResultWrapper<T> implements Serializable {
         return msg;
     }
 
-    public ResultWrapper<T> setMsg(String msg) {
+    public Result<T> setMsg(String msg) {
         this.msg = msg;
         return this;
     }
@@ -76,7 +76,7 @@ public class ResultWrapper<T> implements Serializable {
         return data;
     }
 
-    public ResultWrapper<T> setData(T data) {
+    public Result<T> setData(T data) {
         this.data = data;
         return this;
     }
@@ -85,40 +85,40 @@ public class ResultWrapper<T> implements Serializable {
         return extra;
     }
 
-    public ResultWrapper<T> setExtra(Map<String, Object> extra) {
+    public Result<T> setExtra(Map<String, Object> extra) {
         this.extra = extra;
         return this;
     }
 
-    public static <T> ResultWrapper<T> success() {
+    public static <T> Result<T> success() {
         return EMPTY_SUCCESS_RESULT;
     }
 
-    public static <T> ResultWrapper<T> success(T obj) {
-        return new ResultWrapper()
+    public static <T> Result<T> success(T obj) {
+        return new Result()
             .setData(obj)
             .setCode(CommonResultStatus.OK.getCode())
             .setMsg(CommonResultStatus.OK.getMsg())
             .setSuccess(true);
     }
 
-    public static ResultWrapper failure(ResultStatus resultStatus) {
-        return new ResultWrapper()
+    public static Result failure(ResultStatus resultStatus) {
+        return new Result()
             .setSuccess(false)
             .setCode(resultStatus.getCode())
             .setMsg(resultStatus.getMsg());
     }
 
-    public static ResultWrapper failure(ResultStatus resultStatus, Throwable e) {
-        return new ResultWrapper()
+    public static Result failure(ResultStatus resultStatus, Throwable e) {
+        return new Result()
             .setSuccess(false)
             .setData(e)
             .setCode(resultStatus.getCode())
             .setMsg(resultStatus.getMsg());
     }
 
-    public static ResultWrapper failure(String code, String msg) {
-        return new ResultWrapper()
+    public static Result failure(String code, String msg) {
+        return new Result()
             .setSuccess(false)
             .setCode(code)
             .setMsg(msg);

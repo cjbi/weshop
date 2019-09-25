@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.wechat.service.WechatHomeService;
 import tech.wetech.weshop.wechat.vo.HomeIndexVO;
 
@@ -21,8 +21,8 @@ public class WechatHomeController extends BaseController {
 
 
     @GetMapping("/index")
-    public ResultWrapper<HomeIndexVO> index() {
-        return ResultWrapper.success(wechatHomeService.index());
+    public Result<HomeIndexVO> index() {
+        return Result.success(wechatHomeService.index());
     }
 
 }

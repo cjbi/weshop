@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.wechat.service.WechatCatalogService;
 import tech.wetech.weshop.wechat.vo.CategoryIndexVO;
 import tech.wetech.weshop.wechat.vo.CategoryVO;
@@ -23,13 +23,13 @@ public class WechatCatalogController extends BaseController {
     private WechatCatalogService wechatCatalogService;
 
     @GetMapping("/index")
-    public ResultWrapper<CategoryIndexVO> index(Integer id) {
-        return ResultWrapper.success(wechatCatalogService.index(id));
+    public Result<CategoryIndexVO> index(Integer id) {
+        return Result.success(wechatCatalogService.index(id));
     }
 
     @GetMapping("/current")
-    public ResultWrapper<CategoryVO> current(@NotNull @RequestParam("id") Integer id) {
-        return ResultWrapper.success(wechatCatalogService.current(id));
+    public Result<CategoryVO> current(@NotNull @RequestParam("id") Integer id) {
+        return Result.success(wechatCatalogService.current(id));
     }
 
 }

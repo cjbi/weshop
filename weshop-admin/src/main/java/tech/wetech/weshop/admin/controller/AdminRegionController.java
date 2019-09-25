@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.wetech.weshop.common.controller.BaseController;
 import tech.wetech.weshop.common.utils.Criteria;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.user.api.RegionApi;
 import tech.wetech.weshop.user.enums.RegionTypeEnum;
 import tech.wetech.weshop.user.po.Region;
@@ -26,7 +26,7 @@ public class AdminRegionController extends BaseController {
     private RegionApi regionApi;
 
     @GetMapping("/list")
-    public ResultWrapper<List<Region>> queryList() {
+    public Result<List<Region>> queryList() {
         return regionApi.queryByCriteria(Criteria.of(Region.class))
                 .addExtra("regionType", Arrays.stream(RegionTypeEnum.values()).collect(Collectors.toMap(e -> e, RegionTypeEnum::getName)));
     }

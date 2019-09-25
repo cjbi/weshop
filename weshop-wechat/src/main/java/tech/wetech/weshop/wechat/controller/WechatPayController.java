@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.wechat.service.WechatPayService;
 
 import javax.validation.constraints.NotNull;
@@ -24,8 +24,8 @@ public class WechatPayController {
   private WechatPayService wechatPayService;
 
   @GetMapping("/prepay")
-  public ResultWrapper<WxPayMpOrderResult> prepay(@NotNull @RequestParam("orderId") Integer orderId, @RequestParam("payType") Integer payType) {
-      return ResultWrapper.success(wechatPayService.prepay(orderId));
+  public Result<WxPayMpOrderResult> prepay(@NotNull @RequestParam("orderId") Integer orderId, @RequestParam("payType") Integer payType) {
+      return Result.success(wechatPayService.prepay(orderId));
   }
 
   /**

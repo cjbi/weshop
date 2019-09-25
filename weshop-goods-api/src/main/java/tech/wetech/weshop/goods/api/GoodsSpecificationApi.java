@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tech.wetech.weshop.common.api.Api;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 import tech.wetech.weshop.goods.dto.GoodsSpecificationDTO;
 import tech.wetech.weshop.goods.fallback.GoodsSpecificationApiFallback;
 import tech.wetech.weshop.goods.po.GoodsSpecification;
@@ -15,8 +15,8 @@ import java.util.List;
 public interface GoodsSpecificationApi extends Api<GoodsSpecification> {
 
     @GetMapping("/queryGoodsDetailSpecificationByGoodsId")
-    ResultWrapper<List<GoodsSpecificationDTO>> queryGoodsDetailSpecificationByGoodsId(@RequestParam("goodsId") Integer goodsId);
+    Result<List<GoodsSpecificationDTO>> queryGoodsDetailSpecificationByGoodsId(@RequestParam("goodsId") Integer goodsId);
 
     @GetMapping("/queryValueByGoodsIdAndIdIn")
-    ResultWrapper<List<String>> queryValueByGoodsIdAndIdIn(@RequestParam("goodsId") Integer goodsId, @RequestParam("goodsSpecificationIds") List<Integer> goodsSpecificationIds);
+    Result<List<String>> queryValueByGoodsIdAndIdIn(@RequestParam("goodsId") Integer goodsId, @RequestParam("goodsSpecificationIds") List<Integer> goodsSpecificationIds);
 }

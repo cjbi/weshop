@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import tech.wetech.weshop.common.enums.CommonResultStatus;
-import tech.wetech.weshop.common.utils.ResultWrapper;
+import tech.wetech.weshop.common.utils.Result;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
@@ -29,9 +29,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({Throwable.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResultWrapper<Object> handleThrowable(HttpServletRequest request, Throwable e) {
+    public Result<Object> handleThrowable(HttpServletRequest request, Throwable e) {
         LOG.error("execute method exception error.url is {}", request.getRequestURI(), e);
-        return ResultWrapper.failure(CommonResultStatus.INTERNAL_SERVER_ERROR)
+        return Result.failure(CommonResultStatus.INTERNAL_SERVER_ERROR)
             .addExtra("stackTrace", e.getStackTrace())
             .addExtra("exceptionMessage", e.getClass().getName() + ": " + e.getMessage());
     }
@@ -44,9 +44,9 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler({WeshopException.class})
-    public ResultWrapper handleBizException(HttpServletRequest request, WeshopException e) {
+    public Result handleBizException(HttpServletRequest request, WeshopException e) {
         LOG.warn("execute method exception error.url is {}", request.getRequestURI(), e);
-        return ResultWrapper.failure(e.getStatus());
+        return Result.failure(e.getStatus());
     }
 
     /**
@@ -61,10 +61,10 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, ConstraintViolationException.class})
-    public ResultWrapper handleJSR303Exception(HttpServletRequest request, Exception e) {
+    public Result handleJSR303Exception(HttpServletRequest request, Exception e) {
         LOG.warn("execute method exception error.url is {}", request.getRequestURI(), e);
         BindingResult br = null;
-        ResultWrapper result = new ResultWrapper()
+        Result result = new Result()
             .setSuccess(false)
             .setCode(CommonResultStatus.PARAM_ERROR.getCode())
             .setMsg(CommonResultStatus.PARAM_ERROR.getMsg());
